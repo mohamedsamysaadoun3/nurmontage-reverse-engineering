@@ -5,8 +5,8 @@ public class Reverbe {
     private final String cmd_ffmpeg;
     private final String name;
 
-    public Reverbe(String str, String str2) {
-        this.cmd_ffmpeg = str2;
+    public Reverbe(String str, String textValue2) {
+        this.cmd_ffmpeg = textValue2;
         this.name = str;
     }
 

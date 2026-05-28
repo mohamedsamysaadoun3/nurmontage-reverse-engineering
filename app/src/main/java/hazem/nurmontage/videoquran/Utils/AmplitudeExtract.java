@@ -27,19 +27,19 @@ public class AmplitudeExtract {
         void onError(Exception exc);
     }
 
-    public void extractAmplitudeDataAsync(final String str, final int i, final AmplitudeDataCallback amplitudeDataCallback) {
+    public void extractAmplitudeDataAsync(final String textValue, final int value, final AmplitudeDataCallback amplitudeDataCallback) {
         this.executorService.execute(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AmplitudeExtract$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AmplitudeExtract.this.m627x997f050d(str, i, amplitudeDataCallback);
+                AmplitudeExtract.this.m627x997f050d(textValue, value, amplitudeDataCallback);
             }
         });
     }
 
     /* renamed from: lambda$extractAmplitudeDataAsync$2$hazem-nurmontage-videoquran-Utils-AmplitudeExtract */
-    /* synthetic */ void m627x997f050d(String str, int i, final AmplitudeDataCallback amplitudeDataCallback) {
+    /* synthetic */ void m627x997f050d(String textValue, int value, final AmplitudeDataCallback amplitudeDataCallback) {
         try {
-            final List<Float> extractAmplitudeData = extractAmplitudeData(str, i);
+            final List<Float> extractAmplitudeData = extractAmplitudeData(textValue, value);
             this.mainHandler.post(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AmplitudeExtract$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
@@ -57,11 +57,11 @@ public class AmplitudeExtract {
         }
     }
 
-    private List<Float> extractAmplitudeData(String str, int i) throws IOException, IllegalArgumentException {
-        if (str == null || str.isEmpty()) {
+    private List<Float> extractAmplitudeData(String textValue, int value) throws IOException, IllegalArgumentException {
+        if (textValue == null || textValue.isEmpty()) {
             throw new IllegalArgumentException("File path cannot be null or empty.");
         }
-        if (i <= 0) {
+        if (value <= 0) {
             throw new IllegalArgumentException("Target samples must be greater than zero.");
         }
         ArrayList arrayList = new ArrayList();
@@ -70,7 +70,7 @@ public class AmplitudeExtract {
         try {
             MediaExtractor mediaExtractor2 = new MediaExtractor();
             try {
-                mediaExtractor2.setDataSource(str);
+                mediaExtractor2.setDataSource(textValue);
                 int i2 = 0;
                 while (true) {
                     if (i2 >= mediaExtractor2.getTrackCount()) {
@@ -85,7 +85,7 @@ public class AmplitudeExtract {
                     i2++;
                 }
                 if (i2 == -1 || mediaFormat == null) {
-                    throw new IOException("No audio track found in " + str);
+                    throw new IOException("No audio track found in " + textValue);
                 }
                 mediaExtractor2.selectTrack(i2);
                 if (mediaFormat.getLong("durationUs") <= 0) {
@@ -112,9 +112,9 @@ public class AmplitudeExtract {
                 }
                 if (!arrayList2.isEmpty()) {
                     int size = arrayList2.size();
-                    int max = Math.max(1, size / i);
-                    for (int i3 = 0; i3 < i; i3++) {
-                        int i4 = i3 * max;
+                    int max = Math.max(1, size / value);
+                    for (int value3 = 0; value3 < value; value3++) {
+                        int i4 = value3 * max;
                         int min = Math.min(i4 + max, size);
                         if (i4 >= size) {
                             arrayList.add(Float.valueOf(0.0f));
@@ -133,7 +133,7 @@ public class AmplitudeExtract {
                     mediaExtractor2.release();
                     return arrayList;
                 }
-                for (int i5 = 0; i5 < i; i5++) {
+                for (int value5 = 0; value5 < value; value5++) {
                     arrayList.add(Float.valueOf(0.0f));
                 }
                 mediaExtractor2.release();

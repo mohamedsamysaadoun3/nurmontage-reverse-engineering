@@ -45,9 +45,9 @@ public final class FragmentVolumeBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentVolumeBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentVolumeBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_volume, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

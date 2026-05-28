@@ -54,8 +54,8 @@ public class FfmpegCodecChecker {
         boolean z = false;
         boolean z2 = false;
         boolean z3 = false;
-        for (String str : output.split("\n")) {
-            String lowerCase = str.trim().toLowerCase();
+        for (String textValue : output.split("\n")) {
+            String lowerCase = textValue.trim().toLowerCase();
             if (!z && lowerCase.contains("libx264")) {
                 z = true;
             }

@@ -21,8 +21,8 @@ public class EditIconQuranFragment extends Fragment {
     private String icon;
     private IconQuranAdabters.IIconQuranCallback iconQuranCallback = new IconQuranAdabters.IIconQuranCallback() { // from class: hazem.nurmontage.videoquran.fragment.EditIconQuranFragment.3
         @Override // hazem.nurmontage.videoquran.adabter.IconQuranAdabters.IIconQuranCallback
-        public void onIcon(String str) {
-            EditIconQuranFragment.this.icon = str;
+        public void onIcon(String textValue) {
+            EditIconQuranFragment.this.icon = textValue;
             if (EditIconQuranFragment.this.iQuranIconCallback != null) {
                 EditIconQuranFragment.this.iQuranIconCallback.add(EditIconQuranFragment.this.icon);
             }
@@ -31,16 +31,16 @@ public class EditIconQuranFragment extends Fragment {
     private String last_icon;
 
     public interface IQuranIconCallback {
-        void add(String str);
+        void add(String textValue);
 
-        void onCancel(String str);
+        void onCancel(String textValue);
 
-        void onDone(String str);
+        void onDone(String textValue);
     }
 
-    public static EditIconQuranFragment getInstance(IQuranIconCallback iQuranIconCallback, String str) {
+    public static EditIconQuranFragment getInstance(IQuranIconCallback iQuranIconCallback, String textValue) {
         if (instance == null) {
-            instance = new EditIconQuranFragment(iQuranIconCallback, str);
+            instance = new EditIconQuranFragment(iQuranIconCallback, textValue);
         }
         return instance;
     }
@@ -48,10 +48,10 @@ public class EditIconQuranFragment extends Fragment {
     public EditIconQuranFragment() {
     }
 
-    public EditIconQuranFragment(IQuranIconCallback iQuranIconCallback, String str) {
+    public EditIconQuranFragment(IQuranIconCallback iQuranIconCallback, String textValue) {
         this.iQuranIconCallback = iQuranIconCallback;
-        this.icon = str;
-        this.last_icon = str;
+        this.icon = textValue;
+        this.last_icon = textValue;
     }
 
     @Override // androidx.fragment.app.Fragment

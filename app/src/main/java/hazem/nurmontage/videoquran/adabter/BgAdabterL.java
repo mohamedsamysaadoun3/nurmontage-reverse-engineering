@@ -27,7 +27,7 @@ public class BgAdabterL extends RecyclerView.Adapter<ViewHolder> {
     private int size;
 
     public interface IBgCallback {
-        void onBgClick(int i);
+        void onBgClick(int value);
     }
 
     public void add(BgItem bgItem) {
@@ -39,11 +39,11 @@ public class BgAdabterL extends RecyclerView.Adapter<ViewHolder> {
         }
     }
 
-    public BgAdabterL(String str, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int i) {
+    public BgAdabterL(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int value) {
         this.images = list;
-        this.size = i;
+        this.size = value;
         this.iBgCallback = iChangeBgCallback;
-        this.APP_VERSION = str;
+        this.APP_VERSION = textValue;
     }
 
     public int getPos_select() {
@@ -69,13 +69,13 @@ public class BgAdabterL extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        RequestBuilder<Bitmap> load = Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(i).getId()));
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        RequestBuilder<Bitmap> load = Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(value).getId()));
         int i2 = this.size;
         load.override(i2, i2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.ALL))).into(viewHolder.imageView);
     }

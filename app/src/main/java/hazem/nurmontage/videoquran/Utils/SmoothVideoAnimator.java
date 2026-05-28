@@ -21,15 +21,15 @@ public class SmoothVideoAnimator implements Choreographer.FrameCallback {
     public interface FrameUpdateListener {
         void onAnimationEnd();
 
-        void onFrameUpdate(String str);
+        void onFrameUpdate(String textValue);
     }
 
-    public SmoothVideoAnimator(TrackEntityView trackEntityView, Template template, int i, FrameUpdateListener frameUpdateListener) {
+    public SmoothVideoAnimator(TrackEntityView trackEntityView, Template template, int resId, FrameUpdateListener frameUpdateListener) {
         this.trackViewEntity = trackEntityView;
         this.mTemplate = template;
-        this.FPS = i;
+        this.FPS = resId;
         this.listener = frameUpdateListener;
-        this.frameIntervalNanos = (long) (1.0E9f / i);
+        this.frameIntervalNanos = (long) (1.0E9f / resId);
     }
 
     public void start() {
@@ -60,14 +60,14 @@ public class SmoothVideoAnimator implements Choreographer.FrameCallback {
         if (j - this.lastFrameTimeNanos >= this.frameIntervalNanos) {
             this.lastFrameTimeNanos = j;
             this.listener.onFrameUpdate(new File(this.mTemplate.getFolder_template() + "/VideoFrame", buildFrameFilePath(this.currentFrameIndex)).getAbsolutePath());
-            int i = this.currentFrameIndex;
-            this.currentFrameIndex = i + 1;
-            this.currentFrameIndex = (i % this.maxFrameIndex) + 1;
+            int resId = this.currentFrameIndex;
+            this.currentFrameIndex = resId + 1;
+            this.currentFrameIndex = (resId % this.maxFrameIndex) + 1;
         }
         Choreographer.getInstance().postFrameCallback(this);
     }
 
-    private String buildFrameFilePath(int i) {
-        return String.format(Locale.US, "frame_%04d.jpg", Integer.valueOf(i));
+    private String buildFrameFilePath(int resId) {
+        return String.format(Locale.US, "frame_%04d.jpg", Integer.valueOf(resId));
     }
 }

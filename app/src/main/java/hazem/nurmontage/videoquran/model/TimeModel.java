@@ -15,18 +15,18 @@ public class TimeModel implements Serializable {
     private int widthShape;
     private int width_bitmap_progress;
 
-    public TimeModel(int i, int i2, float f, String str, float f2, float f3, int i3) {
-        this.size = f;
-        this.color = str;
+    public TimeModel(int dimension, int i2, float floatValue, String textValue, float f2, float floatValue3, int duration3) {
+        this.size = floatValue;
+        this.color = textValue;
         this.posY = f2;
-        this.posXRight = f3;
-        this.progress_offset = i3;
-        this.width_bitmap_progress = i;
+        this.posXRight = floatValue3;
+        this.progress_offset = duration3;
+        this.width_bitmap_progress = dimension;
         this.height_bitmap_progress = i2;
     }
 
-    public void setHeight_bitmap_progress(int i) {
-        this.height_bitmap_progress = i;
+    public void setHeight_bitmap_progress(int dimension) {
+        this.height_bitmap_progress = dimension;
     }
 
     public int getHeight_bitmap_progress() {
@@ -41,32 +41,32 @@ public class TimeModel implements Serializable {
         return this.startShape;
     }
 
-    public void setHeightShape(int i) {
-        this.heightShape = i;
+    public void setHeightShape(int dimension) {
+        this.heightShape = dimension;
     }
 
-    public void setWidthShape(int i) {
-        this.widthShape = i;
+    public void setWidthShape(int dimension) {
+        this.widthShape = dimension;
     }
 
     public int getWidthShape() {
         return this.widthShape;
     }
 
-    public void setStartShape(float f) {
-        this.startShape = f;
+    public void setStartShape(float floatValue) {
+        this.startShape = floatValue;
     }
 
     public int getProgress_offset() {
         return this.progress_offset;
     }
 
-    public void setProgress_offset(int i) {
-        this.progress_offset = i;
+    public void setProgress_offset(int dimension) {
+        this.progress_offset = dimension;
     }
 
-    public void setWidth_bitmap_progress(int i) {
-        this.width_bitmap_progress = i;
+    public void setWidth_bitmap_progress(int dimension) {
+        this.width_bitmap_progress = dimension;
     }
 
     public int getWidth_bitmap_progress() {
@@ -89,19 +89,19 @@ public class TimeModel implements Serializable {
         return this.color;
     }
 
-    public void setColor(String str) {
-        this.color = str;
+    public void setColor(String textValue) {
+        this.color = textValue;
     }
 
-    public void setPosXRight(float f) {
-        this.posXRight = f;
+    public void setPosXRight(float floatValue) {
+        this.posXRight = floatValue;
     }
 
-    public void setPosY(float f) {
-        this.posY = f;
+    public void setPosY(float floatValue) {
+        this.posY = floatValue;
     }
 
-    public void setSize(float f) {
-        this.size = f;
+    public void setSize(float floatValue) {
+        this.size = floatValue;
     }
 }

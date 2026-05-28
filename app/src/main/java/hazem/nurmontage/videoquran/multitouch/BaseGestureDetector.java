@@ -14,9 +14,9 @@ public abstract class BaseGestureDetector {
     protected float mPrevPressure;
     protected long mTimeDelta;
 
-    protected abstract void handleInProgressEvent(int i, MotionEvent motionEvent);
+    protected abstract void handleInProgressEvent(int value, MotionEvent motionEvent);
 
-    protected abstract void handleStartProgressEvent(int i, MotionEvent motionEvent);
+    protected abstract void handleStartProgressEvent(int value, MotionEvent motionEvent);
 
     public BaseGestureDetector(Context context) {
         this.mContext = context;

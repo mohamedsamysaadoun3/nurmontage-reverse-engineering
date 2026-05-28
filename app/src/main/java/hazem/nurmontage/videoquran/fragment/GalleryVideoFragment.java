@@ -66,21 +66,21 @@ public class GalleryVideoFragment extends Fragment {
         return root;
     }
 
-    public VideoItem isContains(String str) {
+    public VideoItem isContains(String textValue) {
         List<GallerySelected> list = this.gallerySelecteds;
         if (list == null) {
             return null;
         }
         for (GallerySelected gallerySelected : list) {
-            if (gallerySelected.getVideoItem() != null && gallerySelected.getVideoItem().getPath().equals(str)) {
+            if (gallerySelected.getVideoItem() != null && gallerySelected.getVideoItem().getPath().equals(textValue)) {
                 return gallerySelected.getVideoItem();
             }
         }
         return null;
     }
 
-    public void inselect(int i) {
-        this.adabters.inselectItem(i);
+    public void inselect(int value) {
+        this.adabters.inselectItem(value);
     }
 
     private void loadVideos(View view) {
@@ -156,9 +156,9 @@ public class GalleryVideoFragment extends Fragment {
         }
     }
 
-    private int getVideoDuration(String str) {
+    private int getVideoDuration(String textValue) {
         MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-        mediaMetadataRetriever.setDataSource(str);
+        mediaMetadataRetriever.setDataSource(textValue);
         int parseInt = Integer.parseInt(mediaMetadataRetriever.extractMetadata(9));
         try {
             mediaMetadataRetriever.release();

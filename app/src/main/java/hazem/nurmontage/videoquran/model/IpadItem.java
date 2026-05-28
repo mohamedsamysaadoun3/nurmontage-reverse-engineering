@@ -7,9 +7,9 @@ public class IpadItem {
     private int img;
     private IpadType ipadType;
 
-    public IpadItem(int i, IpadType ipadType) {
+    public IpadItem(int value, IpadType ipadType) {
         this.ipadType = ipadType;
-        this.img = i;
+        this.img = value;
     }
 
     public IpadType getIpadType() {

@@ -37,9 +37,9 @@ public final class FragmentProgressViewBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentProgressViewBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentProgressViewBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_progress_view, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

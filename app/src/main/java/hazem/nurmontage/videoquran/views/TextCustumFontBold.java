@@ -19,8 +19,8 @@ public class TextCustumFontBold extends AppCompatTextView {
         init(context);
     }
 
-    public TextCustumFontBold(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public TextCustumFontBold(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         init(context);
     }
 

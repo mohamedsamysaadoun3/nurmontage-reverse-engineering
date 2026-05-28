@@ -17,8 +17,8 @@ public class Transition implements Serializable {
     private String type_in;
     private String type_out;
 
-    public void setFromW(float f) {
-        this.fromW = f;
+    public void setFromW(float floatValue) {
+        this.fromW = floatValue;
     }
 
     public float getFromW() {
@@ -34,20 +34,20 @@ public class Transition implements Serializable {
         this.type_in = "none";
     }
 
-    public Transition(String str, String str2, String str3, float f, float f2, float f3, boolean z, boolean z2, boolean z3) {
-        this.type_in = str;
+    public Transition(String textValue, String str2, String textValue3, float floatValue, float f2, float floatValue3, boolean isFlag, boolean z2, boolean z3) {
+        this.type_in = textValue;
         this.type_out = str2;
-        this.type_both = str3;
-        this.duration_in = f;
+        this.type_both = textValue3;
+        this.duration_in = floatValue;
         this.duration_out = f2;
-        this.duration_both = f3;
-        this.isIn = z;
+        this.duration_both = floatValue3;
+        this.isIn = isFlag;
         this.isOut = z2;
         this.isBoth = z3;
     }
 
-    public void setOffset_frame_in(float f) {
-        this.offset_frame_in = f;
+    public void setOffset_frame_in(float floatValue) {
+        this.offset_frame_in = floatValue;
     }
 
     public float getOffset_frame_out() {
@@ -58,8 +58,8 @@ public class Transition implements Serializable {
         return this.offset_frame_in;
     }
 
-    public void setOffset_frame_out(float f) {
-        this.offset_frame_out = f;
+    public void setOffset_frame_out(float floatValue) {
+        this.offset_frame_out = floatValue;
     }
 
     public boolean isIn() {
@@ -70,16 +70,16 @@ public class Transition implements Serializable {
         return this.isOut;
     }
 
-    public void setIn(boolean z) {
-        this.isIn = z;
+    public void setIn(boolean isFlag) {
+        this.isIn = isFlag;
     }
 
-    public void setOut(boolean z) {
-        this.isOut = z;
+    public void setOut(boolean isFlag) {
+        this.isOut = isFlag;
     }
 
-    public void setBoth(boolean z) {
-        this.isBoth = z;
+    public void setBoth(boolean isFlag) {
+        this.isBoth = isFlag;
     }
 
     public boolean isBoth() {
@@ -98,28 +98,28 @@ public class Transition implements Serializable {
         return this.duration_out;
     }
 
-    public void setDuration_both(float f) {
-        this.duration_both = f;
+    public void setDuration_both(float floatValue) {
+        this.duration_both = floatValue;
     }
 
-    public void setDuration_in(float f) {
-        this.duration_in = f;
+    public void setDuration_in(float floatValue) {
+        this.duration_in = floatValue;
     }
 
-    public void setDuration_out(float f) {
-        this.duration_out = f;
+    public void setDuration_out(float floatValue) {
+        this.duration_out = floatValue;
     }
 
-    public void setType_in(String str) {
-        this.type_in = str;
+    public void setType_in(String textValue) {
+        this.type_in = textValue;
     }
 
-    public void setType_both(String str) {
-        this.type_both = str;
+    public void setType_both(String textValue) {
+        this.type_both = textValue;
     }
 
-    public void setType_out(String str) {
-        this.type_out = str;
+    public void setType_out(String textValue) {
+        this.type_out = textValue;
     }
 
     public String getType_both() {

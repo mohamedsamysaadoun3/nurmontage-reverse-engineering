@@ -14,7 +14,7 @@ public class QuranReader {
         this.context = context;
     }
 
-    public String getAyahText(int i, int i2) {
+    public String getAyahText(int i, int value2) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("quran/quran-simple.txt"), StandardCharsets.UTF_8));
             while (true) {
@@ -25,9 +25,9 @@ public class QuranReader {
                         try {
                             int parseInt = Integer.parseInt(split[0]);
                             int parseInt2 = Integer.parseInt(split[1]);
-                            String str = split[2];
-                            if (parseInt == i && parseInt2 == i2) {
-                                return str;
+                            String textValue = split[2];
+                            if (parseInt == i && parseInt2 == value2) {
+                                return textValue;
                             }
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
@@ -43,7 +43,7 @@ public class QuranReader {
         }
     }
 
-    public String getTranslationAyahText(String str, int i, int i2) {
+    public String getTranslationAyahText(String textValue, int i, int value2) {
         BufferedReader bufferedReader;
         String str2;
         String readLine;
@@ -51,7 +51,7 @@ public class QuranReader {
         try {
             try {
                 try {
-                    bufferedReader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("quran/" + str), StandardCharsets.UTF_8));
+                    bufferedReader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("quran/" + textValue), StandardCharsets.UTF_8));
                 } catch (Throwable th) {
                     th = th;
                 }
@@ -59,7 +59,7 @@ public class QuranReader {
                 e = e;
             }
             try {
-                str2 = i + "|" + i2;
+                str2 = i + "|" + value2;
             } catch (Exception e2) {
                 e = e2;
                 bufferedReader2 = bufferedReader;

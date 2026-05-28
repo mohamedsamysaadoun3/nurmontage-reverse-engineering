@@ -37,8 +37,8 @@ public enum TransitionType {
 
     private final String value;
 
-    TransitionType(String str) {
-        this.value = str;
+    TransitionType(String textValue) {
+        this.value = textValue;
     }
 
     public String getValue() {

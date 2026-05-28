@@ -79,8 +79,8 @@ public class SquareOutlineProgressBar extends View {
         init();
     }
 
-    public SquareOutlineProgressBar(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public SquareOutlineProgressBar(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         this.trackPaint = new Paint(1);
         this.progressPaint = new Paint(1);
         this.rect = new RectF();
@@ -114,20 +114,20 @@ public class SquareOutlineProgressBar extends View {
     }
 
     @Override // android.view.View
-    protected void onMeasure(int i, int i2) {
-        int size = View.MeasureSpec.getSize(i);
+    protected void onMeasure(int value, int value2) {
+        int size = View.MeasureSpec.getSize(value);
         setMeasuredDimension((int) (size / 1.618034f), size);
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int i, int i2, int i3, int i4) {
-        super.onSizeChanged(i, i2, i3, i4);
-        updateShader(i, i2);
-        float f = i;
-        this.textPaint.setTextSize(0.033f * f);
+    protected void onSizeChanged(int value, int value2, int i3, int size4) {
+        super.onSizeChanged(value, value2, i3, size4);
+        updateShader(value, value2);
+        float floatValue = value;
+        this.textPaint.setTextSize(0.033f * floatValue);
         Rect rect = new Rect();
-        this.cornerRadius = 0.04f * f;
-        float f2 = f * 0.0085f;
+        this.cornerRadius = 0.04f * floatValue;
+        float f2 = floatValue * 0.0085f;
         this.strokeWidth = f2;
         this.trackPaint.setStrokeWidth(f2);
         this.progressPaint.setStrokeWidth(this.strokeWidth);
@@ -143,17 +143,17 @@ public class SquareOutlineProgressBar extends View {
         this.f448xP = this.rect.centerX() - (rect.width() * 0.5f);
     }
 
-    private void updateShader(int i, int i2) {
-        if (i == 0 || i2 == 0) {
+    private void updateShader(int value, int value2) {
+        if (value == 0 || value2 == 0) {
             return;
         }
-        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, i, i2, this.gradientColors, (float[]) null, Shader.TileMode.CLAMP);
+        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, value, value2, this.gradientColors, (float[]) null, Shader.TileMode.CLAMP);
         this.progressShader = linearGradient;
         this.progressPaint.setShader(linearGradient);
     }
 
-    public void setProgress(int i) {
-        int max = Math.max(0, Math.min(i, this.maxProgress));
+    public void setProgress(int value) {
+        int max = Math.max(0, Math.min(value, this.maxProgress));
         if (this.progress != max) {
             this.progress = max;
             invalidate();
@@ -164,27 +164,27 @@ public class SquareOutlineProgressBar extends View {
         return this.progress;
     }
 
-    public void setMaxProgress(int i) {
-        this.maxProgress = Math.max(1, i);
+    public void setMaxProgress(int value) {
+        this.maxProgress = Math.max(1, value);
         invalidate();
     }
 
-    public void setCornerRadius(float f) {
-        this.cornerRadius = f;
+    public void setCornerRadius(float floatValue) {
+        this.cornerRadius = floatValue;
         invalidate();
     }
 
-    public void setStrokeWidth(float f) {
-        this.strokeWidth = f;
-        this.trackPaint.setStrokeWidth(f);
-        this.progressPaint.setStrokeWidth(f);
+    public void setStrokeWidth(float floatValue) {
+        this.strokeWidth = floatValue;
+        this.trackPaint.setStrokeWidth(floatValue);
+        this.progressPaint.setStrokeWidth(floatValue);
         invalidate();
     }
 
     @Override // android.view.View
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float f = this.rect.left;
+        float floatValue = this.rect.left;
         float f2 = this.rect.top;
         float f3 = this.rect.right;
         float f4 = this.rect.bottom;
@@ -194,7 +194,7 @@ public class SquareOutlineProgressBar extends View {
         canvas.drawText(this.strHint, this.f447xH, this.y_hint, this.textPaint);
         this.path.reset();
         this.partialPath.reset();
-        float f6 = f + f5;
+        float f6 = floatValue + f5;
         this.path.moveTo(f6, f2);
         this.path.lineTo(f3 - f5, f2);
         float f7 = 2.0f * f5;
@@ -205,10 +205,10 @@ public class SquareOutlineProgressBar extends View {
         float f10 = f4 - f7;
         this.path.arcTo(new RectF(f8, f10, f3, f4), 0.0f, 90.0f, false);
         this.path.lineTo(f6, f4);
-        float f11 = f7 + f;
-        this.path.arcTo(new RectF(f, f10, f11, f4), 90.0f, 90.0f, false);
-        this.path.lineTo(f, f5 + f2);
-        this.path.arcTo(new RectF(f, f2, f11, f9), 180.0f, 90.0f, false);
+        float f11 = f7 + floatValue;
+        this.path.arcTo(new RectF(floatValue, f10, f11, f4), 90.0f, 90.0f, false);
+        this.path.lineTo(floatValue, f5 + f2);
+        this.path.arcTo(new RectF(floatValue, f2, f11, f9), 180.0f, 90.0f, false);
         this.path.close();
         this.pathMeasure.setPath(this.path, false);
         this.pathMeasure.getSegment(0.0f, this.pathMeasure.getLength() * (this.progress / this.maxProgress), this.partialPath, true);

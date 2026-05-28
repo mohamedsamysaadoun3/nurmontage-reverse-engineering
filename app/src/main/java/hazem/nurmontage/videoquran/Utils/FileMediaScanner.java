@@ -23,7 +23,7 @@ public class FileMediaScanner implements MediaScannerConnection.MediaScannerConn
     }
 
     @Override // android.media.MediaScannerConnection.OnScanCompletedListener
-    public void onScanCompleted(String str, Uri uri) {
+    public void onScanCompleted(String textValue, Uri uri) {
         this.mediaScannerConnection.disconnect();
     }
 }

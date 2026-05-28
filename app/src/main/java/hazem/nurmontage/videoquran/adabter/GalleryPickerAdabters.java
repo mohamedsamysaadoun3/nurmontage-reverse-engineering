@@ -32,12 +32,12 @@ public class GalleryPickerAdabters extends RecyclerView.Adapter<MyViewHolder> {
     private PhotoItem photoItem_selected;
     private final int size;
 
-    public GalleryPickerAdabters(String str, Resources resources, List<GallerySelected> list, int i, GalleryPickerVideo.IPicker iPicker) {
-        this.size = i;
-        this.APP_VERSION = str;
+    public GalleryPickerAdabters(String textValue, Resources resources, List<GallerySelected> list, int value, GalleryPickerVideo.IPicker iPicker) {
+        this.size = value;
+        this.APP_VERSION = textValue;
         this.iPicker = iPicker;
         this.gallerySelectedList = list;
-        Bitmap createBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.RGB_565);
+        Bitmap createBitmap = Bitmap.createBitmap(value, value, Bitmap.Config.RGB_565);
         createBitmap.eraseColor(ViewCompat.MEASURED_STATE_MASK);
         this.bitmapPlaceHolder = new BitmapDrawable(resources, createBitmap);
     }
@@ -66,34 +66,34 @@ public class GalleryPickerAdabters extends RecyclerView.Adapter<MyViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void update(String str) {
+    public void update(String textValue) {
         this.paths.clear();
         for (PhotoItem photoItem : this.all_paths) {
-            if (photoItem.getFolder().equals(str)) {
+            if (photoItem.getFolder().equals(textValue)) {
                 this.paths.add(photoItem);
             }
         }
         notifyDataSetChanged();
     }
 
-    public void inselectItem(int i) {
-        if (i >= this.paths.size()) {
+    public void inselectItem(int value) {
+        if (value >= this.paths.size()) {
             return;
         }
-        PhotoItem photoItem = this.paths.get(i);
+        PhotoItem photoItem = this.paths.get(value);
         photoItem.setSelect(false);
-        notifyItemChanged(i);
+        notifyItemChanged(value);
         updateNumbers(photoItem.getNumber());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_gallery, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        PhotoItem photoItem = this.paths.get(i);
+    public void onBindViewHolder(MyViewHolder myViewHolder, int value) {
+        PhotoItem photoItem = this.paths.get(value);
         myViewHolder.imageView.setNumber(photoItem.getNumber());
         myViewHolder.imageView.onSelect(photoItem.isSelect());
         RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(photoItem.getPath());
@@ -162,17 +162,17 @@ public class GalleryPickerAdabters extends RecyclerView.Adapter<MyViewHolder> {
         }
     }
 
-    public void updateNumbers(int i) {
+    public void updateNumbers(int value) {
         if (this.gallerySelectedList == null) {
             return;
         }
-        while (i < this.gallerySelectedList.size()) {
-            PhotoItem photoItem = this.gallerySelectedList.get(i).getPhotoItem();
+        while (value < this.gallerySelectedList.size()) {
+            PhotoItem photoItem = this.gallerySelectedList.get(value).getPhotoItem();
             if (photoItem != null) {
                 photoItem.setNumber(photoItem.getNumber() - 1);
                 notifyItemChanged(photoItem.getAdabter_pos());
             }
-            i++;
+            value++;
         }
     }
 }

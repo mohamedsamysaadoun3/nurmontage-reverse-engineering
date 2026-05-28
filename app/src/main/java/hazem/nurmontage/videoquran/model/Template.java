@@ -71,8 +71,8 @@ public class Template implements Serializable {
         return this.currentCursur;
     }
 
-    public void setCurrentCursur(int i) {
-        this.currentCursur = i;
+    public void setCurrentCursur(int value) {
+        this.currentCursur = value;
     }
 
     public float getScale_timeline() {
@@ -87,28 +87,28 @@ public class Template implements Serializable {
         this.isNewCode = true;
     }
 
-    public void setScale_timeline(float f) {
-        this.scale_timeline = f;
+    public void setScale_timeline(float scale) {
+        this.scale_timeline = scale;
     }
 
     public String getResolution() {
         return this.resolution;
     }
 
-    public void setResolution(String str) {
-        this.resolution = str;
+    public void setResolution(String textValue) {
+        this.resolution = textValue;
     }
 
     public int getFps() {
         return this.fps;
     }
 
-    public void setFps(int i) {
-        this.fps = i;
+    public void setFps(int value) {
+        this.fps = value;
     }
 
-    public void setFolder_template(String str) {
-        this.folder_template = str;
+    public void setFolder_template(String textValue) {
+        this.folder_template = textValue;
     }
 
     public String getFolder_template() {
@@ -123,24 +123,24 @@ public class Template implements Serializable {
         return this.extension;
     }
 
-    public void setExtension(String str) {
-        this.extension = str;
+    public void setExtension(String textValue) {
+        this.extension = textValue;
     }
 
     public String getUri_upload_extract_audio_video() {
         return this.uri_upload_extract_audio_video;
     }
 
-    public void setUri_upload_extract_audio_video(String str) {
-        this.uri_upload_extract_audio_video = str;
+    public void setUri_upload_extract_audio_video(String textValue) {
+        this.uri_upload_extract_audio_video = textValue;
     }
 
-    public void setUri_original_upload_video(String str) {
-        this.uri_original_upload_video = str;
+    public void setUri_original_upload_video(String textValue) {
+        this.uri_original_upload_video = textValue;
     }
 
-    public void setName_drawable(String str) {
-        this.name_drawable = str;
+    public void setName_drawable(String textValue) {
+        this.name_drawable = textValue;
     }
 
     public String getName_drawable() {
@@ -155,20 +155,20 @@ public class Template implements Serializable {
         return this.duration_video_media;
     }
 
-    public void setDuration_video_media(int i) {
-        this.duration_video_media = i;
+    public void setDuration_video_media(int value) {
+        this.duration_video_media = value;
     }
 
     public String getFrame_bg() {
         return this.frame_bg;
     }
 
-    public void setFrame_bg(String str) {
-        this.frame_bg = str;
+    public void setFrame_bg(String textValue) {
+        this.frame_bg = textValue;
     }
 
-    public void setVideoSquare(boolean z) {
-        this.isVideoSquare = z;
+    public void setVideoSquare(boolean isFlag) {
+        this.isVideoSquare = isFlag;
     }
 
     public float getWidth_square() {
@@ -179,12 +179,12 @@ public class Template implements Serializable {
         return this.height_square;
     }
 
-    public void setWidth_square(float f) {
-        this.width_square = f;
+    public void setWidth_square(float scale) {
+        this.width_square = scale;
     }
 
-    public void setHeight_square(float f) {
-        this.height_square = f;
+    public void setHeight_square(float scale) {
+        this.height_square = scale;
     }
 
     public SquareBitmapModel getSquareBitmapModel() {
@@ -198,8 +198,8 @@ public class Template implements Serializable {
         return this.uri_media_video;
     }
 
-    public void setUri_media_video(String str) {
-        this.uri_media_video = str;
+    public void setUri_media_video(String textValue) {
+        this.uri_media_video = textValue;
     }
 
     public void setmTimeModel(TimeModel timeModel) {
@@ -210,12 +210,12 @@ public class Template implements Serializable {
         return this.mTimeModel;
     }
 
-    public void setX_square(float f) {
-        this.x_square = f;
+    public void setX_square(float scale) {
+        this.x_square = scale;
     }
 
-    public void setY_square(float f) {
-        this.y_square = f;
+    public void setY_square(float scale) {
+        this.y_square = scale;
     }
 
     public float getX_square() {
@@ -226,8 +226,8 @@ public class Template implements Serializable {
         return this.y_square;
     }
 
-    public void setImgResize(String str) {
-        this.imgResize = str;
+    public void setImgResize(String textValue) {
+        this.imgResize = textValue;
     }
 
     public String getImgResize() {
@@ -246,12 +246,12 @@ public class Template implements Serializable {
         return this.ipad_type;
     }
 
-    public void setIpad_type(int i) {
-        this.ipad_type = i;
+    public void setIpad_type(int value) {
+        this.ipad_type = value;
     }
 
-    public void setGlass(boolean z) {
-        this.isGlass = z;
+    public void setGlass(boolean isFlag) {
+        this.isGlass = isFlag;
     }
 
     public boolean isGlass() {
@@ -274,14 +274,14 @@ public class Template implements Serializable {
         return this.height;
     }
 
-    public void setDrawingTranslation(float f, float f2) {
-        this.mDrawingTranslationX = f;
-        this.mDrawingTranslationY = f2;
+    public void setDrawingTranslation(float scale, float floatValue2) {
+        this.mDrawingTranslationX = scale;
+        this.mDrawingTranslationY = floatValue2;
     }
 
-    public void setWidthAndHeight(int i, int i2) {
-        this.width = i;
-        this.height = i2;
+    public void setWidthAndHeight(int value, int resId2) {
+        this.width = value;
+        this.height = resId2;
     }
 
     public void addMedia(EntityMedia entityMedia) {
@@ -292,16 +292,16 @@ public class Template implements Serializable {
         return this.entityMediaList;
     }
 
-    public void setColor_ipad(int i) {
-        this.color_ipad = i;
+    public void setColor_ipad(int value) {
+        this.color_ipad = value;
     }
 
     public int getColor_ipad() {
         return this.color_ipad;
     }
 
-    public void setIndex_color(int i) {
-        this.index_color = i;
+    public void setIndex_color(int value) {
+        this.index_color = value;
     }
 
     public int getIndex_color() {
@@ -312,16 +312,16 @@ public class Template implements Serializable {
         return this.uri_bg_ffmpeg;
     }
 
-    public void setUri_bg_ffmpeg(String str) {
-        this.uri_bg_ffmpeg = str;
+    public void setUri_bg_ffmpeg(String textValue) {
+        this.uri_bg_ffmpeg = textValue;
     }
 
     public int getDuration() {
         return this.duration;
     }
 
-    public void setDuration(int i) {
-        this.duration = i;
+    public void setDuration(int value) {
+        this.duration = value;
     }
 
     public void setEntityProgressTemplate(EntityProgressTemplate entityProgressTemplate) {
@@ -360,8 +360,8 @@ public class Template implements Serializable {
         return this.entitySurahTemplate;
     }
 
-    public void setIdTemplate(String str) {
-        this.idTemplate = str;
+    public void setIdTemplate(String textValue) {
+        this.idTemplate = textValue;
     }
 
     public String getIdTemplate() {
@@ -376,16 +376,16 @@ public class Template implements Serializable {
         this.translationTemplateList.add(entityTranslationTemplate);
     }
 
-    public void setUri_video(String str) {
-        this.uri_video = str;
+    public void setUri_video(String textValue) {
+        this.uri_video = textValue;
     }
 
     public String getUri_video() {
         return this.uri_video;
     }
 
-    public void setUri_bg(String str) {
-        this.uri_bg = str;
+    public void setUri_bg(String textValue) {
+        this.uri_bg = textValue;
     }
 
     public List<EntityQuranTemplate> getQuranEntityList() {
@@ -413,7 +413,7 @@ public class Template implements Serializable {
         return this.resizeType;
     }
 
-    public void setResizeType(int i) {
-        this.resizeType = i;
+    public void setResizeType(int value) {
+        this.resizeType = value;
     }
 }

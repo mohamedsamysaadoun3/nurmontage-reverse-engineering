@@ -38,16 +38,16 @@ public class EntityQuranTimeline extends Entity {
         this.transition = transition;
     }
 
-    public void setFile(String str) {
-        this.file = str;
+    public void setFile(String filePath) {
+        this.file = filePath;
     }
 
-    public void setFile_in(String str) {
-        this.file_in = str;
+    public void setFile_in(String filePath) {
+        this.file_in = filePath;
     }
 
-    public void setFile_out(String str) {
-        this.file_out = str;
+    public void setFile_out(String filePath) {
+        this.file_out = filePath;
     }
 
     public String getFile() {
@@ -67,8 +67,8 @@ public class EntityQuranTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setDownX(float f) {
-        this.downX = f;
+    public void setDownX(float floatValue) {
+        this.downX = floatValue;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -82,22 +82,22 @@ public class EntityQuranTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setLastLeft(float f) {
-        this.lastLeft = f;
+    public void setLastLeft(float floatValue) {
+        this.lastLeft = floatValue;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setLastRight(float f) {
-        this.lastRight = f;
+    public void setLastRight(float floatValue) {
+        this.lastRight = floatValue;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setX(float f) {
-        if (f < 0.0f) {
-            f = 0.0f;
+    public void setX(float floatValue) {
+        if (floatValue < 0.0f) {
+            floatValue = 0.0f;
         }
-        this.rect.left = f;
-        this.left = f;
+        this.rect.left = floatValue;
+        this.left = floatValue;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -106,9 +106,9 @@ public class EntityQuranTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setRight(float f) {
-        this.right = f;
-        this.rect.right = f;
+    public void setRight(float floatValue) {
+        this.right = floatValue;
+        this.rect.right = floatValue;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -126,11 +126,11 @@ public class EntityQuranTimeline extends Entity {
         return this.rect;
     }
 
-    public EntityQuranTimeline(QuranEntity quranEntity, float f, float f2, float f3, float f4, float f5) {
-        super(f5);
+    public EntityQuranTimeline(QuranEntity quranEntity, float floatValue, float f2, float f3, float f4, float floatValue5) {
+        super(floatValue5);
         this.f412h = f3;
         this.quranEntity = quranEntity;
-        this.rect = new RectF(f, f2, f4, f3);
+        this.rect = new RectF(floatValue, f2, f4, f3);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_QURAN;
@@ -150,8 +150,8 @@ public class EntityQuranTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setY(float f) {
-        this.rect.top = f;
+    public void setY(float floatValue) {
+        this.rect.top = floatValue;
         this.rect.bottom = this.f412h + this.rect.top;
         this.centerY = this.rect.top + (this.rect.height() * 0.5f) + (this.textBound.height() * 0.5f);
     }
@@ -162,13 +162,13 @@ public class EntityQuranTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void draw(Canvas canvas, int i, int i2) {
+    public void draw(Canvas canvas, int i, int value2) {
         canvas.drawText(this.quranEntity.getTxt().replace(Common.NUMBER_CHAR, "..."), this.round + this.rect.left, this.centerY, this.paintText);
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setSelect(boolean z) {
-        this.isSelect = z;
+    public void setSelect(boolean isSelected) {
+        this.isSelect = isSelected;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity

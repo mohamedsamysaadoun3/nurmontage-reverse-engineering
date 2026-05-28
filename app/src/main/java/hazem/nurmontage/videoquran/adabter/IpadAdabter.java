@@ -23,21 +23,21 @@ public class IpadAdabter extends RecyclerView.Adapter<ViewHolder> {
     private int pos_select;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public boolean isManyOption(int i) {
-        return i == 0 || i == 1 || i == 7 || i == 8 || i == 9;
+    public boolean isManyOption(int value) {
+        return value == 0 || value == 1 || value == 7 || value == 8 || value == 9;
     }
 
     public int getPos_select() {
         return this.pos_select;
     }
 
-    public IpadAdabter(boolean z, int i, int i2, EditIpadFragment.IIpadEditCallback iIpadEditCallback, List<IpadItem> list, boolean z2) {
+    public IpadAdabter(boolean isFlag, int value, int value2, EditIpadFragment.IIpadEditCallback iIpadEditCallback, List<IpadItem> list, boolean z2) {
         this.ipadItems = list;
-        this.pos_select = i;
+        this.pos_select = value;
         this.ipadEditCallback = iIpadEditCallback;
-        this.ipad_selected = i2;
+        this.ipad_selected = value2;
         this.isGlass = z2;
-        this.isSubscribe = z;
+        this.isSubscribe = isFlag;
     }
 
     private void updateDote(View view, View view2) {
@@ -92,15 +92,15 @@ public class IpadAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_ipad, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        IpadItem ipadItem = this.ipadItems.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        IpadItem ipadItem = this.ipadItems.get(value);
         Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(ipadItem.getImg())).diskCacheStrategy(DiskCacheStrategy.NONE).into(viewHolder.imageView);
-        if (isManyOption(i)) {
+        if (isManyOption(value)) {
             viewHolder.lyt_option.setVisibility(0);
             updateDote(viewHolder.vDot1, viewHolder.vDot2);
         } else {
@@ -109,7 +109,7 @@ public class IpadAdabter extends RecyclerView.Adapter<ViewHolder> {
         if (ipadItem.getIpadType().ordinal() == this.ipad_selected) {
             viewHolder.itemView.setAlpha(1.0f);
             viewHolder.imageView.setBackgroundResource(C2014R.drawable.ipad_selected);
-            this.pos_select = i;
+            this.pos_select = value;
         } else {
             viewHolder.itemView.setAlpha(0.4f);
             viewHolder.imageView.setBackgroundResource(C2014R.drawable.watch_btn_outline);
@@ -117,7 +117,7 @@ public class IpadAdabter extends RecyclerView.Adapter<ViewHolder> {
         if (this.isSubscribe) {
             return;
         }
-        if (i > 1) {
+        if (value > 1) {
             viewHolder.iv_pro.setVisibility(0);
         } else {
             viewHolder.iv_pro.setVisibility(8);

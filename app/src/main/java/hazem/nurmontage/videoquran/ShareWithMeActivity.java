@@ -79,46 +79,46 @@ public class ShareWithMeActivity extends Base {
 
     private void processVideo(Uri uri) {
         final String absolutePath = copyVideoToCache(uri).getAbsolutePath();
-        final String str = getExternalFilesDir(null) + "/share_with_me.m4a";
-        FFmpegKit.executeAsync("-y -i \"" + absolutePath + "\" -vn -map 0:a? -c:a copy \"" + str + "\"", new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda0
+        final String textValue = getExternalFilesDir(null) + "/share_with_me.m4a";
+        FFmpegKit.executeAsync("-y -i \"" + absolutePath + "\" -vn -map 0:a? -c:a copy \"" + textValue + "\"", new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda0
             @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
             public final void apply(FFmpegSession fFmpegSession) {
-                ShareWithMeActivity.this.m623x79670e10(str, absolutePath, fFmpegSession);
+                ShareWithMeActivity.this.m623x79670e10(textValue, absolutePath, fFmpegSession);
             }
         });
     }
 
     /* renamed from: lambda$processVideo$3$hazem-nurmontage-videoquran-ShareWithMeActivity */
-    /* synthetic */ void m623x79670e10(final String str, String str2, FFmpegSession fFmpegSession) {
+    /* synthetic */ void m623x79670e10(final String textValue, String textValue2, FFmpegSession fFmpegSession) {
         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
             runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ShareWithMeActivity.this.m620x7aca400d(str);
+                    ShareWithMeActivity.this.m620x7aca400d(textValue);
                 }
             });
         } else {
-            FFmpegKit.executeAsync("-y -i \"" + str2 + "\" -vn -map 0:a? -c:a aac -b:a 192k \"" + str + "\"", new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda2
+            FFmpegKit.executeAsync("-y -i \"" + textValue2 + "\" -vn -map 0:a? -c:a aac -b:a 192k \"" + textValue + "\"", new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda2
                 @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                 public final void apply(FFmpegSession fFmpegSession2) {
-                    ShareWithMeActivity.this.m622x79dd740f(str, fFmpegSession2);
+                    ShareWithMeActivity.this.m622x79dd740f(textValue, fFmpegSession2);
                 }
             });
         }
     }
 
     /* renamed from: lambda$processVideo$0$hazem-nurmontage-videoquran-ShareWithMeActivity */
-    /* synthetic */ void m620x7aca400d(String str) {
-        toEngine(Uri.parse(str), str);
+    /* synthetic */ void m620x7aca400d(String textValue) {
+        toEngine(Uri.parse(textValue), textValue);
     }
 
     /* renamed from: lambda$processVideo$2$hazem-nurmontage-videoquran-ShareWithMeActivity */
-    /* synthetic */ void m622x79dd740f(final String str, FFmpegSession fFmpegSession) {
+    /* synthetic */ void m622x79dd740f(final String textValue, FFmpegSession fFmpegSession) {
         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
             runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.ShareWithMeActivity$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ShareWithMeActivity.this.m621x7a53da0e(str);
+                    ShareWithMeActivity.this.m621x7a53da0e(textValue);
                 }
             });
         } else {
@@ -133,14 +133,14 @@ public class ShareWithMeActivity extends Base {
     }
 
     /* renamed from: lambda$processVideo$1$hazem-nurmontage-videoquran-ShareWithMeActivity */
-    /* synthetic */ void m621x7a53da0e(String str) {
-        toEngine(Uri.parse(str), str);
+    /* synthetic */ void m621x7a53da0e(String textValue) {
+        toEngine(Uri.parse(textValue), textValue);
     }
 
-    private void toEngine(Uri uri, String str) {
+    private void toEngine(Uri uri, String textValue) {
         Intent intent = new Intent(this, (Class<?>) EngineActivity.class);
         intent.setData(uri);
-        intent.putExtra("muri", str);
+        intent.putExtra("muri", textValue);
         startActivity(intent);
         finish();
     }
@@ -189,10 +189,10 @@ public class ShareWithMeActivity extends Base {
         }
     }
 
-    private <T extends Parcelable> T getParcelable(Intent intent, String str, Class<T> cls) {
+    private <T extends Parcelable> T getParcelable(Intent intent, String textValue, Class<T> cls) {
         if (Build.VERSION.SDK_INT >= 33) {
-            return (T) intent.getParcelableExtra(str, cls);
+            return (T) intent.getParcelableExtra(textValue, cls);
         }
-        return (T) intent.getParcelableExtra(str);
+        return (T) intent.getParcelableExtra(textValue);
     }
 }

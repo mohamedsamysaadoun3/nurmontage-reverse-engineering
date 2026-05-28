@@ -54,8 +54,8 @@ public class EditTrslTxtActivity extends Base {
     final int[] BG_COLORS = {-8388608, -1, ViewCompat.MEASURED_STATE_MASK, -2838729, -16777088, -16694239, -13220529, -9404272};
     private final ColorBgAdabter.IColor iColor = new ColorBgAdabter.IColor() { // from class: hazem.nurmontage.videoquran.EditTrslTxtActivity.6
         @Override // hazem.nurmontage.videoquran.adabter.ColorBgAdabter.IColor
-        public void onColor(int i, int i2) {
-            EditTrslTxtActivity.this.clrBg = i;
+        public void onColor(int value, int color2) {
+            EditTrslTxtActivity.this.clrBg = value;
             EditTrslTxtActivity.this.scrollToSelectedPosition();
         }
     };
@@ -131,8 +131,8 @@ public class EditTrslTxtActivity extends Base {
         initRv();
         this.checkBg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: hazem.nurmontage.videoquran.EditTrslTxtActivity.5
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
-            public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                EditTrslTxtActivity.this.updateColorUI(z);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                EditTrslTxtActivity.this.updateColorUI(isChecked);
             }
         });
         updateColorUI(this.checkBg.isChecked());
@@ -157,10 +157,10 @@ public class EditTrslTxtActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void updateColorUI(boolean z) {
-        this.recyclerView.setEnabled(z);
-        this.recyclerView.animate().alpha(z ? 1.0f : 0.4f).setDuration(180L).start();
-        this.adapter.setEnabled(z);
+    public void updateColorUI(boolean isChecked) {
+        this.recyclerView.setEnabled(isChecked);
+        this.recyclerView.animate().alpha(isChecked ? 1.0f : 0.4f).setDuration(180L).start();
+        this.adapter.setEnabled(isChecked);
     }
 
     public void scrollToSelectedPosition() {
@@ -177,14 +177,14 @@ public class EditTrslTxtActivity extends Base {
         textCustumFont2.setTextColor(Color.parseColor("#888888"));
     }
 
-    public int findWordIndex_Loop(String str) {
+    public int findWordIndex_Loop(String textValue) {
         String[] stringArray = getResources().getStringArray(C2014R.array.surah_names_merged);
-        if (str == null) {
+        if (textValue == null) {
             return -1;
         }
-        for (int i = 0; i < stringArray.length; i++) {
-            if (str.contains(stringArray[i])) {
-                return i + 1;
+        for (int value = 0; value < stringArray.length; value++) {
+            if (textValue.contains(stringArray[value])) {
+                return value + 1;
             }
         }
         return -1;

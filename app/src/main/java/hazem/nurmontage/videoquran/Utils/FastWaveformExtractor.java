@@ -9,15 +9,15 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
 public class FastWaveformExtractor {
-    public static float[] extract(String str, int i) throws Exception {
+    public static float[] extract(String textValue, int value) throws Exception {
         ByteBuffer[] byteBufferArr;
         long j;
-        int i2;
+        int value2;
         MediaCodec.BufferInfo bufferInfo;
         int i3;
-        int i4 = i;
+        int i4 = value;
         MediaExtractor mediaExtractor = new MediaExtractor();
-        mediaExtractor.setDataSource(str);
+        mediaExtractor.setDataSource(textValue);
         int i5 = 0;
         int i6 = 0;
         while (true) {
@@ -53,31 +53,31 @@ public class FastWaveformExtractor {
                 }
                 byteBufferArr = inputBuffers;
                 j = 5000;
-                i2 = i7;
+                value2 = i7;
                 bufferInfo = bufferInfo2;
                 createDecoderByType.queueInputBuffer(dequeueInputBuffer, 0, readSampleData, mediaExtractor.getSampleTime(), 0);
                 mediaExtractor.advance();
             } else {
                 byteBufferArr = inputBuffers;
                 j = 5000;
-                i2 = i7;
+                value2 = i7;
                 bufferInfo = bufferInfo2;
             }
             int dequeueOutputBuffer = createDecoderByType.dequeueOutputBuffer(bufferInfo, j);
             if (dequeueOutputBuffer >= 0) {
-                i7 = i2 + 1;
-                fArr[i2] = computeAmp(outputBuffers[dequeueOutputBuffer], bufferInfo.size);
+                i7 = value2 + 1;
+                fArr[value2] = computeAmp(outputBuffers[dequeueOutputBuffer], bufferInfo.size);
                 i3 = 0;
                 createDecoderByType.releaseOutputBuffer(dequeueOutputBuffer, false);
             } else {
                 i3 = 0;
-                i7 = i2;
+                i7 = value2;
             }
             bufferInfo2 = bufferInfo;
             i5 = i3;
             j3 = j4;
             inputBuffers = byteBufferArr;
-            i4 = i;
+            i4 = value;
         }
         createDecoderByType.stop();
         createDecoderByType.release();
@@ -85,11 +85,11 @@ public class FastWaveformExtractor {
         return fArr;
     }
 
-    private static float computeAmp(ByteBuffer byteBuffer, int i) {
+    private static float computeAmp(ByteBuffer byteBuffer, int value) {
         byteBuffer.position(0);
         float f = 0.0f;
-        for (int i2 = 0; i2 < i - 1; i2 += 2) {
-            f = Math.max(f, Math.abs((int) byteBuffer.getShort(i2)) / 32767.0f);
+        for (int value2 = 0; value2 < value - 1; value2 += 2) {
+            f = Math.max(f, Math.abs((int) byteBuffer.getShort(value2)) / 32767.0f);
         }
         return f;
     }

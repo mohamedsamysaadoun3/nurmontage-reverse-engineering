@@ -230,11 +230,11 @@ public class EngineActivity extends Base {
     };
     private TrackEntityView.ITrimLineCallback iTrimLineCallback = new TrackEntityView.ITrimLineCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.60
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void fadeInAudio(float f) {
+        public void fadeInAudio(float floatValue) {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void fadeOutAudio(float f) {
+        public void fadeOutAudio(float floatValue) {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
@@ -246,8 +246,8 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void onSelectMultiple(int i) {
-            EngineActivity.this.showEditMultipleEntity(i);
+        public void onSelectMultiple(int value) {
+            EngineActivity.this.showEditMultipleEntity(value);
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
@@ -288,7 +288,7 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void onSeekPlayer(float f) {
+        public void onSeekPlayer(float floatValue) {
             try {
                 EngineActivity.this.isOnScroll = true;
                 for (EntityAudio entityAudio : EngineActivity.this.trackViewEntity.getEntityListAudio()) {
@@ -310,7 +310,7 @@ public class EngineActivity extends Base {
                 }
                 EngineActivity.this.pauseTimelineAnimation();
                 EngineActivity.this.stop();
-                int round = Math.round(Math.abs((f / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * (-1000.0f)));
+                int round = Math.round(Math.abs((floatValue / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * (-1000.0f)));
                 if (EngineActivity.this.blurredImageView != null && (round <= EngineActivity.this.trackViewEntity.getMaxTime() || EngineActivity.this.blurredImageView.getProgress() < 1.0f)) {
                     float min = Math.min(1.0f, round / EngineActivity.this.trackViewEntity.getMaxTime());
                     EngineActivity.this.updateTime(round);
@@ -349,7 +349,7 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void onSelectEntity(Entity entity, float f) {
+        public void onSelectEntity(Entity entity, float floatValue) {
             EngineActivity.this.pausePlayer();
             if (entity instanceof EntityQuranTimeline) {
                 EngineActivity.this.blurredImageView.setEntity_select(entity.getEntityView());
@@ -392,8 +392,8 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void enableRedo(boolean z) {
-            if (z) {
+        public void enableRedo(boolean isEnabled) {
+            if (isEnabled) {
                 EngineActivity.this.enableRedoBtn();
             } else {
                 EngineActivity.this.disableRedoBtn();
@@ -401,8 +401,8 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void enableUndo(boolean z) {
-            if (z) {
+        public void enableUndo(boolean isEnabled) {
+            if (isEnabled) {
                 EngineActivity.this.enableUndoBtn();
             } else {
                 EngineActivity.this.disableUndoBtn();
@@ -410,11 +410,11 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.views.TrackEntityView.ITrimLineCallback
-        public void progress(final boolean z) {
+        public void progress(final boolean isEnabled) {
             EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.60.2
                 @Override // java.lang.Runnable
                 public void run() {
-                    if (z) {
+                    if (isEnabled) {
                         EngineActivity.this.showProgress();
                     } else {
                         EngineActivity.this.hideProgressFragment();
@@ -467,17 +467,17 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.AddQuranFragment.IAddQuran
-        public void onAddTranslation(String str, int i, boolean z) {
-            EngineActivity.this.addTranslationEntity(str, i, z);
+        public void onAddTranslation(String textValue, int value, boolean isEnabled) {
+            EngineActivity.this.addTranslationEntity(textValue, value, isEnabled);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.AddQuranFragment.IAddQuran
-        public void onAdd(String str, String str2, String str3, String str4, int i, int i2, String str5, int i3, int i4) {
-            EngineActivity.this.addEntity(str, str2 + " " + i2, str3, str4, i, i2, str5, i3, i4);
+        public void onAdd(String textValue, String textValue2, String textValue3, String str4, int value, int value2, String textValue5, int value3, int value4) {
+            EngineActivity.this.addEntity(textValue, textValue2 + " " + value2, textValue3, str4, value, value2, textValue5, value3, value4);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.AddQuranFragment.IAddQuran
-        public void onDone(String str, int i, String str2, Uri uri, String str3) {
+        public void onDone(String textValue, int value, String textValue2, Uri uri, String textValue3) {
             EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.65.2
                 @Override // java.lang.Runnable
                 public void run() {
@@ -486,11 +486,11 @@ public class EngineActivity extends Base {
             });
             EngineActivity.this.blurredImageView.updateSizeAya();
             EngineActivity.this.blurredImageView.updateSizeAyaTrsl();
-            EngineActivity.this.blurredImageView.setSurahNameEntity(str, str2, null, 1.0f, "خط الإبل.otf", EngineActivity.this.blurredImageView.getClr_aya(), AyaTextPreset.NONE.ordinal(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getStyle() : SurahNameStyle.NONE.ordinal(), i, EngineActivity.this.blurredImageView.getSurahNameEntity() != null && EngineActivity.this.blurredImageView.getSurahNameEntity().isHaveBg(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getClrBg() : ViewCompat.MEASURED_STATE_MASK);
-            if (str3 == null) {
+            EngineActivity.this.blurredImageView.setSurahNameEntity(textValue, textValue2, null, 1.0f, "خط الإبل.otf", EngineActivity.this.blurredImageView.getClr_aya(), AyaTextPreset.NONE.ordinal(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getStyle() : SurahNameStyle.NONE.ordinal(), value, EngineActivity.this.blurredImageView.getSurahNameEntity() != null && EngineActivity.this.blurredImageView.getSurahNameEntity().isHaveBg(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getClrBg() : ViewCompat.MEASURED_STATE_MASK);
+            if (textValue3 == null) {
                 EngineActivity.this.addAudio(uri);
             } else {
-                EngineActivity.this.addAudioFromVideo(uri, str3);
+                EngineActivity.this.addAudioFromVideo(uri, textValue3);
             }
         }
 
@@ -506,7 +506,7 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.AddQuranFragment.IAddQuran
-        public void onDone(String str, int i, String str2, List<RecitersModel> list) {
+        public void onDone(String textValue, int value, String textValue2, List<RecitersModel> list) {
             EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.65.3
                 @Override // java.lang.Runnable
                 public void run() {
@@ -515,7 +515,7 @@ public class EngineActivity extends Base {
             });
             EngineActivity.this.blurredImageView.updateSizeAya();
             EngineActivity.this.blurredImageView.updateSizeAyaTrsl();
-            EngineActivity.this.blurredImageView.setSurahNameEntity(str, str2, null, 1.0f, "خط الإبل.otf", EngineActivity.this.blurredImageView.getClr_aya(), AyaTextPreset.NONE.ordinal(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getStyle() : SurahNameStyle.NONE.ordinal(), i, EngineActivity.this.blurredImageView.getSurahNameEntity() != null && EngineActivity.this.blurredImageView.getSurahNameEntity().isHaveBg(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getClrBg() : ViewCompat.MEASURED_STATE_MASK);
+            EngineActivity.this.blurredImageView.setSurahNameEntity(textValue, textValue2, null, 1.0f, "خط الإبل.otf", EngineActivity.this.blurredImageView.getClr_aya(), AyaTextPreset.NONE.ordinal(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getStyle() : SurahNameStyle.NONE.ordinal(), value, EngineActivity.this.blurredImageView.getSurahNameEntity() != null && EngineActivity.this.blurredImageView.getSurahNameEntity().isHaveBg(), EngineActivity.this.blurredImageView.getSurahNameEntity() != null ? EngineActivity.this.blurredImageView.getSurahNameEntity().getClrBg() : ViewCompat.MEASURED_STATE_MASK);
             if (NetworkUtils.isNetworkAvailable(EngineActivity.this) && list != null && !list.isEmpty()) {
                 EngineActivity.this.addAudioReciters(list);
             } else {
@@ -547,14 +547,14 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.AddQuranFragment.IAddQuran
-        public void onAddReaderName(String str, String str2, Uri uri) {
+        public void onAddReaderName(String textValue, String textValue2, Uri uri) {
             EngineActivity.this.isToCrop = true;
             Intent intent = new Intent(EngineActivity.this, (Class<?>) AddReaderNameActivity.class);
-            intent.putExtra("name", str);
+            intent.putExtra("name", textValue);
             if (uri != null) {
                 intent.putExtra(MimeTypes.BASE_TYPE_AUDIO, uri.toString());
             }
-            intent.putExtra("path_video_copy", str2);
+            intent.putExtra("path_video_copy", textValue2);
             EngineActivity.this.nameReaderResult.launch(intent);
         }
     };
@@ -685,18 +685,18 @@ public class EngineActivity extends Base {
     };
     private EditIpadFragment.IIpadEditCallback iIpadEditCallback = new EditIpadFragment.IIpadEditCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.80
         @Override // hazem.nurmontage.videoquran.fragment.EditIpadFragment.IIpadEditCallback
-        public void onClick(int i, int i2) {
-            EngineActivity.this.mTemplate.setColor_ipad(i);
-            EngineActivity.this.mTemplate.setIndex_color(i2);
+        public void onClick(int value, int value2) {
+            EngineActivity.this.mTemplate.setColor_ipad(value);
+            EngineActivity.this.mTemplate.setIndex_color(value2);
             EngineActivity.this.mTemplate.setGradient(null);
-            EngineActivity.this.blurredImageView.setColorIpad(i);
+            EngineActivity.this.blurredImageView.setColorIpad(value);
             EngineActivity.this.blurredImageView.invalidate();
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditIpadFragment.IIpadEditCallback
-        public void onClick(Gradient gradient, int i) {
+        public void onClick(Gradient gradient, int value) {
             EngineActivity.this.mTemplate.setGradient(gradient);
-            EngineActivity.this.mTemplate.setIndex_color(i);
+            EngineActivity.this.mTemplate.setIndex_color(value);
             EngineActivity.this.blurredImageView.setColorIpad(gradient);
             EngineActivity.this.blurredImageView.invalidate();
         }
@@ -707,25 +707,25 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditIpadFragment.IIpadEditCallback
-        public void onGlassType(boolean z) {
-            EngineActivity.this.mTemplate.setGlass(z);
-            EngineActivity.this.blurredImageView.setGlass(z);
+        public void onGlassType(boolean isEnabled) {
+            EngineActivity.this.mTemplate.setGlass(isEnabled);
+            EngineActivity.this.blurredImageView.setGlass(isEnabled);
             EngineActivity.this.blurredImageView.invalidate();
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditIpadFragment.IIpadEditCallback
-        public void onChangeType(int i) {
-            if (EngineActivity.this.blurredImageView.getmIpadType() == i) {
+        public void onChangeType(int value) {
+            if (EngineActivity.this.blurredImageView.getmIpadType() == value) {
                 return;
             }
             if (EditIpadFragment.instance != null) {
                 EditIpadFragment.instance.scrollToSelectedPosition();
             }
             try {
-                EngineActivity.this.mTemplate.setIpad_type(i);
-                EngineActivity.this.blurredImageView.changeTypeIpad(i);
+                EngineActivity.this.mTemplate.setIpad_type(value);
+                EngineActivity.this.blurredImageView.changeTypeIpad(value);
                 if (EngineActivity.this.mTemplate.isVideoSquare()) {
-                    if (i != IpadType.GRADIENT.ordinal() && i != IpadType.BLACK_LAYER.ordinal() && i != IpadType.MASK_BRUSH.ordinal() && i != IpadType.BLUE_TYPE.ordinal() && i != IpadType.CASSET_IMG.ordinal()) {
+                    if (value != IpadType.GRADIENT.ordinal() && value != IpadType.BLACK_LAYER.ordinal() && value != IpadType.MASK_BRUSH.ordinal() && value != IpadType.BLUE_TYPE.ordinal() && value != IpadType.CASSET_IMG.ordinal()) {
                         if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
                             EngineActivity.this.blurredImageView.setBitmapSquare(EngineActivity.this.blurredImageView.getBitmapBlured());
                             EngineActivity.this.blurredImageView.setRadius_square(0);
@@ -734,21 +734,21 @@ public class EngineActivity extends Base {
                     EngineActivity.this.blurredImageView.setBitmapSquare(EngineActivity.this.blurredImageView.getBitmapNotBlur());
                     EngineActivity.this.blurredImageView.setRadius_square(0);
                 }
-                if (i == IpadType.IPAD.ordinal() || i == IpadType.IPAD_UNBLUR.ordinal()) {
+                if (value == IpadType.IPAD.ordinal() || value == IpadType.IPAD_UNBLUR.ordinal()) {
                     int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
-                    int i2 = (int) (width * 1.13f);
-                    int min = (int) (Math.min(width, i2) * 0.10800001f);
+                    int value2 = (int) (width * 1.13f);
+                    int min = (int) (Math.min(width, value2) * 0.10800001f);
                     int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                     int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                    int i3 = width + round;
-                    if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                        round -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                        i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                    int value3 = width + round;
+                    if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                        round -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                        value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                     }
-                    int i4 = i2 + round2;
-                    if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                        round2 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                        i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                    int value4 = value2 + round2;
+                    if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                        round2 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                        value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                     }
                     if (round < 0) {
                         round = 0;
@@ -756,7 +756,7 @@ public class EngineActivity extends Base {
                     if (round2 < 0) {
                         round2 = 0;
                     }
-                    Rect rect = new Rect(round, round2, i3, i4);
+                    Rect rect = new Rect(round, round2, value3, value4);
                     int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                     int height = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
                     EngineActivity.this.blurredImageView.setBitmapSquare(UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect, min, width2, height));
@@ -765,7 +765,7 @@ public class EngineActivity extends Base {
                     rect.bottom = rect.top + height;
                     EngineActivity.this.blurredImageView.setRectSquare(rect);
                 }
-                if (i == IpadType.IPAD_CLASSIC.ordinal()) {
+                if (value == IpadType.IPAD_CLASSIC.ordinal()) {
                     int width3 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
                     int i5 = (int) (width3 * 1.13f);
                     int round3 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
@@ -775,10 +775,10 @@ public class EngineActivity extends Base {
                         round3 -= i6 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                         i6 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                     }
-                    int i7 = i5 + round4;
-                    if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                        round4 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                        i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                    int value7 = i5 + round4;
+                    if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                        round4 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                        value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                     }
                     if (round3 < 0) {
                         round3 = 0;
@@ -786,7 +786,7 @@ public class EngineActivity extends Base {
                     if (round4 < 0) {
                         round4 = 0;
                     }
-                    Rect rect2 = new Rect(round3, round4, i6, i7);
+                    Rect rect2 = new Rect(round3, round4, i6, value7);
                     int width4 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                     int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
                     EngineActivity.this.blurredImageView.setBitmapSquare(UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect2, width4, height2));
@@ -795,7 +795,7 @@ public class EngineActivity extends Base {
                     rect2.bottom = rect2.top + height2;
                     EngineActivity.this.blurredImageView.setRectSquare(rect2);
                 }
-                if (i == IpadType.IPAD_NEOMORPHIC.ordinal()) {
+                if (value == IpadType.IPAD_NEOMORPHIC.ordinal()) {
                     int width5 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
                     int round5 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                     int round6 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
@@ -824,7 +824,7 @@ public class EngineActivity extends Base {
                     rect3.bottom = rect3.top + height3;
                     EngineActivity.this.blurredImageView.setRectSquare(rect3);
                 }
-                if (i == IpadType.BOTTOM_RECT.ordinal()) {
+                if (value == IpadType.BOTTOM_RECT.ordinal()) {
                     int width7 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 1.0f);
                     int height4 = (int) (EngineActivity.this.blurredImageView.getBitmapBlured().getHeight() * 0.5355f);
                     int round7 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
@@ -854,7 +854,7 @@ public class EngineActivity extends Base {
                     rect4.bottom = rect4.top + height5;
                     EngineActivity.this.blurredImageView.setRectSquare(rect4);
                 }
-                if (i == IpadType.BORDER.ordinal()) {
+                if (value == IpadType.BORDER.ordinal()) {
                     if (ColorUtils.isColorDark(EngineActivity.this.blurredImageView.getBitmapOriginal().getPixel((int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * 0.5f), (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * 0.5f)))) {
                         EngineActivity.this.mTemplate.setColor_ipad(-1);
                     } else {
@@ -918,23 +918,23 @@ public class EngineActivity extends Base {
     private int start_extenstion = 0;
     private EditIconQuranFragment.IQuranIconCallback iQuranIconCallback = new EditIconQuranFragment.IQuranIconCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.92
         @Override // hazem.nurmontage.videoquran.fragment.EditIconQuranFragment.IQuranIconCallback
-        public void add(String str) {
+        public void add(String textValue) {
             try {
                 QuranEntity quranEntity = (QuranEntity) EngineActivity.this.trackViewEntity.getSelectedEntity().getEntityView();
-                quranEntity.setVectorDrawable((VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(str)));
-                quranEntity.setIcon(str);
+                quranEntity.setVectorDrawable((VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(textValue)));
+                quranEntity.setIcon(textValue);
                 quranEntity.updateIconDraw();
                 quranEntity.initPreset(quranEntity.getmPreset());
                 EngineActivity.this.blurredImageView.invalidate();
             } catch (Exception unused) {
-                Log.e("icon  e ", "" + str);
+                Log.e("icon  e ", "" + textValue);
             }
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditIconQuranFragment.IQuranIconCallback
-        public void onDone(String str) {
+        public void onDone(String textValue) {
             try {
-                EngineActivity.this.blurredImageView.setIcon(str, (VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(str)));
+                EngineActivity.this.blurredImageView.setIcon(textValue, (VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(textValue)));
                 EngineActivity.this.hideFragment();
                 EngineActivity.this.iTrimLineCallback.onSelectEntity(EngineActivity.this.trackViewEntity.getSelectedEntity(), -1.0f);
             } catch (Exception unused) {
@@ -942,11 +942,11 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditIconQuranFragment.IQuranIconCallback
-        public void onCancel(String str) {
+        public void onCancel(String textValue) {
             try {
                 QuranEntity quranEntity = (QuranEntity) EngineActivity.this.trackViewEntity.getSelectedEntity().getEntityView();
-                quranEntity.setVectorDrawable((VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(str)));
-                quranEntity.setIcon(str);
+                quranEntity.setVectorDrawable((VectorDrawable) ContextCompat.getDrawable(EngineActivity.this.getApplicationContext(), DrawableHelper.getIDDrawableIconByName(textValue)));
+                quranEntity.setIcon(textValue);
                 quranEntity.updateIconDraw();
                 quranEntity.initPreset(quranEntity.getmPreset());
                 EngineActivity.this.blurredImageView.invalidate();
@@ -1011,21 +1011,21 @@ public class EngineActivity extends Base {
     };
     private FontFragment.IFontCallback iFontCallback = new FontFragment.IFontCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.94
         @Override // hazem.nurmontage.videoquran.fragment.FontFragment.IFontCallback
-        public void onAdd(String str, Typeface typeface) {
+        public void onAdd(String textValue, Typeface typeface) {
             try {
                 if (EngineActivity.this.blurredImageView.getEntity_select() instanceof SurahNameEntity) {
-                    EngineActivity.this.blurredImageView.getSurahNameEntity().setTypeface(typeface, str);
+                    EngineActivity.this.blurredImageView.getSurahNameEntity().setTypeface(typeface, textValue);
                     EngineActivity.this.blurredImageView.invalidate();
-                } else if (str != null && typeface != null) {
-                    EngineActivity.this.blurredImageView.setTypeface(typeface, str);
+                } else if (textValue != null && typeface != null) {
+                    EngineActivity.this.blurredImageView.setTypeface(typeface, textValue);
                 }
-                FontFragment.instance.add(typeface, str);
+                FontFragment.instance.add(typeface, textValue);
             } catch (Exception unused) {
             }
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.FontFragment.IFontCallback
-        public void onDone(String str, Typeface typeface) {
+        public void onDone(String textValue, Typeface typeface) {
             try {
                 EngineActivity.this.hideFragment();
                 if (EngineActivity.this.blurredImageView.getEntity_select() instanceof SurahNameEntity) {
@@ -1038,15 +1038,15 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.FontFragment.IFontCallback
-        public void onCancel(String str, Typeface typeface) {
+        public void onCancel(String textValue, Typeface typeface) {
             try {
                 if (EngineActivity.this.blurredImageView.getEntity_select() instanceof SurahNameEntity) {
-                    EngineActivity.this.blurredImageView.getSurahNameEntity().setTypeface(typeface, str);
+                    EngineActivity.this.blurredImageView.getSurahNameEntity().setTypeface(typeface, textValue);
                     EngineActivity.this.blurredImageView.invalidate();
                     EngineActivity.this.selectSurahName();
                 } else {
-                    if (str != null && typeface != null) {
-                        EngineActivity.this.blurredImageView.setTypeface(typeface, str);
+                    if (textValue != null && typeface != null) {
+                        EngineActivity.this.blurredImageView.setTypeface(typeface, textValue);
                     }
                     EngineActivity.this.hideFragment();
                     EngineActivity.this.iTrimLineCallback.onSelectEntity(EngineActivity.this.trackViewEntity.getSelectedEntity(), -1.0f);
@@ -1062,8 +1062,8 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditBismilahEntityFragment.IBismilahEntityCallback
-        public void updateAya(int i) {
-            EngineActivity.this.blurredImageView.setColorAya(i);
+        public void updateAya(int value) {
+            EngineActivity.this.blurredImageView.setColorAya(value);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditBismilahEntityFragment.IBismilahEntityCallback
@@ -1156,13 +1156,13 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditEntityFragment.IEditEntityCallback
-        public void updateAya(int i) {
-            EngineActivity.this.blurredImageView.setColorAya(i);
+        public void updateAya(int value) {
+            EngineActivity.this.blurredImageView.setColorAya(value);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditEntityFragment.IEditEntityCallback
-        public void updateTrsl(int i) {
-            EngineActivity.this.blurredImageView.setColorTrsl(i);
+        public void updateTrsl(int value) {
+            EngineActivity.this.blurredImageView.setColorTrsl(value);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditEntityFragment.IEditEntityCallback
@@ -1327,13 +1327,13 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditTrslEntityFragment.IEditEntityCallback
-        public void updateAya(int i) {
-            EngineActivity.this.blurredImageView.setColorTrsl(i);
+        public void updateAya(int value) {
+            EngineActivity.this.blurredImageView.setColorTrsl(value);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditTrslEntityFragment.IEditEntityCallback
-        public void updateTrsl(int i) {
-            EngineActivity.this.blurredImageView.setColorTrsl(i);
+        public void updateTrsl(int value) {
+            EngineActivity.this.blurredImageView.setColorTrsl(value);
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditTrslEntityFragment.IEditEntityCallback
@@ -1507,8 +1507,8 @@ public class EngineActivity extends Base {
 
         @Override // hazem.nurmontage.videoquran.fragment.EditMediaFragment.IEditMediaCallback
         public void updateEntity(EffectAudioType effectAudioType, EntityAudio entityAudio) {
-            for (int i = 0; i < EngineActivity.this.trackViewEntity.getEntityListAudio().size(); i++) {
-                EntityAudio entityAudio2 = EngineActivity.this.trackViewEntity.getEntityListAudio().get(i);
+            for (int value = 0; value < EngineActivity.this.trackViewEntity.getEntityListAudio().size(); value++) {
+                EntityAudio entityAudio2 = EngineActivity.this.trackViewEntity.getEntityListAudio().get(value);
                 if (entityAudio2 != entityAudio && entityAudio2.visible()) {
                     if (effectAudioType == EffectAudioType.ECHO) {
                         entityAudio2.getEffectAudio().setDecays(entityAudio.getEffectAudio().getDecays());
@@ -1584,18 +1584,18 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditMediaFragment.IEditMediaCallback
-        public void onCmdPlay(String str) {
+        public void onCmdPlay(String textValue) {
             pausePreview();
             if (EngineActivity.this.trackViewEntity.getSelectedEntity() instanceof EntityAudio) {
-                EngineActivity.this.applyffectPlayAuto(str, (EntityAudio) EngineActivity.this.trackViewEntity.getSelectedEntity());
+                EngineActivity.this.applyffectPlayAuto(textValue, (EntityAudio) EngineActivity.this.trackViewEntity.getSelectedEntity());
             }
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EditMediaFragment.IEditMediaCallback
-        public void onCmd(String str) {
+        public void onCmd(String textValue) {
             pausePreview();
             if (EngineActivity.this.trackViewEntity.getSelectedEntity() instanceof EntityAudio) {
-                EngineActivity.this.applyffect(str, (EntityAudio) EngineActivity.this.trackViewEntity.getSelectedEntity());
+                EngineActivity.this.applyffect(textValue, (EntityAudio) EngineActivity.this.trackViewEntity.getSelectedEntity());
             }
         }
 
@@ -1661,15 +1661,15 @@ public class EngineActivity extends Base {
                                 split.setPath_ffmpeg(entityAudio.getPath_ffmpeg());
                                 split.setIndex(entityAudio.getIndex() + 1);
                                 split.setEnd(entityAudio.getEnd());
-                                float f = round;
-                                split.setStart(f);
+                                float floatValue = round;
+                                split.setStart(floatValue);
                                 split.setMin_duration(round);
                                 EngineActivity.this.trackViewEntity.splitAudio(split, split.getIndex());
                                 EngineActivity.this.trackViewEntity.stackSplit(entityAudio);
                                 entityAudio.setCurrentRect();
                                 entityAudio.setRight(abs);
                                 entityAudio.setMax((entityAudio.getRect().right / entityAudio.getmScaleFactor()) - ((entityAudio.getRect().left / entityAudio.getmScaleFactor()) - entityAudio.getOffset_left()));
-                                entityAudio.setEnd(f);
+                                entityAudio.setEnd(floatValue);
                                 split.setOffset_right(entityAudio.getOffset_right());
                                 entityAudio.setOffset_right(0.0f);
                                 split.setOffset(entityAudio.getOffset() + entityAudio.getOffset_left() + (entityAudio.getRect().width() / entityAudio.getmScaleFactor()));
@@ -1836,7 +1836,7 @@ public class EngineActivity extends Base {
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
         /* renamed from: in */
-        public void mo581in(String str, EntityQuranTimeline entityQuranTimeline) {
+        public void mo581in(String textValue, EntityQuranTimeline entityQuranTimeline) {
             if (entityQuranTimeline == null) {
                 return;
             }
@@ -1844,14 +1844,14 @@ public class EngineActivity extends Base {
                 entityQuranTimeline.setTransition(new Transition());
             }
             entityQuranTimeline.getTransition().setIn(true);
-            entityQuranTimeline.getTransition().setType_in(str);
+            entityQuranTimeline.getTransition().setType_in(textValue);
             EffectAyaFragment.instance.updateView(entityQuranTimeline.getTransition().getDuration_in(), entityQuranTimeline.getTransition());
             entityQuranTimeline.getQuranEntity().endAnimator();
             entityQuranTimeline.getQuranEntity().runIn((int) (entityQuranTimeline.getTransition().getDuration_in() * 1000.0f), true, entityQuranTimeline.getTransition().getType_in());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
-        public void out(String str, EntityQuranTimeline entityQuranTimeline) {
+        public void out(String textValue, EntityQuranTimeline entityQuranTimeline) {
             if (entityQuranTimeline == null) {
                 return;
             }
@@ -1859,46 +1859,46 @@ public class EngineActivity extends Base {
                 entityQuranTimeline.setTransition(new Transition());
             }
             entityQuranTimeline.getTransition().setOut(true);
-            entityQuranTimeline.getTransition().setType_out(str);
+            entityQuranTimeline.getTransition().setType_out(textValue);
             EffectAyaFragment.instance.updateView(entityQuranTimeline.getTransition().getDuration_out(), entityQuranTimeline.getTransition());
             entityQuranTimeline.getQuranEntity().endAnimator();
             entityQuranTimeline.getQuranEntity().runOut((int) (entityQuranTimeline.getTransition().getDuration_out() * 1000.0f), true, entityQuranTimeline.getTransition().getType_out());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
-        public void remove(int i, EntityQuranTimeline entityQuranTimeline) {
-            if (i == 0) {
+        public void remove(int value, EntityQuranTimeline entityQuranTimeline) {
+            if (value == 0) {
                 entityQuranTimeline.getTransition().setIn(false);
                 entityQuranTimeline.getQuranEntity().endAnimator();
             }
-            if (i == 1) {
+            if (value == 1) {
                 entityQuranTimeline.getTransition().setOut(false);
                 entityQuranTimeline.getQuranEntity().endAnimator();
             }
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
-        public void updateDurationIn(float f, EntityQuranTimeline entityQuranTimeline) {
+        public void updateDurationIn(float floatValue, EntityQuranTimeline entityQuranTimeline) {
             if (entityQuranTimeline == null) {
                 return;
             }
-            entityQuranTimeline.getTransition().setDuration_in(f);
+            entityQuranTimeline.getTransition().setDuration_in(floatValue);
             entityQuranTimeline.getQuranEntity().endAnimator();
             entityQuranTimeline.getQuranEntity().runIn((int) (entityQuranTimeline.getTransition().getDuration_in() * 1000.0f), true, entityQuranTimeline.getTransition().getType_in());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
-        public void updateDurationOut(float f, EntityQuranTimeline entityQuranTimeline) {
+        public void updateDurationOut(float floatValue, EntityQuranTimeline entityQuranTimeline) {
             if (entityQuranTimeline == null) {
                 return;
             }
-            entityQuranTimeline.getTransition().setDuration_out(f);
+            entityQuranTimeline.getTransition().setDuration_out(floatValue);
             entityQuranTimeline.getQuranEntity().endAnimator();
             entityQuranTimeline.getQuranEntity().runOut((int) (entityQuranTimeline.getTransition().getDuration_out() * 1000.0f), true, entityQuranTimeline.getTransition().getType_out());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectAyaFragment.ITransition
-        public void applyAll(int i, EntityQuranTimeline entityQuranTimeline) {
+        public void applyAll(int value, EntityQuranTimeline entityQuranTimeline) {
             EngineActivity.this.showProgress();
             EngineActivity engineActivity = EngineActivity.this;
             engineActivity.addUpdateAnim(engineActivity.trackViewEntity.getmIsi3adaTimeline(), entityQuranTimeline);
@@ -1955,7 +1955,7 @@ public class EngineActivity extends Base {
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.ITransition
         /* renamed from: in */
-        public void mo582in(String str, EntityBismilahTimeline entityBismilahTimeline) {
+        public void mo582in(String textValue, EntityBismilahTimeline entityBismilahTimeline) {
             if (entityBismilahTimeline == null) {
                 return;
             }
@@ -1963,14 +1963,14 @@ public class EngineActivity extends Base {
                 entityBismilahTimeline.setTransition(new Transition());
             }
             entityBismilahTimeline.getTransition().setIn(true);
-            entityBismilahTimeline.getTransition().setType_in(str);
+            entityBismilahTimeline.getTransition().setType_in(textValue);
             EffectBismilahFragment.instance.updateView(entityBismilahTimeline.getTransition().getDuration_in(), entityBismilahTimeline.getTransition());
             entityBismilahTimeline.getQuranEntity().endAnimator();
             entityBismilahTimeline.getQuranEntity().runIn((int) (entityBismilahTimeline.getTransition().getDuration_in() * 1000.0f), true, entityBismilahTimeline.getTransition().getType_in());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.ITransition
-        public void out(String str, EntityBismilahTimeline entityBismilahTimeline) {
+        public void out(String textValue, EntityBismilahTimeline entityBismilahTimeline) {
             if (entityBismilahTimeline == null) {
                 return;
             }
@@ -1978,40 +1978,40 @@ public class EngineActivity extends Base {
                 entityBismilahTimeline.setTransition(new Transition());
             }
             entityBismilahTimeline.getTransition().setOut(true);
-            entityBismilahTimeline.getTransition().setType_out(str);
+            entityBismilahTimeline.getTransition().setType_out(textValue);
             EffectBismilahFragment.instance.updateView(entityBismilahTimeline.getTransition().getDuration_out(), entityBismilahTimeline.getTransition());
             entityBismilahTimeline.getQuranEntity().endAnimator();
             entityBismilahTimeline.getQuranEntity().runOut((int) (entityBismilahTimeline.getTransition().getDuration_out() * 1000.0f), true, entityBismilahTimeline.getTransition().getType_out());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.ITransition
-        public void remove(int i, EntityBismilahTimeline entityBismilahTimeline) {
-            if (i == 0) {
+        public void remove(int value, EntityBismilahTimeline entityBismilahTimeline) {
+            if (value == 0) {
                 entityBismilahTimeline.getTransition().setIn(false);
                 entityBismilahTimeline.getQuranEntity().endAnimator();
             }
-            if (i == 1) {
+            if (value == 1) {
                 entityBismilahTimeline.getTransition().setOut(false);
                 entityBismilahTimeline.getQuranEntity().endAnimator();
             }
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.ITransition
-        public void updateDurationIn(float f, EntityBismilahTimeline entityBismilahTimeline) {
+        public void updateDurationIn(float floatValue, EntityBismilahTimeline entityBismilahTimeline) {
             if (entityBismilahTimeline == null) {
                 return;
             }
-            entityBismilahTimeline.getTransition().setDuration_in(f);
+            entityBismilahTimeline.getTransition().setDuration_in(floatValue);
             entityBismilahTimeline.getQuranEntity().endAnimator();
             entityBismilahTimeline.getQuranEntity().runIn((int) (entityBismilahTimeline.getTransition().getDuration_in() * 1000.0f), true, entityBismilahTimeline.getTransition().getType_in());
         }
 
         @Override // hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.ITransition
-        public void updateDurationOut(float f, EntityBismilahTimeline entityBismilahTimeline) {
+        public void updateDurationOut(float floatValue, EntityBismilahTimeline entityBismilahTimeline) {
             if (entityBismilahTimeline == null) {
                 return;
             }
-            entityBismilahTimeline.getTransition().setDuration_out(f);
+            entityBismilahTimeline.getTransition().setDuration_out(floatValue);
             entityBismilahTimeline.getQuranEntity().endAnimator();
             entityBismilahTimeline.getQuranEntity().runOut((int) (entityBismilahTimeline.getTransition().getDuration_out() * 1000.0f), true, entityBismilahTimeline.getTransition().getType_out());
         }
@@ -2044,18 +2044,18 @@ public class EngineActivity extends Base {
     private final Runnable frameProcessorRunnable = new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.107
         @Override // java.lang.Runnable
         public void run() {
-            String str;
+            String textValue;
             while (true) {
                 synchronized (EngineActivity.this.frameLock) {
                     if (EngineActivity.this.pendingFramePath == null) {
                         EngineActivity.this.isProcessingFrame = false;
                         return;
                     } else {
-                        str = EngineActivity.this.pendingFramePath;
+                        textValue = EngineActivity.this.pendingFramePath;
                         EngineActivity.this.pendingFramePath = null;
                     }
                 }
-                EngineActivity.this.processFrame(str);
+                EngineActivity.this.processFrame(textValue);
             }
         }
     };
@@ -2326,9 +2326,9 @@ public class EngineActivity extends Base {
                 this.mTemplate.setUri_bg(stringExtra2);
             } else {
                 Map.Entry<String, Integer> randomDrawableEntry = DrawableHelper.getRandomDrawableEntry();
-                String str = "android.resource://" + getPackageName() + "/drawable/" + randomDrawableEntry.getValue();
-                this.uri_bg = str;
-                this.mTemplate.setUri_bg(str);
+                String textValue = "android.resource://" + getPackageName() + "/drawable/" + randomDrawableEntry.getValue();
+                this.uri_bg = textValue;
+                this.mTemplate.setUri_bg(textValue);
                 this.mTemplate.setName_drawable(randomDrawableEntry.getKey());
             }
             this.mTemplate.setWidthAndHeight(720, 1280);
@@ -2354,11 +2354,11 @@ public class EngineActivity extends Base {
         EngineActivity engineActivity = this;
         Template template = engineActivity.mTemplate;
         if (template != null) {
-            boolean z = template.getIpad_type() == IpadType.GRADIENT.ordinal() || engineActivity.mTemplate.getIpad_type() == IpadType.MASK_BRUSH.ordinal() || engineActivity.mTemplate.getIpad_type() == IpadType.BLACK_LAYER.ordinal();
+            boolean isEnabled = template.getIpad_type() == IpadType.GRADIENT.ordinal() || engineActivity.mTemplate.getIpad_type() == IpadType.MASK_BRUSH.ordinal() || engineActivity.mTemplate.getIpad_type() == IpadType.BLACK_LAYER.ordinal();
             Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(engineActivity, "fonts/arabic/خط فارس الكوفي.otf");
             Typeface createFromAsset = Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf");
             for (EntityQuranTemplate entityQuranTemplate : engineActivity.mTemplate.getQuranEntityList()) {
-                addEntity(entityQuranTemplate.getAya(), entityQuranTemplate.getComplete_aya(), entityQuranTemplate.getTranslation(), entityQuranTemplate.getTranslation_complete(), entityQuranTemplate.getLeft(), entityQuranTemplate.getRight(), entityQuranTemplate.getIndexNumber(), entityQuranTemplate.getNumber(), entityQuranTemplate.getColor(), entityQuranTemplate.getName_font(), entityQuranTemplate.getTransition(), z, entityQuranTemplate.getIcon(), entityQuranTemplate.getStartWord_index(), entityQuranTemplate.getEndWord_index(), entityQuranTemplate.getScale(), entityQuranTemplate.getFactor_size(), entityQuranTemplate.getFactor_sizeTrl(), new RectF(entityQuranTemplate.getRectF().getL(), entityQuranTemplate.getRectF().getT(), entityQuranTemplate.getRectF().getR(), entityQuranTemplate.getRectF().getB()), loadFontFromAsset, createFromAsset, entityQuranTemplate.getColorTrsl(), entityQuranTemplate.getPreset());
+                addEntity(entityQuranTemplate.getAya(), entityQuranTemplate.getComplete_aya(), entityQuranTemplate.getTranslation(), entityQuranTemplate.getTranslation_complete(), entityQuranTemplate.getLeft(), entityQuranTemplate.getRight(), entityQuranTemplate.getIndexNumber(), entityQuranTemplate.getNumber(), entityQuranTemplate.getColor(), entityQuranTemplate.getName_font(), entityQuranTemplate.getTransition(), isEnabled, entityQuranTemplate.getIcon(), entityQuranTemplate.getStartWord_index(), entityQuranTemplate.getEndWord_index(), entityQuranTemplate.getScale(), entityQuranTemplate.getFactor_size(), entityQuranTemplate.getFactor_sizeTrl(), new RectF(entityQuranTemplate.getRectF().getL(), entityQuranTemplate.getRectF().getT(), entityQuranTemplate.getRectF().getR(), entityQuranTemplate.getRectF().getB()), loadFontFromAsset, createFromAsset, entityQuranTemplate.getColorTrsl(), entityQuranTemplate.getPreset());
                 engineActivity = this;
             }
             EngineActivity engineActivity2 = engineActivity;
@@ -2394,8 +2394,8 @@ public class EngineActivity extends Base {
                         } else {
                             AudioUtils.copyToLocalAsync(engineActivity2, Uri.parse(engineActivity2.mTemplate.getUri_upload_extract_audio_video()).toString(), engineActivity2.mTemplate.getFolder_template(), new AudioUtils.Callback() { // from class: hazem.nurmontage.videoquran.EngineActivity.9
                                 @Override // hazem.nurmontage.videoquran.Utils.AudioUtils.Callback
-                                public void onSuccess(String str) {
-                                    entityMedia.setVideo_path(str);
+                                public void onSuccess(String textValue) {
+                                    entityMedia.setVideo_path(textValue);
                                     if (EngineActivity.this.mTemplate.getExtension() != null) {
                                         EngineActivity engineActivity3 = EngineActivity.this;
                                         engineActivity3.addAudioFromVideoWithExtention(engineActivity3.mTemplate.getExtension(), entityMedia.getVideo_path(), 0);
@@ -2495,10 +2495,10 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addUriAudioToQuranFragment(Uri uri, String str) {
+    public void addUriAudioToQuranFragment(Uri uri, String textValue) {
         try {
             FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
-            this.mCurrentFragment = AddQuranFragment.getInstance(this.iAddQuran, this.mResources, uri, str, "-");
+            this.mCurrentFragment = AddQuranFragment.getInstance(this.iAddQuran, this.mResources, uri, textValue, "-");
             beginTransaction.replace(C2014R.id.m_container, this.mCurrentFragment);
             beginTransaction.commit();
             runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.14
@@ -2550,8 +2550,8 @@ public class EngineActivity extends Base {
         }
     }
 
-    private void updateBtnToStart(int i) {
-        if (i == 0) {
+    private void updateBtnToStart(int value) {
+        if (value == 0) {
             this.btnToStart.setColorFilter(-8355712, PorterDuff.Mode.SRC_IN);
             this.btnToStart.setClickable(false);
         } else {
@@ -2601,8 +2601,8 @@ public class EngineActivity extends Base {
                 }
 
                 @Override // hazem.nurmontage.videoquran.Utils.AudioUtils.Callback
-                public void onSuccess(final String str) {
-                    EngineActivity.this.mTemplate.setUri_media_video(str);
+                public void onSuccess(final String textValue) {
+                    EngineActivity.this.mTemplate.setUri_media_video(textValue);
                     File fileVideo = FileUtils.getFileVideo(EngineActivity.this.mTemplate.getFolder_template());
                     final File file = new File(fileVideo, "frame_%04d.jpg");
                     final File file2 = new File(fileVideo, "frame_0001.jpg");
@@ -2611,7 +2611,7 @@ public class EngineActivity extends Base {
                     if (EngineActivity.this.endFrame == 0) {
                         EngineActivity.this.endFrame = 4;
                     }
-                    EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-ss", "0", "-t", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1
+                    EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-ss", "0", "-t", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1
                         /* JADX WARN: Multi-variable type inference failed */
                         /* JADX WARN: Removed duplicated region for block: B:36:0x069e A[Catch: Exception -> 0x0919, TryCatch #0 {Exception -> 0x0919, blocks: (B:3:0x0004, B:5:0x0092, B:6:0x0120, B:8:0x0169, B:10:0x017d, B:12:0x0191, B:14:0x01a5, B:16:0x01b9, B:19:0x01cf, B:21:0x01e3, B:23:0x0250, B:24:0x0272, B:26:0x0286, B:31:0x02ae, B:34:0x0690, B:36:0x069e, B:37:0x08ae, B:39:0x08c2, B:40:0x08ec, B:45:0x08d3, B:49:0x06d7, B:50:0x0326, B:52:0x033a, B:54:0x034e, B:57:0x0364, B:59:0x03d4, B:60:0x03f6, B:62:0x0409, B:67:0x0431, B:68:0x04b2, B:70:0x0528, B:71:0x054a, B:73:0x055d, B:78:0x0585, B:80:0x059e, B:81:0x061a, B:82:0x0710, B:84:0x0720, B:85:0x078f, B:87:0x07ff, B:88:0x0821, B:90:0x0834, B:95:0x085c, B:97:0x0875, B:98:0x0898, B:99:0x088d, B:100:0x0758, B:101:0x00bb, B:103:0x00cf, B:104:0x00f8), top: B:2:0x0004 }] */
                         /* JADX WARN: Removed duplicated region for block: B:39:0x08c2 A[Catch: Exception -> 0x0919, TryCatch #0 {Exception -> 0x0919, blocks: (B:3:0x0004, B:5:0x0092, B:6:0x0120, B:8:0x0169, B:10:0x017d, B:12:0x0191, B:14:0x01a5, B:16:0x01b9, B:19:0x01cf, B:21:0x01e3, B:23:0x0250, B:24:0x0272, B:26:0x0286, B:31:0x02ae, B:34:0x0690, B:36:0x069e, B:37:0x08ae, B:39:0x08c2, B:40:0x08ec, B:45:0x08d3, B:49:0x06d7, B:50:0x0326, B:52:0x033a, B:54:0x034e, B:57:0x0364, B:59:0x03d4, B:60:0x03f6, B:62:0x0409, B:67:0x0431, B:68:0x04b2, B:70:0x0528, B:71:0x054a, B:73:0x055d, B:78:0x0585, B:80:0x059e, B:81:0x061a, B:82:0x0710, B:84:0x0720, B:85:0x078f, B:87:0x07ff, B:88:0x0821, B:90:0x0834, B:95:0x085c, B:97:0x0875, B:98:0x0898, B:99:0x088d, B:100:0x0758, B:101:0x00bb, B:103:0x00cf, B:104:0x00f8), top: B:2:0x0004 }] */
@@ -2623,15 +2623,15 @@ public class EngineActivity extends Base {
                         */
                         public void apply(FFmpegSession fFmpegSession) {
                             Bitmap cropTo16x9;
-                            int i;
+                            int value;
                             Rect rect;
                             Bitmap cropToSquareWithRoundCorners;
                             Bitmap bitmap;
                             try {
                                 EngineActivity.this.mTemplate.setFrame_bg(file2.getAbsolutePath());
                                 RequestBuilder skipMemoryCache = Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(EngineActivity.this.mTemplate.getFrame_bg()).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
-                                int i2 = height;
-                                Bitmap bitmap2 = (Bitmap) skipMemoryCache.override(i2, i2).submit().get();
+                                int value2 = height;
+                                Bitmap bitmap2 = (Bitmap) skipMemoryCache.override(value2, value2).submit().get();
                                 EngineActivity.this.blurredImageView.setGlass(EngineActivity.this.mTemplate.isGlass());
                                 EngineActivity.this.blurredImageView.setVideo(true);
                                 EngineActivity.this.blurredImageView.setBitmapOriginal(bitmap2);
@@ -2651,15 +2651,15 @@ public class EngineActivity extends Base {
                                     int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
                                     int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                                     int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                                    int i3 = width + round;
-                                    if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                        round -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                        i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    int value3 = width + round;
+                                    if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                        round -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     }
-                                    int i4 = width + round2;
-                                    if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                        round2 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                        i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    int value4 = width + round2;
+                                    if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                        round2 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                        value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                     }
                                     if (round < 0) {
                                         round = 0;
@@ -2667,7 +2667,7 @@ public class EngineActivity extends Base {
                                     if (round2 < 0) {
                                         round2 = 0;
                                     }
-                                    rect = new Rect(round, round2, i3, i4);
+                                    rect = new Rect(round, round2, value3, value4);
                                     EngineActivity.this.blurredImageView.setRadius_square(width);
                                     int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                     int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
@@ -2714,22 +2714,22 @@ public class EngineActivity extends Base {
                                             EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap, EngineActivity.this.mTemplate.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), EngineActivity.this.mTemplate.geTypeResize(), rect2);
                                         }
                                         if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
-                                            i = EngineActivity.this.blurredImageView.getPaintLecture().getColor();
+                                            value = EngineActivity.this.blurredImageView.getPaintLecture().getColor();
                                         } else {
-                                            i = EngineActivity.this.blurredImageView.getPaintLecture().getColor() == -1 ? InputDeviceCompat.SOURCE_ANY : Common.COLOR_TRANSLATION;
+                                            value = EngineActivity.this.blurredImageView.getPaintLecture().getColor() == -1 ? InputDeviceCompat.SOURCE_ANY : Common.COLOR_TRANSLATION;
                                         }
-                                        EngineActivity.this.blurredImageView.setClr_trsl(i);
+                                        EngineActivity.this.blurredImageView.setClr_trsl(value);
                                         EngineActivity.this.blurredImageView.setClr_aya(EngineActivity.this.blurredImageView.getPaintLecture().getColor());
                                         EngineActivity.this.addEntityFromTemplate();
-                                        EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
+                                        EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
                                             @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                                             public void apply(FFmpegSession fFmpegSession2) {
                                             }
                                         }).getSessionId()));
                                     }
                                     int width5 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
-                                    int i7 = (int) (width5 * 1.13f);
-                                    int min = Math.min(width5, i7);
+                                    int value7 = (int) (width5 * 1.13f);
+                                    int min = Math.min(width5, value7);
                                     int round5 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                                     int round6 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
                                     int i8 = width5 + round5;
@@ -2737,7 +2737,7 @@ public class EngineActivity extends Base {
                                         round5 -= i8 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                         i8 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     }
-                                    int i9 = i7 + round6;
+                                    int i9 = value7 + round6;
                                     if (i9 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
                                         round6 -= i9 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                         i9 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
@@ -2776,10 +2776,10 @@ public class EngineActivity extends Base {
                                 }
                                 if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
                                 }
-                                EngineActivity.this.blurredImageView.setClr_trsl(i);
+                                EngineActivity.this.blurredImageView.setClr_trsl(value);
                                 EngineActivity.this.blurredImageView.setClr_aya(EngineActivity.this.blurredImageView.getPaintLecture().getColor());
                                 EngineActivity.this.addEntityFromTemplate();
-                                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
+                                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
                                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                                     public void apply(FFmpegSession fFmpegSession2) {
                                     }
@@ -2820,10 +2820,10 @@ public class EngineActivity extends Base {
                             EngineActivity.this.blurredImageView.setRectSquare(rect3);
                             if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
                             }
-                            EngineActivity.this.blurredImageView.setClr_trsl(i);
+                            EngineActivity.this.blurredImageView.setClr_trsl(value);
                             EngineActivity.this.blurredImageView.setClr_aya(EngineActivity.this.blurredImageView.getPaintLecture().getColor());
                             EngineActivity.this.addEntityFromTemplate();
-                            EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
+                            EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.15.1.1
                                 @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                                 public void apply(FFmpegSession fFmpegSession2) {
                                 }
@@ -2864,7 +2864,7 @@ public class EngineActivity extends Base {
                 Bitmap cropToSquareWithRoundCorners;
                 Bitmap bitmap2;
                 Rect rect;
-                int i;
+                int value;
                 try {
                     EngineActivity.this.blurredImageView.initCanvasDimension(EngineActivity.this.blurredImageView.getWidth(), EngineActivity.this.blurredImageView.getHeight(), EngineActivity.this.mTemplate.geTypeResize());
                     int height = EngineActivity.this.blurredImageView.getHeight();
@@ -2883,7 +2883,7 @@ public class EngineActivity extends Base {
                         cropTo16x9 = BitmapCropper.cropTo16x9(EngineActivity.this.blurredImageView.getBitmapOriginal(), EngineActivity.this.blurredImageView.getW(), EngineActivity.this.blurredImageView.getH());
                     }
                     EngineActivity.this.blurredImageView.setGlass(EngineActivity.this.mTemplate.isGlass());
-                    int i2 = 0;
+                    int value2 = 0;
                     EngineActivity.this.blurredImageView.setVideo(false);
                     EngineActivity.this.blurredImageView.updatePosCanvas(cropTo16x9);
                     EngineActivity.this.blurredImageView.updateIpad(cropTo16x9, EngineActivity.this.mTemplate.getIpad_type(), EngineActivity.this.mTemplate.geTypeResize());
@@ -2891,23 +2891,23 @@ public class EngineActivity extends Base {
                         int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
                         int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                         int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                        int i3 = width + round;
-                        if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                            round -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                            i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                        int value3 = width + round;
+                        if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                            round -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                            value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                         }
-                        int i4 = width + round2;
-                        if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                            round2 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                            i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                        int value4 = width + round2;
+                        if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                            round2 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                            value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                         }
                         if (round < 0) {
                             round = 0;
                         }
                         if (round2 >= 0) {
-                            i2 = round2;
+                            value2 = round2;
                         }
-                        Rect rect2 = new Rect(round, i2, i3, i4);
+                        Rect rect2 = new Rect(round, value2, value3, value4);
                         EngineActivity.this.blurredImageView.setRadius_square(width);
                         int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                         int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
@@ -2952,8 +2952,8 @@ public class EngineActivity extends Base {
                             rect = rect3;
                         }
                         int width5 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
-                        int i7 = (int) (width5 * 1.13f);
-                        int min = Math.min(width5, i7);
+                        int value7 = (int) (width5 * 1.13f);
+                        int min = Math.min(width5, value7);
                         int round5 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                         int round6 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
                         int i8 = width5 + round5;
@@ -2961,7 +2961,7 @@ public class EngineActivity extends Base {
                             round5 -= i8 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                             i8 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                         }
-                        int i9 = i7 + round6;
+                        int i9 = value7 + round6;
                         if (i9 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
                             round6 -= i9 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                             i9 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
@@ -3002,11 +3002,11 @@ public class EngineActivity extends Base {
                         EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap2, EngineActivity.this.mTemplate.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), EngineActivity.this.mTemplate.geTypeResize(), rect);
                     }
                     if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
-                        i = EngineActivity.this.blurredImageView.getPaintLecture().getColor();
+                        value = EngineActivity.this.blurredImageView.getPaintLecture().getColor();
                     } else {
-                        i = EngineActivity.this.blurredImageView.getPaintLecture().getColor() == -1 ? InputDeviceCompat.SOURCE_ANY : Common.COLOR_TRANSLATION;
+                        value = EngineActivity.this.blurredImageView.getPaintLecture().getColor() == -1 ? InputDeviceCompat.SOURCE_ANY : Common.COLOR_TRANSLATION;
                     }
-                    EngineActivity.this.blurredImageView.setClr_trsl(i);
+                    EngineActivity.this.blurredImageView.setClr_trsl(value);
                     EngineActivity.this.blurredImageView.setClr_aya(EngineActivity.this.blurredImageView.getPaintLecture().getColor());
                     EngineActivity.this.addEntityFromTemplate();
                 } catch (Exception e) {
@@ -3048,7 +3048,7 @@ public class EngineActivity extends Base {
         }
         this.seekBar_fps.setOnProgressChangeListener(new CustomDiscreteSeekBar.OnProgressChangeListener() { // from class: hazem.nurmontage.videoquran.EngineActivity.18
             @Override // hazem.nurmontage.videoquran.views.CustomDiscreteSeekBar.OnProgressChangeListener
-            public void onProgressChanged(CustomDiscreteSeekBar customDiscreteSeekBar, int i, String str, boolean z) {
+            public void onProgressChanged(CustomDiscreteSeekBar customDiscreteSeekBar, int value, String textValue, boolean isEnabled) {
             }
 
             @Override // hazem.nurmontage.videoquran.views.CustomDiscreteSeekBar.OnProgressChangeListener
@@ -3075,7 +3075,7 @@ public class EngineActivity extends Base {
         }
         this.seekBar_res.setOnProgressChangeListener(new CustomDiscreteSeekBar.OnProgressChangeListener() { // from class: hazem.nurmontage.videoquran.EngineActivity.19
             @Override // hazem.nurmontage.videoquran.views.CustomDiscreteSeekBar.OnProgressChangeListener
-            public void onProgressChanged(CustomDiscreteSeekBar customDiscreteSeekBar, int i, String str, boolean z) {
+            public void onProgressChanged(CustomDiscreteSeekBar customDiscreteSeekBar, int value, String textValue, boolean isEnabled) {
             }
 
             @Override // hazem.nurmontage.videoquran.views.CustomDiscreteSeekBar.OnProgressChangeListener
@@ -3445,10 +3445,10 @@ public class EngineActivity extends Base {
             public void run() {
                 Bitmap cropTo16x9;
                 Rect rect;
-                int i;
+                int value;
                 Bitmap cropToSquareWithRoundCorners;
-                int i2;
-                int i3;
+                int value2;
+                int value3;
                 Bitmap cropTo16x92;
                 try {
                     EngineActivity.this.trackViewEntity.calculMaxTime();
@@ -3472,10 +3472,10 @@ public class EngineActivity extends Base {
                             EngineActivity.this.mTemplate.setDrawingTranslation(EngineActivity.this.blurredImageView.getBtmX(), EngineActivity.this.blurredImageView.getBtmY());
                             int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                             int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                            int i4 = width + round;
-                            if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                round -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                            int value4 = width + round;
+                            if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                round -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                             }
                             int i5 = height + round2;
                             if (i5 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -3488,7 +3488,7 @@ public class EngineActivity extends Base {
                             if (round2 < 0) {
                                 round2 = 0;
                             }
-                            Rect rect2 = new Rect(round, round2, i4, i5);
+                            Rect rect2 = new Rect(round, round2, value4, i5);
                             int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                             int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
                             Bitmap cropToSquare = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect2, width2, height2);
@@ -3512,30 +3512,30 @@ public class EngineActivity extends Base {
                             EngineActivity.this.blurredImageView.updatePosCanvas(EngineActivity.this.mTemplate.getWidth(), EngineActivity.this.mTemplate.getHeight(), bitmap);
                             EngineActivity.this.blurredImageView.updateIpad(bitmap, EngineActivity.this.mTemplate.getIpad_type(), EngineActivity.this.mTemplate.geTypeResize());
                             if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal()) {
-                                i = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
+                                value = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
                                 EngineActivity.this.mTemplate.setDrawingTranslation(EngineActivity.this.blurredImageView.getBtmX(), EngineActivity.this.blurredImageView.getBtmY());
-                                i2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
-                                i3 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                                int i6 = i + i2;
+                                value2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
+                                value3 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
+                                int i6 = value + value2;
                                 if (i6 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                    i2 -= i6 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    value2 -= i6 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     i6 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
-                                int i7 = i + i3;
-                                if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                    i3 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                    i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                int value7 = value + value3;
+                                if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                    value3 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                 }
-                                if (i2 < 0) {
-                                    i2 = 0;
+                                if (value2 < 0) {
+                                    value2 = 0;
                                 }
-                                if (i3 < 0) {
-                                    i3 = 0;
+                                if (value3 < 0) {
+                                    value3 = 0;
                                 }
-                                rect = new Rect(i2, i3, i6, i7);
+                                rect = new Rect(value2, value3, i6, value7);
                                 int width3 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                 int height3 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
-                                cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect, i, width3, height3);
+                                cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect, value, width3, height3);
                                 rect.right = rect.left + width3;
                                 rect.bottom = rect.top + height3;
                                 EngineActivity.this.blurredImageView.setRectSquare(rect);
@@ -3571,9 +3571,9 @@ public class EngineActivity extends Base {
                                     rect.right = rect.left + width5;
                                     rect.bottom = rect.top + height5;
                                     EngineActivity.this.blurredImageView.setRectSquare(rect);
-                                    i2 = round3;
-                                    i = 0;
-                                    i3 = round4;
+                                    value2 = round3;
+                                    value = 0;
+                                    value3 = round4;
                                 }
                                 int width6 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
                                 int i10 = (int) (width6 * 1.13f);
@@ -3608,24 +3608,24 @@ public class EngineActivity extends Base {
                                     rect.bottom = rect.top + height6;
                                     EngineActivity.this.blurredImageView.setRectSquare(rect);
                                     cropToSquareWithRoundCorners = cropToSquare2;
-                                    i = 0;
+                                    value = 0;
                                 } else {
-                                    i = (int) (min * 0.10800001f);
+                                    value = (int) (min * 0.10800001f);
                                     int width8 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                     int height7 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
-                                    cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect, i, width8, height7);
+                                    cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect, value, width8, height7);
                                     rect.right = rect.left + width8;
                                     rect.bottom = rect.top + height7;
                                     EngineActivity.this.blurredImageView.setRectSquare(rect);
                                 }
-                                i2 = round5;
-                                i3 = round6;
+                                value2 = round5;
+                                value3 = round6;
                             }
                             Rect rect3 = rect;
                             Bitmap bitmap2 = cropToSquareWithRoundCorners;
                             EngineActivity engineActivity = EngineActivity.this;
                             EngineActivity.this.mTemplate.setUri_bg_ffmpeg(EngineActivity.this.blurredImageView.setupBitmapDraw(UtilsBitmap.blurInSave(engineActivity, bitmap, 20, 1, engineActivity.mTemplate.getWidth(), EngineActivity.this.mTemplate.getHeight()), bitmap2, EngineActivity.this.mTemplate));
-                            EngineActivity.this.mTemplate.getSquareBitmapModel().set(EngineActivity.this.blurredImageView.getLeft_square(), EngineActivity.this.blurredImageView.getTop_square(), i2, i3, rect3.width(), rect3.height(), bitmap2.getWidth(), bitmap2.getHeight(), i);
+                            EngineActivity.this.mTemplate.getSquareBitmapModel().set(EngineActivity.this.blurredImageView.getLeft_square(), EngineActivity.this.blurredImageView.getTop_square(), value2, value3, rect3.width(), rect3.height(), bitmap2.getWidth(), bitmap2.getHeight(), value);
                         }
                         EngineActivity.this.saveTemplate();
                         Intent intent = new Intent(EngineActivity.this, (Class<?>) ProgressViewActivity.class);
@@ -3655,11 +3655,11 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void setupShowFragment(String str) {
+    public void setupShowFragment(String textValue) {
         findViewById(C2014R.id.layout_time).setVisibility(4);
         findViewById(C2014R.id.layout_menu).setVisibility(4);
-        if (str != null) {
-            this.tv_tittle_fragment.setText(str);
+        if (textValue != null) {
+            this.tv_tittle_fragment.setText(textValue);
             this.tv_tittle_fragment.setVisibility(0);
             LinearLayout linearLayout = this.btnChangeResize;
             if (linearLayout != null) {
@@ -3695,14 +3695,14 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void showEditMultipleEntity(int i) {
+    public void showEditMultipleEntity(int value) {
         if (EditMultipleEntityFragment.instance != null) {
-            EditMultipleEntityFragment.instance.setCount_select(i);
+            EditMultipleEntityFragment.instance.setCount_select(value);
             return;
         }
         findViewById(C2014R.id.layout_menu).setVisibility(4);
         FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
-        this.mCurrentFragment = EditMultipleEntityFragment.getInstance(this.iEditMultipleCallback, this.mResources, i);
+        this.mCurrentFragment = EditMultipleEntityFragment.getInstance(this.iEditMultipleCallback, this.mResources, value);
         beginTransaction.replace(C2014R.id.m_container, this.mCurrentFragment);
         beginTransaction.commit();
     }
@@ -3732,7 +3732,7 @@ public class EngineActivity extends Base {
     }
 
     private void saveTemplateTmp() {
-        String str;
+        String textValue;
         try {
             if (this.mTemplate == null) {
                 this.mTemplate = new Template();
@@ -3841,12 +3841,12 @@ public class EngineActivity extends Base {
                 this.mTemplate.setEntityBismilahTemplate(entityBismilahTemplate2);
             }
             if (this.blurredImageView.getSurahNameEntity() == null) {
-                str = "";
+                textValue = "";
             } else if (this.mTemplate.getEntitySurahTemplate() == null) {
-                str = "";
+                textValue = "";
                 this.mTemplate.setEntitySurahTemplate(new EntitySurahTemplate(this.blurredImageView.getSurahNameEntity().getName(), this.blurredImageView.getSurahNameEntity().getReader(), this.mTemplate.getmDrawingTranslationX() + this.blurredImageView.getRectFSurahName().left, this.mTemplate.getmDrawingTranslationY() + this.blurredImageView.getRectFSurahName().top, new MRectF(this.blurredImageView.getSurahNameEntity().getCopyRect().left, this.blurredImageView.getSurahNameEntity().getCopyRect().top, this.blurredImageView.getSurahNameEntity().getCopyRect().right, this.blurredImageView.getSurahNameEntity().getCopyRect().bottom), this.blurredImageView.getSurahNameEntity().getFactor_scale(), this.blurredImageView.getSurahNameEntity().getNameFont(), this.blurredImageView.getSurahNameEntity().getClrS_name(), this.blurredImageView.getSurahNameEntity().getmPreset(), this.blurredImageView.getSurahNameEntity().getStyle(), this.blurredImageView.getSurahNameEntity().getIndex_surah(), this.blurredImageView.getSurahNameEntity().isHaveBg(), this.blurredImageView.getSurahNameEntity().getClrBg()));
             } else {
-                str = "";
+                textValue = "";
                 this.mTemplate.getEntitySurahTemplate().setClrBg(this.blurredImageView.getSurahNameEntity().getClrBg());
                 this.mTemplate.getEntitySurahTemplate().setHaveBg(this.blurredImageView.getSurahNameEntity().isHaveBg());
                 this.mTemplate.getEntitySurahTemplate().setIndex_surah(this.blurredImageView.getSurahNameEntity().getIndex_surah());
@@ -3880,7 +3880,7 @@ public class EngineActivity extends Base {
                 }
             }
             this.mTemplate.setUri_video(new FileHelper(this).createPublicVideoFolder(this.mResources.getString(C2014R.string.app_name)).getAbsolutePath() + "/" + System.currentTimeMillis() + "_NurMontage.mp4");
-            LocalPersistence.writeTemplate(this, this.mTemplate, str, Common.TEMPLATE_TMP);
+            LocalPersistence.writeTemplate(this, this.mTemplate, textValue, Common.TEMPLATE_TMP);
         } catch (Exception unused) {
         }
     }
@@ -4049,9 +4049,9 @@ public class EngineActivity extends Base {
                 }
                 it2 = it;
             }
-            String str = "Template_" + System.currentTimeMillis();
+            String textValue = "Template_" + System.currentTimeMillis();
             String idTemplate = engineActivity.mTemplate.getIdTemplate();
-            engineActivity.mTemplate.setIdTemplate(str);
+            engineActivity.mTemplate.setIdTemplate(textValue);
             engineActivity.mTemplate.setUri_video(new FileHelper(engineActivity).createPublicVideoFolder(engineActivity.mResources.getString(C2014R.string.app_name)).getAbsolutePath() + "/" + System.currentTimeMillis() + "_NurMontage.mp4");
             Template template = engineActivity.mTemplate;
             LocalPersistence.writeTemplate(engineActivity, template, idTemplate, template.getIdTemplate());
@@ -4083,37 +4083,37 @@ public class EngineActivity extends Base {
     }
 
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, android.app.Activity
-    public void onRequestPermissionsResult(int i, String[] strArr, int[] iArr) {
-        super.onRequestPermissionsResult(i, strArr, iArr);
-        if (i == 1) {
+    public void onRequestPermissionsResult(int value, String[] strArr, int[] iArr) {
+        super.onRequestPermissionsResult(value, strArr, iArr);
+        if (value == 1) {
             if (iArr.length > 0 && iArr[0] == 0) {
                 save();
             } else {
                 Toast.makeText(this, this.mResources.getString(C2014R.string.permission_img), 0).show();
             }
         }
-        if (i == 2) {
+        if (value == 2) {
             if (iArr.length > 0 && iArr[0] == 0) {
                 pickAudio();
             } else {
                 Toast.makeText(this, this.mResources.getString(C2014R.string.permission_audio), 0).show();
             }
         }
-        if (i == 10) {
+        if (value == 10) {
             if ((Build.VERSION.SDK_INT >= 34 && ContextCompat.checkSelfPermission(this, "android.permission.READ_MEDIA_VISUAL_USER_SELECTED") == 0) || (iArr.length > 0 && iArr[0] == 0)) {
                 imageChooser();
             } else {
                 Toast.makeText(this, this.mResources.getString(C2014R.string.permission_img), 0).show();
             }
         }
-        if (i == 11) {
+        if (value == 11) {
             if ((Build.VERSION.SDK_INT >= 34 && ContextCompat.checkSelfPermission(this, "android.permission.READ_MEDIA_VISUAL_USER_SELECTED") == 0) || (iArr.length > 0 && iArr[0] == 0)) {
                 videoChooser();
             } else {
                 Toast.makeText(this, this.mResources.getString(C2014R.string.permission_video), 0).show();
             }
         }
-        if (i == 12) {
+        if (value == 12) {
             if ((Build.VERSION.SDK_INT >= 34 && ContextCompat.checkSelfPermission(this, "android.permission.READ_MEDIA_VISUAL_USER_SELECTED") == 0) || (iArr.length > 0 && iArr[0] == 0)) {
                 videoChooserForAudio();
             } else {
@@ -4131,29 +4131,29 @@ public class EngineActivity extends Base {
         this.timeFormatter = new TimeFormatter(maxTime);
         SmoothTimelineAnimator smoothTimelineAnimator = new SmoothTimelineAnimator(this.startCursur, maxTime, new SmoothTimelineAnimator.AnimatorListener() { // from class: hazem.nurmontage.videoquran.EngineActivity.36
             @Override // hazem.nurmontage.videoquran.Utils.SmoothTimelineAnimator.AnimatorListener
-            public void onUpdate(int i) {
-                if (!EngineActivity.this.mIsPlaying || i == 0) {
+            public void onUpdate(int value) {
+                if (!EngineActivity.this.mIsPlaying || value == 0) {
                     return;
                 }
-                float f = i / maxTime;
+                float floatValue = value / maxTime;
                 if (EngineActivity.this.blurredImageView != null) {
-                    EngineActivity.this.updateTime(i);
-                    EngineActivity.this.blurredImageView.setProgress(f);
+                    EngineActivity.this.updateTime(value);
+                    EngineActivity.this.blurredImageView.setProgress(floatValue);
                 }
-                EngineActivity.this.trackViewEntity.updateCursur(f * timeLineW);
-                EngineActivity.this.trackViewEntity.setCurrent_cursur_position(i);
+                EngineActivity.this.trackViewEntity.updateCursur(floatValue * timeLineW);
+                EngineActivity.this.trackViewEntity.setCurrent_cursur_position(value);
                 float abs = Math.abs(Math.round((EngineActivity.this.trackViewEntity.getCurrentPosition() / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * 1000.0f));
                 if (abs > EngineActivity.this.endTimeAudioVisible) {
                     EngineActivity.this.entityAudio_visible = null;
                 }
                 if (EngineActivity.this.entityAudio_visible == null) {
-                    for (int i2 = EngineActivity.this.lastIndexVisible; i2 < EngineActivity.this.trackViewEntity.getEntityListAudio().size(); i2++) {
-                        EntityAudio entityAudio = EngineActivity.this.trackViewEntity.getEntityListAudio().get(i2);
+                    for (int value2 = EngineActivity.this.lastIndexVisible; value2 < EngineActivity.this.trackViewEntity.getEntityListAudio().size(); value2++) {
+                        EntityAudio entityAudio = EngineActivity.this.trackViewEntity.getEntityListAudio().get(value2);
                         if (entityAudio.visible() && entityAudio.isVisible()) {
                             EngineActivity.this.entityAudio_visible = entityAudio;
                             EngineActivity engineActivity = EngineActivity.this;
                             engineActivity.endTimeAudioVisible = Math.round((engineActivity.entityAudio_visible.getRect().right / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * 1000.0f);
-                            EngineActivity.this.lastIndexVisible = i2;
+                            EngineActivity.this.lastIndexVisible = value2;
                             break;
                         }
                     }
@@ -4229,17 +4229,17 @@ public class EngineActivity extends Base {
         this.timeFormatter = new TimeFormatter(maxTime);
         SmoothTimelineAnimator smoothTimelineAnimator = new SmoothTimelineAnimator(this.startCursur, maxTime, new SmoothTimelineAnimator.AnimatorListener() { // from class: hazem.nurmontage.videoquran.EngineActivity.37
             @Override // hazem.nurmontage.videoquran.Utils.SmoothTimelineAnimator.AnimatorListener
-            public void onUpdate(int i) {
-                if (!EngineActivity.this.mIsPlaying || i == 0) {
+            public void onUpdate(int value) {
+                if (!EngineActivity.this.mIsPlaying || value == 0) {
                     return;
                 }
-                float f = i / maxTime;
+                float floatValue = value / maxTime;
                 if (EngineActivity.this.blurredImageView != null) {
-                    EngineActivity.this.updateTime(i);
-                    EngineActivity.this.blurredImageView.setProgress(f);
+                    EngineActivity.this.updateTime(value);
+                    EngineActivity.this.blurredImageView.setProgress(floatValue);
                 }
-                EngineActivity.this.trackViewEntity.updateCursur(f * timeLineW);
-                EngineActivity.this.trackViewEntity.setCurrent_cursur_position(i);
+                EngineActivity.this.trackViewEntity.updateCursur(floatValue * timeLineW);
+                EngineActivity.this.trackViewEntity.setCurrent_cursur_position(value);
                 try {
                     if (entityAudio.getMediaPlayer() != null && !entityAudio.getMediaPlayer().isPlaying()) {
                         int abs = (int) ((Math.abs(Math.round((EngineActivity.this.trackViewEntity.getCurrentPosition() / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * 1000.0f)) - Math.abs(Math.round((entityAudio.getRect().left / EngineActivity.this.trackViewEntity.getSecond_in_screen()) * 1000.0f))) + entityAudio.getStart());
@@ -4322,9 +4322,9 @@ public class EngineActivity extends Base {
             @Override // java.lang.Runnable
             public void run() {
                 int screenWidth = ScreenUtils.getScreenWidth(EngineActivity.this);
-                float f = screenWidth * 0.12f;
-                EngineActivity.this.trackViewEntity.setSecond_in_screen(f);
-                EngineActivity.this.trackViewEntity.setSecond_in_screen(f, 0, screenWidth);
+                float floatValue = screenWidth * 0.12f;
+                EngineActivity.this.trackViewEntity.setSecond_in_screen(floatValue);
+                EngineActivity.this.trackViewEntity.setSecond_in_screen(floatValue, 0, screenWidth);
                 EngineActivity.this.trackViewEntity.setMaxTime(0);
                 EngineActivity.this.trackViewEntity.init(screenWidth, EngineActivity.this.trackViewEntity.getHeight());
                 EngineActivity.this.trackViewEntity.setPosCursur(EngineActivity.this.mTemplate.getCurrentCursur());
@@ -4337,7 +4337,7 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioTemplateHttp(final Uri uri, final int i, final String str) {
+    public void addAudioTemplateHttp(final Uri uri, final int value, final String textValue) {
         String uri2;
         try {
             if (isDestroyed()) {
@@ -4348,17 +4348,17 @@ public class EngineActivity extends Base {
                 return;
             }
             if (this.mTemplate.getEntityMediaList() != null) {
-                updateProgress(i + 1, this.mTemplate.getEntityMediaList().size());
+                updateProgress(value + 1, this.mTemplate.getEntityMediaList().size());
             }
-            if (str != null) {
+            if (textValue != null) {
                 uri2 = uri.getPath();
             } else if (!uri.toString().contains("share_with_me")) {
                 uri2 = AudioUtils.copyFromUri(this, uri, this.mTemplate.getFolder_template());
             } else {
                 uri2 = uri.toString();
             }
-            final String str2 = uri2;
-            final EntityMedia entityMedia = this.mTemplate.getEntityMediaList().get(i);
+            final String textValue2 = uri2;
+            final EntityMedia entityMedia = this.mTemplate.getEntityMediaList().get(value);
             if (entityMedia.isApplyEffectInPreview()) {
                 final File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_audio_echo.mp3");
                 final EffectAudio effectAudio = entityMedia.getEffectAudio();
@@ -4390,7 +4390,7 @@ public class EngineActivity extends Base {
                 if (effectAudio.getSpeed() != 1.0f) {
                     arrayList.addAll(buildSpeedFilters(effectAudio.getSpeed()));
                 }
-                this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str2, "-af", TextUtils.join(",", arrayList), "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.39
+                this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue2, "-af", TextUtils.join(",", arrayList), "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.39
                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                     public void apply(FFmpegSession fFmpegSession) {
                         try {
@@ -4410,7 +4410,7 @@ public class EngineActivity extends Base {
                                         return;
                                     }
                                     try {
-                                        EngineActivity.this.addEntitMediaHttp(entityMedia, effectAudio.getDuration(), uri, mediaPlayer, entityMedia.getPaths_https(), i, str2, str);
+                                        EngineActivity.this.addEntitMediaHttp(entityMedia, effectAudio.getDuration(), uri, mediaPlayer, entityMedia.getPaths_https(), value, textValue2, textValue);
                                     } catch (Exception unused) {
                                         EngineActivity.this.hideProgressFragment();
                                     }
@@ -4439,7 +4439,7 @@ public class EngineActivity extends Base {
                         return;
                     }
                     try {
-                        EngineActivity.this.addEntitMediaHttp(entityMedia, mediaPlayer2.getDuration(), uri, mediaPlayer2, entityMedia.getPaths_https(), i, str2, str);
+                        EngineActivity.this.addEntitMediaHttp(entityMedia, mediaPlayer2.getDuration(), uri, mediaPlayer2, entityMedia.getPaths_https(), value, textValue2, textValue);
                     } catch (Exception unused) {
                         EngineActivity.this.hideProgressFragment();
                     }
@@ -4452,28 +4452,28 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public List<String> buildSpeedFilters(float f) {
+    public List<String> buildSpeedFilters(float floatValue) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (floatValue < 0.5f) {
+            while (floatValue < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                floatValue /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(floatValue)));
+        } else if (floatValue > 2.0f) {
+            while (floatValue > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                floatValue /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(floatValue)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(floatValue)));
         }
         return arrayList;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioFromVideo(final Uri uri, final String str) {
+    public void addAudioFromVideo(final Uri uri, final String textValue) {
         try {
             MediaPlayer mediaPlayer = new MediaPlayer();
             this.mPlayer = mediaPlayer;
@@ -4490,7 +4490,7 @@ public class EngineActivity extends Base {
                     if (mediaPlayer2 == null) {
                         return;
                     }
-                    EngineActivity.this.changeEntityAudioFromVideo(mediaPlayer2.getDuration(), uri, str);
+                    EngineActivity.this.changeEntityAudioFromVideo(mediaPlayer2.getDuration(), uri, textValue);
                     try {
                         EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.41.1
                             @Override // java.lang.Runnable
@@ -4518,26 +4518,26 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void updateProgress(final int i, final int i2) {
+    public void updateProgress(final int value, final int value2) {
         runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.42
             @Override // java.lang.Runnable
             public void run() {
                 if (ProgressViewFragment.instance != null) {
-                    ProgressViewFragment.instance.update(i, i2);
+                    ProgressViewFragment.instance.update(value, value2);
                 }
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioReciters(final List<RecitersModel> list, final int i) {
+    public void addAudioReciters(final List<RecitersModel> list, final int value) {
         final Uri parse;
         try {
             if (isDestroyed()) {
                 return;
             }
-            updateProgress(i + 1, list.size());
-            if (i >= list.size()) {
+            updateProgress(value + 1, list.size());
+            if (value >= list.size()) {
                 runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.43
                     @Override // java.lang.Runnable
                     public void run() {
@@ -4551,7 +4551,7 @@ public class EngineActivity extends Base {
                 });
                 return;
             }
-            RecitersModel recitersModel = list.get(i);
+            RecitersModel recitersModel = list.get(value);
             if (recitersModel.isTarteel()) {
                 parse = Uri.parse("https://audio-cdn.tarteel.ai/quran/" + recitersModel.getIdentifer() + "/" + recitersModel.getSurah_index() + recitersModel.getNumber_aya() + ".mp3");
             } else {
@@ -4572,7 +4572,7 @@ public class EngineActivity extends Base {
                     if (mediaPlayer2 == null) {
                         EngineActivity.this.hideProgressFragment();
                     } else {
-                        EngineActivity.this.changeEntityAudioReciters(mediaPlayer2.getDuration(), parse, mediaPlayer2, list, i);
+                        EngineActivity.this.changeEntityAudioReciters(mediaPlayer2.getDuration(), parse, mediaPlayer2, list, value);
                     }
                 }
             });
@@ -4583,12 +4583,12 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addEntitMediaHttp(final EntityMedia entityMedia, int i, Uri uri, MediaPlayer mediaPlayer, List<String> list, final int i2, final String str, String str2) {
+    public void addEntitMediaHttp(final EntityMedia entityMedia, int value, Uri uri, MediaPlayer mediaPlayer, List<String> list, final int value2, final String textValue, String textValue2) {
         final EntityAudio entityAudio;
         float posX;
         float posY;
         final int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-        final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
+        final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
         if (entityMedia.getStart() != entityMedia.getEnd()) {
             if (this.mTemplate.isNewCode()) {
                 posX = entityMedia.getPosX();
@@ -4597,10 +4597,10 @@ public class EngineActivity extends Base {
                 posX = (entityMedia.getPosX() / 1000.0f) * this.trackViewEntity.getSecond_in_screen();
                 posY = (entityMedia.getPosY() / 1000.0f) * this.trackViewEntity.getSecond_in_screen();
             }
-            EntityAudio entityAudio2 = new EntityAudio(null, uri, posX, 0.0f, round, posY, entityMedia.getMax(), this.trackViewEntity.getSecond_in_screenNoScale(), i, entityMedia.getOffset(), entityMedia.getOffset_right(), entityMedia.getOffset_left());
+            EntityAudio entityAudio2 = new EntityAudio(null, uri, posX, 0.0f, round, posY, entityMedia.getMax(), this.trackViewEntity.getSecond_in_screenNoScale(), value, entityMedia.getOffset(), entityMedia.getOffset_right(), entityMedia.getOffset_left());
             entityAudio2.setPathHttp(list);
             entityAudio2.setMediaPlayer(mediaPlayer);
-            entityAudio2.setVideo_path(str2);
+            entityAudio2.setVideo_path(textValue2);
             entityAudio2.setStart(entityMedia.getStart());
             entityAudio2.setMin_duration(entityMedia.getStart_original());
             if (entityMedia.getEnd() != 0.0f) {
@@ -4622,15 +4622,15 @@ public class EngineActivity extends Base {
         try {
             final File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.pcm");
             ArrayList arrayList = new ArrayList();
-            arrayList.add("-i");
-            arrayList.add(str);
+            arrayList.add("-value");
+            arrayList.add(textValue);
             arrayList.add("-map");
             arrayList.add("0:a");
             arrayList.add("-ac");
             arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
             arrayList.add("-ar");
             arrayList.add("44100");
-            arrayList.add("-f");
+            arrayList.add("-floatValue");
             arrayList.add("s16le");
             arrayList.add(file.getAbsolutePath());
             arrayList.add("-y");
@@ -4639,11 +4639,11 @@ public class EngineActivity extends Base {
                 public void apply(FFmpegSession fFmpegSession) {
                     if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
                         try {
-                            int i3 = round;
-                            entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (i3 * 0.1f)) + ((int) (i3 * 0.07f)))), round2, round);
-                            entityAudio.setPath_ffmpeg(str);
-                            int i4 = i2 + 1;
-                            if (i4 >= EngineActivity.this.mTemplate.getEntityMediaList().size()) {
+                            int value3 = round;
+                            entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (value3 * 0.1f)) + ((int) (value3 * 0.07f)))), round2, round);
+                            entityAudio.setPath_ffmpeg(textValue);
+                            int value4 = value2 + 1;
+                            if (value4 >= EngineActivity.this.mTemplate.getEntityMediaList().size()) {
                                 try {
                                     EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.45.1
                                         @Override // java.lang.Runnable
@@ -4657,21 +4657,21 @@ public class EngineActivity extends Base {
                                     e.printStackTrace();
                                 }
                             } else {
-                                EntityMedia entityMedia2 = EngineActivity.this.mTemplate.getEntityMediaList().get(i4);
+                                EntityMedia entityMedia2 = EngineActivity.this.mTemplate.getEntityMediaList().get(value4);
                                 if (entityMedia2.getVideo_path() != null) {
                                     EngineActivity engineActivity = EngineActivity.this;
                                     entityMedia.setVideo_path(AudioUtils.copyFromUri(engineActivity, Uri.parse(engineActivity.mTemplate.getUri_upload_extract_audio_video()), EngineActivity.this.mTemplate.getFolder_template()));
                                     if (EngineActivity.this.mTemplate.getExtension() != null) {
                                         EngineActivity engineActivity2 = EngineActivity.this;
-                                        engineActivity2.addAudioFromVideoWithExtention(engineActivity2.mTemplate.getExtension(), entityMedia.getVideo_path(), i4);
+                                        engineActivity2.addAudioFromVideoWithExtention(engineActivity2.mTemplate.getExtension(), entityMedia.getVideo_path(), value4);
                                     } else {
                                         EngineActivity.this.start_extenstion = 0;
-                                        EngineActivity.this.extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, i4);
+                                        EngineActivity.this.extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, value4);
                                     }
                                 } else if (entityMedia2.getPaths_https() != null) {
-                                    EngineActivity.this.addAudioRecitersTemplate(entityMedia2.getPaths_https(), i4, null);
+                                    EngineActivity.this.addAudioRecitersTemplate(entityMedia2.getPaths_https(), value4, null);
                                 } else {
-                                    EngineActivity.this.addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), i4, null);
+                                    EngineActivity.this.addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), value4, null);
                                 }
                             }
                         } catch (Exception e2) {
@@ -4695,14 +4695,14 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void changeEntityAudio(int i, final Uri uri, List<String> list, final int i2, final String str) {
+    public void changeEntityAudio(int value, final Uri uri, List<String> list, final int value2, final String textValue) {
         EntityAudio audio;
         try {
             float scaleFactor = (this.trackViewEntity.getEntityListAudio().isEmpty() || (audio = this.trackViewEntity.getAudio()) == null) ? 0.0f : audio.getRect().right / this.trackViewEntity.getScaleFactor();
             final int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
-            float f = round2;
-            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, f + scaleFactor, f, this.trackViewEntity.getSecond_in_screenNoScale(), i);
+            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
+            float floatValue = round2;
+            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, floatValue + scaleFactor, floatValue, this.trackViewEntity.getSecond_in_screenNoScale(), value);
             entityAudio.setMediaPlayer(this.mPlayer);
             entityAudio.setPathHttp(list);
             entityAudio.getEffectAudio().setEnd(entityAudio.getEnd());
@@ -4713,7 +4713,7 @@ public class EngineActivity extends Base {
                 this.executor.execute(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EngineActivity.this.m579xda6d3951(uri, round, round2, str, entityAudio, i2);
+                        EngineActivity.this.m579xda6d3951(uri, round, round2, textValue, entityAudio, value2);
                     }
                 });
                 this.trackViewEntity.invalidate();
@@ -4726,15 +4726,15 @@ public class EngineActivity extends Base {
     }
 
     /* renamed from: lambda$changeEntityAudio$2$hazem-nurmontage-videoquran-EngineActivity */
-    /* synthetic */ void m579xda6d3951(Uri uri, int i, int i2, String str, EntityAudio entityAudio, int i3) {
+    /* synthetic */ void m579xda6d3951(Uri uri, int value, int value2, String textValue, EntityAudio entityAudio, int value3) {
         try {
             String copyFromUri = AudioUtils.copyFromUri(this, uri, this.mTemplate.getFolder_template());
-            float f = i;
-            entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(str, i2 / (((int) (0.1f * f)) + ((int) (f * 0.07f)))), i2, i);
+            float floatValue = value;
+            entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(textValue, value2 / (((int) (0.1f * floatValue)) + ((int) (floatValue * 0.07f)))), value2, value);
             entityAudio.setPath_ffmpeg(copyFromUri);
-            if (i3 != -1) {
-                int i4 = i3 + 1;
-                if (i4 >= this.mTemplate.getEntityMediaList().size()) {
+            if (value3 != -1) {
+                int value4 = value3 + 1;
+                if (value4 >= this.mTemplate.getEntityMediaList().size()) {
                     try {
                         runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.46
                             @Override // java.lang.Runnable
@@ -4754,24 +4754,24 @@ public class EngineActivity extends Base {
                         return;
                     }
                 }
-                EntityMedia entityMedia = this.mTemplate.getEntityMediaList().get(i3);
-                EntityMedia entityMedia2 = this.mTemplate.getEntityMediaList().get(i4);
+                EntityMedia entityMedia = this.mTemplate.getEntityMediaList().get(value3);
+                EntityMedia entityMedia2 = this.mTemplate.getEntityMediaList().get(value4);
                 if (entityMedia2.getVideo_path() != null) {
                     entityMedia.setVideo_path(AudioUtils.copyFromUri(this, Uri.parse(this.mTemplate.getUri_upload_extract_audio_video()), this.mTemplate.getFolder_template()));
                     if (this.mTemplate.getExtension() != null) {
-                        addAudioFromVideoWithExtention(this.mTemplate.getExtension(), entityMedia.getVideo_path(), i4);
+                        addAudioFromVideoWithExtention(this.mTemplate.getExtension(), entityMedia.getVideo_path(), value4);
                         return;
                     } else {
                         this.start_extenstion = 0;
-                        extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, i4);
+                        extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, value4);
                         return;
                     }
                 }
                 if (entityMedia2.getPaths_https() != null) {
-                    addAudioRecitersTemplate(entityMedia2.getPaths_https(), i4, null);
+                    addAudioRecitersTemplate(entityMedia2.getPaths_https(), value4, null);
                     return;
                 } else {
-                    addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), i4, null);
+                    addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), value4, null);
                     return;
                 }
             }
@@ -4809,12 +4809,12 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addEntitMediaHttp(final EntityMedia entityMedia, int i, Uri uri, MediaPlayer mediaPlayer, List<String> list, final int i2, final String str, final String str2, String str3) {
+    public void addEntitMediaHttp(final EntityMedia entityMedia, int value, Uri uri, MediaPlayer mediaPlayer, List<String> list, final int value2, final String textValue, final String textValue2, String textValue3) {
         EntityAudio entityAudio;
         float posX;
         float posY;
         final int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-        final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
+        final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
         if (entityMedia.getStart() != entityMedia.getEnd()) {
             if (this.mTemplate.isNewCode()) {
                 posX = entityMedia.getPosX();
@@ -4823,10 +4823,10 @@ public class EngineActivity extends Base {
                 posX = (entityMedia.getPosX() / 1000.0f) * this.trackViewEntity.getSecond_in_screen();
                 posY = (entityMedia.getPosY() / 1000.0f) * this.trackViewEntity.getSecond_in_screen();
             }
-            entityAudio = new EntityAudio(null, uri, posX, 0.0f, round, posY, entityMedia.getMax(), this.trackViewEntity.getSecond_in_screenNoScale(), i, entityMedia.getOffset(), entityMedia.getOffset_right(), entityMedia.getOffset_left());
+            entityAudio = new EntityAudio(null, uri, posX, 0.0f, round, posY, entityMedia.getMax(), this.trackViewEntity.getSecond_in_screenNoScale(), value, entityMedia.getOffset(), entityMedia.getOffset_right(), entityMedia.getOffset_left());
             entityAudio.setPathHttp(list);
             entityAudio.setMediaPlayer(mediaPlayer);
-            entityAudio.setVideo_path(str3);
+            entityAudio.setVideo_path(textValue3);
             entityAudio.setStart(entityMedia.getStart());
             entityAudio.setMin_duration(entityMedia.getStart_original());
             if (entityMedia.getEnd() != 0.0f) {
@@ -4848,11 +4848,11 @@ public class EngineActivity extends Base {
                 @Override // java.lang.Runnable
                 public void run() {
                     try {
-                        int i3 = round;
-                        entityAudio2.setAmps(PCMWaveformExtractor.extractWaveform(str2, round2 / (((int) (i3 * 0.1f)) + ((int) (i3 * 0.07f)))), round2, round);
-                        entityAudio2.setPath_ffmpeg(str);
-                        int i4 = i2 + 1;
-                        if (i4 >= EngineActivity.this.mTemplate.getEntityMediaList().size()) {
+                        int value3 = round;
+                        entityAudio2.setAmps(PCMWaveformExtractor.extractWaveform(textValue2, round2 / (((int) (value3 * 0.1f)) + ((int) (value3 * 0.07f)))), round2, round);
+                        entityAudio2.setPath_ffmpeg(textValue);
+                        int value4 = value2 + 1;
+                        if (value4 >= EngineActivity.this.mTemplate.getEntityMediaList().size()) {
                             try {
                                 EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.48.1
                                     @Override // java.lang.Runnable
@@ -4866,21 +4866,21 @@ public class EngineActivity extends Base {
                                 e.printStackTrace();
                             }
                         } else {
-                            EntityMedia entityMedia2 = EngineActivity.this.mTemplate.getEntityMediaList().get(i4);
+                            EntityMedia entityMedia2 = EngineActivity.this.mTemplate.getEntityMediaList().get(value4);
                             if (entityMedia2.getVideo_path() != null) {
                                 EngineActivity engineActivity = EngineActivity.this;
                                 entityMedia.setVideo_path(AudioUtils.copyFromUri(engineActivity, Uri.parse(engineActivity.mTemplate.getUri_upload_extract_audio_video()), EngineActivity.this.mTemplate.getFolder_template()));
                                 if (EngineActivity.this.mTemplate.getExtension() != null) {
                                     EngineActivity engineActivity2 = EngineActivity.this;
-                                    engineActivity2.addAudioFromVideoWithExtention(engineActivity2.mTemplate.getExtension(), entityMedia.getVideo_path(), i4);
+                                    engineActivity2.addAudioFromVideoWithExtention(engineActivity2.mTemplate.getExtension(), entityMedia.getVideo_path(), value4);
                                 } else {
                                     EngineActivity.this.start_extenstion = 0;
-                                    EngineActivity.this.extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, i4);
+                                    EngineActivity.this.extractAudioFromVideoRecursive(entityMedia.getVideo_path(), 0, true, value4);
                                 }
                             } else if (entityMedia2.getPaths_https() != null) {
-                                EngineActivity.this.addAudioRecitersTemplate(entityMedia2.getPaths_https(), i4, null);
+                                EngineActivity.this.addAudioRecitersTemplate(entityMedia2.getPaths_https(), value4, null);
                             } else {
-                                EngineActivity.this.addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), i4, null);
+                                EngineActivity.this.addAudioTemplateHttp(Uri.parse(entityMedia2.getUri()), value4, null);
                             }
                         }
                     } catch (Exception e2) {
@@ -4926,7 +4926,7 @@ public class EngineActivity extends Base {
         }
     }
 
-    private void addAudio(final Uri uri, final List<String> list, final int i, final String str) {
+    private void addAudio(final Uri uri, final List<String> list, final int value, final String textValue) {
         try {
             MediaPlayer mediaPlayer = new MediaPlayer();
             this.mPlayer = mediaPlayer;
@@ -4943,7 +4943,7 @@ public class EngineActivity extends Base {
                     if (mediaPlayer2 == null) {
                         return;
                     }
-                    EngineActivity.this.changeEntityAudio(mediaPlayer2.getDuration(), uri, list, i, str);
+                    EngineActivity.this.changeEntityAudio(mediaPlayer2.getDuration(), uri, list, value, textValue);
                 }
             });
         } catch (Exception e) {
@@ -4954,7 +4954,7 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioTemplate(final Uri uri, final List<String> list, final int i, final String str, final String str2, final String str3) {
+    public void addAudioTemplate(final Uri uri, final List<String> list, final int value, final String textValue, final String textValue2, final String textValue3) {
         try {
             MediaPlayer mediaPlayer = new MediaPlayer();
             this.mPlayer = mediaPlayer;
@@ -4968,8 +4968,8 @@ public class EngineActivity extends Base {
             this.mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // from class: hazem.nurmontage.videoquran.EngineActivity.51
                 @Override // android.media.MediaPlayer.OnPreparedListener
                 public void onPrepared(MediaPlayer mediaPlayer2) {
-                    if (mediaPlayer2 != null && i < EngineActivity.this.mTemplate.getEntityMediaList().size()) {
-                        EngineActivity.this.addEntitMediaHttp(EngineActivity.this.mTemplate.getEntityMediaList().get(i), mediaPlayer2.getDuration(), uri, EngineActivity.this.mPlayer, list, i, str, str2, str3);
+                    if (mediaPlayer2 != null && value < EngineActivity.this.mTemplate.getEntityMediaList().size()) {
+                        EngineActivity.this.addEntitMediaHttp(EngineActivity.this.mTemplate.getEntityMediaList().get(value), mediaPlayer2.getDuration(), uri, EngineActivity.this.mPlayer, list, value, textValue, textValue2, textValue3);
                     }
                 }
             });
@@ -4981,14 +4981,14 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void changeEntityAudioFromVideo(int i, final Uri uri, final String str) {
+    public void changeEntityAudioFromVideo(int value, final Uri uri, final String textValue) {
         EntityAudio audio;
         try {
             float scaleFactor = (this.trackViewEntity.getEntityListAudio().isEmpty() || (audio = this.trackViewEntity.getAudio()) == null) ? 0.0f : audio.getRect().right / this.trackViewEntity.getScaleFactor();
             final int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
-            float f = round2;
-            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, f + scaleFactor, f, this.trackViewEntity.getSecond_in_screenNoScale(), i);
+            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
+            float floatValue = round2;
+            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, floatValue + scaleFactor, floatValue, this.trackViewEntity.getSecond_in_screenNoScale(), value);
             entityAudio.setMediaPlayer(this.mPlayer);
             entityAudio.getEffectAudio().setEnd(entityAudio.getEnd());
             entityAudio.getEffectAudio().setStart(entityAudio.getStart());
@@ -4998,7 +4998,7 @@ public class EngineActivity extends Base {
                 String copyFromUri = AudioUtils.copyFromUri(this, uri, this.mTemplate.getFolder_template());
                 final File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.pcm");
                 ArrayList arrayList = new ArrayList();
-                arrayList.add("-i");
+                arrayList.add("-value");
                 arrayList.add(copyFromUri);
                 arrayList.add("-map");
                 arrayList.add("0:a");
@@ -5006,7 +5006,7 @@ public class EngineActivity extends Base {
                 arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
                 arrayList.add("-ar");
                 arrayList.add("44100");
-                arrayList.add("-f");
+                arrayList.add("-floatValue");
                 arrayList.add("s16le");
                 arrayList.add(file.getAbsolutePath());
                 arrayList.add("-y");
@@ -5015,10 +5015,10 @@ public class EngineActivity extends Base {
                     public void apply(FFmpegSession fFmpegSession) {
                         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
                             try {
-                                int i2 = round;
-                                entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (i2 * 0.1f)) + ((int) (i2 * 0.07f)))), round2, round);
+                                int value2 = round;
+                                entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (value2 * 0.1f)) + ((int) (value2 * 0.07f)))), round2, round);
                                 entityAudio.setPath_ffmpeg(uri.getPath());
-                                entityAudio.setVideo_path(str);
+                                entityAudio.setVideo_path(textValue);
                                 EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.52.1
                                     @Override // java.lang.Runnable
                                     public void run() {
@@ -5055,21 +5055,21 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void changeEntityAudioReciters(int i, Uri uri, MediaPlayer mediaPlayer, List<RecitersModel> list, int i2) {
+    public void changeEntityAudioReciters(int value, Uri uri, MediaPlayer mediaPlayer, List<RecitersModel> list, int value2) {
         EntityAudio audio;
         try {
             float scaleFactor = (this.trackViewEntity.getEntityListAudio().isEmpty() || (audio = this.trackViewEntity.getAudio()) == null) ? 0.0f : audio.getRect().right / this.trackViewEntity.getScaleFactor();
             int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-            int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
-            float f = round2;
-            EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, f + scaleFactor, f, this.trackViewEntity.getSecond_in_screenNoScale(), i);
+            int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
+            float floatValue = round2;
+            EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, floatValue + scaleFactor, floatValue, this.trackViewEntity.getSecond_in_screenNoScale(), value);
             entityAudio.getEffectAudio().setEnd(entityAudio.getEnd());
             entityAudio.getEffectAudio().setStart(entityAudio.getStart());
             entityAudio.getEffectAudio().setDuration((int) (entityAudio.getEnd() - entityAudio.getStart()));
             entityAudio.setMediaPlayer(mediaPlayer);
             this.trackViewEntity.addAudio(entityAudio);
             if (round2 > 0 && round > 0) {
-                AudioUtils.copyToLocalAsync(this, uri.toString(), this.mTemplate.getFolder_template(), new C187354(round2, round, entityAudio, i2, list));
+                AudioUtils.copyToLocalAsync(this, uri.toString(), this.mTemplate.getFolder_template(), new C187354(round2, round, entityAudio, value2, list));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -5085,25 +5085,25 @@ public class EngineActivity extends Base {
         final /* synthetic */ List val$recitersModels;
         final /* synthetic */ int val$w;
 
-        C187354(int i, int i2, EntityAudio entityAudio, int i3, List list) {
-            this.val$w = i;
-            this.val$h = i2;
+        C187354(int value, int value2, EntityAudio entityAudio, int value3, List list) {
+            this.val$w = value;
+            this.val$h = value2;
             this.val$entityAudio = entityAudio;
-            this.val$index = i3;
+            this.val$index = value3;
             this.val$recitersModels = list;
         }
 
         @Override // hazem.nurmontage.videoquran.Utils.AudioUtils.Callback
-        public void onSuccess(final String str) {
+        public void onSuccess(final String textValue) {
             try {
                 final File file = new File(EngineActivity.this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_audio_wave.png");
-                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-filter_complex", "aformat=channel_layouts=mono,showwavespic=s=" + this.val$w + "x" + this.val$h + ":colors=#522123", "-frames:v", IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE, "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.54.1
+                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-filter_complex", "aformat=channel_layouts=mono,showwavespic=s=" + this.val$w + "x" + this.val$h + ":colors=#522123", "-frames:v", IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE, "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.54.1
                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                     public void apply(FFmpegSession fFmpegSession) {
                         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
                             try {
                                 Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(Uri.fromFile(file)).submit().get();
-                                C187354.this.val$entityAudio.setPath_ffmpeg(str);
+                                C187354.this.val$entityAudio.setPath_ffmpeg(textValue);
                                 EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.54.1.1
                                     @Override // java.lang.Runnable
                                     public void run() {
@@ -5132,10 +5132,10 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void duplicateEntityAudio(int i, EntityAudio entityAudio) {
+    public void duplicateEntityAudio(int value, EntityAudio entityAudio) {
         try {
-            float f = entityAudio.getRect().right;
-            EntityAudio entityAudio2 = new EntityAudio(null, entityAudio.getUri(), f, entityAudio.getRect().top, entityAudio.getH(), f + entityAudio.getRect().width(), entityAudio.getMax(), entityAudio.getSecond_in_screen(), (int) (i / 1000.0f), 0.0f, 0.0f, 0.0f);
+            float floatValue = entityAudio.getRect().right;
+            EntityAudio entityAudio2 = new EntityAudio(null, entityAudio.getUri(), floatValue, entityAudio.getRect().top, entityAudio.getH(), floatValue + entityAudio.getRect().width(), entityAudio.getMax(), entityAudio.getSecond_in_screen(), (int) (value / 1000.0f), 0.0f, 0.0f, 0.0f);
             entityAudio2.setAmps(entityAudio.getAmps());
             entityAudio2.setRenderer(entityAudio.getRenderer());
             entityAudio2.addPathHttp(entityAudio.getPaths_http());
@@ -5163,15 +5163,15 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void changeEntityAudio(int i, Uri uri) {
+    public void changeEntityAudio(int value, Uri uri) {
         String uri2;
         EntityAudio audio;
         try {
             float scaleFactor = (this.trackViewEntity.getEntityListAudio().isEmpty() || (audio = this.trackViewEntity.getAudio()) == null) ? 0.0f : audio.getRect().right / this.trackViewEntity.getScaleFactor();
             final int round = Math.round(this.trackViewEntity.getWidth() * 0.077f);
-            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (i / 1000.0f));
-            float f = round2;
-            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, f + scaleFactor, f, this.trackViewEntity.getSecond_in_screenNoScale(), i);
+            final int round2 = Math.round(this.trackViewEntity.getSecond_in_screenNoScale() * (value / 1000.0f));
+            float floatValue = round2;
+            final EntityAudio entityAudio = new EntityAudio(null, uri, scaleFactor, 0.0f, round, floatValue + scaleFactor, floatValue, this.trackViewEntity.getSecond_in_screenNoScale(), value);
             entityAudio.setMediaPlayer(this.mPlayer);
             entityAudio.getEffectAudio().setEnd(entityAudio.getEnd());
             entityAudio.getEffectAudio().setStart(entityAudio.getStart());
@@ -5185,7 +5185,7 @@ public class EngineActivity extends Base {
                 }
                 final File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.pcm");
                 ArrayList arrayList = new ArrayList();
-                arrayList.add("-i");
+                arrayList.add("-value");
                 arrayList.add(uri2);
                 arrayList.add("-map");
                 arrayList.add("0:a");
@@ -5193,19 +5193,19 @@ public class EngineActivity extends Base {
                 arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
                 arrayList.add("-ar");
                 arrayList.add("44100");
-                arrayList.add("-f");
+                arrayList.add("-floatValue");
                 arrayList.add("s16le");
                 arrayList.add(file.getAbsolutePath());
                 arrayList.add("-y");
-                final String str = uri2;
+                final String textValue = uri2;
                 this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync((String[]) arrayList.toArray(new String[0]), new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.55
                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                     public void apply(FFmpegSession fFmpegSession) {
                         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
                             try {
-                                int i2 = round;
-                                entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (i2 * 0.1f)) + ((int) (i2 * 0.07f)))), round2, round);
-                                entityAudio.setPath_ffmpeg(str);
+                                int value2 = round;
+                                entityAudio.setAmps(PCMWaveformExtractor.extractWaveform(file.getAbsolutePath(), round2 / (((int) (value2 * 0.1f)) + ((int) (value2 * 0.07f)))), round2, round);
+                                entityAudio.setPath_ffmpeg(textValue);
                                 EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.55.1
                                     @Override // java.lang.Runnable
                                     public void run() {
@@ -5238,9 +5238,9 @@ public class EngineActivity extends Base {
         }
     }
 
-    private String createCmd(EffectAudio effectAudio, float f, float f2) {
+    private String createCmd(EffectAudio effectAudio, float floatValue, float floatValue2) {
         ArrayList arrayList = new ArrayList();
-        arrayList.add(String.format(Locale.US, "atrim=start=%.2f:end=%.2f", Float.valueOf(f), Float.valueOf(f2)));
+        arrayList.add(String.format(Locale.US, "atrim=start=%.2f:end=%.2f", Float.valueOf(floatValue), Float.valueOf(floatValue2)));
         arrayList.add("asetpts=N/SR/TB");
         if (effectAudio.isRemoveNoice()) {
             arrayList.add("afftdn=nf=-25");
@@ -5251,7 +5251,7 @@ public class EngineActivity extends Base {
         }
         if (effectAudio.getFade_out() > 0) {
             float fade_out = effectAudio.getFade_out();
-            arrayList.add("afade=t=out:st=" + ((f2 - f) - fade_out) + ":d=" + fade_out);
+            arrayList.add("afade=t=out:st=" + ((floatValue2 - floatValue) - fade_out) + ":d=" + fade_out);
         }
         if (effectAudio.isEnhance()) {
             arrayList.add(Common.ENHANCE_CMD);
@@ -5268,8 +5268,8 @@ public class EngineActivity extends Base {
         return TextUtils.join(",", arrayList);
     }
 
-    public void applyffectAll(final EffectAudio effectAudio, int i) {
-        if (i >= this.trackViewEntity.getEntityListAudio().size()) {
+    public void applyffectAll(final EffectAudio effectAudio, int value) {
+        if (value >= this.trackViewEntity.getEntityListAudio().size()) {
             runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.56
                 @Override // java.lang.Runnable
                 public void run() {
@@ -5282,7 +5282,7 @@ public class EngineActivity extends Base {
             });
             return;
         }
-        android.util.Pair<Integer, EntityAudio> entityAudioNotDeleted = this.trackViewEntity.getEntityAudioNotDeleted(i);
+        android.util.Pair<Integer, EntityAudio> entityAudioNotDeleted = this.trackViewEntity.getEntityAudioNotDeleted(value);
         if (entityAudioNotDeleted == null) {
             runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.57
                 @Override // java.lang.Runnable
@@ -5301,7 +5301,7 @@ public class EngineActivity extends Base {
         String createCmd = createCmd(effectAudio, entityAudio.getEffectAudio().getStart() / 1000.0f, entityAudio.getEffectAudio().getEnd() / 1000.0f);
         final File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_audio_echo.mp3");
         final Uri fromFile = Uri.fromFile(file);
-        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", entityAudio.getPath_ffmpeg(), "-af", createCmd, "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.58
+        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", entityAudio.getPath_ffmpeg(), "-af", createCmd, "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.58
             @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
             public void apply(FFmpegSession fFmpegSession) {
                 if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
@@ -5348,10 +5348,10 @@ public class EngineActivity extends Base {
         }).getSessionId()));
     }
 
-    public void applyffect(String str, EntityAudio entityAudio) {
+    public void applyffect(String textValue, EntityAudio entityAudio) {
         showProgressSimple();
         File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_audio_echo.mp3");
-        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", entityAudio.getPath_ffmpeg(), "-af", str, "-y", file.getAbsolutePath()}, new C187859(Uri.fromFile(file), entityAudio, file)).getSessionId()));
+        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", entityAudio.getPath_ffmpeg(), "-af", textValue, "-y", file.getAbsolutePath()}, new C187859(Uri.fromFile(file), entityAudio, file)).getSessionId()));
     }
 
     /* renamed from: hazem.nurmontage.videoquran.EngineActivity$59 */
@@ -5419,53 +5419,53 @@ public class EngineActivity extends Base {
         }
     }
 
-    public EntityBismilahTimeline addTimeLineBismilah(BismilahEntity bismilahEntity, float f, float f2) {
-        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
+    public EntityBismilahTimeline addTimeLineBismilah(BismilahEntity bismilahEntity, float floatValue, float floatValue2) {
+        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.setBismilahTimeline(entityBismilahTimeline);
         return entityBismilahTimeline;
     }
 
-    public EntityBismilahTimeline addTimeLineIsti3ada(BismilahEntity bismilahEntity, float f, float f2) {
-        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
+    public EntityBismilahTimeline addTimeLineIsti3ada(BismilahEntity bismilahEntity, float floatValue, float floatValue2) {
+        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.setmIsi3adaTimeline(entityBismilahTimeline);
         return entityBismilahTimeline;
     }
 
-    public EntityQuranTimeline addTimeLineQuran(QuranEntity quranEntity, float f, float f2) {
-        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
+    public EntityQuranTimeline addTimeLineQuran(QuranEntity quranEntity, float floatValue, float floatValue2) {
+        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.addQuran(entityQuranTimeline);
         return entityQuranTimeline;
     }
 
-    public EntityTrslTimeline addTimeLineQuran(TranslationQuranEntity translationQuranEntity, float f, float f2) {
-        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
+    public EntityTrslTimeline addTimeLineQuran(TranslationQuranEntity translationQuranEntity, float floatValue, float floatValue2) {
+        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.addTrslQuran(entityTrslTimeline);
         return entityTrslTimeline;
     }
 
-    public EntityQuranTimeline addTimeLineQuran(int i, QuranEntity quranEntity, float f, float f2) {
-        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
-        this.trackViewEntity.addQuran(entityQuranTimeline, i);
+    public EntityQuranTimeline addTimeLineQuran(int value, QuranEntity quranEntity, float floatValue, float floatValue2) {
+        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
+        this.trackViewEntity.addQuran(entityQuranTimeline, value);
         return entityQuranTimeline;
     }
 
-    public EntityTrslTimeline addTimeLineQuran(int i, TranslationQuranEntity translationQuranEntity, float f, float f2) {
-        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
-        this.trackViewEntity.addTrslQuran(entityTrslTimeline, i);
+    public EntityTrslTimeline addTimeLineQuran(int value, TranslationQuranEntity translationQuranEntity, float floatValue, float floatValue2) {
+        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
+        this.trackViewEntity.addTrslQuran(entityTrslTimeline, value);
         return entityTrslTimeline;
     }
 
-    public EntityQuranTimeline splitTimeLineQuran(int i, QuranEntity quranEntity, float f, float f2, float f3) {
-        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
-        entityQuranTimeline.setmScaleFactor(f3);
-        this.trackViewEntity.addQuran_split(entityQuranTimeline, i);
+    public EntityQuranTimeline splitTimeLineQuran(int value, QuranEntity quranEntity, float floatValue, float floatValue2, float floatValue3) {
+        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
+        entityQuranTimeline.setmScaleFactor(floatValue3);
+        this.trackViewEntity.addQuran_split(entityQuranTimeline, value);
         return entityQuranTimeline;
     }
 
-    public EntityTrslTimeline splitTimeLineQuran(int i, TranslationQuranEntity translationQuranEntity, float f, float f2, float f3) {
-        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f2, this.trackViewEntity.getSecond_in_screen());
-        entityTrslTimeline.setmScaleFactor(f3);
-        this.trackViewEntity.addQuran_split(entityTrslTimeline, i);
+    public EntityTrslTimeline splitTimeLineQuran(int value, TranslationQuranEntity translationQuranEntity, float floatValue, float floatValue2, float floatValue3) {
+        EntityTrslTimeline entityTrslTimeline = new EntityTrslTimeline(translationQuranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue2, this.trackViewEntity.getSecond_in_screen());
+        entityTrslTimeline.setmScaleFactor(floatValue3);
+        this.trackViewEntity.addQuran_split(entityTrslTimeline, value);
         return entityTrslTimeline;
     }
 
@@ -5479,8 +5479,8 @@ public class EngineActivity extends Base {
         if (trackEntityView.isExist(trackEntityView.getBismilahTimeline())) {
             xCursur = Math.max(xCursur, this.trackViewEntity.getBismilahTimeline().getRect().right);
         }
-        float f = xCursur;
-        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f + (this.trackViewEntity.getSecond_in_screen() * 4.0f), this.trackViewEntity.getSecond_in_screen());
+        float floatValue = xCursur;
+        EntityQuranTimeline entityQuranTimeline = new EntityQuranTimeline(quranEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue + (this.trackViewEntity.getSecond_in_screen() * 4.0f), this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.addQuran(entityQuranTimeline);
         return entityQuranTimeline;
     }
@@ -5497,8 +5497,8 @@ public class EngineActivity extends Base {
     }
 
     public EntityBismilahTimeline addTimeLineBismilah(BismilahEntity bismilahEntity) {
-        float f = this.trackViewEntity.getmIsi3adaTimeline() != null ? this.trackViewEntity.getmIsi3adaTimeline().getRect().right : 0.0f;
-        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, f, 0.0f, this.trackViewEntity.getWidth() * 0.077f, f + (this.trackViewEntity.getSecond_in_screen() * 4.0f), this.trackViewEntity.getSecond_in_screen());
+        float floatValue = this.trackViewEntity.getmIsi3adaTimeline() != null ? this.trackViewEntity.getmIsi3adaTimeline().getRect().right : 0.0f;
+        EntityBismilahTimeline entityBismilahTimeline = new EntityBismilahTimeline(bismilahEntity, floatValue, 0.0f, this.trackViewEntity.getWidth() * 0.077f, floatValue + (this.trackViewEntity.getSecond_in_screen() * 4.0f), this.trackViewEntity.getSecond_in_screen());
         this.trackViewEntity.setBismilahTimeline(entityBismilahTimeline);
         return entityBismilahTimeline;
     }
@@ -5601,21 +5601,21 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addEntity(String str, String str2, String str3, String str4, int i, int i2, String str5, int i3, int i4) {
+    public void addEntity(String textValue, String textValue2, String textValue3, String str4, int value, int value2, String textValue5, int value3, int value4) {
         String nameFont;
-        boolean z = this.mTemplate.getIpad_type() == IpadType.GRADIENT.ordinal() || this.mTemplate.getIpad_type() == IpadType.MASK_BRUSH.ordinal() || this.mTemplate.getIpad_type() == IpadType.BLACK_LAYER.ordinal();
+        boolean isEnabled = this.mTemplate.getIpad_type() == IpadType.GRADIENT.ordinal() || this.mTemplate.getIpad_type() == IpadType.MASK_BRUSH.ordinal() || this.mTemplate.getIpad_type() == IpadType.BLACK_LAYER.ordinal();
         if (this.blurredImageView.getQuranEntities().isEmpty()) {
             nameFont = Common.FONT_QURAN;
         } else {
             nameFont = this.blurredImageView.getQuranEntities().get(0).getNameFont();
         }
-        String str6 = nameFont;
-        QuranEntity quranEntity = new QuranEntity(this, DrawableHelper.getIDDrawableIconByName(str5), str, str2, str3, str4, this.blurredImageView.getRectFAya(), UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/" + str6), Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"), i, i2, UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/خط فارس الكوفي.otf"), this.blurredImageView.getClr_aya(), this.blurredImageView.getClr_trsl(), str6, z);
+        String textValue6 = nameFont;
+        QuranEntity quranEntity = new QuranEntity(this, DrawableHelper.getIDDrawableIconByName(textValue5), textValue, textValue2, textValue3, str4, this.blurredImageView.getRectFAya(), UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/" + textValue6), Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"), value, value2, UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/خط فارس الكوفي.otf"), this.blurredImageView.getClr_aya(), this.blurredImageView.getClr_trsl(), textValue6, isEnabled);
         quranEntity.setIpad_type(this.mTemplate.getIpad_type());
         quranEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
-        quranEntity.setStartWord_index(i3);
-        quranEntity.setEndWord_index(i4);
-        quranEntity.setIcon(str5);
+        quranEntity.setStartWord_index(value3);
+        quranEntity.setEndWord_index(value4);
+        quranEntity.setIcon(textValue5);
         quranEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
         EntityQuranTimeline addTimeLineQuran = addTimeLineQuran(quranEntity);
         addTimeLineQuran.setmScaleFactor(this.trackViewEntity.getScaleFactor());
@@ -5625,8 +5625,8 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addTranslationEntity(String str, int i, boolean z) {
-        TranslationQuranEntity translationQuranEntity = new TranslationQuranEntity(str, this.blurredImageView.getRectFAya(), Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"), i, InputDeviceCompat.SOURCE_ANY, "ReadexPro_Medium.ttf", this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
+    public void addTranslationEntity(String textValue, int value, boolean isEnabled) {
+        TranslationQuranEntity translationQuranEntity = new TranslationQuranEntity(textValue, this.blurredImageView.getRectFAya(), Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"), value, InputDeviceCompat.SOURCE_ANY, "ReadexPro_Medium.ttf", this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
         translationQuranEntity.setIpad_type(this.mTemplate.getIpad_type());
         translationQuranEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
         translationQuranEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
@@ -5637,7 +5637,7 @@ public class EngineActivity extends Base {
         this.blurredImageView.addEntity(translationQuranEntity);
     }
 
-    private void addEntityBissmilah(String str, float f, float f2, int i, Transition transition, float f3, float f4, RectF rectF, int i2) {
+    private void addEntityBissmilah(String textValue, float floatValue, float floatValue2, int value, Transition transition, float floatValue3, float floatValue4, RectF rectF, int value2) {
         RectF rectF2;
         Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/خط البسملة.ttf");
         if (rectF == null) {
@@ -5645,25 +5645,25 @@ public class EngineActivity extends Base {
         } else {
             rectF2 = new RectF(rectF.left * this.blurredImageView.getmCanvas_width(), rectF.top * this.blurredImageView.getmCanvas_height(), rectF.right * this.blurredImageView.getmCanvas_width(), rectF.bottom * this.blurredImageView.getmCanvas_height());
         }
-        BismilahEntity bismilahEntity = new BismilahEntity(str, rectF2, loadFontFromAsset, i, i2);
-        bismilahEntity.setFcSize(f4);
-        bismilahEntity.setFactor_scale(f3);
+        BismilahEntity bismilahEntity = new BismilahEntity(textValue, rectF2, loadFontFromAsset, value, value2);
+        bismilahEntity.setFcSize(floatValue4);
+        bismilahEntity.setFactor_scale(floatValue3);
         bismilahEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
         if (bismilahEntity.getFactorSize() == 1.0f) {
             bismilahEntity.createStaticLayout();
         } else {
             bismilahEntity.setupScaleSave(bismilahEntity.getFactorSize(), this.blurredImageView.getmCanvas_width());
         }
-        bismilahEntity.initPreset(i2);
+        bismilahEntity.initPreset(value2);
         bismilahEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
-        EntityBismilahTimeline addTimeLineBismilah = addTimeLineBismilah(bismilahEntity, f, f2);
+        EntityBismilahTimeline addTimeLineBismilah = addTimeLineBismilah(bismilahEntity, floatValue, floatValue2);
         bismilahEntity.setBismilahTimeline(addTimeLineBismilah);
         addTimeLineBismilah.setTransition(transition);
         addTimeLineBismilah.setEntityView(bismilahEntity);
         this.blurredImageView.addBismilahEntity(bismilahEntity);
     }
 
-    private void addEntityIsti3ada(String str, float f, float f2, int i, Transition transition, float f3, float f4, RectF rectF, int i2) {
+    private void addEntityIsti3ada(String textValue, float floatValue, float floatValue2, int value, Transition transition, float floatValue3, float floatValue4, RectF rectF, int value2) {
         RectF rectF2;
         Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/خط الاستعاذه.ttf");
         if (rectF == null) {
@@ -5671,18 +5671,18 @@ public class EngineActivity extends Base {
         } else {
             rectF2 = new RectF(rectF.left * this.blurredImageView.getmCanvas_width(), rectF.top * this.blurredImageView.getmCanvas_height(), rectF.right * this.blurredImageView.getmCanvas_width(), rectF.bottom * this.blurredImageView.getmCanvas_height());
         }
-        BismilahEntity bismilahEntity = new BismilahEntity(str, rectF2, loadFontFromAsset, i, i2);
-        bismilahEntity.setFcSize(f4);
-        bismilahEntity.setFactor_scale(f3);
+        BismilahEntity bismilahEntity = new BismilahEntity(textValue, rectF2, loadFontFromAsset, value, value2);
+        bismilahEntity.setFcSize(floatValue4);
+        bismilahEntity.setFactor_scale(floatValue3);
         bismilahEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
         if (bismilahEntity.getFactorSize() == 1.0f) {
             bismilahEntity.createStaticLayout();
         } else {
             bismilahEntity.setupScaleSave(bismilahEntity.getFactorSize(), this.blurredImageView.getmCanvas_width());
         }
-        bismilahEntity.initPreset(i2);
+        bismilahEntity.initPreset(value2);
         bismilahEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
-        EntityBismilahTimeline addTimeLineIsti3ada = addTimeLineIsti3ada(bismilahEntity, f, f2);
+        EntityBismilahTimeline addTimeLineIsti3ada = addTimeLineIsti3ada(bismilahEntity, floatValue, floatValue2);
         bismilahEntity.setBismilahTimeline(addTimeLineIsti3ada);
         addTimeLineIsti3ada.setTransition(transition);
         addTimeLineIsti3ada.setEntityView(bismilahEntity);
@@ -5939,22 +5939,22 @@ public class EngineActivity extends Base {
         }
     }
 
-    private void addEntity(String str, String str2, String str3, String str4, float f, float f2, int i, int i2, int i3, String str5, Transition transition, boolean z, String str6, int i4, int i5, float f3, float f4, float f5, RectF rectF, Typeface typeface, Typeface typeface2, int i6, int i7) {
+    private void addEntity(String textValue, String textValue2, String textValue3, String str4, float floatValue, float floatValue2, int value, int value2, int value3, String textValue5, Transition transition, boolean isEnabled, String textValue6, int value4, int i5, float floatValue3, float floatValue4, float floatValue5, RectF rectF, Typeface typeface, Typeface typeface2, int i6, int value7) {
         RectF rectF2;
-        String str7 = str6 == null ? "hafes" : str6;
-        Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/" + str5);
+        String str7 = textValue6 == null ? "hafes" : textValue6;
+        Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/arabic/" + textValue5);
         if (rectF == null) {
             rectF2 = this.blurredImageView.getRectFAya();
         } else {
             rectF2 = new RectF(rectF.left * this.blurredImageView.getmCanvas_width(), rectF.top * this.blurredImageView.getmCanvas_height(), rectF.right * this.blurredImageView.getmCanvas_width(), rectF.bottom * this.blurredImageView.getmCanvas_height());
         }
-        QuranEntity quranEntity = new QuranEntity(this, str, str2, str3, str4, rectF2, loadFontFromAsset, typeface2, i, i2, typeface, i3, i6, str5, z, DrawableHelper.getIDDrawableIconByName(str7));
-        quranEntity.setFcSize(f4);
-        quranEntity.setFactorSizeTrl(f5);
+        QuranEntity quranEntity = new QuranEntity(this, textValue, textValue2, textValue3, str4, rectF2, loadFontFromAsset, typeface2, value, value2, typeface, value3, i6, textValue5, isEnabled, DrawableHelper.getIDDrawableIconByName(str7));
+        quranEntity.setFcSize(floatValue4);
+        quranEntity.setFactorSizeTrl(floatValue5);
         quranEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
-        quranEntity.setFactor_scale(f3);
+        quranEntity.setFactor_scale(floatValue3);
         quranEntity.setIpad_type(this.mTemplate.getIpad_type());
-        quranEntity.setStartWord_index(i4);
+        quranEntity.setStartWord_index(value4);
         quranEntity.setEndWord_index(i5);
         quranEntity.setIcon(str7);
         quranEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
@@ -5963,28 +5963,28 @@ public class EngineActivity extends Base {
         } else {
             quranEntity.setupScaleSave(quranEntity.getFactorSize(), this.blurredImageView.getmCanvas_width());
         }
-        quranEntity.initPreset(i7);
-        EntityQuranTimeline addTimeLineQuran = addTimeLineQuran(quranEntity, f, f2);
+        quranEntity.initPreset(value7);
+        EntityQuranTimeline addTimeLineQuran = addTimeLineQuran(quranEntity, floatValue, floatValue2);
         quranEntity.setEntityQuran(addTimeLineQuran);
         addTimeLineQuran.setTransition(transition);
         addTimeLineQuran.setEntityView(quranEntity);
         this.blurredImageView.addEntity(quranEntity);
     }
 
-    private void addEntityTrsl(String str, float f, float f2, int i, int i2, String str2, Transition transition, float f3, float f4, RectF rectF, int i3, int i4, boolean z) {
+    private void addEntityTrsl(String textValue, float floatValue, float floatValue2, int value, int value2, String textValue2, Transition transition, float floatValue3, float floatValue4, RectF rectF, int value3, int value4, boolean isEnabled) {
         RectF rectF2;
-        Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/" + str2);
+        Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(this, "fonts/" + textValue2);
         if (rectF == null) {
             rectF2 = this.blurredImageView.getRectFAya();
         } else {
             rectF2 = new RectF(rectF.left * this.blurredImageView.getmCanvas_width(), rectF.top * this.blurredImageView.getmCanvas_height(), rectF.right * this.blurredImageView.getmCanvas_width(), rectF.bottom * this.blurredImageView.getmCanvas_height());
         }
-        TranslationQuranEntity translationQuranEntity = new TranslationQuranEntity(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height(), str, rectF2, loadFontFromAsset, i, i2, str2);
-        translationQuranEntity.setHaveBg(z);
-        translationQuranEntity.setClrBg(i4);
-        translationQuranEntity.setFcSize(f4);
+        TranslationQuranEntity translationQuranEntity = new TranslationQuranEntity(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height(), textValue, rectF2, loadFontFromAsset, value, value2, textValue2);
+        translationQuranEntity.setHaveBg(isEnabled);
+        translationQuranEntity.setClrBg(value4);
+        translationQuranEntity.setFcSize(floatValue4);
         translationQuranEntity.setCanvasWH(this.blurredImageView.getmCanvas_width(), this.blurredImageView.getmCanvas_height());
-        translationQuranEntity.setFactor_scale(f3);
+        translationQuranEntity.setFactor_scale(floatValue3);
         translationQuranEntity.setIpad_type(this.mTemplate.getIpad_type());
         translationQuranEntity.setViewWeakReference(new WeakReference<>(this.trackViewEntity), new WeakReference<>(this.blurredImageView));
         if (translationQuranEntity.getFactorSize() == 1.0f) {
@@ -5992,8 +5992,8 @@ public class EngineActivity extends Base {
         } else {
             translationQuranEntity.setupScaleSave(translationQuranEntity.getFactorSize(), this.blurredImageView.getmCanvas_width());
         }
-        translationQuranEntity.initPreset(i3);
-        EntityTrslTimeline addTimeLineQuran = addTimeLineQuran(translationQuranEntity, f, f2);
+        translationQuranEntity.initPreset(value3);
+        EntityTrslTimeline addTimeLineQuran = addTimeLineQuran(translationQuranEntity, floatValue, floatValue2);
         translationQuranEntity.setEntityTrslTimeline(addTimeLineQuran);
         addTimeLineQuran.setTransition(transition);
         addTimeLineQuran.setEntityView(translationQuranEntity);
@@ -6019,22 +6019,22 @@ public class EngineActivity extends Base {
         StringBuilder sb = new StringBuilder();
         try {
             Iterator it = list.iterator();
-            final int i = 0;
+            final int value = 0;
             while (it.hasNext()) {
                 RecitersModel recitersModel = (RecitersModel) it.next();
                 try {
-                    String str = recitersModel.isTarteel() ? "https://audio-cdn.tarteel.ai/quran/" + recitersModel.getIdentifer() + "/" + recitersModel.getSurah_index() + recitersModel.getNumber_aya() + ".mp3" : "https://everyayah.com/data/" + recitersModel.getIdentifer() + "/" + recitersModel.getSurah_index() + recitersModel.getNumber_aya() + ".mp3";
-                    String downloadFile = AudioUtils.downloadFile(this, str, this.mTemplate.getFolder_template());
+                    String textValue = recitersModel.isTarteel() ? "https://audio-cdn.tarteel.ai/quran/" + recitersModel.getIdentifer() + "/" + recitersModel.getSurah_index() + recitersModel.getNumber_aya() + ".mp3" : "https://everyayah.com/data/" + recitersModel.getIdentifer() + "/" + recitersModel.getSurah_index() + recitersModel.getNumber_aya() + ".mp3";
+                    String downloadFile = AudioUtils.downloadFile(this, textValue, this.mTemplate.getFolder_template());
                     if (downloadFile != null) {
                         arrayList.add(downloadFile);
-                        arrayList2.add(str);
+                        arrayList2.add(textValue);
                         sb.append("file '").append(downloadFile.replace("'", "\\'")).append("'\n");
-                        i++;
+                        value++;
                         try {
                             handler.post(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    EngineActivity.this.m574xa24c2879(i, list);
+                                    EngineActivity.this.m574xa24c2879(value, list);
                                 }
                             });
                         } catch (Exception e) {
@@ -6053,11 +6053,11 @@ public class EngineActivity extends Base {
             final File file2 = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.mp3");
             final File file3 = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.pcm");
             ArrayList arrayList3 = new ArrayList();
-            arrayList3.add("-f");
+            arrayList3.add("-floatValue");
             arrayList3.add("concat");
             arrayList3.add("-safe");
             arrayList3.add("0");
-            arrayList3.add("-i");
+            arrayList3.add("-value");
             arrayList3.add(file.getAbsolutePath());
             arrayList3.add("-map");
             arrayList3.add("0:a");
@@ -6070,7 +6070,7 @@ public class EngineActivity extends Base {
             arrayList3.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
             arrayList3.add("-ar");
             arrayList3.add("44100");
-            arrayList3.add("-f");
+            arrayList3.add("-floatValue");
             arrayList3.add("s16le");
             arrayList3.add(file3.getAbsolutePath());
             arrayList3.add("-y");
@@ -6093,8 +6093,8 @@ public class EngineActivity extends Base {
     }
 
     /* renamed from: lambda$addAudioReciters$3$hazem-nurmontage-videoquran-EngineActivity */
-    /* synthetic */ void m574xa24c2879(int i, List list) {
-        updateProgress(i, list.size());
+    /* synthetic */ void m574xa24c2879(int value, List list) {
+        updateProgress(value, list.size());
     }
 
     /* renamed from: lambda$addAudioReciters$5$hazem-nurmontage-videoquran-EngineActivity */
@@ -6123,8 +6123,8 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioRecitersTemplate(List<String> list, int i, String str) {
-        Executors.newSingleThreadExecutor().execute(new RunnableC188666(list, i, str));
+    public void addAudioRecitersTemplate(List<String> list, int value, String textValue) {
+        Executors.newSingleThreadExecutor().execute(new RunnableC188666(list, value, textValue));
     }
 
     /* renamed from: hazem.nurmontage.videoquran.EngineActivity$66 */
@@ -6133,10 +6133,10 @@ public class EngineActivity extends Base {
         final /* synthetic */ String val$path_video;
         final /* synthetic */ List val$pathes;
 
-        RunnableC188666(List list, int i, String str) {
+        RunnableC188666(List list, int value, String textValue) {
             this.val$pathes = list;
-            this.val$index = i;
-            this.val$path_video = str;
+            this.val$index = value;
+            this.val$path_video = textValue;
         }
 
         /* JADX WARN: Removed duplicated region for block: B:13:0x0061 A[SYNTHETIC] */
@@ -6152,7 +6152,7 @@ public class EngineActivity extends Base {
                 new ArrayList();
                 StringBuilder sb = new StringBuilder();
                 Iterator it = this.val$pathes.iterator();
-                int i = 0;
+                int value = 0;
                 while (it.hasNext()) {
                     Uri parse = Uri.parse((String) it.next());
                     String uri = parse.toString();
@@ -6161,8 +6161,8 @@ public class EngineActivity extends Base {
                         downloadFile = AudioUtils.copyFromUri(engineActivity, parse, engineActivity.mTemplate.getFolder_template());
                         if (downloadFile == null) {
                             sb.append("file '").append(downloadFile.replace("'", "\\'")).append("'\n");
-                            i++;
-                            EngineActivity.this.updateProgress(i, this.val$pathes.size());
+                            value++;
+                            EngineActivity.this.updateProgress(value, this.val$pathes.size());
                         }
                     }
                     EngineActivity engineActivity2 = EngineActivity.this;
@@ -6177,11 +6177,11 @@ public class EngineActivity extends Base {
                 final File file2 = new File(EngineActivity.this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.mp3");
                 final File file3 = new File(EngineActivity.this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_output.pcm");
                 ArrayList arrayList = new ArrayList();
-                arrayList.add("-f");
+                arrayList.add("-floatValue");
                 arrayList.add("concat");
                 arrayList.add("-safe");
                 arrayList.add("0");
-                arrayList.add("-i");
+                arrayList.add("-value");
                 arrayList.add(file.getAbsolutePath());
                 arrayList.add("-map");
                 arrayList.add("0:a");
@@ -6194,7 +6194,7 @@ public class EngineActivity extends Base {
                 arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
                 arrayList.add("-ar");
                 arrayList.add("44100");
-                arrayList.add("-f");
+                arrayList.add("-floatValue");
                 arrayList.add("s16le");
                 arrayList.add(file3.getAbsolutePath());
                 arrayList.add("-y");
@@ -6235,7 +6235,7 @@ public class EngineActivity extends Base {
                                     if (effectAudio.getSpeed() != 1.0f) {
                                         arrayList2.addAll(EngineActivity.this.buildSpeedFilters(effectAudio.getSpeed()));
                                     }
-                                    EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", file2.getAbsolutePath(), "-af", TextUtils.join(",", arrayList2), "-y", file4.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.66.1.1
+                                    EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", file2.getAbsolutePath(), "-af", TextUtils.join(",", arrayList2), "-y", file4.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.66.1.1
                                         @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                                         public void apply(FFmpegSession fFmpegSession2) {
                                             EngineActivity.this.addAudioTemplate(Uri.fromFile(file4), RunnableC188666.this.val$pathes, RunnableC188666.this.val$index, file2.getAbsolutePath(), file3.getAbsolutePath(), RunnableC188666.this.val$path_video);
@@ -6288,49 +6288,49 @@ public class EngineActivity extends Base {
         }
     }
 
-    public void updateEndViewTime(int i) {
-        String str;
-        long j = i;
+    public void updateEndViewTime(int value) {
+        String textValue;
+        long j = value;
         long seconds = TimeUnit.MILLISECONDS.toSeconds(j) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(j));
         if (seconds < 10) {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
         } else {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
         }
-        this.tv_endTime.setText("/" + str);
+        this.tv_endTime.setText("/" + textValue);
     }
 
-    public void updateStartViewTime(int i) {
-        String str;
-        long j = i;
+    public void updateStartViewTime(int value) {
+        String textValue;
+        long j = value;
         long seconds = TimeUnit.MILLISECONDS.toSeconds(j) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(j));
         if (seconds < 10) {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
         } else {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
         }
-        this.tv_currentTime.setText(str);
+        this.tv_currentTime.setText(textValue);
     }
 
-    public void updateViewTime(int i, int i2) {
-        String str;
-        String str2;
-        long j = i2;
+    public void updateViewTime(int value, int value2) {
+        String textValue;
+        String textValue2;
+        long j = value2;
         long seconds = TimeUnit.MILLISECONDS.toSeconds(j) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(j));
         if (seconds < 10) {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":0" + seconds;
         } else {
-            str = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
+            textValue = TimeUnit.MILLISECONDS.toMinutes(j) + ":" + seconds;
         }
-        long j2 = i;
+        long j2 = value;
         long seconds2 = TimeUnit.MILLISECONDS.toSeconds(j2) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(j2));
         if (seconds2 < 10) {
-            str2 = TimeUnit.MILLISECONDS.toMinutes(j2) + ":0" + seconds2;
+            textValue2 = TimeUnit.MILLISECONDS.toMinutes(j2) + ":0" + seconds2;
         } else {
-            str2 = TimeUnit.MILLISECONDS.toMinutes(j2) + ":" + seconds2;
+            textValue2 = TimeUnit.MILLISECONDS.toMinutes(j2) + ":" + seconds2;
         }
-        this.tv_currentTime.setText(str);
-        this.tv_endTime.setText("/" + str2);
+        this.tv_currentTime.setText(textValue);
+        this.tv_endTime.setText("/" + textValue2);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -6471,7 +6471,7 @@ public class EngineActivity extends Base {
         }
     }
 
-    public void dialogPremium(int i) {
+    public void dialogPremium(int value) {
         try {
             if (this.dialog != null) {
                 cancelDialog();
@@ -6553,7 +6553,7 @@ public class EngineActivity extends Base {
                         try {
                             try {
                                 EngineActivity.this.mTemplate.setUri_bg(EngineActivity.this.uri_bg);
-                                int i = 0;
+                                int value = 0;
                                 EngineActivity.this.mTemplate.setVideoSquare(false);
                                 EngineActivity.this.blurredImageView.setVideo(false);
                                 int height = EngineActivity.this.blurredImageView.getHeight();
@@ -6571,23 +6571,23 @@ public class EngineActivity extends Base {
                                     int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
                                     int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                                     int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                                    int i2 = width + round;
-                                    if (i2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                        round -= i2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                        i2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    int value2 = width + round;
+                                    if (value2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                        round -= value2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        value2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     }
-                                    int i3 = width + round2;
-                                    if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                        round2 -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                        i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    int value3 = width + round2;
+                                    if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                        round2 -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                        value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                     }
                                     if (round < 0) {
                                         round = 0;
                                     }
                                     if (round2 >= 0) {
-                                        i = round2;
+                                        value = round2;
                                     }
-                                    Rect rect2 = new Rect(round, i, i2, i3);
+                                    Rect rect2 = new Rect(round, value, value2, value3);
                                     EngineActivity.this.blurredImageView.setRadius_square(width);
                                     int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                     int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
@@ -6603,10 +6603,10 @@ public class EngineActivity extends Base {
                                         int height3 = (int) (cropTo16x9.getHeight() * 0.5355f);
                                         int round3 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                                         int round4 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                                        int i4 = width3 + round3;
-                                        if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                            round3 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                            i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        int value4 = width3 + round3;
+                                        if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                            round3 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                            value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                         }
                                         int i5 = height3 + round4;
                                         if (i5 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -6619,7 +6619,7 @@ public class EngineActivity extends Base {
                                         if (round4 < 0) {
                                             round4 = 0;
                                         }
-                                        Rect rect3 = new Rect(round3, round4, i4, i5);
+                                        Rect rect3 = new Rect(round3, round4, value4, i5);
                                         int width4 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                         int height4 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
                                         Bitmap cropToSquare = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect3, width4, height4);
@@ -6636,10 +6636,10 @@ public class EngineActivity extends Base {
                                     int min = Math.min(width5, i6);
                                     int round5 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                                     int round6 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                                    int i7 = width5 + round5;
-                                    if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                        round5 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                        i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    int value7 = width5 + round5;
+                                    if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                        round5 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     }
                                     int i8 = i6 + round6;
                                     if (i8 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -6652,7 +6652,7 @@ public class EngineActivity extends Base {
                                     if (round6 < 0) {
                                         round6 = 0;
                                     }
-                                    Rect rect4 = new Rect(round5, round6, i7, i8);
+                                    Rect rect4 = new Rect(round5, round6, value7, i8);
                                     if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_CLASSIC.ordinal()) {
                                         int width6 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                         int height5 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
@@ -6742,21 +6742,21 @@ public class EngineActivity extends Base {
         }
     }
 
-    public void updateHitRatio(int i, String str) {
-        if (i == ResizeType.SOCIAL_STORY.ordinal()) {
+    public void updateHitRatio(int value, String textValue) {
+        if (value == ResizeType.SOCIAL_STORY.ordinal()) {
             this.textChangeResize.setText("9:16");
-        } else if (i == ResizeType.SQUARE.ordinal()) {
+        } else if (value == ResizeType.SQUARE.ordinal()) {
             this.textChangeResize.setText("1:1");
         } else {
             this.textChangeResize.setText("16:9");
         }
-        this.ivResize.setImageResource(DrawableHelper.getIdResource(str));
+        this.ivResize.setImageResource(DrawableHelper.getIdResource(textValue));
     }
 
     /* renamed from: hazem.nurmontage.videoquran.EngineActivity$78 */
     class C189978 implements DimensionAdabters.IDimensionCallback {
         @Override // hazem.nurmontage.videoquran.adabter.DimensionAdabters.IDimensionCallback
-        public void isCustomSize(boolean z, ResizeType resizeType) {
+        public void isCustomSize(boolean isEnabled, ResizeType resizeType) {
         }
 
         C189978() {
@@ -6768,9 +6768,9 @@ public class EngineActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.adabter.DimensionAdabters.IDimensionCallback
-        public void onCustumSize(int i, int i2, final int i3, final String str, int i4) {
-            EngineActivity.this.updateHitRatio(i3, str);
-            if (i3 == EngineActivity.this.mTemplate.geTypeResize()) {
+        public void onCustumSize(int value, int value2, final int value3, final String textValue, int value4) {
+            EngineActivity.this.updateHitRatio(value3, textValue);
+            if (value3 == EngineActivity.this.mTemplate.geTypeResize()) {
                 return;
             }
             if (ResizeFragment.instance != null) {
@@ -6791,11 +6791,11 @@ public class EngineActivity extends Base {
                         try {
                             try {
                                 EngineActivity.this.blurredImageView.reset();
-                                EngineActivity.this.mTemplate.setResizeType(i3);
-                                EngineActivity.this.mTemplate.setImgResize(str);
-                                Pair<Integer, Integer> size = AspectRatioCalculator.getSize(i3, EngineActivity.this.mTemplate.getResolution());
+                                EngineActivity.this.mTemplate.setResizeType(value3);
+                                EngineActivity.this.mTemplate.setImgResize(textValue);
+                                Pair<Integer, Integer> size = AspectRatioCalculator.getSize(value3, EngineActivity.this.mTemplate.getResolution());
                                 EngineActivity.this.mTemplate.setWidthAndHeight(size.getFirst().intValue(), size.getSecond().intValue());
-                                EngineActivity.this.blurredImageView.initCanvasDimension(EngineActivity.this.blurredImageView.getWidth(), EngineActivity.this.blurredImageView.getHeight(), i3);
+                                EngineActivity.this.blurredImageView.initCanvasDimension(EngineActivity.this.blurredImageView.getWidth(), EngineActivity.this.blurredImageView.getHeight(), value3);
                                 if (EngineActivity.this.mTemplate.geTypeResize() == ResizeType.SOCIAL_STORY.ordinal()) {
                                     cropTo16x9 = BitmapCropper.cropTo9x16(EngineActivity.this.blurredImageView.getBitmapOriginal(), EngineActivity.this.blurredImageView.getW(), EngineActivity.this.blurredImageView.getH());
                                 } else if (EngineActivity.this.mTemplate.geTypeResize() == ResizeType.SQUARE.ordinal()) {
@@ -6829,10 +6829,10 @@ public class EngineActivity extends Base {
                                     round -= i6 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     i6 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
-                                int i7 = width + round2;
-                                if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                    round2 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                    i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                int value7 = width + round2;
+                                if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                    round2 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                 }
                                 if (round < 0) {
                                     round = 0;
@@ -6840,7 +6840,7 @@ public class EngineActivity extends Base {
                                 if (round2 >= 0) {
                                     i5 = round2;
                                 }
-                                Rect rect2 = new Rect(round, i5, i6, i7);
+                                Rect rect2 = new Rect(round, i5, i6, value7);
                                 EngineActivity.this.blurredImageView.setRadius_square(width);
                                 int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                                 int height = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
@@ -6930,9 +6930,9 @@ public class EngineActivity extends Base {
                                 rect = rect4;
                             }
                             if (EngineActivity.this.blurredImageView.getColor_gradient() != null) {
-                                EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap, EngineActivity.this.blurredImageView.getColor_gradient(), EngineActivity.this.mTemplate.getIpad_type(), i3, rect);
+                                EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap, EngineActivity.this.blurredImageView.getColor_gradient(), EngineActivity.this.mTemplate.getIpad_type(), value3, rect);
                             } else {
-                                EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap, EngineActivity.this.blurredImageView.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), i3, rect);
+                                EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), bitmap, EngineActivity.this.blurredImageView.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), value3, rect);
                             }
                             EngineActivity.this.blurredImageView.resizeEntity();
                             EngineActivity.this.blurredImageView.updatePosSurahName();
@@ -6958,9 +6958,9 @@ public class EngineActivity extends Base {
                         EngineActivity.this.blurredImageView.setBitmapNotBlur(cropTo16x9);
                         Bitmap copy = cropTo16x9.copy(cropTo16x9.getConfig() != null ? cropTo16x9.getConfig() : Bitmap.Config.ARGB_8888, true);
                         if (EngineActivity.this.blurredImageView.getColor_gradient() != null) {
-                            EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), copy, EngineActivity.this.blurredImageView.getColor_gradient(), EngineActivity.this.mTemplate.getIpad_type(), i3, EngineActivity.this.blurredImageView.getRectSquare());
+                            EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), copy, EngineActivity.this.blurredImageView.getColor_gradient(), EngineActivity.this.mTemplate.getIpad_type(), value3, EngineActivity.this.blurredImageView.getRectSquare());
                         } else {
-                            EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), copy, EngineActivity.this.blurredImageView.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), i3, EngineActivity.this.blurredImageView.getRectSquare());
+                            EngineActivity.this.blurredImageView.setBitmap(UtilsBitmap.blur(EngineActivity.this, cropTo16x9, 20, 1), copy, EngineActivity.this.blurredImageView.getColor_ipad(), EngineActivity.this.mTemplate.getIpad_type(), value3, EngineActivity.this.blurredImageView.getRectSquare());
                         }
                         if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
                             EngineActivity.this.blurredImageView.setBitmapSquare(EngineActivity.this.blurredImageView.getBitmapBlured());
@@ -7193,14 +7193,14 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addAudioFromVideoWithExtention(String str, final String str2, final int i) {
+    public void addAudioFromVideoWithExtention(String textValue, final String textValue2, final int value) {
         try {
-            final File file = new File(new File(this.mTemplate.getFolder_template()), System.currentTimeMillis() + "_audio" + str);
-            FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str2, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.84
+            final File file = new File(new File(this.mTemplate.getFolder_template()), System.currentTimeMillis() + "_audio" + textValue);
+            FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue2, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.84
                 @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                 public void apply(FFmpegSession fFmpegSession) {
                     if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
-                        EngineActivity.this.addAudioTemplateHttp(Uri.fromFile(file), i, str2);
+                        EngineActivity.this.addAudioTemplateHttp(Uri.fromFile(file), value, textValue2);
                     }
                 }
             });
@@ -7210,20 +7210,20 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void extractAudioFromVideoRecursive(final String str, final int i, final boolean z, final int i2) {
+    public void extractAudioFromVideoRecursive(final String textValue, final int value, final boolean isEnabled, final int value2) {
         if (isDestroyed()) {
             return;
         }
-        if (i < this.extentions.length) {
+        if (value < this.extentions.length) {
             try {
-                final File file = new File(new File(this.mTemplate.getFolder_template()), System.currentTimeMillis() + "_audio" + this.extentions[i]);
-                FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.85
+                final File file = new File(new File(this.mTemplate.getFolder_template()), System.currentTimeMillis() + "_audio" + this.extentions[value]);
+                FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.85
                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                     public void apply(FFmpegSession fFmpegSession) {
                         if (ReturnCode.isSuccess(fFmpegSession.getReturnCode())) {
-                            EngineActivity.this.mTemplate.setExtension(EngineActivity.this.extentions[i]);
+                            EngineActivity.this.mTemplate.setExtension(EngineActivity.this.extentions[value]);
                             Uri fromFile = Uri.fromFile(file);
-                            if (!z) {
+                            if (!isEnabled) {
                                 EngineActivity.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.85.1
                                     @Override // java.lang.Runnable
                                     public void run() {
@@ -7231,32 +7231,32 @@ public class EngineActivity extends Base {
                                         EngineActivity.this.hideProgressFragment();
                                     }
                                 });
-                                EngineActivity.this.addUriAudioToQuranFragment(fromFile, str);
+                                EngineActivity.this.addUriAudioToQuranFragment(fromFile, textValue);
                                 return;
                             } else {
-                                EngineActivity.this.addAudioTemplateHttp(fromFile, i2, str);
+                                EngineActivity.this.addAudioTemplateHttp(fromFile, value2, textValue);
                                 return;
                             }
                         }
                         EngineActivity.this.start_extenstion++;
                         EngineActivity engineActivity = EngineActivity.this;
-                        engineActivity.extractAudioFromVideoRecursive(str, engineActivity.start_extenstion, z, i);
+                        engineActivity.extractAudioFromVideoRecursive(textValue, engineActivity.start_extenstion, isEnabled, value);
                     }
                 });
                 return;
             } catch (Exception e) {
                 e.printStackTrace();
-                extractAudioFromVideo(str, z);
+                extractAudioFromVideo(textValue, isEnabled);
                 return;
             }
         }
-        extractAudioFromVideo(str, z);
+        extractAudioFromVideo(textValue, isEnabled);
     }
 
-    private void extractAudioFromVideo(final String str, final boolean z) {
+    private void extractAudioFromVideo(final String textValue, final boolean isEnabled) {
         try {
             final File file = new File(new File(this.mTemplate.getFolder_template()), System.currentTimeMillis() + "_audio.mp3");
-            FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", str, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.86
+            FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", textValue, "-vn", "-acodec", "copy", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.86
                 @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                 public void apply(FFmpegSession fFmpegSession) {
                     if (fFmpegSession == null) {
@@ -7272,11 +7272,11 @@ public class EngineActivity extends Base {
                     if (fFmpegSession.getReturnCode().isValueSuccess()) {
                         Uri fromFile = Uri.fromFile(file);
                         EngineActivity.this.mTemplate.setExtension(".mp3");
-                        if (!z) {
-                            EngineActivity.this.addUriAudioToQuranFragment(fromFile, str);
+                        if (!isEnabled) {
+                            EngineActivity.this.addUriAudioToQuranFragment(fromFile, textValue);
                             return;
                         } else {
-                            EngineActivity.this.addAudioTemplateHttp(fromFile, 0, str);
+                            EngineActivity.this.addAudioTemplateHttp(fromFile, 0, textValue);
                             return;
                         }
                     }
@@ -7346,8 +7346,8 @@ public class EngineActivity extends Base {
         class AnonymousClass1 implements MediaPlayer.OnPreparedListener {
             final /* synthetic */ String val$path;
 
-            AnonymousClass1(String str) {
-                this.val$path = str;
+            AnonymousClass1(String textValue) {
+                this.val$path = textValue;
             }
 
             @Override // android.media.MediaPlayer.OnPreparedListener
@@ -7370,7 +7370,7 @@ public class EngineActivity extends Base {
                 if (EngineActivity.this.endFrame == 0) {
                     EngineActivity.this.endFrame = 3;
                 }
-                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", this.val$path, "-ss", "0", "-t", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.88.1.1
+                EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", this.val$path, "-ss", "0", "-t", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.88.1.1
                     @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                     public void apply(FFmpegSession fFmpegSession) {
                         EngineActivity.this.changeBitmap(file2.getAbsolutePath());
@@ -7380,7 +7380,7 @@ public class EngineActivity extends Base {
                                 EngineActivity.this.hideProgressFragment();
                             }
                         });
-                        EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", AnonymousClass1.this.val$path, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.88.1.1.2
+                        EngineActivity.this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", AnonymousClass1.this.val$path, "-ss", "" + EngineActivity.this.endFrame, "-r", "25", "-vf", "scale=" + height + ":" + height + ":force_original_aspect_ratio=increase", "-start_number", "" + (EngineActivity.this.endFrame * 25), "-q:v", "0", "-threads", "4", "-an", "-y", file.getAbsolutePath()}, new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.EngineActivity.88.1.1.2
                             @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                             public void apply(FFmpegSession fFmpegSession2) {
                             }
@@ -7392,7 +7392,7 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void changeBitmap(final String str) {
+    public void changeBitmap(final String textValue) {
         this.executor.execute(new Runnable() { // from class: hazem.nurmontage.videoquran.EngineActivity.89
             /* JADX WARN: Multi-variable type inference failed */
             @Override // java.lang.Runnable
@@ -7403,7 +7403,7 @@ public class EngineActivity extends Base {
                 Rect rect;
                 try {
                     int height = EngineActivity.this.blurredImageView.getHeight();
-                    Bitmap bitmap2 = (Bitmap) Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(str).override(height, height).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).submit().get();
+                    Bitmap bitmap2 = (Bitmap) Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(textValue).override(height, height).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).submit().get();
                     if (bitmap2 == null) {
                         return;
                     }
@@ -7426,32 +7426,32 @@ public class EngineActivity extends Base {
                             EngineActivity.this.blurredImageView.setBitmapSquare(EngineActivity.this.blurredImageView.getBitmapBlured());
                         } else {
                             int min = Math.min(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth(), EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight());
-                            int i = 0;
+                            int value = 0;
                             if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal()) {
                                 int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
-                                float f = min;
-                                int round = Math.round(EngineActivity.this.mTemplate.getX_square() * f);
-                                int round2 = Math.round(EngineActivity.this.mTemplate.getY_square() * f);
-                                int i2 = width + round;
-                                if (i2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                    round -= i2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                    i2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                float floatValue = min;
+                                int round = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue);
+                                int round2 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue);
+                                int value2 = width + round;
+                                if (value2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                    round -= value2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    value2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
-                                int i3 = width + round2;
-                                if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                    round2 -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                    i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                int value3 = width + round2;
+                                if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                    round2 -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                 }
                                 if (round < 0) {
                                     round = 0;
                                 }
                                 if (round2 >= 0) {
-                                    i = round2;
+                                    value = round2;
                                 }
-                                Rect rect2 = new Rect(round, i, i2, i3);
+                                Rect rect2 = new Rect(round, value, value2, value3);
                                 EngineActivity.this.blurredImageView.setRadius_square(width);
-                                int width_square = (int) (EngineActivity.this.mTemplate.getWidth_square() * f);
-                                int height_square = (int) (f * EngineActivity.this.mTemplate.getHeight_square());
+                                int width_square = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue);
+                                int height_square = (int) (floatValue * EngineActivity.this.mTemplate.getHeight_square());
                                 Bitmap cropToSquareWithRoundCorners2 = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect2, width, width_square, height_square);
                                 rect2.right = rect2.left + width_square;
                                 rect2.bottom = rect2.top + height_square;
@@ -7462,13 +7462,13 @@ public class EngineActivity extends Base {
                                 if (EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD_UNBLUR.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD_CLASSIC.ordinal()) {
                                     int width2 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 1.0f);
                                     int height2 = (int) (cropTo16x9.getHeight() * 0.5355f);
-                                    float f2 = min;
-                                    int round3 = Math.round(EngineActivity.this.mTemplate.getX_square() * f2);
-                                    int round4 = Math.round(EngineActivity.this.mTemplate.getY_square() * f2);
-                                    int i4 = width2 + round3;
-                                    if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                        round3 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                        i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    float floatValue2 = min;
+                                    int round3 = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue2);
+                                    int round4 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue2);
+                                    int value4 = width2 + round3;
+                                    if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                        round3 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                     }
                                     int i5 = height2 + round4;
                                     if (i5 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -7481,9 +7481,9 @@ public class EngineActivity extends Base {
                                     if (round4 < 0) {
                                         round4 = 0;
                                     }
-                                    Rect rect3 = new Rect(round3, round4, i4, i5);
-                                    int width_square2 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f2);
-                                    int height_square2 = (int) (f2 * EngineActivity.this.mTemplate.getHeight_square());
+                                    Rect rect3 = new Rect(round3, round4, value4, i5);
+                                    int width_square2 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue2);
+                                    int height_square2 = (int) (floatValue2 * EngineActivity.this.mTemplate.getHeight_square());
                                     Bitmap cropToSquare = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect3, width_square2, height_square2);
                                     EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquare);
                                     EngineActivity.this.blurredImageView.setRadius_square(0);
@@ -7496,13 +7496,13 @@ public class EngineActivity extends Base {
                                 int width3 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
                                 int i6 = (int) (width3 * 1.13f);
                                 int min2 = Math.min(width3, i6);
-                                float f3 = min;
-                                int round5 = Math.round(EngineActivity.this.mTemplate.getX_square() * f3);
-                                int round6 = Math.round(EngineActivity.this.mTemplate.getY_square() * f3);
-                                int i7 = width3 + round5;
-                                if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                    round5 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                    i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                float floatValue3 = min;
+                                int round5 = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue3);
+                                int round6 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue3);
+                                int value7 = width3 + round5;
+                                if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                    round5 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
                                 int i8 = i6 + round6;
                                 if (i8 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -7515,10 +7515,10 @@ public class EngineActivity extends Base {
                                 if (round6 < 0) {
                                     round6 = 0;
                                 }
-                                Rect rect4 = new Rect(round5, round6, i7, i8);
+                                Rect rect4 = new Rect(round5, round6, value7, i8);
                                 if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_CLASSIC.ordinal()) {
-                                    int width_square3 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f3);
-                                    int height_square3 = (int) (f3 * EngineActivity.this.mTemplate.getHeight_square());
+                                    int width_square3 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue3);
+                                    int height_square3 = (int) (floatValue3 * EngineActivity.this.mTemplate.getHeight_square());
                                     Bitmap cropToSquare2 = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect4, width_square3, height_square3);
                                     EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquare2);
                                     EngineActivity.this.blurredImageView.setRadius_square(0);
@@ -7529,8 +7529,8 @@ public class EngineActivity extends Base {
                                 } else {
                                     int i9 = (int) (min2 * 0.10800001f);
                                     EngineActivity.this.blurredImageView.setRadius_square(i9);
-                                    int width_square4 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f3);
-                                    int height_square4 = (int) (f3 * EngineActivity.this.mTemplate.getHeight_square());
+                                    int width_square4 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue3);
+                                    int height_square4 = (int) (floatValue3 * EngineActivity.this.mTemplate.getHeight_square());
                                     cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect4, i9, width_square4, height_square4);
                                     rect4.right = rect4.left + width_square4;
                                     rect4.bottom = rect4.top + height_square4;
@@ -7568,7 +7568,7 @@ public class EngineActivity extends Base {
         });
     }
 
-    private void updateSquareBitmap(final String str) {
+    private void updateSquareBitmap(final String textValue) {
         if (this.isOnScroll) {
             if (this.mIsPlaying) {
                 return;
@@ -7587,7 +7587,7 @@ public class EngineActivity extends Base {
                 try {
                     try {
                         int height = EngineActivity.this.blurredImageView.getHeight();
-                        bitmap = (Bitmap) Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(str).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).override(height, height).submit().get();
+                        bitmap = (Bitmap) Glide.with((FragmentActivity) EngineActivity.this).asBitmap().load(textValue).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).override(height, height).submit().get();
                     } catch (Exception e) {
                         e.printStackTrace();
                         engineActivity = EngineActivity.this;
@@ -7607,19 +7607,19 @@ public class EngineActivity extends Base {
                     if (EngineActivity.this.mTemplate.getIpad_type() != IpadType.BLACK_LAYER.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.GRADIENT.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.MASK_BRUSH.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.BLUE_TYPE.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.CASSET_IMG.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.CASSET_IMG_BLUR.ordinal()) {
                         if (EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD_UNBLUR.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.BOTTOM_RECT.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD_CLASSIC.ordinal() && EngineActivity.this.mTemplate.getIpad_type() != IpadType.IPAD_NEOMORPHIC.ordinal()) {
                             int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
-                            int i = (int) (width * 1.13f);
-                            int min = (int) (Math.min(width, i) * 0.10800001f);
+                            int value = (int) (width * 1.13f);
+                            int min = (int) (Math.min(width, value) * 0.10800001f);
                             int round = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getX_square());
                             int round2 = Math.round(EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getY_square());
-                            int i2 = width + round;
-                            if (i2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                round -= i2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                i2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                            int value2 = width + round;
+                            if (value2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                round -= value2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                value2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                             }
-                            int i3 = i + round2;
-                            if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                round2 -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                            int value3 = value + round2;
+                            if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                round2 -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                             }
                             if (round < 0) {
                                 round = 0;
@@ -7627,7 +7627,7 @@ public class EngineActivity extends Base {
                             if (round2 < 0) {
                                 round2 = 0;
                             }
-                            Rect rect = new Rect(round, round2, i2, i3);
+                            Rect rect = new Rect(round, round2, value2, value3);
                             int width2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth() * EngineActivity.this.mTemplate.getWidth_square());
                             int height2 = (int) (EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight() * EngineActivity.this.mTemplate.getHeight_square());
                             EngineActivity.this.blurredImageView.setBitmapSquare(UtilsBitmap.cropToSquareWithRoundCorners(bitmap, rect, min, width2, height2));
@@ -7692,8 +7692,8 @@ public class EngineActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Bitmap setupOriginalBitmap(Bitmap bitmap, int i) {
-        float min = i / Math.min(r0, r1);
+    public Bitmap setupOriginalBitmap(Bitmap bitmap, int value) {
+        float min = value / Math.min(r0, r1);
         return Bitmap.createScaledBitmap(bitmap, Math.round(bitmap.getWidth() * min), Math.round(bitmap.getHeight() * min), true);
     }
 
@@ -7718,7 +7718,7 @@ public class EngineActivity extends Base {
                             EngineActivity.this.uri_bg = uri.toString();
                             EngineActivity.this.mTemplate.setName_drawable(null);
                             EngineActivity.this.mTemplate.setUri_bg(EngineActivity.this.uri_bg);
-                            int i = 0;
+                            int value = 0;
                             EngineActivity.this.mTemplate.setVideoSquare(false);
                             EngineActivity.this.blurredImageView.setVideo(false);
                             EngineActivity.this.blurredImageView.setBitmapOriginal(EngineActivity.this.setupOriginalBitmap(uri));
@@ -7734,29 +7734,29 @@ public class EngineActivity extends Base {
                             int min = Math.min(EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth(), EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight());
                             if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal()) {
                                 int width = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.6f);
-                                float f = min;
-                                int round = Math.round(EngineActivity.this.mTemplate.getX_square() * f);
-                                int round2 = Math.round(EngineActivity.this.mTemplate.getY_square() * f);
-                                int i2 = width + round;
-                                if (i2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                    round -= i2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                    i2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                float floatValue = min;
+                                int round = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue);
+                                int round2 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue);
+                                int value2 = width + round;
+                                if (value2 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                    round -= value2 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    value2 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
-                                int i3 = width + round2;
-                                if (i3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
-                                    round2 -= i3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
-                                    i3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                int value3 = width + round2;
+                                if (value3 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
+                                    round2 -= value3 - EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
+                                    value3 = EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight();
                                 }
                                 if (round < 0) {
                                     round = 0;
                                 }
                                 if (round2 >= 0) {
-                                    i = round2;
+                                    value = round2;
                                 }
-                                Rect rect2 = new Rect(round, i, i2, i3);
+                                Rect rect2 = new Rect(round, value, value2, value3);
                                 EngineActivity.this.blurredImageView.setRadius_square(width);
-                                int width_square = (int) (EngineActivity.this.mTemplate.getWidth_square() * f);
-                                int height_square = (int) (f * EngineActivity.this.mTemplate.getHeight_square());
+                                int width_square = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue);
+                                int height_square = (int) (floatValue * EngineActivity.this.mTemplate.getHeight_square());
                                 Bitmap cropToSquareWithRoundCorners2 = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect2, width, width_square, height_square);
                                 EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquareWithRoundCorners2);
                                 rect2.right = rect2.left + width_square;
@@ -7769,13 +7769,13 @@ public class EngineActivity extends Base {
                                     if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.BOTTOM_RECT.ordinal()) {
                                         int width2 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 1.0f);
                                         int height = (int) (cropTo16x9.getHeight() * 0.5355f);
-                                        float f2 = min;
-                                        int round3 = Math.round(EngineActivity.this.mTemplate.getX_square() * f2);
-                                        int round4 = Math.round(EngineActivity.this.mTemplate.getY_square() * f2);
-                                        int i4 = width2 + round3;
-                                        if (i4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                            round3 -= i4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                            i4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                        float floatValue2 = min;
+                                        int round3 = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue2);
+                                        int round4 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue2);
+                                        int value4 = width2 + round3;
+                                        if (value4 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                            round3 -= value4 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                            value4 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                         }
                                         int i5 = height + round4;
                                         if (i5 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -7788,9 +7788,9 @@ public class EngineActivity extends Base {
                                         if (round4 < 0) {
                                             round4 = 0;
                                         }
-                                        Rect rect3 = new Rect(round3, round4, i4, i5);
-                                        int width_square2 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f2);
-                                        int height_square2 = (int) (f2 * EngineActivity.this.mTemplate.getHeight_square());
+                                        Rect rect3 = new Rect(round3, round4, value4, i5);
+                                        int width_square2 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue2);
+                                        int height_square2 = (int) (floatValue2 * EngineActivity.this.mTemplate.getHeight_square());
                                         Bitmap cropToSquare = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect3, width_square2, height_square2);
                                         EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquare);
                                         EngineActivity.this.blurredImageView.setRadius_square(0);
@@ -7807,13 +7807,13 @@ public class EngineActivity extends Base {
                                 int width3 = (int) (EngineActivity.this.blurredImageView.getIpad_rect().width() * 0.87530595f);
                                 int i6 = (int) (width3 * 1.13f);
                                 int min2 = Math.min(width3, i6);
-                                float f3 = min;
-                                int round5 = Math.round(EngineActivity.this.mTemplate.getX_square() * f3);
-                                int round6 = Math.round(EngineActivity.this.mTemplate.getY_square() * f3);
-                                int i7 = width3 + round5;
-                                if (i7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
-                                    round5 -= i7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
-                                    i7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                float floatValue3 = min;
+                                int round5 = Math.round(EngineActivity.this.mTemplate.getX_square() * floatValue3);
+                                int round6 = Math.round(EngineActivity.this.mTemplate.getY_square() * floatValue3);
+                                int value7 = width3 + round5;
+                                if (value7 > EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth()) {
+                                    round5 -= value7 - EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
+                                    value7 = EngineActivity.this.blurredImageView.getBitmapOriginal().getWidth();
                                 }
                                 int i8 = i6 + round6;
                                 if (i8 > EngineActivity.this.blurredImageView.getBitmapOriginal().getHeight()) {
@@ -7826,10 +7826,10 @@ public class EngineActivity extends Base {
                                 if (round6 < 0) {
                                     round6 = 0;
                                 }
-                                Rect rect4 = new Rect(round5, round6, i7, i8);
+                                Rect rect4 = new Rect(round5, round6, value7, i8);
                                 if (EngineActivity.this.mTemplate.getIpad_type() == IpadType.IPAD_CLASSIC.ordinal()) {
-                                    int width_square3 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f3);
-                                    int height_square3 = (int) (f3 * EngineActivity.this.mTemplate.getHeight_square());
+                                    int width_square3 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue3);
+                                    int height_square3 = (int) (floatValue3 * EngineActivity.this.mTemplate.getHeight_square());
                                     Bitmap cropToSquare2 = UtilsBitmap.cropToSquare(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect4, width_square3, height_square3);
                                     EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquare2);
                                     EngineActivity.this.blurredImageView.setRadius_square(0);
@@ -7840,8 +7840,8 @@ public class EngineActivity extends Base {
                                 } else {
                                     int i9 = (int) (min2 * 0.10800001f);
                                     EngineActivity.this.blurredImageView.setRadius_square(i9);
-                                    int width_square4 = (int) (EngineActivity.this.mTemplate.getWidth_square() * f3);
-                                    int height_square4 = (int) (f3 * EngineActivity.this.mTemplate.getHeight_square());
+                                    int width_square4 = (int) (EngineActivity.this.mTemplate.getWidth_square() * floatValue3);
+                                    int height_square4 = (int) (floatValue3 * EngineActivity.this.mTemplate.getHeight_square());
                                     cropToSquareWithRoundCorners = UtilsBitmap.cropToSquareWithRoundCorners(EngineActivity.this.blurredImageView.getBitmapOriginal(), rect4, i9, width_square4, height_square4);
                                     EngineActivity.this.blurredImageView.setBitmapSquare(cropToSquareWithRoundCorners);
                                     rect4.right = rect4.left + width_square4;
@@ -7988,10 +7988,10 @@ public class EngineActivity extends Base {
         }
     }
 
-    public void applyffectPlayAuto(String str, EntityAudio entityAudio) {
+    public void applyffectPlayAuto(String textValue, EntityAudio entityAudio) {
         showProgressSimple();
         File file = new File(this.mTemplate.getFolder_template(), System.currentTimeMillis() + "_audio_echo.mp3");
-        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-i", entityAudio.getPath_ffmpeg(), "-af", str, "-y", file.getAbsolutePath()}, new AnonymousClass101(Uri.fromFile(file), entityAudio, file)).getSessionId()));
+        this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync(new String[]{"-value", entityAudio.getPath_ffmpeg(), "-af", textValue, "-y", file.getAbsolutePath()}, new AnonymousClass101(Uri.fromFile(file), entityAudio, file)).getSessionId()));
     }
 
     /* renamed from: hazem.nurmontage.videoquran.EngineActivity$101, reason: invalid class name */
@@ -8081,8 +8081,8 @@ public class EngineActivity extends Base {
         if (EditMediaFragment.instance == null || !(this.trackViewEntity.getSelectedEntity() instanceof EntityAudio)) {
             return;
         }
-        float f = -this.trackViewEntity.getCurrentPosition();
-        EditMediaFragment.instance.checkSplit((EntityAudio) this.trackViewEntity.getSelectedEntity(), f);
+        float floatValue = -this.trackViewEntity.getCurrentPosition();
+        EditMediaFragment.instance.checkSplit((EntityAudio) this.trackViewEntity.getSelectedEntity(), floatValue);
     }
 
     private void clearCallback() {
@@ -8159,9 +8159,9 @@ public class EngineActivity extends Base {
             }
 
             @Override // hazem.nurmontage.videoquran.Utils.SmoothVideoAnimator.FrameUpdateListener
-            public void onFrameUpdate(String str) {
+            public void onFrameUpdate(String textValue) {
                 synchronized (EngineActivity.this.frameLock) {
-                    EngineActivity.this.pendingFramePath = str;
+                    EngineActivity.this.pendingFramePath = textValue;
                     if (!EngineActivity.this.isProcessingFrame) {
                         EngineActivity.this.isProcessingFrame = true;
                         EngineActivity.this.executor.execute(EngineActivity.this.frameProcessorRunnable);
@@ -8192,38 +8192,38 @@ public class EngineActivity extends Base {
         if (max > min) {
             max = ((max - 1) % min) + 1;
         }
-        String str = max < 10 ? "frame_000" + max + ".jpg" : max < 100 ? "frame_00" + max + ".jpg" : max < 1000 ? "frame_0" + max + ".jpg" : "frame_" + max + ".jpg";
+        String textValue = max < 10 ? "frame_000" + max + ".jpg" : max < 100 ? "frame_00" + max + ".jpg" : max < 1000 ? "frame_0" + max + ".jpg" : "frame_" + max + ".jpg";
         this.isOnScroll = true;
-        updateSquareBitmap(new File(this.mTemplate.getFolder_template() + "/VideoFrame", str).getAbsolutePath());
+        updateSquareBitmap(new File(this.mTemplate.getFolder_template() + "/VideoFrame", textValue).getAbsolutePath());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Multi-variable type inference failed */
-    public void processFrame(String str) {
+    public void processFrame(String textValue) {
         final Bitmap cropTo16x9;
         try {
             if (!(this.isOnScroll && this.mIsPlaying) && this.mIsPlaying) {
                 int height = this.blurredImageView.getHeight();
-                Bitmap bitmap = (Bitmap) Glide.with((FragmentActivity) this).asBitmap().load(str).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).override(height, height).submit().get();
+                Bitmap bitmap = (Bitmap) Glide.with((FragmentActivity) this).asBitmap().load(textValue).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).override(height, height).submit().get();
                 if (bitmap == null) {
                     return;
                 }
                 if (this.mTemplate.getIpad_type() != IpadType.BLACK_LAYER.ordinal() && this.mTemplate.getIpad_type() != IpadType.GRADIENT.ordinal() && this.mTemplate.getIpad_type() != IpadType.MASK_BRUSH.ordinal() && this.mTemplate.getIpad_type() != IpadType.BLUE_TYPE.ordinal() && this.mTemplate.getIpad_type() != IpadType.CASSET_IMG.ordinal()) {
                     if (this.mTemplate.getIpad_type() != IpadType.IPAD.ordinal() && this.mTemplate.getIpad_type() != IpadType.IPAD_UNBLUR.ordinal() && this.mTemplate.getIpad_type() != IpadType.BOTTOM_RECT.ordinal() && this.mTemplate.getIpad_type() != IpadType.IPAD_CLASSIC.ordinal() && this.mTemplate.getIpad_type() != IpadType.IPAD_NEOMORPHIC.ordinal()) {
                         int width = (int) (this.blurredImageView.getIpad_rect().width() * 0.87530595f);
-                        int i = (int) (width * 1.13f);
-                        int min = (int) (Math.min(width, i) * 0.10800001f);
+                        int value = (int) (width * 1.13f);
+                        int min = (int) (Math.min(width, value) * 0.10800001f);
                         int round = Math.round(this.blurredImageView.getBitmapOriginal().getWidth() * this.mTemplate.getX_square());
                         int round2 = Math.round(this.blurredImageView.getBitmapOriginal().getHeight() * this.mTemplate.getY_square());
-                        int i2 = width + round;
-                        if (i2 > this.blurredImageView.getBitmapOriginal().getWidth()) {
-                            round -= i2 - this.blurredImageView.getBitmapOriginal().getWidth();
-                            i2 = this.blurredImageView.getBitmapOriginal().getWidth();
+                        int value2 = width + round;
+                        if (value2 > this.blurredImageView.getBitmapOriginal().getWidth()) {
+                            round -= value2 - this.blurredImageView.getBitmapOriginal().getWidth();
+                            value2 = this.blurredImageView.getBitmapOriginal().getWidth();
                         }
-                        int i3 = i + round2;
-                        if (i3 > this.blurredImageView.getBitmapOriginal().getHeight()) {
-                            round2 -= i3 - this.blurredImageView.getBitmapOriginal().getHeight();
-                            i3 = this.blurredImageView.getBitmapOriginal().getHeight();
+                        int value3 = value + round2;
+                        if (value3 > this.blurredImageView.getBitmapOriginal().getHeight()) {
+                            round2 -= value3 - this.blurredImageView.getBitmapOriginal().getHeight();
+                            value3 = this.blurredImageView.getBitmapOriginal().getHeight();
                         }
                         if (round < 0) {
                             round = 0;
@@ -8231,7 +8231,7 @@ public class EngineActivity extends Base {
                         if (round2 < 0) {
                             round2 = 0;
                         }
-                        Rect rect = new Rect(round, round2, i2, i3);
+                        Rect rect = new Rect(round, round2, value2, value3);
                         int width2 = (int) (this.blurredImageView.getBitmapOriginal().getWidth() * this.mTemplate.getWidth_square());
                         int height2 = (int) (this.blurredImageView.getBitmapOriginal().getHeight() * this.mTemplate.getHeight_square());
                         cropTo16x9 = UtilsBitmap.cropToSquareWithRoundCorners(bitmap, rect, min, width2, height2);

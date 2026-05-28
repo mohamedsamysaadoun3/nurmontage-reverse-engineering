@@ -7,21 +7,21 @@ public class WordModel {
     /* renamed from: w */
     private String f441w;
 
-    public WordModel(String str, boolean z) {
-        this.f441w = str;
-        this.isSelected = z;
+    public WordModel(String textValue, boolean isFlag) {
+        this.f441w = textValue;
+        this.isSelected = isFlag;
     }
 
-    public WordModel(String str) {
-        this.f441w = str;
+    public WordModel(String textValue) {
+        this.f441w = textValue;
     }
 
-    public void setSelected(boolean z) {
-        this.isSelected = z;
+    public void setSelected(boolean isFlag) {
+        this.isSelected = isFlag;
     }
 
-    public void setW(String str) {
-        this.f441w = str;
+    public void setW(String textValue) {
+        this.f441w = textValue;
     }
 
     public String getW() {

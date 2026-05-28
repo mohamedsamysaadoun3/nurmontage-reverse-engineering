@@ -27,9 +27,9 @@ import org.json.JSONObject;
 
 /* loaded from: classes2.dex */
 public class TranslationExtractor {
-    public static void convertJsonToTxt(Context context, String str, String str2) {
+    public static void convertJsonToTxt(Context context, String textValue, String textValue2) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getAssets().open(str), StandardCharsets.UTF_8));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getAssets().open(textValue), StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
             while (true) {
                 String readLine = bufferedReader.readLine();
@@ -54,13 +54,13 @@ public class TranslationExtractor {
             });
             LinkedHashMap linkedHashMap = new LinkedHashMap();
             HashMap hashMap = new HashMap();
-            for (String str3 : arrayList) {
-                String[] split = str3.split(":");
+            for (String textValue3 : arrayList) {
+                String[] split = textValue3.split(":");
                 String str4 = split[0];
                 String str5 = split[1];
                 int parseInt = Integer.parseInt(split[2]);
                 String str6 = str4 + "|" + str5;
-                String string = jSONObject.getString(str3);
+                String string = jSONObject.getString(textValue3);
                 if (!string.matches("\\(\\d+\\)") && !string.matches("\\d+")) {
                     ((Map) linkedHashMap.computeIfAbsent(str6, new Function() { // from class: hazem.nurmontage.videoquran.Utils.TranslationExtractor$$ExternalSyntheticLambda2
                         @Override // java.util.function.Function
@@ -75,15 +75,15 @@ public class TranslationExtractor {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            File file2 = new File(file, str2);
+            File file2 = new File(file, textValue2);
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file2), Key.STRING_CHARSET_NAME));
             for (Map.Entry entry : linkedHashMap.entrySet()) {
                 String str7 = (String) entry.getKey();
                 Map map = (Map) entry.getValue();
                 int intValue = ((Integer) hashMap.get(str7)).intValue();
                 ArrayList arrayList2 = new ArrayList();
-                for (int i = 1; i <= intValue; i++) {
-                    arrayList2.add((String) map.getOrDefault(Integer.valueOf(i), "*"));
+                for (int value = 1; value <= intValue; value++) {
+                    arrayList2.add((String) map.getOrDefault(Integer.valueOf(value), "*"));
                 }
                 bufferedWriter.write(str7 + ProVersionActivity$$ExternalSyntheticBackport0.m586m(",", arrayList2));
                 bufferedWriter.newLine();
@@ -96,9 +96,9 @@ public class TranslationExtractor {
         }
     }
 
-    static /* synthetic */ int lambda$convertJsonToTxt$0(String str, String str2) {
-        String[] split = str.split(":");
-        String[] split2 = str2.split(":");
+    static /* synthetic */ int lambda$convertJsonToTxt$0(String textValue, String textValue2) {
+        String[] split = textValue.split(":");
+        String[] split2 = textValue2.split(":");
         int parseInt = Integer.parseInt(split[0]);
         int parseInt2 = Integer.parseInt(split2[0]);
         int parseInt3 = Integer.parseInt(split[1]);
@@ -106,7 +106,7 @@ public class TranslationExtractor {
         return parseInt != parseInt2 ? parseInt - parseInt2 : parseInt3 != parseInt4 ? parseInt3 - parseInt4 : Integer.parseInt(split[2]) - Integer.parseInt(split2[2]);
     }
 
-    static /* synthetic */ Map lambda$convertJsonToTxt$1(String str) {
+    static /* synthetic */ Map lambda$convertJsonToTxt$1(String textValue) {
         return new LinkedHashMap();
     }
 
@@ -133,7 +133,7 @@ public class TranslationExtractor {
                     try {
                         Pattern compile = Pattern.compile("^\\(\\s*\\d+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,.*'([^']*)'\\s*\\)$");
                         StringBuilder sb = new StringBuilder();
-                        int i = -1;
+                        int value = -1;
                         int i2 = -1;
                         while (true) {
                             String readLine = bufferedReader2.readLine();
@@ -149,18 +149,18 @@ public class TranslationExtractor {
                                 int parseInt = Integer.parseInt(matcher.group(1));
                                 int parseInt2 = Integer.parseInt(matcher.group(2));
                                 String group = matcher.group(3);
-                                if (i != -1 && i2 != -1 && (parseInt2 != i || parseInt != i2)) {
-                                    bufferedWriter.write(i + "|" + i2 + sb.toString().replaceAll(",\\s+", ",").replaceAll(", $", ""));
+                                if (value != -1 && i2 != -1 && (parseInt2 != value || parseInt != i2)) {
+                                    bufferedWriter.write(value + "|" + i2 + sb.toString().replaceAll(",\\s+", ",").replaceAll(", $", ""));
                                     bufferedWriter.newLine();
                                     sb.setLength(0);
                                 }
                                 sb.append(group).append(", ");
                                 i2 = parseInt;
-                                i = parseInt2;
+                                value = parseInt2;
                             }
                         }
-                        if (sb.length() > 0 && i != -1 && i2 != -1) {
-                            bufferedWriter.write(i + "|" + i2 + " " + sb.toString().replaceAll(", $", ""));
+                        if (sb.length() > 0 && value != -1 && i2 != -1) {
+                            bufferedWriter.write(value + "|" + i2 + " " + sb.toString().replaceAll(", $", ""));
                         }
                         bufferedWriter.flush();
                         System.out.println("✅ Translations saved to: " + file2.getAbsolutePath());

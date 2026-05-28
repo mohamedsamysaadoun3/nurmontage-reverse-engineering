@@ -69,8 +69,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int i, boolean z) {
-                    EchoEffectFragment.this.tv_hint_delay.setText(String.valueOf(i));
+                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_delay.setText(String.valueOf(value));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -90,8 +90,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar3, int i, boolean z) {
-                    EchoEffectFragment.this.tv_hint_repeat.setText(String.valueOf(i + 1));
+                public void onProgressChanged(SeekBar seekBar3, int value, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_repeat.setText(String.valueOf(value + 1));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -111,8 +111,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar4, int i, boolean z) {
-                    EchoEffectFragment.this.tv_hint_volume.setText(String.valueOf(i));
+                public void onProgressChanged(SeekBar seekBar4, int value, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_volume.setText(String.valueOf(value));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -170,15 +170,15 @@ public class EchoEffectFragment extends Fragment {
         this.isPlay = false;
     }
 
-    private void applyEchoEffect(boolean z, boolean z2) {
-        float f;
+    private void applyEchoEffect(boolean isFlag, boolean z2) {
+        float speed;
         EchoEffectFragment echoEffectFragment;
         int progress = this.delaySeekBar.getProgress();
-        int i = 1;
+        int value = 1;
         int progress2 = this.repeatSeekBar.getProgress() + 1;
         int progress3 = this.volumeSeekBar.getProgress();
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
-        if (!z && effectAudio.getDelays() == progress && effectAudio.getDecays() == this.repeatSeekBar.getProgress() && effectAudio.getVolume_echo() == progress3) {
+        if (!isFlag && effectAudio.getDelays() == progress && effectAudio.getDecays() == this.repeatSeekBar.getProgress() && effectAudio.getVolume_echo() == progress3) {
             this.iEchoCallback.startPreview();
             return;
         }
@@ -208,23 +208,23 @@ public class EchoEffectFragment extends Fragment {
             arrayList.add(effectAudio.getReverbPreset());
         }
         if (effectAudio.getDecays() <= 0 || effectAudio.getDelays() <= 0) {
-            f = 1.0f;
+            speed = 1.0f;
         } else {
             float f2 = progress3 / 100.0f;
             float f3 = 0.01f;
             float max = Math.max(0.01f, 1.0f - f2);
             StringBuilder sb = new StringBuilder();
             StringBuilder sb2 = new StringBuilder();
-            while (i <= progress2) {
+            while (value <= progress2) {
                 int i2 = progress;
-                float max2 = Math.max(0.01f, (float) (max * Math.pow(0.8d, i - 1)));
-                sb.append(progress * i);
+                float max2 = Math.max(0.01f, (float) (max * Math.pow(0.8d, value - 1)));
+                sb.append(progress * value);
                 sb2.append(String.format(Locale.US, "%.2f", Float.valueOf(max2)));
-                if (i < progress2) {
+                if (value < progress2) {
                     sb.append("|");
                     sb2.append("|");
                 }
-                i++;
+                value++;
                 progress = i2;
                 f3 = 0.01f;
             }
@@ -232,10 +232,10 @@ public class EchoEffectFragment extends Fragment {
             effectAudio.setOutGain(max3);
             effectAudio.setDecays_cmd(sb2.toString());
             effectAudio.setDelays_cmd(sb.toString());
-            f = 1.0f;
+            speed = 1.0f;
             arrayList.add(String.format(Locale.US, "aecho=%.2f:%.2f:%s:%s", Float.valueOf(1.0f), Float.valueOf(max3), sb, sb2));
         }
-        if (effectAudio.getSpeed() != f) {
+        if (effectAudio.getSpeed() != speed) {
             echoEffectFragment = this;
             arrayList.addAll(echoEffectFragment.buildSpeedFilters(effectAudio.getSpeed()));
         } else {
@@ -243,7 +243,7 @@ public class EchoEffectFragment extends Fragment {
         }
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = echoEffectFragment.iEchoCallback;
         if (iEditMediaCallback != null) {
-            if (z) {
+            if (isFlag) {
                 iEditMediaCallback.updateEntity(EffectAudioType.ECHO, echoEffectFragment.entityAudio);
                 echoEffectFragment.iEchoCallback.onCmdAll(effectAudio);
                 return;
@@ -257,22 +257,22 @@ public class EchoEffectFragment extends Fragment {
         }
     }
 
-    private List<String> buildSpeedFilters(float f) {
+    private List<String> buildSpeedFilters(float speed) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (speed < 0.5f) {
+            while (speed < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                speed /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
+        } else if (speed > 2.0f) {
+            while (speed > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                speed /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         }
         return arrayList;
     }
@@ -288,11 +288,11 @@ public class EchoEffectFragment extends Fragment {
     }
 
     private void previewAudio() {
-        boolean z = this.isPlay;
-        this.isPlay = !z;
+        boolean isFlag = this.isPlay;
+        this.isPlay = !isFlag;
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iEchoCallback;
         if (iEditMediaCallback != null) {
-            if (!z) {
+            if (!isFlag) {
                 applyEchoEffect(false, true);
                 this.btnPreview.setImageResource(C2014R.drawable.pause_24px);
             } else {

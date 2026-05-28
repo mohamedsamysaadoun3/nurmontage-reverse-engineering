@@ -70,7 +70,7 @@ public class QuranSearchActivity extends Base {
     };
     private final SearchQuranAdabters.ISearchQuranCallback iSearchQuranCallback = new SearchQuranAdabters.ISearchQuranCallback() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity.4
         @Override // hazem.nurmontage.videoquran.adabter.SearchQuranAdabters.ISearchQuranCallback
-        public void onClick(int i, int i2, ItemQuranSearch itemQuranSearch) {
+        public void onClick(int value, int value2, ItemQuranSearch itemQuranSearch) {
             QuranSearchActivity.this.indexSurah = itemQuranSearch.getSurahIndex();
             if (!QuranSearchActivity.this.isFullSurah) {
                 QuranSearchActivity quranSearchActivity = QuranSearchActivity.this;
@@ -80,12 +80,12 @@ public class QuranSearchActivity extends Base {
                 QuranSearchActivity.this.btnDone.performClick();
                 return;
             }
-            QuranSearchActivity.this.mFrom = i;
-            QuranSearchActivity.this.mTo = i2;
+            QuranSearchActivity.this.mFrom = value;
+            QuranSearchActivity.this.mTo = value2;
             if (QuranSearchActivity.this.btnDone.getVisibility() != 0) {
                 QuranSearchActivity.this.btnDone.setVisibility(0);
             }
-            QuranSearchActivity.this.btnDone.setText(QuranSearchActivity.this.getResources().getString(C2014R.string.from_to, Integer.valueOf(i + 1), Integer.valueOf(i2 + 1)));
+            QuranSearchActivity.this.btnDone.setText(QuranSearchActivity.this.getResources().getString(C2014R.string.from_to, Integer.valueOf(value + 1), Integer.valueOf(value2 + 1)));
         }
     };
 
@@ -152,8 +152,8 @@ public class QuranSearchActivity extends Base {
         this.editText.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"));
         this.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity$$ExternalSyntheticLambda3
             @Override // android.widget.TextView.OnEditorActionListener
-            public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                return QuranSearchActivity.this.m613xff99d684(textView, i, keyEvent);
+            public final boolean onEditorAction(TextView textView, int value, KeyEvent keyEvent) {
+                return QuranSearchActivity.this.m613xff99d684(textView, value, keyEvent);
             }
         });
         findViewById(C2014R.id.btn_search).setOnClickListener(new View.OnClickListener() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity$$ExternalSyntheticLambda4
@@ -179,8 +179,8 @@ public class QuranSearchActivity extends Base {
     }
 
     /* renamed from: lambda$onCreate$2$hazem-nurmontage-videoquran-QuranSearchActivity */
-    /* synthetic */ boolean m613xff99d684(TextView textView, int i, KeyEvent keyEvent) {
-        if (i != 3) {
+    /* synthetic */ boolean m613xff99d684(TextView textView, int value, KeyEvent keyEvent) {
+        if (value != 3) {
             return false;
         }
         closeKeyboard();
@@ -264,8 +264,8 @@ public class QuranSearchActivity extends Base {
         if (trim.isEmpty() || trim.equals("--") || !Utils.isProbablyLArabic(trim)) {
             return;
         }
-        String str = this.lastSearchKey;
-        if (str == null || !str.equals(trim)) {
+        String textValue = this.lastSearchKey;
+        if (textValue == null || !textValue.equals(trim)) {
             this.lastSearchKey = trim.replace("\"", "");
             SearchQuranAdabters searchQuranAdabters = this.searchQuranAdapter;
             if (searchQuranAdabters != null) {
@@ -302,29 +302,29 @@ public class QuranSearchActivity extends Base {
         }
     }
 
-    private String normalizeArabic(String str) {
-        if (str == null) {
+    private String normalizeArabic(String textValue) {
+        if (textValue == null) {
             return "";
         }
-        String trim = str.trim();
+        String trim = textValue.trim();
         if (trim.startsWith("ال")) {
             trim = trim.substring(2);
         }
         return trim.replace("أ", "ا").replace("إ", "ا").replace("آ", "ا").replace("ى", "ي").replace("ة", "ه").replaceAll("[\\u064B-\\u065F]", "");
     }
 
-    private int getIndexSurah(String str) {
-        String normalizeArabic = normalizeArabic(str);
-        int i = 0;
+    private int getIndexSurah(String textValue) {
+        String normalizeArabic = normalizeArabic(textValue);
+        int value = 0;
         while (true) {
             String[] strArr = this.surahNames;
-            if (i >= strArr.length) {
+            if (value >= strArr.length) {
                 return -1;
             }
-            if (normalizeArabic(strArr[i].split("-")[0].trim()).contains(normalizeArabic)) {
-                return i;
+            if (normalizeArabic(strArr[value].split("-")[0].trim()).contains(normalizeArabic)) {
+                return value;
             }
-            i++;
+            value++;
         }
     }
 
@@ -361,14 +361,14 @@ public class QuranSearchActivity extends Base {
                     if (split.length >= 3) {
                         final int parseInt = Integer.parseInt(split[0]) - 1;
                         final int parseInt2 = Integer.parseInt(split[1]) - 1;
-                        final String str = split[2];
-                        final String removeTashkeel = RemoveTashkeel.removeTashkeel((parseInt > 0 && parseInt2 == 0 && str.contains("بِّسْمِ اللَّهِ")) ? str.substring(40) : str);
+                        final String textValue = split[2];
+                        final String removeTashkeel = RemoveTashkeel.removeTashkeel((parseInt > 0 && parseInt2 == 0 && textValue.contains("بِّسْمِ اللَّهِ")) ? textValue.substring(40) : textValue);
                         final int match = this.javaBM.match(removeTashkeel);
                         if (match != -1) {
                             this.handler.post(new Runnable() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity$$ExternalSyntheticLambda6
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    QuranSearchActivity.this.m616xd5958f6e(match, removeTashkeel, str, parseInt, parseInt2);
+                                    QuranSearchActivity.this.m616xd5958f6e(match, removeTashkeel, textValue, parseInt, parseInt2);
                                 }
                             });
                         }
@@ -416,10 +416,10 @@ public class QuranSearchActivity extends Base {
     }
 
     /* renamed from: lambda$searchAllQuran$5$hazem-nurmontage-videoquran-QuranSearchActivity */
-    /* synthetic */ void m616xd5958f6e(int i, String str, String str2, int i2, int i3) {
+    /* synthetic */ void m616xd5958f6e(int value, String textValue, String textValue2, int value2, int value3) {
         if (this.searchQuranAdapter != null) {
-            int countIndex = Utils.countIndex(Utils.countSpace(i, str), str2);
-            this.searchQuranAdapter.add(new ItemQuranSearch(str2, this.surahNames[i2], i3 + 1, i2, countIndex, Utils.countIndex(countIndex, Utils.countSpace(this.javaBM.getmPattern()), str2)));
+            int countIndex = Utils.countIndex(Utils.countSpace(value, textValue), textValue2);
+            this.searchQuranAdapter.add(new ItemQuranSearch(textValue2, this.surahNames[value2], value3 + 1, value2, countIndex, Utils.countIndex(countIndex, Utils.countSpace(this.javaBM.getmPattern()), textValue2)));
             updateCount();
         }
     }

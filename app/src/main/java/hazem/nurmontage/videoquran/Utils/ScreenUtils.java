@@ -31,7 +31,7 @@ public class ScreenUtils {
         return displayMetrics.heightPixels;
     }
 
-    public static int byScreenHeight(Activity activity, float f) {
+    public static int byScreenHeight(Activity activity, float dimension) {
         int i;
         if (Build.VERSION.SDK_INT >= 30) {
             WindowMetrics currentWindowMetrics = activity.getWindowManager().getCurrentWindowMetrics();
@@ -42,6 +42,6 @@ public class ScreenUtils {
             activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             i = displayMetrics.heightPixels;
         }
-        return Math.round(i * f);
+        return Math.round(i * dimension);
     }
 }

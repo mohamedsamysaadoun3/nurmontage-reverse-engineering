@@ -8,19 +8,19 @@ import java.util.Locale;
 
 /* loaded from: classes2.dex */
 public class PriceFormatter {
-    public static String formatPrice(String str) {
-        if (str == null || str.isEmpty()) {
+    public static String formatPrice(String priceStr) {
+        if (priceStr == null || priceStr.isEmpty()) {
             return "";
         }
-        String extractCurrencySymbol = extractCurrencySymbol(str);
-        String trim = str.replace(extractCurrencySymbol, "").trim();
+        String extractCurrencySymbol = extractCurrencySymbol(priceStr);
+        String trim = priceStr.replace(extractCurrencySymbol, "").trim();
         if (trim.contains(",") && !trim.contains(".")) {
             trim = trim.replace(",", ".");
         }
         try {
             NumberFormat numberInstance = NumberFormat.getNumberInstance(Locale.US);
             if (!(numberInstance instanceof DecimalFormat)) {
-                return str;
+                return priceStr;
             }
             DecimalFormat decimalFormat = (DecimalFormat) numberInstance;
             decimalFormat.getDecimalFormatSymbols();
@@ -28,12 +28,12 @@ public class PriceFormatter {
             decimalFormat.applyPattern("#,##0.##");
             return extractCurrencySymbol + decimalFormat.format(bigDecimal);
         } catch (NumberFormatException | ParseException unused) {
-            return str;
+            return priceStr;
         }
     }
 
-    private static String extractCurrencySymbol(String str) {
-        for (char c : str.toCharArray()) {
+    private static String extractCurrencySymbol(String priceStr) {
+        for (char c : priceStr.toCharArray()) {
             if (!Character.isDigit(c) && c != '.' && c != ',') {
                 return String.valueOf(c);
             }

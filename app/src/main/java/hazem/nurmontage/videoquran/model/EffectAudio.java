@@ -26,8 +26,8 @@ public class EffectAudio implements Serializable {
         return this.isEnhance;
     }
 
-    public void setEnhance(boolean z) {
-        this.isEnhance = z;
+    public void setEnhance(boolean isFlag) {
+        this.isEnhance = isFlag;
     }
 
     public boolean isRemoveNoice() {
@@ -42,40 +42,40 @@ public class EffectAudio implements Serializable {
         return this.end;
     }
 
-    public void setDuration(int i) {
-        this.duration = i;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public int getDuration() {
         return this.duration;
     }
 
-    public void setStart(float f) {
-        this.start = f;
+    public void setStart(float floatValue) {
+        this.start = floatValue;
     }
 
-    public void setEnd(float f) {
-        this.end = f;
+    public void setEnd(float floatValue) {
+        this.end = floatValue;
     }
 
-    public void setReverbPreset_index_list(int i) {
-        this.reverbPreset_index_list = i;
+    public void setReverbPreset_index_list(int duration) {
+        this.reverbPreset_index_list = duration;
     }
 
     public int getReverbPreset_index_list() {
         return this.reverbPreset_index_list;
     }
 
-    public void setRemoveNoice(boolean z) {
-        this.isRemoveNoice = z;
+    public void setRemoveNoice(boolean isFlag) {
+        this.isRemoveNoice = isFlag;
     }
 
     public int getVolume_echo() {
         return this.volume_echo;
     }
 
-    public void setVolume_echo(int i) {
-        this.volume_echo = i;
+    public void setVolume_echo(int duration) {
+        this.volume_echo = duration;
     }
 
     public String getDecays_cmd() {
@@ -86,24 +86,24 @@ public class EffectAudio implements Serializable {
         return this.delays_cmd;
     }
 
-    public void setDecays(int i) {
-        this.decays = i;
+    public void setDecays(int duration) {
+        this.decays = duration;
     }
 
-    public void setDelays(int i) {
-        this.delays = i;
+    public void setDelays(int duration) {
+        this.delays = duration;
     }
 
-    public void setDecays_cmd(String str) {
-        this.decays_cmd = str;
+    public void setDecays_cmd(String textValue) {
+        this.decays_cmd = textValue;
     }
 
-    public void setDelays_cmd(String str) {
-        this.delays_cmd = str;
+    public void setDelays_cmd(String textValue) {
+        this.delays_cmd = textValue;
     }
 
-    public void setOutGain(float f) {
-        this.outGain = f;
+    public void setOutGain(float floatValue) {
+        this.outGain = floatValue;
     }
 
     public int getDecays() {
@@ -122,8 +122,8 @@ public class EffectAudio implements Serializable {
         return this.reverbPreset;
     }
 
-    public void setReverbPreset(String str) {
-        this.reverbPreset = str;
+    public void setReverbPreset(String textValue) {
+        this.reverbPreset = textValue;
     }
 
     public int getFade_in() {
@@ -142,19 +142,19 @@ public class EffectAudio implements Serializable {
         return this.volume;
     }
 
-    public void setFade_in(int i) {
-        this.fade_in = i;
+    public void setFade_in(int duration) {
+        this.fade_in = duration;
     }
 
-    public void setSpeed(float f) {
-        this.speed = f;
+    public void setSpeed(float floatValue) {
+        this.speed = floatValue;
     }
 
-    public void setFade_out(int i) {
-        this.fade_out = i;
+    public void setFade_out(int duration) {
+        this.fade_out = duration;
     }
 
-    public void setVolume(float f) {
-        this.volume = f;
+    public void setVolume(float floatValue) {
+        this.volume = floatValue;
     }
 }

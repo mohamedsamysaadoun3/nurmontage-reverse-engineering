@@ -19,10 +19,10 @@ public class ImgAdapter extends RecyclerView.Adapter<ViewHolder> {
     private final List<Integer> images;
     private final int size;
 
-    public ImgAdapter(String str, List<Integer> list, int i) {
-        this.APP_VERSION = str;
+    public ImgAdapter(String textValue, List<Integer> list, int value) {
+        this.APP_VERSION = textValue;
         this.images = list;
-        this.size = i;
+        this.size = value;
         setHasStableIds(true);
     }
 
@@ -36,13 +36,13 @@ public class ImgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(this.images.get(i));
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(this.images.get(value));
         int i2 = this.size;
         load.override(i2, i2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).centerCrop().into(viewHolder.imageView);
     }
@@ -57,7 +57,7 @@ public class ImgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public long getItemId(int i) {
-        return this.images.get(i).intValue();
+    public long getItemId(int value) {
+        return this.images.get(value).intValue();
     }
 }

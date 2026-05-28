@@ -16,17 +16,17 @@ public class ColorAdabter extends RecyclerView.Adapter<ViewHolder> {
     private int pos_select;
 
     public interface IColor {
-        void onColor(int i, int i2);
+        void onColor(int color, int color2);
     }
 
-    public ColorAdabter(IColor iColor, int[] iArr, int i) {
+    public ColorAdabter(IColor iColor, int[] iArr, int color) {
         this.colors = iArr;
         this.iColorCallback = iColor;
-        this.pos_select = i;
+        this.pos_select = color;
     }
 
-    public void setEnabled(boolean z) {
-        this.enabled = z;
+    public void setEnabled(boolean isEnabled) {
+        this.enabled = isEnabled;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -41,9 +41,9 @@ public class ColorAdabter extends RecyclerView.Adapter<ViewHolder> {
                     if (ColorAdabter.this.iColorCallback == null || ColorAdabter.this.pos_select == ViewHolder.this.getAdapterPosition() || !ColorAdabter.this.enabled) {
                         return;
                     }
-                    int i = ColorAdabter.this.pos_select;
+                    int color = ColorAdabter.this.pos_select;
                     ColorAdabter.this.pos_select = ViewHolder.this.getAdapterPosition();
-                    ColorAdabter.this.notifyItemChanged(i);
+                    ColorAdabter.this.notifyItemChanged(color);
                     ColorAdabter.this.notifyItemChanged(ColorAdabter.this.pos_select);
                     ColorAdabter.this.iColorCallback.onColor(ColorAdabter.this.colors[ViewHolder.this.getAdapterPosition()], ViewHolder.this.getAdapterPosition());
                 }
@@ -52,17 +52,17 @@ public class ColorAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int color) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_color, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors[i], i == this.pos_select);
+    public void onBindViewHolder(ViewHolder viewHolder, int color) {
+        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors[color], color == this.pos_select);
     }
 
-    public void setGradientBackground(View view, View view2, int i, boolean z) {
-        if (z) {
+    public void setGradientBackground(View view, View view2, int color, boolean isEnabled) {
+        if (isEnabled) {
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setShape(0);
             gradientDrawable.setCornerRadius(100.0f);
@@ -74,7 +74,7 @@ public class ColorAdabter extends RecyclerView.Adapter<ViewHolder> {
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setShape(0);
         gradientDrawable2.setCornerRadius(100.0f);
-        gradientDrawable2.setColor(i);
+        gradientDrawable2.setColor(color);
         view.setBackground(gradientDrawable2);
     }
 

@@ -14,7 +14,7 @@ public class BitmapSaver {
         this.context = context;
     }
 
-    public boolean saveBitmap(Bitmap bitmap, String str) {
+    public boolean saveBitmap(Bitmap bitmap, String textValue) {
         FileOutputStream fileOutputStream;
         FileOutputStream fileOutputStream2 = null;
         File externalFilesDir = this.context.getExternalFilesDir(null);
@@ -23,7 +23,7 @@ public class BitmapSaver {
         }
         try {
             try {
-                fileOutputStream = new FileOutputStream(new File(externalFilesDir.getAbsolutePath() + "/" + str));
+                fileOutputStream = new FileOutputStream(new File(externalFilesDir.getAbsolutePath() + "/" + textValue));
             } catch (Throwable th) {
                 th = th;
             }

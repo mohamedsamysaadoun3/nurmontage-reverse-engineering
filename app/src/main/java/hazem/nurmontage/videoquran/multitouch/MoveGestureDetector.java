@@ -45,9 +45,9 @@ public class MoveGestureDetector extends BaseGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleStartProgressEvent(int i, MotionEvent motionEvent) {
-        if (i != 0) {
-            if (i != 2) {
+    protected void handleStartProgressEvent(int value, MotionEvent motionEvent) {
+        if (value != 0) {
+            if (value != 2) {
                 return;
             }
             this.mGestureInProgress = this.mListener.onMoveBegin(this);
@@ -60,9 +60,9 @@ public class MoveGestureDetector extends BaseGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleInProgressEvent(int i, MotionEvent motionEvent) {
-        if (i != 1) {
-            if (i == 2) {
+    protected void handleInProgressEvent(int value, MotionEvent motionEvent) {
+        if (value != 1) {
+            if (value == 2) {
                 updateStateByEvent(motionEvent);
                 if (this.mCurrPressure / this.mPrevPressure <= 0.67f || !this.mListener.onMove(this)) {
                     return;
@@ -71,7 +71,7 @@ public class MoveGestureDetector extends BaseGestureDetector {
                 this.mPrevEvent = MotionEvent.obtain(motionEvent);
                 return;
             }
-            if (i != 3) {
+            if (value != 3) {
                 return;
             }
         }
@@ -94,9 +94,9 @@ public class MoveGestureDetector extends BaseGestureDetector {
         int pointerCount = motionEvent.getPointerCount();
         float f = 0.0f;
         float f2 = 0.0f;
-        for (int i = 0; i < pointerCount; i++) {
-            f += motionEvent.getX(i);
-            f2 += motionEvent.getY(i);
+        for (int value = 0; value < pointerCount; value++) {
+            f += motionEvent.getX(value);
+            f2 += motionEvent.getY(value);
         }
         float f3 = pointerCount;
         return new PointF(f / f3, f2 / f3);

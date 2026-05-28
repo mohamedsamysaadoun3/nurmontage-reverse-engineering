@@ -42,12 +42,12 @@ public class SquareImageView extends AppCompatImageView {
         return this.anInt;
     }
 
-    public void setNumber(int i) {
-        if (i == 0) {
+    public void setNumber(int value) {
+        if (value == 0) {
             return;
         }
-        this.anInt = i;
-        this.number = "" + i;
+        this.anInt = value;
+        this.number = "" + value;
         this.f442cx = (getWidth() * 0.5f) - (this.textPaint.measureText(this.number) * 0.5f);
     }
 
@@ -71,8 +71,8 @@ public class SquareImageView extends AppCompatImageView {
         init();
     }
 
-    public SquareImageView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public SquareImageView(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         this.paint = new Paint(1);
         this.paintRect = new Paint(1);
         this.textPaint = new TextPaint(1);
@@ -85,17 +85,17 @@ public class SquareImageView extends AppCompatImageView {
     }
 
     @Override // android.widget.ImageView, android.view.View
-    protected void onMeasure(int i, int i2) {
-        super.onMeasure(i, i2);
+    protected void onMeasure(int value, int value2) {
+        super.onMeasure(value, value2);
         int measuredWidth = getMeasuredWidth();
         setMeasuredDimension(measuredWidth, measuredWidth);
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int i, int i2, int i3, int i4) {
-        super.onSizeChanged(i, i2, i3, i4);
+    protected void onSizeChanged(int value, int value2, int i3, int size4) {
+        super.onSizeChanged(value, value2, i3, size4);
         this.paintRect.setColor(-1056964608);
-        float f = i;
+        float f = value;
         this.paint.setStrokeWidth(0.02f * f);
         if (!this.isSelect) {
             this.paint.setColor(-8355712);
@@ -140,9 +140,9 @@ public class SquareImageView extends AppCompatImageView {
         }
     }
 
-    public void onSelect(boolean z) {
-        this.isSelect = z;
-        if (!z) {
+    public void onSelect(boolean isSelected) {
+        this.isSelect = isSelected;
+        if (!isSelected) {
             this.paint.setColor(-8355712);
             this.paint.setStyle(Paint.Style.STROKE);
         } else {

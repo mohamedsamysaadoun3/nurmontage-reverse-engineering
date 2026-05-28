@@ -22,7 +22,7 @@ public class AudioUploadHelper {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static File processAudioUriForUpload(Context context, Uri uri, String str) {
+    public static File processAudioUriForUpload(Context context, Uri uri, String textValue) {
         File file;
         InputStream inputStream;
         ContentResolver contentResolver = context.getContentResolver();
@@ -43,7 +43,7 @@ public class AudioUploadHelper {
                             }
                             return null;
                         }
-                        file = new File(context.getExternalFilesDir(null), str);
+                        file = new File(context.getExternalFilesDir(null), textValue);
                         try {
                             FileOutputStream fileOutputStream = new FileOutputStream(file);
                             try {

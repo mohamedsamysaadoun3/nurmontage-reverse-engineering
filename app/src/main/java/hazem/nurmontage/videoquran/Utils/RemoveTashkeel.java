@@ -13,8 +13,8 @@ public class RemoveTashkeel {
 
     static {
         char[] cArr = {1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1648, 1600};
-        for (int i = 0; i < 13; i++) {
-            TASHKEEL_SET.add(Character.valueOf(cArr[i]));
+        for (int value = 0; value < 13; value++) {
+            TASHKEEL_SET.add(Character.valueOf(cArr[value]));
         }
         arabicV_original = Arrays.asList("ؘ", "ؙ", "ؚ", "ؐ", "ؐؑ", "ؒ", "ؓ", "ؔ", "ؕ", "ؖ", "ؗ", "ؗ", "ﹰﹰ", "ﹲ", "ﹴ", "ﹸ", "ﹼ", "ﹾ", "ٍ", "ً", "ُ", "ِ", "َ", "ّ", "ٓ", "ٔ", "ْ", "ِ", "َّ", "َ", "َْ", "َ", "ً", "ٌ", "َ", "ُ", "ٍ", "َ", "ْ", "ِ", "ُ", "ّ", "ً");
     }
@@ -23,13 +23,13 @@ public class RemoveTashkeel {
         return TASHKEEL_SET.contains(Character.valueOf(c));
     }
 
-    public static String removeTashkeel(String str) {
-        if (str == null) {
+    public static String removeTashkeel(String textValue) {
+        if (textValue == null) {
             return null;
         }
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
+        StringBuilder sb = new StringBuilder(textValue.length());
+        for (int value = 0; value < textValue.length(); value++) {
+            char charAt = textValue.charAt(value);
             if (!isTashkeel(charAt)) {
                 sb.append(charAt);
             }
@@ -37,26 +37,26 @@ public class RemoveTashkeel {
         return sb.toString();
     }
 
-    public static int countTashkeel(String str) {
-        if (str == null) {
+    public static int countTashkeel(String textValue) {
+        if (textValue == null) {
             return 0;
         }
-        int i = 0;
-        for (int i2 = 0; i2 < str.length(); i2++) {
-            if (isTashkeel(str.charAt(i2))) {
-                i++;
+        int value = 0;
+        for (int value2 = 0; value2 < textValue.length(); value2++) {
+            if (isTashkeel(textValue.charAt(value2))) {
+                value++;
             }
         }
-        return i;
+        return value;
     }
 
-    public static String removeTashkeelAndPoint(String str) {
-        if (str == null) {
+    public static String removeTashkeelAndPoint(String textValue) {
+        if (textValue == null) {
             return null;
         }
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
+        StringBuilder sb = new StringBuilder(textValue.length());
+        for (int value = 0; value < textValue.length(); value++) {
+            char charAt = textValue.charAt(value);
             if (!isTashkeel(charAt) && charAt != '.') {
                 sb.append(charAt);
             }
@@ -64,13 +64,13 @@ public class RemoveTashkeel {
         return sb.toString();
     }
 
-    public static String removeChar(String str) {
-        if (str == null) {
+    public static String removeChar(String textValue) {
+        if (textValue == null) {
             return null;
         }
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
+        StringBuilder sb = new StringBuilder(textValue.length());
+        for (int value = 0; value < textValue.length(); value++) {
+            char charAt = textValue.charAt(value);
             if (isTashkeel(charAt)) {
                 sb.append(charAt);
             } else {

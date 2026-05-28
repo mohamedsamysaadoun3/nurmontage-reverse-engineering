@@ -54,9 +54,9 @@ public final class ActivityYoutuberBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivityYoutuberBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivityYoutuberBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_youtuber, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

@@ -29,8 +29,8 @@ public enum ResizeType {
 
     float value;
 
-    ResizeType(float f) {
-        this.value = f;
+    ResizeType(float dimension) {
+        this.value = dimension;
     }
 
     public float getValue() {

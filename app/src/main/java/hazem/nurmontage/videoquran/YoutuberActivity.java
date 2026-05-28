@@ -35,9 +35,9 @@ public class YoutuberActivity extends Base {
     };
     private YoutuberAdabter.IYoutuber iYoutuber = new YoutuberAdabter.IYoutuber() { // from class: hazem.nurmontage.videoquran.YoutuberActivity.2
         @Override // hazem.nurmontage.videoquran.adabter.YoutuberAdabter.IYoutuber
-        public void onClick(String str) {
-            Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("vnd.youtube:" + str));
-            Intent intent2 = new Intent("android.intent.action.VIEW", Uri.parse("https://youtu.be/" + str));
+        public void onClick(String textValue) {
+            Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("vnd.youtube:" + textValue));
+            Intent intent2 = new Intent("android.intent.action.VIEW", Uri.parse("https://youtu.be/" + textValue));
             try {
                 try {
                     YoutuberActivity.this.startActivity(intent);

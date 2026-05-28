@@ -36,11 +36,11 @@ public class TextEditActivity extends Base {
     private int startIndex;
     private WordAyaAdabter wordAyaAdabter;
 
-    public static int findFirstDigitIndex(String str) {
-        if (str != null && !str.isEmpty()) {
-            for (int i = 0; i < str.length(); i++) {
-                if (Character.isDigit(str.charAt(i))) {
-                    return i;
+    public static int findFirstDigitIndex(String textValue) {
+        if (textValue != null && !textValue.isEmpty()) {
+            for (int value = 0; value < textValue.length(); value++) {
+                if (Character.isDigit(textValue.charAt(value))) {
+                    return value;
                 }
             }
         }
@@ -125,19 +125,19 @@ public class TextEditActivity extends Base {
         StringBuilder sb = new StringBuilder();
         List<WordModel> list = this.wordAyaAdabter.getList();
         this.startIndex = -1;
-        int i = 0;
-        for (int i2 = 0; i2 < list.size(); i2++) {
-            WordModel wordModel = list.get(i2);
+        int value = 0;
+        for (int value2 = 0; value2 < list.size(); value2++) {
+            WordModel wordModel = list.get(value2);
             if (wordModel.isSelected()) {
                 if (this.startIndex == -1) {
-                    this.startIndex = i2;
+                    this.startIndex = value2;
                 }
-                i++;
+                value++;
                 sb.append(wordModel.getW()).append(" ");
             }
         }
         int i3 = this.startIndex;
-        this.endIndex = i + 1 + i3;
+        this.endIndex = value + 1 + i3;
         if (i3 != -1) {
             this.startIndex = WordProcessor.mapIndexAfterGroupReverse(i3, 4, list.size());
             this.endIndex = WordProcessor.mapIndexAfterGroupReverse(this.endIndex, 4, list.size());
@@ -145,31 +145,31 @@ public class TextEditActivity extends Base {
         return sb.toString().trim();
     }
 
-    private void init(String str, String str2) {
+    private void init(String textValue, String textValue2) {
         WordProcessor wordProcessor = new WordProcessor();
-        String[] split = str2.trim().split("\\s+");
+        String[] split = textValue2.trim().split("\\s+");
         ArrayList arrayList = new ArrayList();
         if (this.startIndex == this.endIndex) {
-            String[] split2 = str.split("\\s+");
-            int indexOf = str2.indexOf(str);
+            String[] split2 = textValue.split("\\s+");
+            int indexOf = textValue2.indexOf(textValue);
             boolean z = indexOf == 0;
-            int i = 0;
-            int i2 = 0;
-            for (String str3 : split) {
+            int value = 0;
+            int value2 = 0;
+            for (String textValue3 : split) {
                 if (!z) {
-                    if (i == indexOf) {
+                    if (value == indexOf) {
                         z = true;
                     }
-                    i += str3.length() + 1;
+                    value += textValue3.length() + 1;
                 }
-                if (z && i2 < split2.length) {
-                    boolean equals = str3.equals(split2[i2]);
-                    arrayList.add(new WordModel(str3, equals));
+                if (z && value2 < split2.length) {
+                    boolean equals = textValue3.equals(split2[value2]);
+                    arrayList.add(new WordModel(textValue3, equals));
                     if (equals) {
-                        i2++;
+                        value2++;
                     }
                 } else {
-                    arrayList.add(new WordModel(str3, false));
+                    arrayList.add(new WordModel(textValue3, false));
                 }
             }
         } else {

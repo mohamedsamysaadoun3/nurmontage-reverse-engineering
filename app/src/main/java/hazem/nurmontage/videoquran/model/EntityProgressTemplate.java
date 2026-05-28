@@ -7,9 +7,9 @@ public class EntityProgressTemplate implements Serializable {
     private float left;
     private float top;
 
-    public EntityProgressTemplate(float f, float f2) {
-        this.left = f;
-        this.top = f2;
+    public EntityProgressTemplate(float floatValue, float floatValue2) {
+        this.left = floatValue;
+        this.top = floatValue2;
     }
 
     public float getTop() {
@@ -20,11 +20,11 @@ public class EntityProgressTemplate implements Serializable {
         return this.left;
     }
 
-    public void setLeft(float f) {
-        this.left = f;
+    public void setLeft(float floatValue) {
+        this.left = floatValue;
     }
 
-    public void setTop(float f) {
-        this.top = f;
+    public void setTop(float floatValue) {
+        this.top = floatValue;
     }
 }

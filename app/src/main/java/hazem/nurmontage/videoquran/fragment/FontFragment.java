@@ -29,16 +29,16 @@ public class FontFragment extends Fragment {
     private Typeface typeface;
 
     public interface IFontCallback {
-        void onAdd(String str, Typeface typeface);
+        void onAdd(String textValue, Typeface typeface);
 
-        void onCancel(String str, Typeface typeface);
+        void onCancel(String textValue, Typeface typeface);
 
-        void onDone(String str, Typeface typeface);
+        void onDone(String textValue, Typeface typeface);
     }
 
-    public static FontFragment getInstance(IFontCallback iFontCallback, String str, Typeface typeface) {
+    public static FontFragment getInstance(IFontCallback iFontCallback, String textValue, Typeface typeface) {
         if (instance == null) {
-            instance = new FontFragment(iFontCallback, str, typeface);
+            instance = new FontFragment(iFontCallback, textValue, typeface);
         }
         return instance;
     }
@@ -46,15 +46,15 @@ public class FontFragment extends Fragment {
     public FontFragment() {
     }
 
-    public FontFragment(IFontCallback iFontCallback, String str, Typeface typeface) {
+    public FontFragment(IFontCallback iFontCallback, String textValue, Typeface typeface) {
         this.iFontCallback = iFontCallback;
-        this.last_font = str;
+        this.last_font = textValue;
         this.lastTypeface = typeface;
     }
 
-    public void add(Typeface typeface, String str) {
+    public void add(Typeface typeface, String textValue) {
         this.typeface = typeface;
-        this.font_select = str;
+        this.font_select = textValue;
     }
 
     @Override // androidx.fragment.app.Fragment
@@ -76,13 +76,13 @@ public class FontFragment extends Fragment {
             linearSnapHelper.attachToRecyclerView(this.recyclerView);
             this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: hazem.nurmontage.videoquran.fragment.FontFragment.1
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrollStateChanged(RecyclerView recyclerView, int i) {
-                    super.onScrollStateChanged(recyclerView, i);
+                public void onScrollStateChanged(RecyclerView recyclerView, int value) {
+                    super.onScrollStateChanged(recyclerView, value);
                 }
 
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrolled(RecyclerView recyclerView, int i, int i2) {
-                    super.onScrolled(recyclerView, i, i2);
+                public void onScrolled(RecyclerView recyclerView, int value, int value2) {
+                    super.onScrolled(recyclerView, value, value2);
                     if (FontFragment.this.isInit) {
                         FontFragment.this.isInit = false;
                         return;

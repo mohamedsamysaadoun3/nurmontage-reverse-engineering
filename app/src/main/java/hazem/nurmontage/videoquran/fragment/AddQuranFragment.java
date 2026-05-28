@@ -72,8 +72,8 @@ public class AddQuranFragment extends Fragment {
     private boolean isFromSelect = true;
     private IconQuranAdabters.IIconQuranCallback iconQuranCallback = new IconQuranAdabters.IIconQuranCallback() { // from class: hazem.nurmontage.videoquran.fragment.AddQuranFragment.8
         @Override // hazem.nurmontage.videoquran.adabter.IconQuranAdabters.IIconQuranCallback
-        public void onIcon(String str) {
-            AddQuranFragment.this.icon = str;
+        public void onIcon(String textValue) {
+            AddQuranFragment.this.icon = textValue;
         }
     };
     private AdapterView.OnItemSelectedListener onFromAyaSelectedListener = new AdapterView.OnItemSelectedListener() { // from class: hazem.nurmontage.videoquran.fragment.AddQuranFragment.9
@@ -82,14 +82,14 @@ public class AddQuranFragment extends Fragment {
         }
 
         @Override // android.widget.AdapterView.OnItemSelectedListener
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long j) {
+        public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
             if (AddQuranFragment.this.isFromSearch) {
                 AddQuranFragment.this.spinnerTo.setSelection(AddQuranFragment.this.quranPreference.getTo());
                 AddQuranFragment.this.isFromSearch = false;
             } else {
                 if (!AddQuranFragment.this.isFromSelect) {
-                    if (AddQuranFragment.this.spinnerTo.getSelectedItemPosition() != i) {
-                        AddQuranFragment.this.spinnerTo.setSelection(i);
+                    if (AddQuranFragment.this.spinnerTo.getSelectedItemPosition() != value) {
+                        AddQuranFragment.this.spinnerTo.setSelection(value);
                         return;
                     }
                     return;
@@ -104,19 +104,19 @@ public class AddQuranFragment extends Fragment {
         }
 
         @Override // android.widget.AdapterView.OnItemSelectedListener
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long j) {
-            int i2;
-            if (i == AddQuranFragment.this.current_pos) {
+        public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
+            int value2;
+            if (value == AddQuranFragment.this.current_pos) {
                 return;
             }
             if (AddQuranFragment.this.isInit) {
-                i2 = AddQuranFragment.this.arrayCount[AddQuranFragment.this.quranPreference.getSurah()];
+                value2 = AddQuranFragment.this.arrayCount[AddQuranFragment.this.quranPreference.getSurah()];
             } else {
-                i2 = AddQuranFragment.this.arrayCount[i];
+                value2 = AddQuranFragment.this.arrayCount[value];
             }
             ArrayList arrayList = new ArrayList();
-            for (int i3 = 1; i3 <= i2; i3++) {
-                arrayList.add(String.valueOf(i3));
+            for (int value3 = 1; value3 <= value2; value3++) {
+                arrayList.add(String.valueOf(value3));
             }
             AddQuranFragment.this.adapterFromAyah.clear();
             AddQuranFragment.this.adapterFromAyah.addAll(arrayList);
@@ -143,19 +143,19 @@ public class AddQuranFragment extends Fragment {
     };
 
     public interface IAddQuran {
-        void onAdd(String str, String str2, String str3, String str4, int i, int i2, String str5, int i3, int i4);
+        void onAdd(String textValue, String name2, String textValue3, String str4, int value, int value2, String textValue5, int value3, int value4);
 
-        void onAddReaderName(String str, String str2, Uri uri);
+        void onAddReaderName(String textValue, String name2, Uri uri);
 
-        void onAddTranslation(String str, int i, boolean z);
+        void onAddTranslation(String textValue, int value, boolean isFlag);
 
         void onBismilah();
 
         void onCancel();
 
-        void onDone(String str, int i, String str2, Uri uri, String str3);
+        void onDone(String textValue, int value, String name2, Uri uri, String textValue3);
 
-        void onDone(String str, int i, String str2, List<RecitersModel> list);
+        void onDone(String textValue, int value, String name2, List<RecitersModel> list);
 
         void onErrorLimitation();
 
@@ -171,9 +171,9 @@ public class AddQuranFragment extends Fragment {
     private void setSystemBarsColorBlack() {
     }
 
-    public static AddQuranFragment getInstance(IAddQuran iAddQuran, Resources resources, Uri uri, String str, String str2) {
+    public static AddQuranFragment getInstance(IAddQuran iAddQuran, Resources resources, Uri uri, String textValue, String name2) {
         if (instance == null) {
-            instance = new AddQuranFragment(iAddQuran, resources, uri, str, str2);
+            instance = new AddQuranFragment(iAddQuran, resources, uri, textValue, name2);
         }
         return instance;
     }
@@ -193,12 +193,12 @@ public class AddQuranFragment extends Fragment {
         this.resources = resources;
     }
 
-    public AddQuranFragment(IAddQuran iAddQuran, Resources resources, Uri uri, String str, String str2) {
+    public AddQuranFragment(IAddQuran iAddQuran, Resources resources, Uri uri, String textValue, String name2) {
         this.iAddQuran = iAddQuran;
         this.resources = resources;
         this.uri_recitation = uri;
-        this.path_video_copy = str;
-        this.reader_name = str2;
+        this.path_video_copy = textValue;
+        this.reader_name = name2;
     }
 
     @Override // androidx.fragment.app.Fragment
@@ -273,7 +273,7 @@ public class AddQuranFragment extends Fragment {
                 }
 
                 @Override // android.widget.AdapterView.OnItemSelectedListener
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long j) {
+                public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
                     if (AddQuranFragment.this.isFromSelectReciters) {
                         AddQuranFragment.this.goneReaderNameUpload();
                     }
@@ -343,8 +343,8 @@ public class AddQuranFragment extends Fragment {
                     AddQuranFragment.this.iAddQuran.onAddReaderName(AddQuranFragment.this.reader_name, AddQuranFragment.this.path_video_copy, AddQuranFragment.this.uri_recitation);
                 }
             });
-            String str = this.reader_name;
-            if (str == null || str.isEmpty()) {
+            String textValue = this.reader_name;
+            if (textValue == null || textValue.isEmpty()) {
                 this.reader_name = "-";
                 this.tv_reader_name.setTextColor(-1);
             } else {
@@ -405,10 +405,10 @@ public class AddQuranFragment extends Fragment {
             int surah = this.quranPreference.getSurah();
             this.current_pos = surah;
             this.spinnerSurah.setSelection(surah, false);
-            int i = this.arrayCount[this.quranPreference.getSurah()];
+            int value = this.arrayCount[this.quranPreference.getSurah()];
             ArrayList arrayList = new ArrayList();
-            for (int i2 = 1; i2 <= i; i2++) {
-                arrayList.add(String.valueOf(i2));
+            for (int value2 = 1; value2 <= value; value2++) {
+                arrayList.add(String.valueOf(value2));
             }
             this.adapterFromAyah.clear();
             this.adapterFromAyah.addAll(arrayList);
@@ -421,41 +421,41 @@ public class AddQuranFragment extends Fragment {
         }
     }
 
-    public void setNameReader(String str, Uri uri, String str2) {
+    public void setNameReader(String textValue, Uri uri, String name2) {
         this.uri_recitation = uri;
-        this.path_video_copy = str2;
+        this.path_video_copy = name2;
         if (uri != null) {
             this.iv_done_upload.setVisibility(0);
         }
-        if (str == null || str.isEmpty()) {
+        if (textValue == null || textValue.isEmpty()) {
             this.tv_reader_name.getPaint().setUnderlineText(false);
-            str = "-";
+            textValue = "-";
         } else {
             this.tv_reader_name.getPaint().setUnderlineText(true);
         }
-        this.reader_name = str;
-        this.tv_reader_name.setText(str);
+        this.reader_name = textValue;
+        this.tv_reader_name.setText(textValue);
     }
 
-    public void splitAya(String str, String str2, int i) {
-        int i2;
-        int i3;
-        int i4;
+    public void splitAya(String textValue, String name2, int value) {
+        int value2;
+        int value3;
+        int value4;
         StringBuilder sb;
-        String str3;
+        String textValue3;
         String str4;
         StringBuilder sb2;
         int i5;
         int i6;
-        String str5;
+        String textValue5;
         int i7;
-        String trim = str.trim();
+        String trim = textValue.trim();
         String[] split = trim.replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").trim().split("\\s+");
-        String[] split2 = str2 != null ? str2.split(",") : null;
+        String[] split2 = name2 != null ? name2.split(",") : null;
         String str6 = " ";
         String str7 = " نص";
         if (split.length <= 4) {
-            this.iAddQuran.onAdd(str + " نص", trim, str2 != null ? str2.replace(",", " ") : null, str2, str.length(), i, this.icon, 0, split.length);
+            this.iAddQuran.onAdd(textValue + " نص", trim, name2 != null ? name2.replace(",", " ") : null, name2, textValue.length(), value, this.icon, 0, split.length);
             return;
         }
         StringBuilder sb3 = new StringBuilder();
@@ -476,36 +476,36 @@ public class AddQuranFragment extends Fragment {
                 int i14 = (i12 + i9) - (i13 - i9);
                 if (i11 == length) {
                     String trim2 = sb3.toString().trim();
-                    i2 = i11;
+                    value2 = i11;
                     int i15 = i12;
                     i5 = 0;
-                    i3 = length;
-                    i4 = 1;
+                    value3 = length;
+                    value4 = 1;
                     sb2 = sb3;
-                    str3 = str7;
+                    textValue3 = str7;
                     str4 = str6;
-                    this.iAddQuran.onAdd(trim2 + str7, trim, split2 != null ? getWords(split2, i12, i14) : null, str2, trim2.length(), i, this.icon, i15, i14);
+                    this.iAddQuran.onAdd(trim2 + str7, trim, split2 != null ? getWords(split2, i12, i14) : null, name2, trim2.length(), value, this.icon, i15, i14);
                     i7 = i15;
                 } else {
-                    i2 = i11;
+                    value2 = i11;
                     int i16 = i12;
-                    i3 = length;
-                    i4 = i8;
+                    value3 = length;
+                    value4 = i8;
                     sb2 = sb3;
-                    str3 = str7;
+                    textValue3 = str7;
                     str4 = str6;
                     i5 = 0;
                     IAddQuran iAddQuran = this.iAddQuran;
                     String trim3 = sb2.toString().trim();
                     if (split2 != null) {
                         i6 = i16;
-                        str5 = getWords(split2, i6, i14);
+                        textValue5 = getWords(split2, i6, i14);
                     } else {
                         i6 = i16;
-                        str5 = null;
+                        textValue5 = null;
                     }
                     i7 = i6;
-                    iAddQuran.onAdd(trim3, trim, str5, str2, -1, -1, this.icon, i6, i6 + i13);
+                    iAddQuran.onAdd(trim3, trim, textValue5, name2, -1, -1, this.icon, i6, i6 + i13);
                 }
                 i12 = i7 + i13;
                 sb = sb2;
@@ -513,59 +513,59 @@ public class AddQuranFragment extends Fragment {
                 i9 = i5;
                 i10 = i9;
             } else {
-                i2 = i11;
-                i3 = length;
-                i4 = i8;
+                value2 = i11;
+                value3 = length;
+                value4 = i8;
                 sb = sb3;
-                str3 = str7;
+                textValue3 = str7;
                 str4 = str6;
                 i10 = i13;
             }
             sb3 = sb;
-            i11 = i2 + 1;
-            i8 = i4;
+            i11 = value2 + 1;
+            i8 = value4;
             str6 = str4;
-            length = i3;
-            str7 = str3;
+            length = value3;
+            str7 = textValue3;
         }
         int i17 = i12;
         StringBuilder sb4 = sb3;
         String str9 = str7;
         if (sb4.length() > 0) {
             String trim4 = sb4.toString().trim();
-            this.iAddQuran.onAdd(trim4 + str9, trim, split2 != null ? getWords(split2, (split2.length - i9) - (i10 - i9), split2.length) : null, str2, trim4.length(), i, this.icon, i17, i17 + i10);
+            this.iAddQuran.onAdd(trim4 + str9, trim, split2 != null ? getWords(split2, (split2.length - i9) - (i10 - i9), split2.length) : null, name2, trim4.length(), value, this.icon, i17, i17 + i10);
         }
     }
 
-    public String getWords(String[] strArr, int i, int i2) {
+    public String getWords(String[] strArr, int value, int value2) {
         if (strArr == null || strArr.length == 0) {
             return "";
         }
-        if (i < 0) {
-            i = 0;
+        if (value < 0) {
+            value = 0;
         }
-        if (i2 > strArr.length) {
-            i2 = strArr.length;
+        if (value2 > strArr.length) {
+            value2 = strArr.length;
         }
-        if (i >= i2) {
+        if (value >= value2) {
             return "";
         }
-        return ProVersionActivity$$ExternalSyntheticBackport0.m587m(" ", (CharSequence[]) Arrays.copyOfRange(strArr, i, i2));
+        return ProVersionActivity$$ExternalSyntheticBackport0.m587m(" ", (CharSequence[]) Arrays.copyOfRange(strArr, value, value2));
     }
 
-    public void addAyaEntityRecursive(int i, int i2, int i3) {
+    public void addAyaEntityRecursive(int value, int value2, int value3) {
         try {
-            String ayahText = this.quranReader.getAyahText(i3, i);
-            String translationAyahText = this.spinnerTranslation.getSelectedItemPosition() > 0 ? this.quranReader.getTranslationAyahText(this.translation_name[this.spinnerTranslation.getSelectedItemPosition() - 1], i3, i) : null;
-            splitAya(ayahText, null, i);
+            String ayahText = this.quranReader.getAyahText(value3, value);
+            String translationAyahText = this.spinnerTranslation.getSelectedItemPosition() > 0 ? this.quranReader.getTranslationAyahText(this.translation_name[this.spinnerTranslation.getSelectedItemPosition() - 1], value3, value) : null;
+            splitAya(ayahText, null, value);
             if (translationAyahText != null) {
-                this.iAddQuran.onAddTranslation(translationAyahText, i, this.spinnerTranslation.getSelectedItemPosition() == 1);
+                this.iAddQuran.onAddTranslation(translationAyahText, value, this.spinnerTranslation.getSelectedItemPosition() == 1);
             }
             if (this.iAddQuran != null) {
                 if (this.spinnerReciters.isEnabled()) {
-                    this.recitersModels.add(new RecitersModel(this.arrayIdentifier[this.spinnerReciters.getSelectedItemPosition()], i3, i));
+                    this.recitersModels.add(new RecitersModel(this.arrayIdentifier[this.spinnerReciters.getSelectedItemPosition()], value3, value));
                 }
-                if (i >= i2) {
+                if (value >= value2) {
                     if (this.uri_recitation != null) {
                         this.iAddQuran.onDone(this.surah_hint + this.arraySurah[this.spinnerSurah.getSelectedItemPosition()], this.spinnerSurah.getSelectedItemPosition() + 1, this.reader_name, this.uri_recitation, this.path_video_copy);
                         return;
@@ -575,7 +575,7 @@ public class AddQuranFragment extends Fragment {
                     }
                 }
             }
-            addAyaEntityRecursive(i + 1, i2, i3);
+            addAyaEntityRecursive(value + 1, value2, value3);
         } catch (Exception e) {
             e.printStackTrace();
         }

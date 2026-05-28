@@ -25,16 +25,16 @@ public class DimensionAdabters extends RecyclerView.Adapter<ViewHolder> {
     public interface IDimensionCallback {
         void done();
 
-        void isCustomSize(boolean z, ResizeType resizeType);
+        void isCustomSize(boolean isFlag, ResizeType resizeType);
 
-        void onCustumSize(int i, int i2, int i3, String str, int i4);
+        void onCustumSize(int size, int i2, int i3, String textValue, int size4);
     }
 
-    public DimensionAdabters(List<ItemDimension> list, IDimensionCallback iDimensionCallback, List<Pair<Integer, Integer>> list2, int i) {
+    public DimensionAdabters(List<ItemDimension> list, IDimensionCallback iDimensionCallback, List<Pair<Integer, Integer>> list2, int size) {
         this.mDimensionList = list;
         this.mIDimensionCallback = iDimensionCallback;
         this.listDim = list2;
-        this.selected = i;
+        this.selected = size;
     }
 
     public DimensionAdabters(List<ItemDimension> list, IDimensionCallback iDimensionCallback, List<Pair<Integer, Integer>> list2) {
@@ -44,8 +44,8 @@ public class DimensionAdabters extends RecyclerView.Adapter<ViewHolder> {
         this.listDim = list2;
     }
 
-    public void setSelected(int i) {
-        this.selected = i;
+    public void setSelected(int size) {
+        this.selected = size;
     }
 
     public int getSelected() {
@@ -57,7 +57,7 @@ public class DimensionAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int size) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_aspect, viewGroup, false));
     }
 
@@ -67,17 +67,17 @@ public class DimensionAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Pair<Integer, Integer> pair = this.listDim.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int size) {
+        Pair<Integer, Integer> pair = this.listDim.get(size);
         viewHolder.layout.getLayoutParams().width = ((Integer) pair.first).intValue();
         viewHolder.layout.getLayoutParams().height = ((Integer) pair.second).intValue();
-        String[] split = this.mDimensionList.get(i).getName().split("\n");
+        String[] split = this.mDimensionList.get(size).getName().split("\n");
         viewHolder.name.setText(split[0]);
         if (split.length > 1) {
             viewHolder.dimension.setText(split[1]);
         }
-        Glide.with(viewHolder.itemView).asBitmap().centerInside().diskCacheStrategy(DiskCacheStrategy.ALL).load(Integer.valueOf(this.mDimensionList.get(i).getImage())).into(viewHolder.imageView);
-        if (i == this.selected) {
+        Glide.with(viewHolder.itemView).asBitmap().centerInside().diskCacheStrategy(DiskCacheStrategy.ALL).load(Integer.valueOf(this.mDimensionList.get(size).getImage())).into(viewHolder.imageView);
+        if (size == this.selected) {
             viewHolder.layout.setBackgroundResource(C2014R.drawable.rect_btn_select);
         } else {
             viewHolder.layout.setBackgroundResource(C2014R.drawable.rect_btn);
@@ -114,9 +114,9 @@ public class DimensionAdabters extends RecyclerView.Adapter<ViewHolder> {
                 @Override // android.view.View.OnClickListener
                 public void onClick(View view2) {
                     if (DimensionAdabters.this.mIDimensionCallback != null) {
-                        int i = DimensionAdabters.this.selected;
+                        int size = DimensionAdabters.this.selected;
                         DimensionAdabters.this.selected = ViewHolder.this.getAdapterPosition();
-                        DimensionAdabters.this.notifyItemChanged(i);
+                        DimensionAdabters.this.notifyItemChanged(size);
                         DimensionAdabters.this.notifyItemChanged(DimensionAdabters.this.selected);
                         ItemDimension itemDimension = (ItemDimension) DimensionAdabters.this.mDimensionList.get(ViewHolder.this.getAdapterPosition());
                         DimensionAdabters.this.mIDimensionCallback.onCustumSize(itemDimension.getW(), itemDimension.getH(), itemDimension.getResizeType().ordinal(), itemDimension.getId(), itemDimension.getImage());

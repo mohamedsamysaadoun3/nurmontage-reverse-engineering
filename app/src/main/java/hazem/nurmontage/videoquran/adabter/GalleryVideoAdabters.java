@@ -34,12 +34,12 @@ public class GalleryVideoAdabters extends RecyclerView.Adapter<MyViewHolder> {
     private VideoItem videoItem_select;
     private List<VideoItem> videoItems;
 
-    public GalleryVideoAdabters(String str, Resources resources, List<GallerySelected> list, int i, GalleryPickerVideo.IPicker iPicker) {
-        this.size = i;
-        this.APP_VERSION = str;
+    public GalleryVideoAdabters(String textValue, Resources resources, List<GallerySelected> list, int resId, GalleryPickerVideo.IPicker iPicker) {
+        this.size = resId;
+        this.APP_VERSION = textValue;
         this.iPicker = iPicker;
         this.gallerySelectedList = list;
-        Bitmap createBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.RGB_565);
+        Bitmap createBitmap = Bitmap.createBitmap(resId, resId, Bitmap.Config.RGB_565);
         createBitmap.eraseColor(ViewCompat.MEASURED_STATE_MASK);
         this.bitmapPlaceHolder = new BitmapDrawable(resources, createBitmap);
     }
@@ -59,17 +59,17 @@ public class GalleryVideoAdabters extends RecyclerView.Adapter<MyViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void update(String str) {
+    public void update(String textValue) {
         this.videoItems.clear();
         for (VideoItem videoItem : this.all_videoItems) {
-            if (videoItem.getFolderPath().equals(str)) {
+            if (videoItem.getFolderPath().equals(textValue)) {
                 this.videoItems.add(videoItem);
             }
         }
         notifyDataSetChanged();
     }
 
-    public void setFolder(String str) {
+    public void setFolder(String textValue) {
         notifyDataSetChanged();
     }
 
@@ -83,23 +83,23 @@ public class GalleryVideoAdabters extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int resId) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_gallery, viewGroup, false));
     }
 
-    public void inselectItem(int i) {
-        if (i >= this.videoItems.size()) {
+    public void inselectItem(int resId) {
+        if (resId >= this.videoItems.size()) {
             return;
         }
-        VideoItem videoItem = this.videoItems.get(i);
+        VideoItem videoItem = this.videoItems.get(resId);
         videoItem.setSelect(false);
-        notifyItemChanged(i);
+        notifyItemChanged(resId);
         updateNumbers(videoItem.getNumber());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        VideoItem videoItem = this.videoItems.get(i);
+    public void onBindViewHolder(MyViewHolder myViewHolder, int resId) {
+        VideoItem videoItem = this.videoItems.get(resId);
         myViewHolder.imageView.setNumber(videoItem.getNumber());
         myViewHolder.imageView.onSelect(videoItem.isSelect());
         RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(videoItem.getPath());
@@ -173,9 +173,9 @@ public class GalleryVideoAdabters extends RecyclerView.Adapter<MyViewHolder> {
         }
     }
 
-    public void updateNumbers(int i) {
-        while (i < this.gallerySelectedList.size()) {
-            GallerySelected gallerySelected = this.gallerySelectedList.get(i);
+    public void updateNumbers(int resId) {
+        while (resId < this.gallerySelectedList.size()) {
+            GallerySelected gallerySelected = this.gallerySelectedList.get(resId);
             VideoItem videoItem = gallerySelected.getVideoItem();
             if (videoItem != null) {
                 videoItem.setNumber(videoItem.getNumber() - 1);
@@ -185,7 +185,7 @@ public class GalleryVideoAdabters extends RecyclerView.Adapter<MyViewHolder> {
             if (photoItem != null) {
                 photoItem.setNumber(photoItem.getNumber() - 1);
             }
-            i++;
+            resId++;
         }
     }
 }

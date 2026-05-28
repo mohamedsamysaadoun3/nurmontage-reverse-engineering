@@ -14,8 +14,8 @@ import java.io.File;
 
 /* loaded from: classes2.dex */
 public class FileUtils {
-    public static boolean checkFileExists(String str) {
-        return new File(str).exists();
+    public static boolean checkFileExists(String filePath) {
+        return new File(filePath).exists();
     }
 
     public static File getFile(Context context) {
@@ -35,8 +35,8 @@ public class FileUtils {
         return null;
     }
 
-    public static File getFileVideo(String str) {
-        File file = new File(str);
+    public static File getFileVideo(String filePath) {
+        File file = new File(filePath);
         if (!file.exists() && !file.mkdirs()) {
             Log.e("TAG getFileVideo", "! mkdirs.");
             return null;
@@ -50,18 +50,18 @@ public class FileUtils {
     }
 
     public static File getFileFromUri(Context context, Uri uri) throws Exception {
-        String str = null;
-        str = null;
+        String filePath = null;
+        filePath = null;
         Uri uri2 = null;
-        str = null;
+        filePath = null;
         if (DocumentsContract.isDocumentUri(context, uri)) {
             if (isExternalStorageDocument(uri)) {
                 String[] split = DocumentsContract.getDocumentId(uri).split(":");
                 if ("primary".equalsIgnoreCase(split[0])) {
-                    str = Environment.getExternalStorageDirectory() + "/" + split[1];
+                    filePath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
             } else if (isDownloadsDocument(uri)) {
-                str = getDataColumn(context, ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(DocumentsContract.getDocumentId(uri)).longValue()), null, null);
+                filePath = getDataColumn(context, ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(DocumentsContract.getDocumentId(uri)).longValue()), null, null);
             } else if (isMediaDocument(uri)) {
                 String[] split2 = DocumentsContract.getDocumentId(uri).split(":");
                 String str2 = split2[0];
@@ -72,20 +72,20 @@ public class FileUtils {
                 } else if (MimeTypes.BASE_TYPE_AUDIO.equals(str2)) {
                     uri2 = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 }
-                str = getDataColumn(context, uri2, "_id=?", new String[]{split2[1]});
+                filePath = getDataColumn(context, uri2, "_id=?", new String[]{split2[1]});
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            str = getDataColumn(context, uri, null, null);
+            filePath = getDataColumn(context, uri, null, null);
         } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            str = uri.getPath();
+            filePath = uri.getPath();
         }
-        return new File(str);
+        return new File(filePath);
     }
 
-    public static String getDataColumn(Context context, Uri uri, String str, String[] strArr) {
+    public static String getDataColumn(Context context, Uri uri, String filePath, String[] strArr) {
         Cursor cursor = null;
         try {
-            Cursor query = context.getContentResolver().query(uri, new String[]{"_data"}, str, strArr, null);
+            Cursor query = context.getContentResolver().query(uri, new String[]{"_data"}, filePath, strArr, null);
             if (query != null) {
                 try {
                     if (query.moveToFirst()) {

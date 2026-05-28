@@ -49,9 +49,9 @@ public final class ActivityEditTrslBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivityEditTrslBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivityEditTrslBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_edit_trsl, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

@@ -42,8 +42,8 @@ public class NeumorphicRectView extends View {
         init();
     }
 
-    public NeumorphicRectView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public NeumorphicRectView(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         this.cornerRadius = 40.0f;
         this.shadowOffset = 20.0f;
         this.baseColor = Color.parseColor("#398B89");
@@ -76,10 +76,10 @@ public class NeumorphicRectView extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int i, int i2, int i3, int i4) {
-        super.onSizeChanged(i, i2, i3, i4);
+    protected void onSizeChanged(int value, int i2, int i3, int size4) {
+        super.onSizeChanged(value, i2, i3, size4);
         float f = this.shadowOffset;
-        this.rect.set(f * 1.5f, f * 1.5f, i - (f * 1.5f), i2 - (f * 1.5f));
+        this.rect.set(f * 1.5f, f * 1.5f, value - (f * 1.5f), i2 - (f * 1.5f));
         this.backgroundPaint.setShader(new LinearGradient(this.rect.left, this.rect.top, this.rect.right, this.rect.bottom, Color.argb(255, (int) (Color.red(this.baseColor) * 1.1f), (int) (Color.green(this.baseColor) * 1.1f), (int) (Color.blue(this.baseColor) * 1.1f)), Color.argb(255, (int) (Color.red(this.baseColor) * 0.9f), (int) (Color.green(this.baseColor) * 0.9f), (int) (Color.blue(this.baseColor) * 0.9f)), Shader.TileMode.CLAMP));
     }
 

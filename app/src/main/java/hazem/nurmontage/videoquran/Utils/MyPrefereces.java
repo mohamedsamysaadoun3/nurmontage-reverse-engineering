@@ -25,9 +25,9 @@ public class MyPrefereces {
         return context.getSharedPreferences(PREFS_NAME, 0).getInt(SCROLL_X, 0);
     }
 
-    public static void putScrollX(Context context, int i) {
+    public static void putScrollX(Context context, int value) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putInt(SCROLL_X, i);
+        edit.putInt(SCROLL_X, value);
         edit.apply();
     }
 
@@ -45,9 +45,9 @@ public class MyPrefereces {
         return context.getSharedPreferences(PREFS_NAME, 0).getInt("icon_quran", 0);
     }
 
-    public static void putIndexLastIcon(Context context, int i) {
+    public static void putIndexLastIcon(Context context, int value) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putInt("icon_quran", i);
+        edit.putInt("icon_quran", value);
         edit.apply();
     }
 
@@ -55,9 +55,9 @@ public class MyPrefereces {
         return context.getSharedPreferences(PREFS_NAME, 0).getBoolean("IncludeBismilah", false);
     }
 
-    public static void putIncludeBismilah(Context context, boolean z) {
+    public static void putIncludeBismilah(Context context, boolean isFlag) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putBoolean("IncludeBismilah", z);
+        edit.putBoolean("IncludeBismilah", isFlag);
         edit.apply();
     }
 

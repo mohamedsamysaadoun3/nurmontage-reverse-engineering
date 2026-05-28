@@ -56,8 +56,8 @@ public class EditS_NameActivity extends Base {
     final int[] BG_COLORS = {-8388608, -1, ViewCompat.MEASURED_STATE_MASK, -2838729, -16777088, -16694239, -13220529, -9404272};
     private final ColorBgAdabter.IColor iColor = new ColorBgAdabter.IColor() { // from class: hazem.nurmontage.videoquran.EditS_NameActivity.8
         @Override // hazem.nurmontage.videoquran.adabter.ColorBgAdabter.IColor
-        public void onColor(int i, int i2) {
-            EditS_NameActivity.this.clrBg = i;
+        public void onColor(int value, int color2) {
+            EditS_NameActivity.this.clrBg = value;
             EditS_NameActivity.this.scrollToSelectedPosition();
         }
     };
@@ -69,7 +69,7 @@ public class EditS_NameActivity extends Base {
 
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
     protected void onCreate(Bundle bundle) {
-        String str;
+        String textValue;
         super.onCreate(bundle);
         EdgeToEdge.enable(this);
         setContentView(C2014R.layout.activity_edit_sname);
@@ -118,15 +118,15 @@ public class EditS_NameActivity extends Base {
         this.tvOption2 = (TextCustumFont) findViewById(C2014R.id.tv_option_2);
         this.tvOption1.setText(stringExtra2);
         this.tvOption2.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/surah_name.otf"));
-        int i = this.index_surah;
-        if (i < 10) {
-            str = "00" + this.index_surah + "sura";
-        } else if (i < 100) {
-            str = "0" + this.index_surah + "sura";
+        int value = this.index_surah;
+        if (value < 10) {
+            textValue = "00" + this.index_surah + "sura";
+        } else if (value < 100) {
+            textValue = "0" + this.index_surah + "sura";
         } else {
-            str = this.index_surah + "sura";
+            textValue = this.index_surah + "sura";
         }
-        this.tvOption2.setText(str);
+        this.tvOption2.setText(textValue);
         if (this.style == 1) {
             selectOption(this.tvOption2, this.tvOption1);
         }
@@ -175,8 +175,8 @@ public class EditS_NameActivity extends Base {
         initRv();
         this.checkBg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: hazem.nurmontage.videoquran.EditS_NameActivity.7
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
-            public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                EditS_NameActivity.this.updateColorUI(z);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                EditS_NameActivity.this.updateColorUI(isChecked);
             }
         });
         updateColorUI(this.checkBg.isChecked());
@@ -201,10 +201,10 @@ public class EditS_NameActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void updateColorUI(boolean z) {
-        this.recyclerView.setEnabled(z);
-        this.recyclerView.animate().alpha(z ? 1.0f : 0.4f).setDuration(180L).start();
-        this.adapter.setEnabled(z);
+    public void updateColorUI(boolean isChecked) {
+        this.recyclerView.setEnabled(isChecked);
+        this.recyclerView.animate().alpha(isChecked ? 1.0f : 0.4f).setDuration(180L).start();
+        this.adapter.setEnabled(isChecked);
     }
 
     public void scrollToSelectedPosition() {
@@ -222,14 +222,14 @@ public class EditS_NameActivity extends Base {
         textCustumFont2.setTextColor(Color.parseColor("#888888"));
     }
 
-    public int findWordIndex_Loop(String str) {
+    public int findWordIndex_Loop(String textValue) {
         String[] stringArray = getResources().getStringArray(C2014R.array.surah_names_merged);
-        if (str == null) {
+        if (textValue == null) {
             return -1;
         }
-        for (int i = 0; i < stringArray.length; i++) {
-            if (str.contains(stringArray[i])) {
-                return i + 1;
+        for (int value = 0; value < stringArray.length; value++) {
+            if (textValue.contains(stringArray[value])) {
+                return value + 1;
             }
         }
         return -1;

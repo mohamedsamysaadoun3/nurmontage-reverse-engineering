@@ -15,34 +15,34 @@ public class SurahSpinnerAdapter extends ArrayAdapter<String> {
     private boolean isArabic;
     private final String[] surahNames;
 
-    public SurahSpinnerAdapter(Context context, String[] strArr, boolean z) {
+    public SurahSpinnerAdapter(Context context, String[] strArr, boolean isFlag) {
         super(context, C2014R.layout.row_spinner_aya, strArr);
         this.context = context;
         this.surahNames = strArr;
-        this.isArabic = z;
+        this.isArabic = isFlag;
     }
 
     @Override // android.widget.ArrayAdapter, android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return getCustomView(i, view, viewGroup, C2014R.layout.row_spinner_aya);
+    public View getView(int value, View view, ViewGroup viewGroup) {
+        return getCustomView(value, view, viewGroup, C2014R.layout.row_spinner_aya);
     }
 
     @Override // android.widget.ArrayAdapter, android.widget.BaseAdapter, android.widget.SpinnerAdapter
-    public View getDropDownView(int i, View view, ViewGroup viewGroup) {
-        return getCustomView(i, view, viewGroup, C2014R.layout.row_spinner_aya);
+    public View getDropDownView(int value, View view, ViewGroup viewGroup) {
+        return getCustomView(value, view, viewGroup, C2014R.layout.row_spinner_aya);
     }
 
-    private View getCustomView(int i, View view, ViewGroup viewGroup, int i2) {
+    private View getCustomView(int value, View view, ViewGroup viewGroup, int value2) {
         String str;
         if (view == null) {
-            view = LayoutInflater.from(this.context).inflate(i2, viewGroup, false);
+            view = LayoutInflater.from(this.context).inflate(value2, viewGroup, false);
         }
-        Log.e("getCustomView", "" + i);
+        Log.e("getCustomView", "" + value);
         TextView textView = (TextView) view.findViewById(C2014R.id.spinner_text);
         if (this.isArabic) {
-            str = this.surahNames[i].split(" - ")[0];
+            str = this.surahNames[value].split(" - ")[0];
         } else {
-            str = this.surahNames[i].split(" - ")[1];
+            str = this.surahNames[value].split(" - ")[1];
         }
         textView.setText(str);
         return view;

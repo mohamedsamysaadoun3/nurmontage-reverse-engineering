@@ -24,12 +24,12 @@ public class CinematicProcessor {
         return copy;
     }
 
-    public static Bitmap createGlassRect(Bitmap bitmap, int i) {
+    public static Bitmap createGlassRect(Bitmap bitmap, int value) {
         Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         Paint paint = new Paint(1);
-        float f = i;
-        RectF rectF = new RectF(f, f, r0 - i, r1 - i);
+        float f = value;
+        RectF rectF = new RectF(f, f, r0 - value, r1 - value);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(-1);
         canvas.drawRoundRect(rectF, 40.0f, 40.0f, paint);

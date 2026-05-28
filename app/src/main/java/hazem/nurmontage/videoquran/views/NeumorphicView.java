@@ -31,8 +31,8 @@ public class NeumorphicView extends View {
         init();
     }
 
-    public NeumorphicView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public NeumorphicView(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         init();
     }
 
@@ -44,11 +44,11 @@ public class NeumorphicView extends View {
         setBaseThemeColor(Color.rgb(200, 200, 200));
     }
 
-    public void setBaseThemeColor(int i) {
-        this.baseColor = i;
-        int red = Color.red(i);
-        int green = Color.green(i);
-        int blue = Color.blue(i);
+    public void setBaseThemeColor(int value) {
+        this.baseColor = value;
+        int red = Color.red(value);
+        int green = Color.green(value);
+        int blue = Color.blue(value);
         this.darkShadowColor = Color.argb(150, Math.max(0, red - 50), Math.max(0, green - 50), Math.max(0, blue - 50));
         this.lightHighlightColor = Color.argb(200, Math.min(255, red + 50), Math.min(255, green + 50), Math.min(255, blue + 50));
         this.accentColor = Color.rgb(Math.max(0, red - 30), Math.max(0, green - 30), Math.max(0, blue - 30));
@@ -64,11 +64,11 @@ public class NeumorphicView extends View {
         super.onDraw(canvas);
         int dpToPx = (int) dpToPx(30.0f);
         float width = getWidth() - (dpToPx * 2);
-        float f = dpToPx;
-        drawNeumorphicRect(canvas, f, f, width, getHeight() - r1, dpToPx(30.0f), this.baseColor, this.darkShadowColor, this.lightHighlightColor, dpToPx(10.0f), true);
+        float floatValue = dpToPx;
+        drawNeumorphicRect(canvas, floatValue, floatValue, width, getHeight() - r1, dpToPx(30.0f), this.baseColor, this.darkShadowColor, this.lightHighlightColor, dpToPx(10.0f), true);
         float dpToPx2 = dpToPx(100.0f);
         float width2 = getWidth() / 2.0f;
-        float dpToPx3 = f + dpToPx(100.0f);
+        float dpToPx3 = floatValue + dpToPx(100.0f);
         drawNeumorphicCircle(canvas, width2, dpToPx3, dpToPx2, this.baseColor, this.lightHighlightColor, this.darkShadowColor, dpToPx(10.0f), false);
         this.paint.setColor(this.textColor);
         this.paint.setTextSize(dpToPx(30.0f));
@@ -83,7 +83,7 @@ public class NeumorphicView extends View {
         canvas.drawText("Ustadz : Muzammil Hasballah", getWidth() / 2.0f, f2 + dpToPx(65.0f), this.paint);
         float dpToPx4 = width - dpToPx(60.0f);
         float dpToPx5 = dpToPx(20.0f);
-        float dpToPx6 = f + dpToPx(30.0f);
+        float dpToPx6 = floatValue + dpToPx(30.0f);
         float dpToPx7 = f2 + dpToPx(115.0f);
         float dpToPx8 = dpToPx(10.0f);
         drawNeumorphicRect(canvas, dpToPx6, dpToPx7, dpToPx4, dpToPx5, dpToPx8, this.baseColor, this.darkShadowColor, this.lightHighlightColor, dpToPx(5.0f), true);
@@ -133,59 +133,59 @@ public class NeumorphicView extends View {
         canvas.drawCircle(((getWidth() - dpToPx16) - dpToPx15) + dpToPx(20.0f), dpToPx(20.0f) + dpToPx16, dpToPx(5.0f), this.paint);
         canvas.drawLine(dpToPx(20.0f) + ((getWidth() - dpToPx16) - dpToPx15), dpToPx16 + dpToPx(20.0f), dpToPx(35.0f) + ((getWidth() - dpToPx16) - dpToPx15), dpToPx16 + dpToPx(5.0f), this.paint);
         canvas.drawLine(dpToPx(20.0f) + ((getWidth() - dpToPx16) - dpToPx15), dpToPx16 + dpToPx(20.0f), dpToPx(35.0f) + ((getWidth() - dpToPx16) - dpToPx15), dpToPx16 + dpToPx(35.0f), this.paint);
-        float f3 = dpToPx16 + dpToPx15;
-        drawNeumorphicRect(canvas, f3 + dpToPx(10.0f), dpToPx16, dpToPx15, dpToPx15, dpToPx(15.0f), this.baseColor, this.darkShadowColor, this.lightHighlightColor, dpToPx(5.0f), true);
+        float floatValue3 = dpToPx16 + dpToPx15;
+        drawNeumorphicRect(canvas, floatValue3 + dpToPx(10.0f), dpToPx16, dpToPx15, dpToPx15, dpToPx(15.0f), this.baseColor, this.darkShadowColor, this.lightHighlightColor, dpToPx(5.0f), true);
         this.paint.setColor(this.iconColor);
-        canvas.drawCircle(dpToPx(10.0f) + f3 + dpToPx(15.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(20.0f), dpToPx(5.0f), this.paint);
-        canvas.drawLine(dpToPx(10.0f) + f3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(10.0f), dpToPx(10.0f) + f3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(20.0f), this.paint);
-        canvas.drawLine(dpToPx(10.0f) + f3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(10.0f), dpToPx(35.0f) + f3 + dpToPx(10.0f), dpToPx16 + dpToPx(10.0f) + dpToPx(10.0f), this.paint);
+        canvas.drawCircle(dpToPx(10.0f) + floatValue3 + dpToPx(15.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(20.0f), dpToPx(5.0f), this.paint);
+        canvas.drawLine(dpToPx(10.0f) + floatValue3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(10.0f), dpToPx(10.0f) + floatValue3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(20.0f), this.paint);
+        canvas.drawLine(dpToPx(10.0f) + floatValue3 + dpToPx(20.0f), dpToPx(10.0f) + dpToPx16 + dpToPx(10.0f), dpToPx(35.0f) + floatValue3 + dpToPx(10.0f), dpToPx16 + dpToPx(10.0f) + dpToPx(10.0f), this.paint);
     }
 
-    private void drawNeumorphicRect(Canvas canvas, float f, float f2, float f3, float f4, float f5, int i, int i2, int i3, float f6, boolean z) {
-        this.paint.setColor(z ? i2 : i3);
-        float f7 = f + f3;
-        float f8 = f2 + f4;
-        this.rectF.set(f + f6, f2 + f6, f7 + f6, f8 + f6);
+    private void drawNeumorphicRect(Canvas canvas, float floatValue, float f2, float floatValue3, float floatValue4, float f5, int value, int i2, int value3, float floatValue6, boolean isFlag) {
+        this.paint.setColor(isFlag ? i2 : value3);
+        float f7 = floatValue + floatValue3;
+        float f8 = f2 + floatValue4;
+        this.rectF.set(floatValue + floatValue6, f2 + floatValue6, f7 + floatValue6, f8 + floatValue6);
         canvas.drawRoundRect(this.rectF, f5, f5, this.paint);
-        this.paint.setColor(z ? i3 : i2);
-        this.rectF.set(f - f6, f2 - f6, f7 - f6, f8 - f6);
+        this.paint.setColor(isFlag ? value3 : i2);
+        this.rectF.set(floatValue - floatValue6, f2 - floatValue6, f7 - floatValue6, f8 - floatValue6);
         canvas.drawRoundRect(this.rectF, f5, f5, this.paint);
-        this.paint.setColor(i);
-        this.rectF.set(f, f2, f7, f8);
+        this.paint.setColor(value);
+        this.rectF.set(floatValue, f2, f7, f8);
         canvas.drawRoundRect(this.rectF, f5, f5, this.paint);
     }
 
-    private void drawNeumorphicCircle(Canvas canvas, float f, float f2, float f3, int i, int i2, int i3, float f4, boolean z) {
-        this.paint.setColor(z ? i2 : i3);
-        canvas.drawCircle(f + f4, f2 + f4, f3, this.paint);
+    private void drawNeumorphicCircle(Canvas canvas, float floatValue, float f2, float floatValue3, int value, int i2, int value3, float floatValue4, boolean isFlag) {
+        this.paint.setColor(isFlag ? i2 : value3);
+        canvas.drawCircle(floatValue + floatValue4, f2 + floatValue4, floatValue3, this.paint);
         Paint paint = this.paint;
-        if (z) {
-            i2 = i3;
+        if (isFlag) {
+            i2 = value3;
         }
         paint.setColor(i2);
-        canvas.drawCircle(f - f4, f2 - f4, f3, this.paint);
-        this.paint.setColor(i);
-        canvas.drawCircle(f, f2, f3, this.paint);
+        canvas.drawCircle(floatValue - floatValue4, f2 - floatValue4, floatValue3, this.paint);
+        this.paint.setColor(value);
+        canvas.drawCircle(floatValue, f2, floatValue3, this.paint);
     }
 
-    private float dpToPx(float f) {
-        return f * getResources().getDisplayMetrics().density;
+    private float dpToPx(float floatValue) {
+        return floatValue * getResources().getDisplayMetrics().density;
     }
 
-    private Path createTrianglePath(float f, float f2, float f3, boolean z) {
+    private Path createTrianglePath(float floatValue, float f2, float floatValue3, boolean isFlag) {
         Path path = new Path();
-        if (z) {
-            float f4 = f3 / 2.0f;
-            float f5 = f + f4;
-            path.moveTo(f5, f2 - f4);
-            path.lineTo(f - f4, f2);
-            path.lineTo(f5, f2 + f4);
+        if (isFlag) {
+            float floatValue4 = floatValue3 / 2.0f;
+            float f5 = floatValue + floatValue4;
+            path.moveTo(f5, f2 - floatValue4);
+            path.lineTo(floatValue - floatValue4, f2);
+            path.lineTo(f5, f2 + floatValue4);
         } else {
-            float f6 = f3 / 2.0f;
-            float f7 = f - f6;
-            path.moveTo(f7, f2 - f6);
-            path.lineTo(f + f6, f2);
-            path.lineTo(f7, f2 + f6);
+            float floatValue6 = floatValue3 / 2.0f;
+            float f7 = floatValue - floatValue6;
+            path.moveTo(f7, f2 - floatValue6);
+            path.lineTo(floatValue + floatValue6, f2);
+            path.lineTo(f7, f2 + floatValue6);
         }
         path.close();
         return path;

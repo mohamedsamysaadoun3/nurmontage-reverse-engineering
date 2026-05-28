@@ -11,44 +11,44 @@ import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
 public class UltraFastWaveform {
-    public static float[] extractAmplitudes(String str, int i) throws IOException {
-        int length = decodeToPCM(str).length;
-        float[] fArr = new float[i];
-        double d = length / i;
-        int i2 = 0;
-        while (i2 < i) {
-            int i3 = i2 + 1;
+    public static float[] extractAmplitudes(String textValue, int value) throws IOException {
+        int length = decodeToPCM(textValue).length;
+        float[] fArr = new float[value];
+        double d = length / value;
+        int value2 = 0;
+        while (value2 < value) {
+            int i3 = value2 + 1;
             int min = Math.min((int) (i3 * d), length);
             float f = 0.0f;
-            for (int i4 = (int) (i2 * d); i4 < min; i4++) {
-                f = Math.max(f, Math.abs((int) r11[i4]) / 32767.0f);
+            for (int value4 = (int) (value2 * d); value4 < min; value4++) {
+                f = Math.max(f, Math.abs((int) r11[value4]) / 32767.0f);
             }
-            fArr[i2] = f;
-            i2 = i3;
+            fArr[value2] = f;
+            value2 = i3;
         }
         return fArr;
     }
 
-    private static short[] decodeToPCM(String str) throws IOException {
+    private static short[] decodeToPCM(String textValue) throws IOException {
         MediaExtractor mediaExtractor = new MediaExtractor();
-        mediaExtractor.setDataSource(str);
+        mediaExtractor.setDataSource(textValue);
         MediaFormat mediaFormat = null;
-        int i = 0;
+        int value = 0;
         while (true) {
-            if (i >= mediaExtractor.getTrackCount()) {
-                i = -1;
+            if (value >= mediaExtractor.getTrackCount()) {
+                value = -1;
                 break;
             }
-            mediaFormat = mediaExtractor.getTrackFormat(i);
+            mediaFormat = mediaExtractor.getTrackFormat(value);
             if (mediaFormat.getString("mime").startsWith("audio/")) {
                 break;
             }
-            i++;
+            value++;
         }
-        if (i == -1) {
+        if (value == -1) {
             throw new IOException("No audio track found");
         }
-        mediaExtractor.selectTrack(i);
+        mediaExtractor.selectTrack(value);
         MediaCodec createDecoderByType = MediaCodec.createDecoderByType(mediaFormat.getString("mime"));
         createDecoderByType.configure(mediaFormat, (Surface) null, (MediaCrypto) null, 0);
         createDecoderByType.start();
@@ -83,8 +83,8 @@ public class UltraFastWaveform {
         createDecoderByType.release();
         mediaExtractor.release();
         short[] sArr = new short[arrayList.size()];
-        for (int i2 = 0; i2 < arrayList.size(); i2++) {
-            sArr[i2] = ((Short) arrayList.get(i2)).shortValue();
+        for (int value2 = 0; value2 < arrayList.size(); value2++) {
+            sArr[value2] = ((Short) arrayList.get(value2)).shortValue();
         }
         return sArr;
     }

@@ -19,26 +19,26 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
     private int pos_select;
 
     public interface IColor {
-        void onGradient(Gradient gradient, int i);
+        void onGradient(Gradient gradient, int value);
     }
 
-    public GradientAdabter(IColor iColor, List<Gradient> list, boolean z, int i) {
+    public GradientAdabter(IColor iColor, List<Gradient> list, boolean isFlag, int value) {
         this.colors = list;
         this.iColorCallback = iColor;
-        this.isSubscribe = z;
-        this.pos_select = i;
+        this.isSubscribe = isFlag;
+        this.pos_select = value;
     }
 
     public Gradient getSelect() {
-        int i = this.pos_select;
-        if (i >= 0) {
-            return this.colors.get(i);
+        int value = this.pos_select;
+        if (value >= 0) {
+            return this.colors.get(value);
         }
         return null;
     }
 
-    public void setGradientBackground(View view, View view2, Gradient gradient, boolean z) {
-        if (z) {
+    public void setGradientBackground(View view, View view2, Gradient gradient, boolean isFlag) {
+        if (isFlag) {
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setShape(0);
             gradientDrawable.setCornerRadius(100.0f);
@@ -54,9 +54,9 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
         view.setBackground(gradientDrawable2);
     }
 
-    public void setGradientBackground(View view, int i) {
+    public void setGradientBackground(View view, int value) {
         GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(i);
+        gradientDrawable.setColor(value);
         gradientDrawable.setShape(0);
         gradientDrawable.setCornerRadius(100.0f);
         view.setBackground(gradientDrawable);
@@ -77,9 +77,9 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
                 public void onClick(View view2) {
                     if (GradientAdabter.this.iColorCallback != null) {
                         if ((GradientAdabter.this.isSubscribe || ViewHolder.this.getAdapterPosition() <= 1) && GradientAdabter.this.pos_select != ViewHolder.this.getAdapterPosition()) {
-                            int i = GradientAdabter.this.pos_select;
+                            int value = GradientAdabter.this.pos_select;
                             GradientAdabter.this.pos_select = ViewHolder.this.getAdapterPosition();
-                            GradientAdabter.this.notifyItemChanged(i);
+                            GradientAdabter.this.notifyItemChanged(value);
                             GradientAdabter.this.notifyItemChanged(GradientAdabter.this.pos_select);
                             GradientAdabter.this.iColorCallback.onGradient((Gradient) GradientAdabter.this.colors.get(ViewHolder.this.getAdapterPosition()), ViewHolder.this.getAdapterPosition());
                         }
@@ -90,14 +90,14 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_color, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors.get(i), i == this.pos_select);
-        if (!this.isSubscribe && i > 1) {
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors.get(value), value == this.pos_select);
+        if (!this.isSubscribe && value > 1) {
             viewHolder.imageLayer.setVisibility(0);
         } else {
             viewHolder.imageLayer.setVisibility(8);

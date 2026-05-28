@@ -106,36 +106,36 @@ public class EditTextFragment extends Fragment {
         int endWord_index = this.quranEntity.getEndWord_index();
         String[] split = complete_aya.trim().replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").trim().split("\\s+");
         ArrayList arrayList = new ArrayList();
-        int i = 1;
+        int value = 1;
         if (startWord_index == endWord_index) {
             String[] split2 = txt.trim().replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").split("\\s+");
             int indexOf = complete_aya.indexOf(txt);
             int i2 = indexOf == 0 ? 1 : 0;
             int length = split.length;
-            int i3 = 0;
+            int value3 = 0;
             int i4 = 0;
             int i5 = 0;
-            while (i3 < length) {
-                String str = split[i3];
-                if (!str.equals("-1")) {
+            while (value3 < length) {
+                String textValue = split[value3];
+                if (!textValue.equals("-1")) {
                     if (i2 == 0) {
                         if (i4 == indexOf) {
-                            i2 = i;
+                            i2 = value;
                         }
-                        i4 += str.length() + i;
+                        i4 += textValue.length() + value;
                     }
                     if (i2 != 0 && i5 < split2.length) {
-                        boolean equals = str.equals(split2[i5]);
-                        arrayList.add(new WordModel(str, equals));
+                        boolean equals = textValue.equals(split2[i5]);
+                        arrayList.add(new WordModel(textValue, equals));
                         if (equals) {
                             i5++;
                         }
                     } else {
-                        arrayList.add(new WordModel(str, false));
+                        arrayList.add(new WordModel(textValue, false));
                     }
                 }
-                i3++;
-                i = 1;
+                value3++;
+                value = 1;
             }
         } else {
             int i6 = 0;
@@ -178,36 +178,36 @@ public class EditTextFragment extends Fragment {
         int endWord_index = this.quranEntity.getEndWord_index();
         String[] split = complete_aya.trim().replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").trim().split("\\s+");
         ArrayList arrayList = new ArrayList();
-        int i = 1;
+        int value = 1;
         if (startWord_index == endWord_index) {
             String[] split2 = txt.trim().replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").split("\\s+");
             int indexOf = complete_aya.indexOf(txt);
             int i2 = indexOf == 0 ? 1 : 0;
             int length = split.length;
-            int i3 = 0;
+            int value3 = 0;
             int i4 = 0;
             int i5 = 0;
-            while (i3 < length) {
-                String str = split[i3];
-                if (!str.equals("-1")) {
+            while (value3 < length) {
+                String textValue = split[value3];
+                if (!textValue.equals("-1")) {
                     if (i2 == 0) {
                         if (i4 == indexOf) {
-                            i2 = i;
+                            i2 = value;
                         }
-                        i4 += str.length() + i;
+                        i4 += textValue.length() + value;
                     }
                     if (i2 != 0 && i5 < split2.length) {
-                        boolean equals = str.equals(split2[i5]);
-                        arrayList.add(new WordModel(str, equals));
+                        boolean equals = textValue.equals(split2[i5]);
+                        arrayList.add(new WordModel(textValue, equals));
                         if (equals) {
                             i5++;
                         }
                     } else {
-                        arrayList.add(new WordModel(str, false));
+                        arrayList.add(new WordModel(textValue, false));
                     }
                 }
-                i3++;
-                i = 1;
+                value3++;
+                value = 1;
             }
         } else {
             int i6 = 0;
@@ -227,11 +227,11 @@ public class EditTextFragment extends Fragment {
         }
     }
 
-    public static int findFirstDigitIndex(String str) {
-        if (str != null && !str.isEmpty()) {
-            for (int i = 0; i < str.length(); i++) {
-                if (Character.isDigit(str.charAt(i))) {
-                    return i;
+    public static int findFirstDigitIndex(String textValue) {
+        if (textValue != null && !textValue.isEmpty()) {
+            for (int value = 0; value < textValue.length(); value++) {
+                if (Character.isDigit(textValue.charAt(value))) {
+                    return value;
                 }
             }
         }
@@ -244,18 +244,18 @@ public class EditTextFragment extends Fragment {
         StringBuilder sb2 = new StringBuilder();
         List<WordModel> list = this.wordAyaAdabter.getList();
         String[] split = this.quranEntity.getTranslation_complete() != null ? this.quranEntity.getTranslation_complete().split(",") : null;
-        int i = -1;
+        int value = -1;
         int i2 = 0;
-        for (int i3 = 0; i3 < list.size(); i3++) {
-            WordModel wordModel = list.get(i3);
+        for (int value3 = 0; value3 < list.size(); value3++) {
+            WordModel wordModel = list.get(value3);
             if (wordModel.isSelected()) {
-                if (i == -1) {
-                    i = i3;
+                if (value == -1) {
+                    value = value3;
                 }
                 i2++;
                 sb.append(wordModel.getW()).append(" ");
-                if (split != null && i3 < split.length) {
-                    sb2.append(split[i3]).append(" ");
+                if (split != null && value3 < split.length) {
+                    sb2.append(split[value3]).append(" ");
                 }
             }
         }
@@ -264,12 +264,12 @@ public class EditTextFragment extends Fragment {
         } else {
             this.quranEntity.setTranslation(null);
         }
-        int i4 = i2 + i;
+        int i4 = i2 + value;
         if (this.quranEntity.getNumber() != -1) {
             i4++;
         }
         this.quranEntity.setEndWord_index(i4);
-        this.quranEntity.setStartWord_index(i);
+        this.quranEntity.setStartWord_index(value);
         return sb.toString().trim();
     }
 

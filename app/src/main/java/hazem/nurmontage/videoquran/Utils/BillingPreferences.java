@@ -8,9 +8,9 @@ public class BillingPreferences {
     private static final String KEY_IS_SUBSCRIBED = "isSubscribed";
     private static final String PREF_NAME = "BillingPrefs";
 
-    public static void saveSubscriptionStatus(Context context, boolean z) {
+    public static void saveSubscriptionStatus(Context context, boolean isSubscribed) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putBoolean(KEY_IS_SUBSCRIBED, z);
+        edit.putBoolean(KEY_IS_SUBSCRIBED, isSubscribed);
         edit.apply();
     }
 

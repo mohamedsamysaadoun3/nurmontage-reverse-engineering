@@ -107,8 +107,8 @@ public class CropViewHint extends View {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public static Bitmap get(Context context, int i, int i2, int i3) throws ExecutionException, InterruptedException {
-        FutureTarget submit = Glide.with(context).asBitmap().load(Integer.valueOf(i3)).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new ObjectKey(AppUtils.getAppVersionName(context))).override(i, i2).centerInside().submit();
+    public static Bitmap get(Context context, int i, int value2, int value3) throws ExecutionException, InterruptedException {
+        FutureTarget submit = Glide.with(context).asBitmap().load(Integer.valueOf(value3)).diskCacheStrategy(DiskCacheStrategy.NONE).signature(new ObjectKey(AppUtils.getAppVersionName(context))).override(i, value2).centerInside().submit();
         Bitmap copy = ((Bitmap) submit.get()).copy(Bitmap.Config.ARGB_8888, true);
         Glide.with(context).clear(submit);
         return copy;
@@ -121,8 +121,8 @@ public class CropViewHint extends View {
         return null;
     }
 
-    private void drawArrowHead(Canvas canvas, float f, float f2, float f3, float f4) {
-        double atan2 = Math.atan2(f2 - f4, f - f3);
+    private void drawArrowHead(Canvas canvas, float f, float f2, float f3, float floatValue4) {
+        double atan2 = Math.atan2(f2 - floatValue4, f - f3);
         double d = f;
         double d2 = atan2 - 0.5235987755982988d;
         float cos = (float) (d - (this.arrowHeadSize * Math.cos(d2)));
@@ -140,8 +140,8 @@ public class CropViewHint extends View {
     }
 
     @Override // android.view.View
-    protected void onMeasure(int i, int i2) {
-        super.onMeasure(i, i2);
+    protected void onMeasure(int i, int value2) {
+        super.onMeasure(i, value2);
         int size = View.MeasureSpec.getSize(i);
         setMeasuredDimension(size, size);
         float f = size;

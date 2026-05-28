@@ -13,19 +13,19 @@ public class BgItem {
     /* renamed from: y */
     private float f416y;
 
-    public BgItem(int i, float f, float f2, String str) {
-        this.f414id = i;
+    public BgItem(int value, float f, float floatValue2, String textValue) {
+        this.f414id = value;
         this.f415x = f;
-        this.f416y = f2;
-        this.name_drawable = str;
+        this.f416y = floatValue2;
+        this.name_drawable = textValue;
     }
 
     public String getName_drawable() {
         return this.name_drawable;
     }
 
-    public void setName_drawable(String str) {
-        this.name_drawable = str;
+    public void setName_drawable(String textValue) {
+        this.name_drawable = textValue;
     }
 
     public float getY() {

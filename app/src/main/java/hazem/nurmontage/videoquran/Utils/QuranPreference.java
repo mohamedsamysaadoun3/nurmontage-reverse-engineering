@@ -18,18 +18,18 @@ public class QuranPreference {
         this.sharedPreferences = context.getSharedPreferences(PREF_NAME, 0);
     }
 
-    public static void savePreferencesSearch(Context context, int i, int i2, int i3, String str) {
+    public static void savePreferencesSearch(Context context, int i, int value2, int value3, String textValue) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putInt("from", i2);
-        edit.putInt("to", i3);
+        edit.putInt("from", value2);
+        edit.putInt("to", value3);
         edit.putInt("surah", i);
-        edit.putString(KEY_SEARCH, str);
+        edit.putString(KEY_SEARCH, textValue);
         edit.apply();
     }
 
-    public static void saveLastSearch(Context context, String str) {
+    public static void saveLastSearch(Context context, String textValue) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putString(KEY_SEARCH, str);
+        edit.putString(KEY_SEARCH, textValue);
         edit.apply();
     }
 
@@ -37,20 +37,20 @@ public class QuranPreference {
         return context.getSharedPreferences(PREF_NAME, 0).getString(KEY_SEARCH, "");
     }
 
-    public void savePreferences(int i, int i2, int i3, int i4, int i5) {
+    public void savePreferences(int i, int value2, int value3, int i4, int value5) {
         SharedPreferences.Editor edit = this.sharedPreferences.edit();
-        edit.putInt("from", i2);
-        edit.putInt("to", i3);
+        edit.putInt("from", value2);
+        edit.putInt("to", value3);
         edit.putInt("surah", i);
         edit.putInt(KEY_NAME_READER, i4);
-        edit.putInt(KEY_TRANSLATION, i5);
+        edit.putInt(KEY_TRANSLATION, value5);
         edit.apply();
     }
 
-    public static void savePreferencesSearch(Context context, int i, int i2) {
+    public static void savePreferencesSearch(Context context, int i, int value2) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putInt("from", i2);
-        edit.putInt("to", i2);
+        edit.putInt("from", value2);
+        edit.putInt("to", value2);
         edit.putInt("surah", i);
         edit.apply();
     }

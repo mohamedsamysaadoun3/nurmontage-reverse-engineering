@@ -373,7 +373,7 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void initBtnHelp(boolean z) {
+    public void initBtnHelp(boolean showHelp) {
         findViewById(C2014R.id.layout_help).setVisibility(0);
         Typeface createFromAsset = Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf");
         Button button = (Button) findViewById(C2014R.id.btn_help);
@@ -432,8 +432,8 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
         recyclerView.setHasFixedSize(false);
         recyclerView.setItemAnimator(null);
         ArrayList arrayList = new ArrayList();
-        for (String str : this.mResources.getStringArray(C2014R.array.feature_list)) {
-            arrayList.add(new ModelFeatures(str));
+        for (String textValue : this.mResources.getStringArray(C2014R.array.feature_list)) {
+            arrayList.add(new ModelFeatures(textValue));
         }
         FeaturesAdabter featuresAdabter = new FeaturesAdabter(arrayList);
         this.featuresAdabter = featuresAdabter;
@@ -595,9 +595,9 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
         }
     }
 
-    private String formatPriceWithSymbol(long j, String str) {
+    private String formatPriceWithSymbol(long j, String textValue) {
         NumberFormat currencyInstance = NumberFormat.getCurrencyInstance(Locale.US);
-        currencyInstance.setCurrency(Currency.getInstance(str));
+        currencyInstance.setCurrency(Currency.getInstance(textValue));
         currencyInstance.setMaximumFractionDigits(2);
         currencyInstance.setMinimumFractionDigits(2);
         return currencyInstance.format(j / 1000000.0d);
@@ -812,11 +812,11 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
             ProVersionActivity.this.recyclerView.setItemAnimator(null);
             ProVersionActivity.this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: hazem.nurmontage.videoquran.ProVersionActivity.16.1
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrollStateChanged(RecyclerView recyclerView, int i) {
-                    super.onScrollStateChanged(recyclerView, i);
-                    if (i == 1) {
+                public void onScrollStateChanged(RecyclerView recyclerView, int value) {
+                    super.onScrollStateChanged(recyclerView, value);
+                    if (value == 1) {
                         ProVersionActivity.this.isUserScrolling = true;
-                    } else if (i == 0) {
+                    } else if (value == 0) {
                         ProVersionActivity.this.isUserScrolling = false;
                         ProVersionActivity.this.startAutoScroll();
                     }

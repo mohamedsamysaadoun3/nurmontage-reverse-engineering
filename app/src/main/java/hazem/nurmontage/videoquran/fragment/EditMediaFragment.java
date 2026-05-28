@@ -47,11 +47,11 @@ public class EditMediaFragment extends Fragment {
 
         void noice();
 
-        void onCmd(String str);
+        void onCmd(String textValue);
 
         void onCmdAll(EffectAudio effectAudio);
 
-        void onCmdPlay(String str);
+        void onCmdPlay(String textValue);
 
         void onCut();
 
@@ -78,18 +78,18 @@ public class EditMediaFragment extends Fragment {
         void volumeEffect();
     }
 
-    public static EditMediaFragment getInstance(IEditMediaCallback iEditMediaCallback, Resources resources, EntityAudio entityAudio, float f) {
+    public static EditMediaFragment getInstance(IEditMediaCallback iEditMediaCallback, Resources resources, EntityAudio entityAudio, float floatValue) {
         if (instance == null) {
-            instance = new EditMediaFragment(iEditMediaCallback, resources, entityAudio, f);
+            instance = new EditMediaFragment(iEditMediaCallback, resources, entityAudio, floatValue);
         }
         return instance;
     }
 
-    public EditMediaFragment(IEditMediaCallback iEditMediaCallback, Resources resources, EntityAudio entityAudio, float f) {
+    public EditMediaFragment(IEditMediaCallback iEditMediaCallback, Resources resources, EntityAudio entityAudio, float floatValue) {
         this.iEditMediaCallback = iEditMediaCallback;
         this.resources = resources;
         this.entity_select = entityAudio;
-        this.pos_cursur = f;
+        this.pos_cursur = floatValue;
     }
 
     public EditMediaFragment() {
@@ -118,7 +118,7 @@ public class EditMediaFragment extends Fragment {
             final ImageView imageView2 = (ImageView) root.findViewById(C2014R.id.btn_show_right);
             horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.EditMediaFragment.2
                 @Override // android.view.View.OnScrollChangeListener
-                public void onScrollChange(View view, int i, int i2, int i3, int i4) {
+                public void onScrollChange(View view, int i, int i2, int i3, int value4) {
                     try {
                         if (i > EditMediaFragment.this.btn_cut.getWidth() * 0.3f) {
                             imageView2.setVisibility(8);
@@ -293,9 +293,9 @@ public class EditMediaFragment extends Fragment {
         }
     }
 
-    public void initCheckSplit(EntityAudio entityAudio, float f) {
+    public void initCheckSplit(EntityAudio entityAudio, float floatValue) {
         try {
-            if (entityAudio.getRect().left <= f && entityAudio.getRect().right >= f) {
+            if (entityAudio.getRect().left <= floatValue && entityAudio.getRect().right >= floatValue) {
                 this.btn_cut.setClickable(true);
                 this.tv_cut.setTextColor(-1);
                 this.iv_cut.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
@@ -308,14 +308,14 @@ public class EditMediaFragment extends Fragment {
         }
     }
 
-    public void checkSplit(EntityAudio entityAudio, float f) {
+    public void checkSplit(EntityAudio entityAudio, float floatValue) {
         if (entityAudio == null) {
             return;
         }
         this.entity_select = entityAudio;
         updateBtn();
         try {
-            if (entityAudio.getRect().left <= f && entityAudio.getRect().right >= f) {
+            if (entityAudio.getRect().left <= floatValue && entityAudio.getRect().right >= floatValue) {
                 this.btn_cut.setClickable(true);
                 this.tv_cut.setTextColor(-1);
                 this.iv_cut.setColorFilter(-1, PorterDuff.Mode.SRC_IN);

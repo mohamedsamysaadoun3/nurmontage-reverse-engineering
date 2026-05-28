@@ -15,9 +15,9 @@ public class TimelineAnimator {
         public void run() {
             if (TimelineAnimator.this.isRunning) {
                 long currentTimeMillis = System.currentTimeMillis();
-                int i = (int) (currentTimeMillis - TimelineAnimator.this.lastFrameTime);
+                int value = (int) (currentTimeMillis - TimelineAnimator.this.lastFrameTime);
                 TimelineAnimator.this.lastFrameTime = currentTimeMillis;
-                TimelineAnimator.this.currentTimeMs += i;
+                TimelineAnimator.this.currentTimeMs += value;
                 if (TimelineAnimator.this.currentTimeMs >= TimelineAnimator.this.maxTimeMs) {
                     TimelineAnimator timelineAnimator = TimelineAnimator.this;
                     timelineAnimator.currentTimeMs = timelineAnimator.maxTimeMs;
@@ -36,17 +36,17 @@ public class TimelineAnimator {
     public interface AnimatorListener {
         void onEnd();
 
-        void onUpdate(int i);
+        void onUpdate(int value);
     }
 
     public boolean isRunning() {
         return this.isRunning;
     }
 
-    public TimelineAnimator(int i, int i2, AnimatorListener animatorListener) {
-        this.startTimeMs = i;
-        this.currentTimeMs = i;
-        this.maxTimeMs = i2;
+    public TimelineAnimator(int value, int duration2, AnimatorListener animatorListener) {
+        this.startTimeMs = value;
+        this.currentTimeMs = value;
+        this.maxTimeMs = duration2;
         this.listener = animatorListener;
     }
 

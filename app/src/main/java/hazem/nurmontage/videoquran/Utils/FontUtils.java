@@ -9,14 +9,14 @@ import java.io.InputStream;
 
 /* loaded from: classes2.dex */
 public class FontUtils {
-    public static void copyFontToInternalStorage(Context context, String str) {
+    public static void copyFontToInternalStorage(Context context, String textValue) {
         AssetManager assets = context.getAssets();
-        File file = new File(context.getFilesDir(), str);
+        File file = new File(context.getFilesDir(), textValue);
         if (file.exists()) {
             return;
         }
         try {
-            InputStream open = assets.open("fonts/arabic/" + str);
+            InputStream open = assets.open("fonts/arabic/" + textValue);
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 try {

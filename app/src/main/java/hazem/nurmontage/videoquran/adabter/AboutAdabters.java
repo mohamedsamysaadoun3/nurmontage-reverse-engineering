@@ -23,22 +23,22 @@ public class AboutAdabters extends RecyclerView.Adapter<ViewHolder> {
     private final int mDimensionW;
     private final List<ModelAbout> mModelAboutList;
 
-    public AboutAdabters(Context context, String str, List<ModelAbout> list, int i, int i2) {
+    public AboutAdabters(Context context, String textValue, List<ModelAbout> list, int value, int value2) {
         this.mContext = context;
         this.mModelAboutList = list;
-        this.mDimensionW = i;
-        this.mDimensionH = i2;
-        this.APP_VERSION = str;
+        this.mDimensionW = value;
+        this.mDimensionH = value2;
+        this.APP_VERSION = textValue;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_billing, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        ModelAbout modelAbout = this.mModelAboutList.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        ModelAbout modelAbout = this.mModelAboutList.get(value);
         viewHolder.textView.setGravity(modelAbout.geGravity());
         if (modelAbout.getSizeText() == 19) {
             viewHolder.textView.getPaint().setFakeBoldText(true);
@@ -82,25 +82,25 @@ public class AboutAdabters extends RecyclerView.Adapter<ViewHolder> {
         private int sizeText;
         private Pair<String, Integer> text;
 
-        public ModelAbout(Pair<String, Integer> pair, int i) {
+        public ModelAbout(Pair<String, Integer> pair, int value) {
             this.image_2 = -1;
             this.sizeText = 16;
             this.text = pair;
-            this.image_1 = i;
+            this.image_1 = value;
         }
 
-        public ModelAbout(int i, Pair<String, Integer> pair, int i2) {
+        public ModelAbout(int value, Pair<String, Integer> pair, int value2) {
             this.image_2 = -1;
             this.text = pair;
-            this.image_1 = i2;
-            this.sizeText = i;
+            this.image_1 = value2;
+            this.sizeText = value;
         }
 
-        public ModelAbout(int i, int i2, Pair<String, Integer> pair) {
+        public ModelAbout(int value, int value2, Pair<String, Integer> pair) {
             this.sizeText = 16;
             this.text = pair;
-            this.image_1 = i;
-            this.image_2 = i2;
+            this.image_1 = value;
+            this.image_2 = value2;
         }
 
         public ModelAbout(Pair<String, Integer> pair) {
@@ -110,18 +110,18 @@ public class AboutAdabters extends RecyclerView.Adapter<ViewHolder> {
             this.text = pair;
         }
 
-        public ModelAbout(Pair<String, Integer> pair, int i, int i2) {
+        public ModelAbout(Pair<String, Integer> pair, int value, int value2) {
             this.image_2 = -1;
             this.text = pair;
-            this.sizeText = i2;
-            this.image_1 = i;
+            this.sizeText = value2;
+            this.image_1 = value;
         }
 
-        public ModelAbout(int i, Pair<String, Integer> pair) {
+        public ModelAbout(int value, Pair<String, Integer> pair) {
             this.image_1 = -1;
             this.image_2 = -1;
             this.text = pair;
-            this.sizeText = i;
+            this.sizeText = value;
         }
 
         public int getImage_1() {

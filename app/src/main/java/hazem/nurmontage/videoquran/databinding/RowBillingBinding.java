@@ -33,9 +33,9 @@ public final class RowBillingBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static RowBillingBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static RowBillingBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.row_billing, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

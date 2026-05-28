@@ -17,11 +17,11 @@ public class MRectF implements Serializable {
     /* renamed from: t */
     private float f436t;
 
-    public MRectF(float f, float f2, float f3, float f4) {
-        this.f434l = f;
+    public MRectF(float floatValue, float f2, float f3, float floatValue4) {
+        this.f434l = floatValue;
         this.f436t = f2;
         this.f435r = f3;
-        this.f433b = f4;
+        this.f433b = floatValue4;
     }
 
     public float getT() {
@@ -40,19 +40,19 @@ public class MRectF implements Serializable {
         return this.f435r;
     }
 
-    public void setB(float f) {
-        this.f433b = f;
+    public void setB(float floatValue) {
+        this.f433b = floatValue;
     }
 
-    public void setL(float f) {
-        this.f434l = f;
+    public void setL(float floatValue) {
+        this.f434l = floatValue;
     }
 
-    public void setR(float f) {
-        this.f435r = f;
+    public void setR(float floatValue) {
+        this.f435r = floatValue;
     }
 
-    public void setT(float f) {
-        this.f436t = f;
+    public void setT(float floatValue) {
+        this.f436t = floatValue;
     }
 }

@@ -46,9 +46,9 @@ public final class ControllerQuranMinimalBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ControllerQuranMinimalBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ControllerQuranMinimalBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.controller_quran_minimal, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

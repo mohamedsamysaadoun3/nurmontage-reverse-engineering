@@ -51,23 +51,23 @@ public class EditBismilahEntityFragment extends Fragment {
 
         void update();
 
-        void updateAya(int i);
+        void updateAya(int value);
 
         void updatePreset(AyaTextPreset ayaTextPreset);
     }
 
-    public static EditBismilahEntityFragment getInstance(IBismilahEntityCallback iBismilahEntityCallback, Resources resources, Entity entity, float f) {
+    public static EditBismilahEntityFragment getInstance(IBismilahEntityCallback iBismilahEntityCallback, Resources resources, Entity entity, float floatValue) {
         if (instance == null) {
-            instance = new EditBismilahEntityFragment(iBismilahEntityCallback, resources, entity, f);
+            instance = new EditBismilahEntityFragment(iBismilahEntityCallback, resources, entity, floatValue);
         }
         return instance;
     }
 
-    public EditBismilahEntityFragment(IBismilahEntityCallback iBismilahEntityCallback, Resources resources, Entity entity, float f) {
+    public EditBismilahEntityFragment(IBismilahEntityCallback iBismilahEntityCallback, Resources resources, Entity entity, float floatValue) {
         this.iEditEntityCallback = iBismilahEntityCallback;
         this.resources = resources;
         this.entity_select = entity;
-        this.pos_cursur = f;
+        this.pos_cursur = floatValue;
     }
 
     public EditBismilahEntityFragment() {
@@ -171,12 +171,12 @@ public class EditBismilahEntityFragment extends Fragment {
         return root;
     }
 
-    public void checkSplitEntity(Entity entity, float f) {
+    public void checkSplitEntity(Entity entity, float floatValue) {
         if (entity == null) {
             return;
         }
         try {
-            if (entity.getRect().right < f) {
+            if (entity.getRect().right < floatValue) {
                 this.tv_from_now.setTextColor(-8355712);
                 this.iv_from_now.setColorFilter(-8355712, PorterDuff.Mode.SRC_IN);
                 this.btn_from_now.setClickable(false);
@@ -185,7 +185,7 @@ public class EditBismilahEntityFragment extends Fragment {
                 this.tv_from_now.setTextColor(-1);
                 this.iv_from_now.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
             }
-            if (entity.getRect().left > f) {
+            if (entity.getRect().left > floatValue) {
                 this.tv_until_now.setTextColor(-8355712);
                 this.iv_until_now.setColorFilter(-8355712, PorterDuff.Mode.SRC_IN);
                 this.btn_until_now.setClickable(false);

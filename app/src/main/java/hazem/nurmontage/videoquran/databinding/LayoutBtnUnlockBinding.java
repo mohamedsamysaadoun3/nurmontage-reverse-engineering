@@ -28,9 +28,9 @@ public final class LayoutBtnUnlockBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static LayoutBtnUnlockBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static LayoutBtnUnlockBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.layout_btn_unlock, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

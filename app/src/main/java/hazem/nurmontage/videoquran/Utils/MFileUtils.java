@@ -18,8 +18,8 @@ public class MFileUtils {
         public String name;
         public String timedDate;
 
-        public FileInfo(String str, long j) {
-            this.name = str;
+        public FileInfo(String filePath, long j) {
+            this.name = filePath;
             this.lastModified = j;
             this.formattedDate = MFileUtils.formatDateShort(j);
             if (j > 0) {
@@ -46,7 +46,7 @@ public class MFileUtils {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static FileInfo getFileInfo(Context context, String str) {
+    public static FileInfo getFileInfo(Context context, String filePath) {
         String str2;
         Cursor query;
         long j;
@@ -57,10 +57,10 @@ public class MFileUtils {
         r2 = null;
         Cursor cursor2 = null;
         String str3 = null;
-        if (str == null) {
+        if (filePath == null) {
             return null;
         }
-        Uri parse = Uri.parse(str);
+        Uri parse = Uri.parse(filePath);
         try {
             if ("content".equalsIgnoreCase(parse.getScheme())) {
                 try {
@@ -114,7 +114,7 @@ public class MFileUtils {
                                     if (!"file".equalsIgnoreCase(parse.getScheme())) {
                                         file = new File(parse.getPath());
                                     } else {
-                                        file = new File(str);
+                                        file = new File(filePath);
                                     }
                                     if (file.exists()) {
                                         if (str3 == null) {

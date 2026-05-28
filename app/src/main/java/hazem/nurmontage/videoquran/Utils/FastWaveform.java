@@ -14,12 +14,12 @@ import java.util.Map;
 
 /* loaded from: classes2.dex */
 public class FastWaveform {
-    public static float[] decodeWaveform(Context context, Uri uri, int i) {
+    public static float[] decodeWaveform(Context context, Uri uri, int requestCode) {
         MediaExtractor mediaExtractor;
         int i2;
         MediaFormat mediaFormat;
         long j;
-        float[] fArr = new float[i];
+        float[] fArr = new float[requestCode];
         try {
             mediaExtractor = new MediaExtractor();
             mediaExtractor.setDataSource(context, uri, (Map<String, String>) null);
@@ -46,7 +46,7 @@ public class FastWaveform {
         MediaCodec createDecoderByType = MediaCodec.createDecoderByType(mediaFormat.getString("mime"));
         createDecoderByType.configure(mediaFormat, (Surface) null, (MediaCrypto) null, 0);
         createDecoderByType.start();
-        long j2 = ((mediaFormat.getLong("durationUs") / 1000000) * mediaFormat.getInteger("sample-rate")) / i;
+        long j2 = ((mediaFormat.getLong("durationUs") / 1000000) * mediaFormat.getInteger("sample-rate")) / requestCode;
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
         boolean z = false;
         int i3 = 0;
@@ -82,7 +82,7 @@ public class FastWaveform {
                     if (j3 >= j2) {
                         fArr[i3] = f;
                         int i4 = i3 + 1;
-                        if (i4 >= i) {
+                        if (i4 >= requestCode) {
                             i3 = i4;
                             z = true;
                             break;

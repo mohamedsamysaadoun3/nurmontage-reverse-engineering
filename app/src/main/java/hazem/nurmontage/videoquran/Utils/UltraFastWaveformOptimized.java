@@ -10,9 +10,9 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
 public class UltraFastWaveformOptimized {
-    public static float[] extractAmplitudes(String str, int i) throws IOException {
+    public static float[] extractAmplitudes(String textValue, int value) throws IOException {
         MediaExtractor mediaExtractor = new MediaExtractor();
-        mediaExtractor.setDataSource(str);
+        mediaExtractor.setDataSource(textValue);
         MediaFormat mediaFormat = null;
         int i2 = 0;
         while (true) {
@@ -34,9 +34,9 @@ public class UltraFastWaveformOptimized {
         createDecoderByType.configure(mediaFormat, (Surface) null, (MediaCrypto) null, 0);
         createDecoderByType.start();
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-        float[] fArr = new float[i];
+        float[] fArr = new float[value];
         mediaFormat.getLong("durationUs");
-        int[] iArr = new int[i];
+        int[] iArr = new int[value];
         boolean z = false;
         int i3 = 0;
         while (!z) {
@@ -57,11 +57,11 @@ public class UltraFastWaveformOptimized {
                     ByteBuffer outputBuffer = createDecoderByType.getOutputBuffer(dequeueOutputBuffer);
                     outputBuffer.position(0);
                     int i4 = bufferInfo.size / 2;
-                    float f = i4 / i;
-                    for (int i5 = 0; i5 < i4; i5 += 2) {
-                        short s = outputBuffer.getShort(i5);
+                    float f = i4 / value;
+                    for (int value5 = 0; value5 < i4; value5 += 2) {
+                        short s = outputBuffer.getShort(value5);
                         int i6 = (int) (i3 / f);
-                        if (i6 >= i) {
+                        if (i6 >= value) {
                             break;
                         }
                         fArr[i6] = Math.max(fArr[i6], Math.abs((int) s) / 32767.0f);

@@ -15,8 +15,8 @@ import java.util.concurrent.ExecutionException;
 
 /* loaded from: classes2.dex */
 public class ImageLoader {
-    public static Bitmap loadAndCropAndBlur(Context context, Object obj, int i, int i2) throws ExecutionException, InterruptedException {
-        return Glide.with(context).asBitmap().load(obj).apply((BaseRequestOptions<?>) RequestOptions.bitmapTransform(new StoryCropTransformation(i, i2)).override(i, i2)).submit().get();
+    public static Bitmap loadAndCropAndBlur(Context context, Object obj, int i, int value2) throws ExecutionException, InterruptedException {
+        return Glide.with(context).asBitmap().load(obj).apply((BaseRequestOptions<?>) RequestOptions.bitmapTransform(new StoryCropTransformation(i, value2)).override(i, value2)).submit().get();
     }
 
     public static class StoryCropTransformation implements Transformation<Bitmap> {
@@ -24,16 +24,16 @@ public class ImageLoader {
         private final int targetWidth;
 
         @Override // com.bumptech.glide.load.Transformation
-        public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int i, int i2) {
+        public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int i, int value2) {
             return null;
         }
 
-        public StoryCropTransformation(int i, int i2) {
+        public StoryCropTransformation(int i, int value2) {
             this.targetWidth = i;
-            this.targetHeight = i2;
+            this.targetHeight = value2;
         }
 
-        public Resource<Bitmap> transform(BitmapPool bitmapPool, Resource<Bitmap> resource, int i, int i2) {
+        public Resource<Bitmap> transform(BitmapPool bitmapPool, Resource<Bitmap> resource, int i, int value2) {
             Bitmap bitmap = resource.get();
             int width = bitmap.getWidth();
             int height = bitmap.getHeight();

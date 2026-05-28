@@ -56,9 +56,9 @@ public class PitchFragment extends Fragment {
         this.volumeSeekBar.setProgress(20);
         this.volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.PitchFragment.1
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar2, int i, boolean z) {
-                if (z) {
-                    PitchFragment.this.tvProgress.setText(String.valueOf(i));
+            public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                if (isFlag) {
+                    PitchFragment.this.tvProgress.setText(String.valueOf(value));
                 }
             }
 
@@ -111,11 +111,11 @@ public class PitchFragment extends Fragment {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void previewAudio() {
-        boolean z = this.isPlay;
-        this.isPlay = !z;
+        boolean isFlag = this.isPlay;
+        this.isPlay = !isFlag;
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iVolumeCallback;
         if (iEditMediaCallback != null) {
-            if (!z) {
+            if (!isFlag) {
                 iEditMediaCallback.startPreview();
                 this.btnPreview.setImageResource(C2014R.drawable.pause_24px);
             } else {

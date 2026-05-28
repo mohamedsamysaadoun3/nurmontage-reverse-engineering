@@ -10,16 +10,16 @@ public class VideoItem {
     private String path;
     private String time;
 
-    public void setAdabter_pos(int i) {
-        this.adabter_pos = i;
+    public void setAdabter_pos(int value) {
+        this.adabter_pos = value;
     }
 
     public int getAdabter_pos() {
         return this.adabter_pos;
     }
 
-    public void setNumber(int i) {
-        this.number = i;
+    public void setNumber(int value) {
+        this.number = value;
     }
 
     public int getNumber() {
@@ -30,8 +30,8 @@ public class VideoItem {
         return this.isSelect;
     }
 
-    public void setSelect(boolean z) {
-        this.isSelect = z;
+    public void setSelect(boolean isSelected) {
+        this.isSelect = isSelected;
     }
 
     public void setGallerySelected(GallerySelected gallerySelected) {
@@ -42,11 +42,11 @@ public class VideoItem {
         return this.gallerySelected;
     }
 
-    public VideoItem(String str, String str2, String str3, boolean z) {
+    public VideoItem(String str, String str2, String textValue3, boolean isSelected) {
         this.folderPath = str;
         this.path = str2;
-        this.time = str3;
-        this.isSelect = z;
+        this.time = textValue3;
+        this.isSelect = isSelected;
     }
 
     public String getFolderPath() {

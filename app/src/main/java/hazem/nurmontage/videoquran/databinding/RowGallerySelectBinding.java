@@ -34,9 +34,9 @@ public final class RowGallerySelectBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static RowGallerySelectBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static RowGallerySelectBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.row_gallery_select, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

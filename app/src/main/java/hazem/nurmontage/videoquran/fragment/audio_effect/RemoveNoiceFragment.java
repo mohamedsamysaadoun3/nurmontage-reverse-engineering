@@ -57,7 +57,7 @@ public class RemoveNoiceFragment extends Fragment {
             switchCompat.setChecked(this.entityAudio.getEffectAudio().isRemoveNoice());
             this.btn_remove_noice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.RemoveNoiceFragment.1
                 @Override // android.widget.CompoundButton.OnCheckedChangeListener
-                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     RemoveNoiceFragment.this.apply(false);
                 }
             });
@@ -106,11 +106,11 @@ public class RemoveNoiceFragment extends Fragment {
     }
 
     private void preview() {
-        boolean z = this.isPlay;
-        this.isPlay = !z;
+        boolean isChecked = this.isPlay;
+        this.isPlay = !isChecked;
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iEditMediaCallback;
         if (iEditMediaCallback != null) {
-            if (!z) {
+            if (!isChecked) {
                 iEditMediaCallback.startPreview();
                 this.btnPreview.setImageResource(C2014R.drawable.pause_24px);
             } else {
@@ -128,7 +128,7 @@ public class RemoveNoiceFragment extends Fragment {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void apply(boolean z) {
+    public void apply(boolean isChecked) {
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
         effectAudio.setRemoveNoice(this.btn_remove_noice.isChecked());
         float start = effectAudio.getStart() / 1000.0f;
@@ -161,7 +161,7 @@ public class RemoveNoiceFragment extends Fragment {
         }
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iEditMediaCallback;
         if (iEditMediaCallback != null) {
-            if (z) {
+            if (isChecked) {
                 iEditMediaCallback.updateEntity(EffectAudioType.NOICE, this.entityAudio);
                 this.iEditMediaCallback.onCmdAll(effectAudio);
             } else {
@@ -170,22 +170,22 @@ public class RemoveNoiceFragment extends Fragment {
         }
     }
 
-    private List<String> buildSpeedFilters(float f) {
+    private List<String> buildSpeedFilters(float speed) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (speed < 0.5f) {
+            while (speed < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                speed /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
+        } else if (speed > 2.0f) {
+            while (speed > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                speed /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         }
         return arrayList;
     }

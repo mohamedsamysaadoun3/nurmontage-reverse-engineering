@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
 public class WaveformExtractor {
-    public static float[] extractAmplitudes(String str, int i) {
+    public static float[] extractAmplitudes(String textValue, int value) {
         ByteBuffer[] byteBufferArr;
         float[] fArr;
         long j;
@@ -19,10 +19,10 @@ public class WaveformExtractor {
         int dequeueInputBuffer;
         MediaExtractor mediaExtractor = new MediaExtractor();
         try {
-            mediaExtractor.setDataSource(str);
+            mediaExtractor.setDataSource(textValue);
             int selectAudioTrack = selectAudioTrack(mediaExtractor);
             if (selectAudioTrack < 0) {
-                return new float[i];
+                return new float[value];
             }
             mediaExtractor.selectTrack(selectAudioTrack);
             MediaFormat trackFormat = mediaExtractor.getTrackFormat(selectAudioTrack);
@@ -33,9 +33,9 @@ public class WaveformExtractor {
             createDecoderByType.start();
             ByteBuffer[] inputBuffers = createDecoderByType.getInputBuffers();
             ByteBuffer[] outputBuffers = createDecoderByType.getOutputBuffers();
-            float[] fArr2 = new float[i];
-            float[] fArr3 = new float[i];
-            float f = (trackFormat.getLong("durationUs") / 1000000.0f) / i;
+            float[] fArr2 = new float[value];
+            float[] fArr3 = new float[value];
+            float f = (trackFormat.getLong("durationUs") / 1000000.0f) / value;
             MediaCodec.BufferInfo bufferInfo2 = new MediaCodec.BufferInfo();
             boolean z = false;
             while (true) {
@@ -68,10 +68,10 @@ public class WaveformExtractor {
                     byteBuffer.position(bufferInfo.offset);
                     byteBuffer.limit(bufferInfo.offset + bufferInfo.size);
                     int remaining = byteBuffer.asShortBuffer().remaining();
-                    for (int i4 = 0; i4 < remaining; i4++) {
-                        float abs = Math.abs((int) r5.get(i4)) / 32768.0f;
+                    for (int value4 = 0; value4 < remaining; value4++) {
+                        float abs = Math.abs((int) r5.get(value4)) / 32768.0f;
                         int i5 = (int) ((bufferInfo.presentationTimeUs / 1000000.0f) / f);
-                        if (i5 < i) {
+                        if (i5 < value) {
                             fArr2[i5] = fArr2[i5] + abs;
                             fArr[i5] = fArr[i5] + 1.0f;
                         }
@@ -89,10 +89,10 @@ public class WaveformExtractor {
                 fArr3 = fArr;
                 inputBuffers = byteBufferArr;
             }
-            for (int i6 = 0; i6 < i; i6++) {
-                float f2 = fArr[i6];
+            for (int value6 = 0; value6 < value; value6++) {
+                float f2 = fArr[value6];
                 if (f2 > 0.0f) {
-                    fArr2[i6] = fArr2[i6] / f2;
+                    fArr2[value6] = fArr2[value6] / f2;
                 }
             }
             createDecoderByType.stop();
@@ -101,14 +101,14 @@ public class WaveformExtractor {
             return fArr2;
         } catch (Exception e) {
             e.printStackTrace();
-            return new float[i];
+            return new float[value];
         }
     }
 
     private static int selectAudioTrack(MediaExtractor mediaExtractor) {
-        for (int i = 0; i < mediaExtractor.getTrackCount(); i++) {
-            if (mediaExtractor.getTrackFormat(i).getString("mime").startsWith("audio/")) {
-                return i;
+        for (int value = 0; value < mediaExtractor.getTrackCount(); value++) {
+            if (mediaExtractor.getTrackFormat(value).getString("mime").startsWith("audio/")) {
+                return value;
             }
         }
         return -1;

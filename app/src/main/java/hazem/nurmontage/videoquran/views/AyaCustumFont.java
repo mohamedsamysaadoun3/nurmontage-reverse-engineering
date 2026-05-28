@@ -19,8 +19,8 @@ public class AyaCustumFont extends AppCompatTextView {
         init(context);
     }
 
-    public AyaCustumFont(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public AyaCustumFont(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         init(context);
     }
 

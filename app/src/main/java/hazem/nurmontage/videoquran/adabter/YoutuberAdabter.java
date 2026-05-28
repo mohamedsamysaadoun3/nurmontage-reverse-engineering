@@ -27,15 +27,15 @@ public class YoutuberAdabter extends RecyclerView.Adapter<ViewHolder> {
     private int f392w;
 
     public interface IYoutuber {
-        void onClick(String str);
+        void onClick(String textValue);
     }
 
-    public YoutuberAdabter(IYoutuber iYoutuber, List<YoutuberModel> list, String str, int i, int i2) {
+    public YoutuberAdabter(IYoutuber iYoutuber, List<YoutuberModel> list, String textValue, int value, int value2) {
         this.images = list;
-        this.APP_VERSION = str;
+        this.APP_VERSION = textValue;
         this.iYoutuber = iYoutuber;
-        this.f392w = i;
-        this.f391h = i2;
+        this.f392w = value;
+        this.f391h = value2;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,13 +57,13 @@ public class YoutuberAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(i).getImg())).override(this.f392w, this.f391h).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.ALL))).into(viewHolder.imageView);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(value).getImg())).override(this.f392w, this.f391h).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.ALL))).into(viewHolder.imageView);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

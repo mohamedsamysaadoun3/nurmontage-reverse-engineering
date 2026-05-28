@@ -49,8 +49,8 @@ public class EntityAudio extends Entity {
     private String video_path;
     public byte[] waveformValues;
 
-    public void setScaleEffect(float f) {
-        this.scaleEffect = f;
+    public void setScaleEffect(float scale) {
+        this.scaleEffect = scale;
     }
 
     public float getScaleEffect() {
@@ -75,8 +75,8 @@ public class EntityAudio extends Entity {
         return this.paths_http;
     }
 
-    public void setApplyEffectInPreview(boolean z) {
-        this.isApplyEffectInPreview = z;
+    public void setApplyEffectInPreview(boolean isFlag) {
+        this.isApplyEffectInPreview = isFlag;
     }
 
     public boolean isApplyEffectInPreview() {
@@ -87,8 +87,8 @@ public class EntityAudio extends Entity {
         return this.path_ffmpeg_effect;
     }
 
-    public void setPath_ffmpeg_effect(String str) {
-        this.path_ffmpeg_effect = str;
+    public void setPath_ffmpeg_effect(String filePath) {
+        this.path_ffmpeg_effect = filePath;
     }
 
     public EffectAudio getEffectAudio() {
@@ -129,9 +129,9 @@ public class EntityAudio extends Entity {
         return this.mediaPlayer;
     }
 
-    public void setPath_ffmpeg(String str) {
-        this.path_ffmpeg = str;
-        setPath_ffmpeg_effect(str);
+    public void setPath_ffmpeg(String filePath) {
+        this.path_ffmpeg = filePath;
+        setPath_ffmpeg_effect(filePath);
     }
 
     public String getPath_ffmpeg() {
@@ -139,12 +139,12 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setSecond_in_screen(float f) {
-        this.second_in_screen = f;
+    public void setSecond_in_screen(float scale) {
+        this.second_in_screen = scale;
     }
 
-    public void setVideo_path(String str) {
-        this.video_path = str;
+    public void setVideo_path(String filePath) {
+        this.video_path = filePath;
     }
 
     public String getVideo_path() {
@@ -155,8 +155,8 @@ public class EntityAudio extends Entity {
         return this.min_duration;
     }
 
-    public void setMin_duration(int i) {
-        this.min_duration = i;
+    public void setMin_duration(int duration) {
+        this.min_duration = duration;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -168,28 +168,28 @@ public class EntityAudio extends Entity {
         return this.duration;
     }
 
-    public void setDuration(int i) {
-        this.duration = i;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public float getStart() {
         return this.start;
     }
 
-    public void setStart(float f) {
-        this.start = f;
+    public void setStart(float scale) {
+        this.start = scale;
     }
 
     public float getEnd() {
         return this.end;
     }
 
-    public void setEnd(float f) {
-        this.end = f;
+    public void setEnd(float scale) {
+        this.end = scale;
     }
 
-    public void setMax(float f) {
-        this.max = f;
+    public void setMax(float scale) {
+        this.max = scale;
     }
 
     public float getMax() {
@@ -197,8 +197,8 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setDownX(float f) {
-        this.downX = f;
+    public void setDownX(float scale) {
+        this.downX = scale;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -212,22 +212,22 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setLastLeft(float f) {
-        this.lastLeft = f;
+    public void setLastLeft(float scale) {
+        this.lastLeft = scale;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setLastRight(float f) {
-        this.lastRight = f;
+    public void setLastRight(float scale) {
+        this.lastRight = scale;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setX(float f) {
-        if (f < 0.0f) {
-            f = 0.0f;
+    public void setX(float scale) {
+        if (scale < 0.0f) {
+            scale = 0.0f;
         }
-        this.left = f;
-        this.rect.left = f;
+        this.left = scale;
+        this.rect.left = scale;
     }
 
     public Uri getUri() {
@@ -240,9 +240,9 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setRight(float f) {
-        this.rect.right = f;
-        this.right = f;
+    public void setRight(float scale) {
+        this.rect.right = scale;
+        this.right = scale;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -250,10 +250,10 @@ public class EntityAudio extends Entity {
         float round = (Math.round(getRect().right / getSecond_in_screen()) * 1000) - getOnTapTime();
         setOffset_right((((getRect().left / getmScaleFactor()) - getOffset_left()) + getMax()) - (getRect().right / getmScaleFactor()));
         this.end += round;
-        float f = this.end;
-        int i = this.duration;
-        if (f > i) {
-            this.end = i;
+        float scale = this.end;
+        int duration = this.duration;
+        if (scale > duration) {
+            this.end = duration;
         }
         this.right = this.lastRight;
     }
@@ -268,9 +268,9 @@ public class EntityAudio extends Entity {
         this.start = Math.round((Math.abs(Math.round((getRect().left / getSecond_in_screen()) * 1000.0f)) - getOnTapTime()) + getStart());
         setOffset_left(getOffset_left() + this.tmpOffset);
         this.tmpOffset = 0.0f;
-        float f = this.start;
+        float scale = this.start;
         float f2 = this.min_duration;
-        if (f < f2) {
+        if (scale < f2) {
             this.start = f2;
         }
         this.left = this.lastLeft;
@@ -285,8 +285,8 @@ public class EntityAudio extends Entity {
         return this.isPlay;
     }
 
-    public void setPlay(boolean z) {
-        this.isPlay = z;
+    public void setPlay(boolean isFlag) {
+        this.isPlay = isFlag;
     }
 
     public boolean isVisible() {
@@ -294,32 +294,32 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setVisible(boolean z) {
-        this.isVisible = z;
+    public void setVisible(boolean isFlag) {
+        this.isVisible = isFlag;
     }
 
-    public EntityAudio split(float f) {
-        EntityAudio entityAudio = new EntityAudio(null, this.uri, f, getRect().top, this.f410h, getRect().right, ((getRect().right / getmScaleFactor()) + getOffset_right()) - (f / getmScaleFactor()), getSecond_in_screen(), (int) (getDuration() / 1000.0f), 0.0f, 0.0f, 0.0f);
+    public EntityAudio split(float scale) {
+        EntityAudio entityAudio = new EntityAudio(null, this.uri, scale, getRect().top, this.f410h, getRect().right, ((getRect().right / getmScaleFactor()) + getOffset_right()) - (scale / getmScaleFactor()), getSecond_in_screen(), (int) (getDuration() / 1000.0f), 0.0f, 0.0f, 0.0f);
         entityAudio.setFade_out(getFade_out());
         entityAudio.setFade_in(getFade_in());
         entityAudio.getRect().bottom = getRect().bottom;
         return entityAudio;
     }
 
-    public EntityAudio(Bitmap bitmap, Uri uri, float f, float f2, float f3, float f4, float f5, float f6, int i, float f7, float f8, float f9) {
+    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float f2, float f3, float f4, float f5, float floatValue6, int duration, float f7, float f8, float floatValue9) {
         super(f3);
         this.effectAudio = new EffectAudio();
         setOffset_right(f8);
         setOffset(f7);
-        setOffset_left(f9);
-        this.duration = i * 1000;
-        this.end = i;
-        this.second_in_screen = f6;
+        setOffset_left(floatValue9);
+        this.duration = duration * 1000;
+        this.end = duration;
+        this.second_in_screen = floatValue6;
         setVisible(true);
         this.uri = uri;
         this.max = f5;
         this.f410h = f3;
-        this.rect = new RectF(f, f2, f4, f3);
+        this.rect = new RectF(scale, f2, f4, f3);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_AUDIO;
@@ -339,19 +339,19 @@ public class EntityAudio extends Entity {
         this.padding = f3 * 0.07f;
     }
 
-    public EntityAudio(Bitmap bitmap, Uri uri, float f, float f2, float f3, float f4, float f5, float f6, int i) {
+    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float f2, float f3, float f4, float f5, float floatValue6, int duration) {
         super(f3);
         this.effectAudio = new EffectAudio();
         setOffset_right(0.0f);
         setOffset(0.0f);
-        this.duration = i * 1000;
-        this.end = i;
-        this.second_in_screen = f6;
+        this.duration = duration * 1000;
+        this.end = duration;
+        this.second_in_screen = floatValue6;
         setVisible(true);
         this.uri = uri;
         this.max = f5;
         this.f410h = f3;
-        this.rect = new RectF(f, f2, f4, f3);
+        this.rect = new RectF(scale, f2, f4, f3);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_AUDIO;
@@ -372,8 +372,8 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setY(float f) {
-        this.rect.top = f;
+    public void setY(float scale) {
+        this.rect.top = scale;
         this.rect.bottom = this.f410h + this.rect.top;
     }
 
@@ -393,9 +393,9 @@ public class EntityAudio extends Entity {
         this.amps = fArr;
     }
 
-    public void setAmps(float[] fArr, int i, int i2) {
+    public void setAmps(float[] fArr, int duration, int value2) {
         this.amps = fArr;
-        this.renderer = new WaveformBitmapRenderer(fArr, i, i2, Common.COLOR_WAVE_INT);
+        this.renderer = new WaveformBitmapRenderer(fArr, duration, value2, Common.COLOR_WAVE_INT);
     }
 
     private void drawWave(Canvas canvas, RectF rectF) {
@@ -407,7 +407,7 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void draw(Canvas canvas, int i, int i2) {
+    public void draw(Canvas canvas, int duration, int value2) {
         try {
             drawWave(canvas, this.rect);
         } catch (Exception e) {
@@ -425,8 +425,8 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void setSelect(boolean z) {
-        this.isSelect = z;
+    public void setSelect(boolean isFlag) {
+        this.isSelect = isFlag;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -478,22 +478,22 @@ public class EntityAudio extends Entity {
         return this.isStartFadeOut;
     }
 
-    public void setStartFadeIn(boolean z) {
-        this.isStartFadeIn = z;
+    public void setStartFadeIn(boolean isFlag) {
+        this.isStartFadeIn = isFlag;
     }
 
-    public void setStartFadeOut(boolean z) {
-        this.isStartFadeOut = z;
+    public void setStartFadeOut(boolean isFlag) {
+        this.isStartFadeOut = isFlag;
     }
 
     public void setiTrimLineCallback(TrackEntityView.ITrimLineCallback iTrimLineCallback) {
         this.iTrimLineCallback = iTrimLineCallback;
     }
 
-    public void setFadeInDelta(float f) {
+    public void setFadeInDelta(float scale) {
         TrackEntityView.ITrimLineCallback iTrimLineCallback = this.iTrimLineCallback;
         if (iTrimLineCallback != null) {
-            iTrimLineCallback.fadeInAudio(f);
+            iTrimLineCallback.fadeInAudio(scale);
         }
     }
 
@@ -509,10 +509,10 @@ public class EntityAudio extends Entity {
         this.objectAnimator.start();
     }
 
-    public void setFadeOutDelta(float f) {
+    public void setFadeOutDelta(float scale) {
         TrackEntityView.ITrimLineCallback iTrimLineCallback = this.iTrimLineCallback;
         if (iTrimLineCallback != null) {
-            iTrimLineCallback.fadeOutAudio(f);
+            iTrimLineCallback.fadeOutAudio(scale);
         }
     }
 

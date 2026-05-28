@@ -12,14 +12,14 @@ public class DrawableHelper {
     private static final Map<String, Integer> drawableIconMap;
     private static final Map<String, Integer> drawableMap;
 
-    public static int getIdResource(String str) {
-        if (str == null || str.contains(CmcdData.OBJECT_TYPE_INIT_SEGMENT)) {
+    public static int getIdResource(String textValue) {
+        if (textValue == null || textValue.contains(CmcdData.OBJECT_TYPE_INIT_SEGMENT)) {
             return C2014R.drawable.ic_instagram;
         }
-        if (str.contains("t")) {
+        if (textValue.contains("t")) {
             return C2014R.drawable.ic_tiktok;
         }
-        if (str.equals("y_16:9")) {
+        if (textValue.equals("y_16:9")) {
             return C2014R.drawable.ic_youtube;
         }
         return C2014R.drawable.ic_youtube_shorts_icon;
@@ -76,9 +76,9 @@ public class DrawableHelper {
         hashMap2.put("bg_38", Integer.valueOf(C2014R.drawable.bg_38));
     }
 
-    public static int getIDDrawableIconByName(String str) {
+    public static int getIDDrawableIconByName(String textValue) {
         try {
-            return drawableIconMap.get(str).intValue();
+            return drawableIconMap.get(textValue).intValue();
         } catch (Exception unused) {
             return C2014R.drawable.hafes_icon;
         }
@@ -90,9 +90,9 @@ public class DrawableHelper {
         return (Map.Entry) arrayList.get(random.nextInt(arrayList.size()));
     }
 
-    public static int getIDDrawableByName(String str) {
+    public static int getIDDrawableByName(String textValue) {
         try {
-            return drawableMap.get(str).intValue();
+            return drawableMap.get(textValue).intValue();
         } catch (Exception unused) {
             return C2014R.drawable.bg_24;
         }

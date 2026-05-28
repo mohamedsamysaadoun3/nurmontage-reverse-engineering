@@ -28,16 +28,16 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     private final int size;
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public /* bridge */ /* synthetic */ void onBindViewHolder(ViewHolder viewHolder, int i, List list) {
-        onBindViewHolder2(viewHolder, i, (List<Object>) list);
+    public /* bridge */ /* synthetic */ void onBindViewHolder(ViewHolder viewHolder, int value, List list) {
+        onBindViewHolder2(viewHolder, value, (List<Object>) list);
     }
 
-    public BgAdapter(String str, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int i, int i2) {
-        this.APP_VERSION = str;
+    public BgAdapter(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int value, int value2) {
+        this.APP_VERSION = textValue;
         this.iBgCallback = iChangeBgCallback;
         this.images = list;
-        this.size = i;
-        this.selected = i2;
+        this.size = value;
+        this.selected = value2;
         setHasStableIds(true);
     }
 
@@ -78,10 +78,10 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
                 }
                 return;
             }
-            int i = BgAdapter.this.selected;
+            int value = BgAdapter.this.selected;
             BgAdapter.this.selected = adapterPosition;
-            if (i != -1) {
-                BgAdapter.this.notifyItemChanged(i, "alpha");
+            if (value != -1) {
+                BgAdapter.this.notifyItemChanged(value, "alpha");
             }
             BgAdapter bgAdapter = BgAdapter.this;
             bgAdapter.notifyItemChanged(bgAdapter.selected, "alpha");
@@ -92,25 +92,25 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     /* renamed from: onBindViewHolder, reason: avoid collision after fix types in other method */
-    public void onBindViewHolder2(ViewHolder viewHolder, int i, List<Object> list) {
+    public void onBindViewHolder2(ViewHolder viewHolder, int value, List<Object> list) {
         if (!list.isEmpty()) {
-            applyState(viewHolder, i);
+            applyState(viewHolder, value);
             return;
         }
-        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(Integer.valueOf(this.images.get(i).getId()));
-        int i2 = this.size;
-        load.override(i2, i2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(10, 8))).into(viewHolder.imageView);
-        applyState(viewHolder, i);
+        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(Integer.valueOf(this.images.get(value).getId()));
+        int value2 = this.size;
+        load.override(value2, value2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(10, 8))).into(viewHolder.imageView);
+        applyState(viewHolder, value);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        applyState(viewHolder, i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        applyState(viewHolder, value);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -123,12 +123,12 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public long getItemId(int i) {
-        return this.images.get(i).getId();
+    public long getItemId(int value) {
+        return this.images.get(value).getId();
     }
 
-    private void applyState(ViewHolder viewHolder, int i) {
-        boolean z = i == this.selected;
+    private void applyState(ViewHolder viewHolder, int value) {
+        boolean z = value == this.selected;
         float f = z ? 1.0f : 0.65f;
         if (z) {
             viewHolder.itemView.setBackgroundResource(C2014R.drawable.ipad_selected);

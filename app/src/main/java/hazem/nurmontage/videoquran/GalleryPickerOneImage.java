@@ -64,7 +64,7 @@ public class GalleryPickerOneImage extends Base {
     };
     private GalleryPickerVideo.IPicker iPicker = new GalleryPickerVideo.IPicker() { // from class: hazem.nurmontage.videoquran.GalleryPickerOneImage.2
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(VideoItem videoItem, int i) {
+        public void onAdd(VideoItem videoItem, int value) {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
@@ -77,18 +77,18 @@ public class GalleryPickerOneImage extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(PhotoItem photoItem, int i) {
+        public void onAdd(PhotoItem photoItem, int value) {
             GalleryPickerOneImage.this.mPhotoItem = photoItem;
         }
     };
     private ExploreAdabters.IExplore iExplore = new ExploreAdabters.IExplore() { // from class: hazem.nurmontage.videoquran.GalleryPickerOneImage.3
         @Override // hazem.nurmontage.videoquran.adabter.ExploreAdabters.IExplore
-        public void folder(File file, String str, String str2) {
+        public void folder(File file, String textValue, String textValue2) {
             if (GalleryPickerOneImage.this.rv_explore.getVisibility() != 4) {
                 GalleryPickerOneImage.this.rv_explore.setVisibility(4);
             }
-            GalleryPickerOneImage.this.changeFolder(str2);
-            GalleryPickerOneImage.this.btnExplore.setText(str);
+            GalleryPickerOneImage.this.changeFolder(textValue2);
+            GalleryPickerOneImage.this.btnExplore.setText(textValue);
         }
 
         @Override // hazem.nurmontage.videoquran.adabter.ExploreAdabters.IExplore
@@ -162,8 +162,8 @@ public class GalleryPickerOneImage extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void setSetting(boolean z) {
-        if (z) {
+    public void setSetting(boolean isFlag) {
+        if (isFlag) {
             return;
         }
         LinearLayout linearLayout = (LinearLayout) findViewById(C2014R.id.to_setting);
@@ -218,10 +218,10 @@ public class GalleryPickerOneImage extends Base {
             @Override // java.lang.Runnable
             public void run() {
                 HashSet hashSet;
-                int i;
-                String str;
+                int value;
+                String textValue;
                 int i2;
-                String str2;
+                String textValue2;
                 int i3 = 0;
                 Cursor query = GalleryPickerOneImage.this.getContentResolver().query(MediaStore.Files.getContentUri("external"), new String[]{"_id", "_data", "parent"}, "media_type=1", null, "date_added DESC");
                 final ArrayList arrayList = new ArrayList();
@@ -262,14 +262,14 @@ public class GalleryPickerOneImage extends Base {
                                 listFiles = fileArr;
                             }
                             i2 = i6;
-                            str2 = str4;
+                            textValue2 = str4;
                         } else {
                             i2 = 0;
-                            str2 = null;
+                            textValue2 = null;
                         }
                         if (i2 > 0) {
                             i4 += i2;
-                            arrayList.add(new ExploreItem(file, parent, "" + i2, file.getName(), str2));
+                            arrayList.add(new ExploreItem(file, parent, "" + i2, file.getName(), textValue2));
                         }
                     }
                     String str5 = str3;
@@ -312,14 +312,14 @@ public class GalleryPickerOneImage extends Base {
                         if (listFiles2 != null) {
                             int length2 = listFiles2.length;
                             int i9 = 0;
-                            i = 0;
+                            value = 0;
                             String str7 = null;
                             while (i9 < length2) {
                                 HashSet hashSet3 = hashSet2;
                                 File file4 = listFiles2[i9];
                                 File[] fileArr2 = listFiles2;
                                 if (GalleryPickerOneImage.this.isImageFile(file4)) {
-                                    i++;
+                                    value++;
                                     if (str7 == null) {
                                         str7 = file4.getAbsolutePath();
                                         if (str6 == null) {
@@ -332,15 +332,15 @@ public class GalleryPickerOneImage extends Base {
                                 listFiles2 = fileArr2;
                             }
                             hashSet = hashSet2;
-                            str = str7;
+                            textValue = str7;
                         } else {
                             hashSet = hashSet2;
-                            i = 0;
-                            str = null;
+                            value = 0;
+                            textValue = null;
                         }
-                        if (i > 0) {
-                            i4 += i;
-                            arrayList.add(new ExploreItem(file3, parent2, "" + i, file3.getName(), str));
+                        if (value > 0) {
+                            i4 += value;
+                            arrayList.add(new ExploreItem(file3, parent2, "" + value, file3.getName(), textValue));
                         }
                     }
                     arrayList2.add(new PhotoItem(parent2, ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow("_id"))).toString(), false));
@@ -381,11 +381,11 @@ public class GalleryPickerOneImage extends Base {
         });
     }
 
-    public void changeFolder(String str) {
-        if (str.equals(this.mResources.getString(C2014R.string.all))) {
+    public void changeFolder(String textValue) {
+        if (textValue.equals(this.mResources.getString(C2014R.string.all))) {
             this.galleryPickerAdabters.updateAll();
         } else {
-            this.galleryPickerAdabters.update(str);
+            this.galleryPickerAdabters.update(textValue);
         }
     }
 }

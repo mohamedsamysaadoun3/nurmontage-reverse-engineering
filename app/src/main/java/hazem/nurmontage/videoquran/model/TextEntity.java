@@ -26,46 +26,46 @@ public class TextEntity extends EntityView {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void postTranslate(float f, float f2) {
+    public void postTranslate(float scale, float floatValue2) {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void scale(float f, int i, int i2) {
+    public void scale(float scale, int value, int value2) {
     }
 
-    public void setTxt(String str) {
-        this.txt = str;
-        this.staticLayout = StaticLayout.Builder.obtain(str, 0, str.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
+    public void setTxt(String textValue) {
+        this.txt = textValue;
+        this.staticLayout = StaticLayout.Builder.obtain(textValue, 0, textValue.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
     }
 
     private void createStaticLayout() {
-        String str = this.txt;
-        this.staticLayout = StaticLayout.Builder.obtain(str, 0, str.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
+        String textValue = this.txt;
+        this.staticLayout = StaticLayout.Builder.obtain(textValue, 0, textValue.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
     }
 
-    public TextEntity(String str, float f, float f2, EntityQuranTimeline entityQuranTimeline) {
-        this.txt = str;
-        this.f439x = f;
-        this.f440y = f2;
+    public TextEntity(String textValue, float scale, float floatValue2, EntityQuranTimeline entityQuranTimeline) {
+        this.txt = textValue;
+        this.f439x = scale;
+        this.f440y = floatValue2;
         setVisible(true);
         this.entityQuran = entityQuranTimeline;
     }
 
-    public TextEntity(String str, float f, float f2, int i) {
-        this.txt = str;
-        this.f439x = f;
-        this.f440y = f2;
+    public TextEntity(String textValue, float scale, float floatValue2, int value) {
+        this.txt = textValue;
+        this.f439x = scale;
+        this.f440y = floatValue2;
         setVisible(true);
-        this.viewWidth = i;
+        this.viewWidth = value;
         this.paintAya.setColor(-1);
-        this.paintAya.setTextSize(i * 0.06f);
+        this.paintAya.setTextSize(value * 0.06f);
         createStaticLayout();
     }
 
-    public void update(int i, int i2) {
-        this.f440y = i * 0.67f;
-        this.viewWidth = i2;
-        this.paintAya.setTextSize(i2 * 0.06f);
+    public void update(int value, int value2) {
+        this.f440y = value * 0.67f;
+        this.viewWidth = value2;
+        this.paintAya.setTextSize(value2 * 0.06f);
         createStaticLayout();
     }
 
@@ -105,8 +105,8 @@ public class TextEntity extends EntityView {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void setVisible(boolean z) {
-        this.isVisible = z;
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 
     public float getX() {

@@ -54,9 +54,9 @@ public class QuranFileUtils {
         }
     }
 
-    public static void replacePhraseFromAssetsToFilesDir(Context context, String str, String str2) throws IOException {
+    public static void replacePhraseFromAssetsToFilesDir(Context context, String filePath, String filePath2) throws IOException {
         StringBuilder sb = new StringBuilder();
-        InputStream open = context.getAssets().open(str);
+        InputStream open = context.getAssets().open(filePath);
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(open, StandardCharsets.UTF_8));
             while (true) {
@@ -75,7 +75,7 @@ public class QuranFileUtils {
                 open.close();
             }
             String replace = sb.toString().replace(TARGET, REPLACEMENT);
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(context.getFilesDir(), str2)), StandardCharsets.UTF_8));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(context.getFilesDir(), filePath2)), StandardCharsets.UTF_8));
             try {
                 bufferedWriter.write(replace);
                 bufferedWriter.close();
@@ -99,9 +99,9 @@ public class QuranFileUtils {
         }
     }
 
-    public static void counTPhraseFromAssetsToFilesDir(Context context, String str) throws IOException {
+    public static void counTPhraseFromAssetsToFilesDir(Context context, String filePath) throws IOException {
         StringBuilder sb = new StringBuilder();
-        InputStream open = context.getAssets().open(str);
+        InputStream open = context.getAssets().open(filePath);
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(open, StandardCharsets.UTF_8));
             while (true) {

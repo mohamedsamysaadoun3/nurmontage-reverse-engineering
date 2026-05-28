@@ -74,12 +74,12 @@ public class UtilsFile {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static String getDataColumn(Context context, Uri uri, String str, String[] strArr) {
+    public static String getDataColumn(Context context, Uri uri, String textValue, String[] strArr) {
         Cursor cursor;
         ?? r0 = 0;
         try {
             try {
-                cursor = context.getContentResolver().query(uri, new String[]{"_data"}, str, strArr, null);
+                cursor = context.getContentResolver().query(uri, new String[]{"_data"}, textValue, strArr, null);
                 if (cursor != null) {
                     try {
                         if (cursor.moveToFirst()) {

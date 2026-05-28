@@ -16,7 +16,7 @@ public class StackEntity {
     private float right;
     private float start;
 
-    public StackEntity(RectF rectF, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8) {
+    public StackEntity(RectF rectF, float f, float f2, float f3, float f4, float f5, float f6, float f7, float floatValue8) {
         this.rectF = rectF;
         this.offset = f;
         this.end = f2;
@@ -25,7 +25,7 @@ public class StackEntity {
         this.right = f5;
         this.max = f6;
         this.offset_right = f7;
-        this.offset_left = f8;
+        this.offset_left = floatValue8;
     }
 
     public float getOffset_left() {

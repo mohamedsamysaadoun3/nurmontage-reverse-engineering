@@ -10,22 +10,22 @@ public class RenderManager {
     private int currentTaskIndex = 0;
     private float globalProgress = 0.0f;
 
-    public void addTask(String str, int i) {
+    public void addTask(String textValue, int value) {
         RenderTask renderTask = new RenderTask();
-        renderTask.name = str;
-        renderTask.expectedDuration = i;
+        renderTask.name = textValue;
+        renderTask.expectedDuration = value;
         this.tasks.add(0, renderTask);
     }
 
     public void computeWeights() {
         Iterator<RenderTask> it = this.tasks.iterator();
-        int i = 0;
+        int value = 0;
         while (it.hasNext()) {
-            i += it.next().expectedDuration;
+            value += it.next().expectedDuration;
         }
         Iterator<RenderTask> it2 = this.tasks.iterator();
         while (it2.hasNext()) {
-            it2.next().weight = r2.expectedDuration / i;
+            it2.next().weight = r2.expectedDuration / value;
         }
     }
 
@@ -39,19 +39,19 @@ public class RenderManager {
         }
     }
 
-    public float updateLocalProgress(float f) {
-        int i;
+    public float updateLocalProgress(float floatValue) {
+        int value;
         float f2 = 0.0f;
         int i2 = 0;
         while (true) {
-            i = this.currentTaskIndex;
-            if (i2 >= i) {
+            value = this.currentTaskIndex;
+            if (i2 >= value) {
                 break;
             }
             f2 += this.tasks.get(i2).weight;
             i2++;
         }
-        float f3 = f2 + (f * this.tasks.get(i).weight);
+        float f3 = f2 + (floatValue * this.tasks.get(value).weight);
         this.globalProgress = f3;
         if (f3 > 1.0f) {
             this.globalProgress = 1.0f;

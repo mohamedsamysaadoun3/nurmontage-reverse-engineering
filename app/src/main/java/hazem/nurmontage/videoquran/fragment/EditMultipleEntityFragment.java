@@ -31,20 +31,20 @@ public class EditMultipleEntityFragment extends Fragment {
         void onDelete();
     }
 
-    public void setCount_select(int i) {
+    public void setCount_select(int count) {
     }
 
-    public static EditMultipleEntityFragment getInstance(IEditMultipleCallback iEditMultipleCallback, Resources resources, int i) {
+    public static EditMultipleEntityFragment getInstance(IEditMultipleCallback iEditMultipleCallback, Resources resources, int count) {
         if (instance == null) {
-            instance = new EditMultipleEntityFragment(iEditMultipleCallback, resources, i);
+            instance = new EditMultipleEntityFragment(iEditMultipleCallback, resources, count);
         }
         return instance;
     }
 
-    public EditMultipleEntityFragment(IEditMultipleCallback iEditMultipleCallback, Resources resources, int i) {
+    public EditMultipleEntityFragment(IEditMultipleCallback iEditMultipleCallback, Resources resources, int count) {
         this.iEditMediaCallback = iEditMultipleCallback;
         this.resources = resources;
-        this.count_select = i;
+        this.count_select = count;
     }
 
     public EditMultipleEntityFragment() {
@@ -78,12 +78,12 @@ public class EditMultipleEntityFragment extends Fragment {
         return root;
     }
 
-    public void checkSplit(Entity entity, float f) {
+    public void checkSplit(Entity entity, float floatValue) {
         if (entity == null) {
             return;
         }
         try {
-            if (entity.getRect().left <= f && entity.getRect().right >= f) {
+            if (entity.getRect().left <= floatValue && entity.getRect().right >= floatValue) {
                 this.btn_cut.setClickable(true);
                 this.tv_cut.setTextColor(-1);
                 this.iv_cut.setColorFilter(-1, PorterDuff.Mode.SRC_IN);

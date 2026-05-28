@@ -19,8 +19,8 @@ public class ButtonCustumFontBilling extends AppCompatButton {
         init(context);
     }
 
-    public ButtonCustumFontBilling(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public ButtonCustumFontBilling(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         init(context);
     }
 

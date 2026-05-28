@@ -17,13 +17,13 @@ public class ItemDimension {
     /* renamed from: w */
     private final int f431w;
 
-    public ItemDimension(String str, int i, ResizeType resizeType, int i2, int i3, String str2) {
+    public ItemDimension(String str, int i, ResizeType resizeType, int i2, int size3, String textValue2) {
         this.name = str;
         this.image = i;
         this.resizeType = resizeType;
         this.f431w = i2;
-        this.f429h = i3;
-        this.f430id = str2;
+        this.f429h = size3;
+        this.f430id = textValue2;
     }
 
     public String getId() {

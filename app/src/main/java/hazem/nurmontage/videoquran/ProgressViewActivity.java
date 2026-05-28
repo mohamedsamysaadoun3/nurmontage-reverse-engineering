@@ -235,7 +235,7 @@ public class ProgressViewActivity extends Base {
         try {
             File createTempFile = File.createTempFile("aac_test", ".m4a", context.getCacheDir());
             createTempFile.deleteOnExit();
-            FFmpegKit.executeAsync("-y -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -t 1 -c:a aac -b:a 64k " + createTempFile.getAbsolutePath(), new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ProgressViewActivity$$ExternalSyntheticLambda9
+            FFmpegKit.executeAsync("-y -floatValue lavfi -value anullsrc=channel_layout=stereo:sample_rate=44100 -t 1 -c:a aac -b:a 64k " + createTempFile.getAbsolutePath(), new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ProgressViewActivity$$ExternalSyntheticLambda9
                 @Override // com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback
                 public final void apply(FFmpegSession fFmpegSession) {
                     ProgressViewActivity.lambda$checkAacEncoder$2(fFmpegSession);
@@ -255,64 +255,64 @@ public class ProgressViewActivity extends Base {
         }
     }
 
-    private String mFadeFilter(float f, float f2, boolean z) {
-        if (f2 - 0.05f <= 0.0f) {
-            f2 = 0.01f;
+    private String mFadeFilter(float floatValue, float floatValue2, boolean isFlag) {
+        if (floatValue2 - 0.05f <= 0.0f) {
+            floatValue2 = 0.01f;
         }
-        return "fade=t=" + (z ? "in" : "out") + ":st=" + Math.abs(f) + ":d=" + Math.abs(f2) + ":alpha=1:color=white,fps=60,format=rgba";
+        return "fade=t=" + (isFlag ? "in" : "out") + ":st=" + Math.abs(floatValue) + ":d=" + Math.abs(floatValue2) + ":alpha=1:color=white,fps=60,format=rgba";
     }
 
-    private String fadeInOut(float f, float f2, float f3) {
-        if (f <= 0.0f) {
-            f = 0.01f;
+    private String fadeInOut(float floatValue, float floatValue2, float floatValue3) {
+        if (floatValue <= 0.0f) {
+            floatValue = 0.01f;
         }
-        if (f2 - 0.05f <= 0.0f) {
-            f2 = 0.01f;
+        if (floatValue2 - 0.05f <= 0.0f) {
+            floatValue2 = 0.01f;
         }
-        if (f3 - 0.05f <= 0.0f) {
-            f3 = 0.01f;
+        if (floatValue3 - 0.05f <= 0.0f) {
+            floatValue3 = 0.01f;
         }
-        return "fade=t=in:st=0:d=" + Math.abs(f2) + ":alpha=1:color=white,fps=" + this.mTemplate.getFps() + ",format=rgba,fade=t=out:st=" + Math.abs(f) + ":d=" + Math.abs(f3) + ":alpha=1:color=white,fps=" + this.mTemplate.getFps() + ",format=rgba";
+        return "fade=t=in:st=0:d=" + Math.abs(floatValue2) + ":alpha=1:color=white,fps=" + this.mTemplate.getFps() + ",format=rgba,fade=t=out:st=" + Math.abs(floatValue) + ":d=" + Math.abs(floatValue3) + ":alpha=1:color=white,fps=" + this.mTemplate.getFps() + ",format=rgba";
     }
 
-    private String fadeFilter(String str, int i, float f, float f2, boolean z) {
-        String str2 = z ? "in" : "out";
-        return str + "fade=t=" + str2 + ":st=" + f + ":d=" + Math.abs(f2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + str2 + "_" + i + "];";
+    private String fadeFilter(String textValue, int value, float floatValue, float floatValue2, boolean isFlag) {
+        String str2 = isFlag ? "in" : "out";
+        return textValue + "fade=t=" + str2 + ":st=" + floatValue + ":d=" + Math.abs(floatValue2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + str2 + "_" + value + "];";
     }
 
-    private String fadeFilter(String str, float f, float f2, boolean z) {
-        String str2 = z ? "in" : "out";
-        return "[" + str + "]fade=t=" + str2 + ":st=" + f + ":d=" + Math.abs(f2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + str2 + "_" + str + "];";
+    private String fadeFilter(String textValue, float floatValue, float floatValue2, boolean isFlag) {
+        String str2 = isFlag ? "in" : "out";
+        return "[" + textValue + "]fade=t=" + str2 + ":st=" + floatValue + ":d=" + Math.abs(floatValue2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + str2 + "_" + textValue + "];";
     }
 
-    private String fadeFilter(int i, float f, float f2, boolean z) {
-        String str = z ? "in" : "out";
-        return "[" + i + "]fade=t=" + str + ":st=" + f + ":d=" + Math.abs(f2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + str + "_" + i + "];";
+    private String fadeFilter(int value, float floatValue, float floatValue2, boolean isFlag) {
+        String textValue = isFlag ? "in" : "out";
+        return "[" + value + "]fade=t=" + textValue + ":st=" + floatValue + ":d=" + Math.abs(floatValue2 - 0.05f) + ":alpha=1:color=white,fps=60,format=rgba[" + textValue + "_" + value + "];";
     }
 
-    private String slideX(float f, float f2, float f3, float f4, float f5, float f6) {
-        String str = "clip((t-" + f + ")/" + f2 + ",0,1)";
-        return "'" + f3 + "+(" + ("(" + f5 + "+(" + (f6 - f5) + ")*" + ("(" + str + "*" + str + "*(3-2*" + str + "))") + ")") + ")*" + f4 + "'";
+    private String slideX(float floatValue, float floatValue2, float floatValue3, float f4, float f5, float floatValue6) {
+        String textValue = "clip((t-" + floatValue + ")/" + floatValue2 + ",0,1)";
+        return "'" + floatValue3 + "+(" + ("(" + f5 + "+(" + (floatValue6 - f5) + ")*" + ("(" + textValue + "*" + textValue + "*(3-2*" + textValue + "))") + ")") + ")*" + f4 + "'";
     }
 
-    private String mSlideX(float f, float f2, float f3, float f4, float f5, float f6) {
-        String str = "clip((t-" + f + ")/" + f2 + ",0,1)";
-        return f3 + "+(" + ("(" + f5 + "+(" + (f6 - f5) + ")*" + ("(" + str + "*" + str + "*(3-2*" + str + "))") + ")") + ")*" + f4;
+    private String mSlideX(float floatValue, float floatValue2, float floatValue3, float f4, float f5, float floatValue6) {
+        String textValue = "clip((t-" + floatValue + ")/" + floatValue2 + ",0,1)";
+        return floatValue3 + "+(" + ("(" + f5 + "+(" + (floatValue6 - f5) + ")*" + ("(" + textValue + "*" + textValue + "*(3-2*" + textValue + "))") + ")") + ")*" + f4;
     }
 
-    private File getOrCreateMask(int i, int i2, int i3) {
-        File file = new File(getFilesDir(), "mask_" + i + "x" + i2 + "_r" + i3 + ".png");
+    private File getOrCreateMask(int value, int value2, int value3) {
+        File file = new File(getFilesDir(), "mask_" + value + "x" + value2 + "_r" + value3 + ".png");
         if (file.exists()) {
             return file;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Bitmap createBitmap = Bitmap.createBitmap(value, value2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         Paint paint = new Paint(1);
         paint.setColor(-1);
-        RectF rectF = new RectF(0.0f, 0.0f, i, i2);
-        float f = i3;
-        canvas.drawRoundRect(rectF, f, f, paint);
+        RectF rectF = new RectF(0.0f, 0.0f, value, value2);
+        float floatValue = value3;
+        canvas.drawRoundRect(rectF, floatValue, floatValue, paint);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             try {
@@ -325,12 +325,12 @@ public class ProgressViewActivity extends Base {
         return file;
     }
 
-    private File createTransparentBg(int i, int i2) {
+    private File createTransparentBg(int value, int value2) {
         File file = new File(getFilesDir(), "bg_tr_.png");
         if (file.exists()) {
             return file;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Bitmap createBitmap = Bitmap.createBitmap(value, value2, Bitmap.Config.ARGB_8888);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             try {
@@ -343,9 +343,9 @@ public class ProgressViewActivity extends Base {
         return file;
     }
 
-    private String generateVideoTimer(int i, final CountDownLatch countDownLatch, final Semaphore semaphore) {
-        String str = this.mTemplate.getFolder_template() + "/timer.mov";
-        int max = Math.max(i / 1000, 1);
+    private String generateVideoTimer(int value, final CountDownLatch countDownLatch, final Semaphore semaphore) {
+        String textValue = this.mTemplate.getFolder_template() + "/timer.mov";
+        int max = Math.max(value / 1000, 1);
         this.renderManager.addTask("timer prerender", max);
         float posXRight = this.mTemplate.getmTimeModel().getPosXRight();
         String color = this.mTemplate.getmTimeModel().getColor();
@@ -353,13 +353,13 @@ public class ProgressViewActivity extends Base {
         String str2 = getFilesDir().getAbsolutePath() + "/NotoNaskhArabic.ttf";
         ArrayList arrayList = new ArrayList();
         arrayList.add("-y");
-        arrayList.add("-f");
+        arrayList.add("-floatValue");
         arrayList.add("lavfi");
-        arrayList.add("-i");
+        arrayList.add("-value");
         arrayList.add("color=size=" + Math.round(this.mTemplate.getmTimeModel().getWidth_bitmap_progress() * 1.3f) + "x" + this.mTemplate.getmTimeModel().getHeight_bitmap_progress() + ":rate=10:duration=" + max + ":color=" + (ColorUtils.isColorDark(Color.parseColor(color)) ? "black@0" : "white@0") + ",format=rgba");
-        int i2 = max + 1;
+        int value2 = max + 1;
         arrayList.add("-vf");
-        arrayList.add("drawtext=fontfile='" + str2 + "':text='%{eif\\:trunc(t/60)\\:d\\:2}\\:%{eif\\:trunc(mod(t\\,60))\\:d\\:2}':x=0.0:y=0.0:fontsize=" + size + ":fontcolor=" + color + ",drawtext=fontfile='" + str2 + "':text='-%{eif\\:trunc((" + i2 + "-t)/60)\\:d\\:2}\\:%{eif\\:trunc(mod(" + i2 + "-t\\,60))\\:d\\:2}':x=" + posXRight + ":y=0.0:fontsize=" + size + ":fontcolor=" + color);
+        arrayList.add("drawtext=fontfile='" + str2 + "':text='%{eif\\:trunc(t/60)\\:d\\:2}\\:%{eif\\:trunc(mod(t\\,60))\\:d\\:2}':x=0.0:y=0.0:fontsize=" + size + ":fontcolor=" + color + ",drawtext=fontfile='" + str2 + "':text='-%{eif\\:trunc((" + value2 + "-t)/60)\\:d\\:2}\\:%{eif\\:trunc(mod(" + value2 + "-t\\,60))\\:d\\:2}':x=" + posXRight + ":y=0.0:fontsize=" + size + ":fontcolor=" + color);
         arrayList.add("-c:v");
         arrayList.add("qtrle");
         arrayList.add("-pix_fmt");
@@ -368,7 +368,7 @@ public class ProgressViewActivity extends Base {
         arrayList.add("veryfast");
         arrayList.add("-avoid_negative_ts");
         arrayList.add("make_zero");
-        arrayList.add(str);
+        arrayList.add(textValue);
         try {
             semaphore.acquire();
             this.id_ffmpeg.add(Long.valueOf(FFmpegKit.executeWithArgumentsAsync((String[]) arrayList.toArray(new String[0]), new FFmpegSessionCompleteCallback() { // from class: hazem.nurmontage.videoquran.ProgressViewActivity$$ExternalSyntheticLambda12
@@ -377,7 +377,7 @@ public class ProgressViewActivity extends Base {
                     ProgressViewActivity.this.m605x4bb4e94a(countDownLatch, semaphore, fFmpegSession);
                 }
             }, null, new ProgressViewActivity$$ExternalSyntheticLambda6(this)).getSessionId()));
-            return str;
+            return textValue;
         } catch (InterruptedException unused) {
             this.renderManager.nextTask();
             countDownLatch.countDown();
@@ -390,30 +390,30 @@ public class ProgressViewActivity extends Base {
         updateNext(countDownLatch, semaphore);
     }
 
-    private String runPreRender(String str, String str2, String str3, int i, String str4, boolean z, final CountDownLatch countDownLatch, final Semaphore semaphore, String str5) {
+    private String runPreRender(String textValue, String str2, String str3, int value, String str4, boolean isFlag, final CountDownLatch countDownLatch, final Semaphore semaphore, String textValue5) {
         ArrayList arrayList = new ArrayList();
         arrayList.add("-hide_banner");
         arrayList.add("-y");
         arrayList.add("-stream_loop");
         arrayList.add("-1");
-        arrayList.add("-i");
-        arrayList.add(str);
+        arrayList.add("-value");
+        arrayList.add(textValue);
         if (str2 != null) {
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(str2);
         }
         arrayList.add("-filter_complex");
         arrayList.add(str3);
-        if (z) {
+        if (isFlag) {
             arrayList.add("-c:v");
             arrayList.add("qtrle");
             arrayList.add("-pix_fmt");
             arrayList.add("rgba");
-        } else if (str5 != null) {
+        } else if (textValue5 != null) {
             arrayList.add("-threads");
             arrayList.add("0");
             arrayList.add("-c:v");
-            arrayList.add(str5);
+            arrayList.add(textValue5);
             arrayList.add("-preset");
             arrayList.add("fast");
             arrayList.add("-crf");
@@ -425,8 +425,8 @@ public class ProgressViewActivity extends Base {
         arrayList.add("-r");
         arrayList.add(String.valueOf(this.mTemplate.getFps()));
         arrayList.add("-t");
-        arrayList.add(Math.max(i, 500) + "ms");
-        if (!z) {
+        arrayList.add(Math.max(value, 500) + "ms");
+        if (!isFlag) {
             arrayList.add("-movflags");
             arrayList.add("+faststart");
         }
@@ -465,9 +465,9 @@ public class ProgressViewActivity extends Base {
         }
     }
 
-    public String preRenderMask_Rounded(SquareBitmapModel squareBitmapModel, int i, CountDownLatch countDownLatch, Semaphore semaphore) {
+    public String preRenderMask_Rounded(SquareBitmapModel squareBitmapModel, int value, CountDownLatch countDownLatch, Semaphore semaphore) {
         String uri_media_video = this.mTemplate.getUri_media_video();
-        String str = this.mTemplate.getFolder_template() + "/rounded_" + System.currentTimeMillis() + ".mov";
+        String textValue = this.mTemplate.getFolder_template() + "/rounded_" + System.currentTimeMillis() + ".mov";
         int max = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
         int round = Math.round(squareBitmapModel.getRight());
         int round2 = Math.round(squareBitmapModel.getBottom());
@@ -481,12 +481,12 @@ public class ProgressViewActivity extends Base {
         if ((round6 & 1) == 1) {
             round6++;
         }
-        return runPreRender(uri_media_video, getOrCreateMask(round5, round6, (int) squareBitmapModel.getRaduis()).getAbsolutePath(), "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos[v];[v][1:v]alphamerge,format=rgba", i, str, true, countDownLatch, semaphore, null);
+        return runPreRender(uri_media_video, getOrCreateMask(round5, round6, (int) squareBitmapModel.getRaduis()).getAbsolutePath(), "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos[v];[v][1:v]alphamerge,format=rgba", value, textValue, true, countDownLatch, semaphore, null);
     }
 
-    public String preRenderMask_Circle(SquareBitmapModel squareBitmapModel, int i, CountDownLatch countDownLatch, Semaphore semaphore) {
+    public String preRenderMask_Circle(SquareBitmapModel squareBitmapModel, int value, CountDownLatch countDownLatch, Semaphore semaphore) {
         String uri_media_video = this.mTemplate.getUri_media_video();
-        String str = this.mTemplate.getFolder_template() + "/circle_" + System.currentTimeMillis() + ".mov";
+        String textValue = this.mTemplate.getFolder_template() + "/circle_" + System.currentTimeMillis() + ".mov";
         int max = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
         int round = Math.round(squareBitmapModel.getRight());
         int round2 = Math.round(squareBitmapModel.getBottom());
@@ -500,10 +500,10 @@ public class ProgressViewActivity extends Base {
         if ((round6 & 1) == 1) {
             round6++;
         }
-        return runPreRender(uri_media_video, getOrCreateMaskCircle(round5, round6).getAbsolutePath(), "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos[v];[v][1:v]alphamerge,format=rgba", i, str, true, countDownLatch, semaphore, null);
+        return runPreRender(uri_media_video, getOrCreateMaskCircle(round5, round6).getAbsolutePath(), "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos[v];[v][1:v]alphamerge,format=rgba", value, textValue, true, countDownLatch, semaphore, null);
     }
 
-    public String preRender_NoMask(SquareBitmapModel squareBitmapModel, int i, CountDownLatch countDownLatch, Semaphore semaphore, String str) {
+    public String preRender_NoMask(SquareBitmapModel squareBitmapModel, int value, CountDownLatch countDownLatch, Semaphore semaphore, String textValue) {
         String uri_media_video = this.mTemplate.getUri_media_video();
         String str2 = this.mTemplate.getFolder_template() + "/nomask_" + System.currentTimeMillis() + ".mp4";
         int max = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
@@ -519,16 +519,16 @@ public class ProgressViewActivity extends Base {
         if ((round6 & 1) == 1) {
             round6++;
         }
-        return runPreRender(uri_media_video, null, "scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos,format=yuv420p", i, str2, false, countDownLatch, semaphore, str);
+        return runPreRender(uri_media_video, null, "scale=" + max + ":" + max + ":force_original_aspect_ratio=increase,crop=" + round + ":" + round2 + ":" + round3 + ":" + round4 + ",scale=" + round5 + ":" + round6 + ":flags=lanczos,format=yuv420p", value, str2, false, countDownLatch, semaphore, textValue);
     }
 
-    private File getOrCreateMaskCircle(int i, int i2) {
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+    private File getOrCreateMaskCircle(int value, int value2) {
+        Bitmap createBitmap = Bitmap.createBitmap(value, value2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         Paint paint = new Paint(1);
         paint.setColor(-1);
-        canvas.drawCircle(i / 2.0f, i2 / 2.0f, Math.min(i, i2) / 2.0f, paint);
-        File file = new File(this.mTemplate.getFolder_template(), "circle_" + i + "x" + i2 + ".png");
+        canvas.drawCircle(value / 2.0f, value2 / 2.0f, Math.min(value, value2) / 2.0f, paint);
+        File file = new File(this.mTemplate.getFolder_template(), "circle_" + value + "x" + value2 + ".png");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             createBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
@@ -538,7 +538,7 @@ public class ProgressViewActivity extends Base {
         return file;
     }
 
-    public String preRenderVideo(int i, final CountDownLatch countDownLatch, final Semaphore semaphore, String str) {
+    public String preRenderVideo(int value, final CountDownLatch countDownLatch, final Semaphore semaphore, String textValue) {
         String uri_media_video = this.mTemplate.getUri_media_video();
         String str2 = this.mTemplate.getFolder_template() + "/layer_video_" + System.currentTimeMillis() + ".mp4";
         int max = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
@@ -548,19 +548,19 @@ public class ProgressViewActivity extends Base {
         arrayList.add("-y");
         arrayList.add("-stream_loop");
         arrayList.add("-1");
-        arrayList.add("-i");
+        arrayList.add("-value");
         arrayList.add(uri_media_video);
         File file = new File(this.mTemplate.getUri_bg_ffmpeg());
         if (file.exists() && file.isFile()) {
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(this.mTemplate.getUri_bg_ffmpeg());
             arrayList.add("-filter_complex");
             arrayList.add(str3);
-            if (str != null) {
+            if (textValue != null) {
                 arrayList.add("-threads");
                 arrayList.add("0");
                 arrayList.add("-c:v");
-                arrayList.add(str);
+                arrayList.add(textValue);
                 arrayList.add("-preset");
                 arrayList.add("fast");
                 arrayList.add("-crf");
@@ -572,7 +572,7 @@ public class ProgressViewActivity extends Base {
             arrayList.add("-r");
             arrayList.add(String.valueOf(this.mTemplate.getFps()));
             arrayList.add("-t");
-            arrayList.add(Math.max(i, 500) + "ms");
+            arrayList.add(Math.max(value, 500) + "ms");
             arrayList.add("-movflags");
             arrayList.add("+faststart");
             arrayList.add("-an");
@@ -601,31 +601,31 @@ public class ProgressViewActivity extends Base {
         updateNext(countDownLatch, semaphore);
     }
 
-    public String preRenderVideoHue(int i, final CountDownLatch countDownLatch, final Semaphore semaphore, String str) {
+    public String preRenderVideoHue(int value, final CountDownLatch countDownLatch, final Semaphore semaphore, String textValue) {
         String uri_media_video = this.mTemplate.getUri_media_video();
         String str2 = this.mTemplate.getFolder_template() + "/layer_video_" + System.currentTimeMillis() + ".mp4";
         int max = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
         int width = this.mTemplate.getWidth();
         int height = this.mTemplate.getHeight();
-        String str3 = "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase:flags=lanczos,hue=s=0,crop=" + width + ":" + height + ":" + ("(iw-" + width + ")/2") + ":" + ("(ih-" + height + ")/2") + "[main];[main][1]overlay[fm];[2:v]loop=loop=-1:size=1:start=0,setpts=N/FRAME_RATE/TB[lineProg];[3:v]loop=loop=-1:size=1:start=0,setpts=N/FRAME_RATE/TB[lineBg];[lineProg][lineBg]overlay=x=" + ((-this.mTemplate.getmTimeModel().getWidth_bitmap_progress()) + " + ((cos((t / (" + (i / 1000.0d) + ") + 1) * PI) / 2 + 0.5) * " + (this.mTemplate.getmTimeModel().getWidth_bitmap_progress() - this.mTemplate.getmTimeModel().getProgress_offset()) + ")") + ":y=0[bgApplied];[fm][bgApplied]overlay=" + this.mTemplate.getEntityProgressTemplate().getLeft() + ":" + this.mTemplate.getEntityProgressTemplate().getTop();
+        String str3 = "[0:v]scale=" + max + ":" + max + ":force_original_aspect_ratio=increase:flags=lanczos,hue=s=0,crop=" + width + ":" + height + ":" + ("(iw-" + width + ")/2") + ":" + ("(ih-" + height + ")/2") + "[main];[main][1]overlay[fm];[2:v]loop=loop=-1:size=1:start=0,setpts=N/FRAME_RATE/TB[lineProg];[3:v]loop=loop=-1:size=1:start=0,setpts=N/FRAME_RATE/TB[lineBg];[lineProg][lineBg]overlay=x=" + ((-this.mTemplate.getmTimeModel().getWidth_bitmap_progress()) + " + ((cos((t / (" + (value / 1000.0d) + ") + 1) * PI) / 2 + 0.5) * " + (this.mTemplate.getmTimeModel().getWidth_bitmap_progress() - this.mTemplate.getmTimeModel().getProgress_offset()) + ")") + ":y=0[bgApplied];[fm][bgApplied]overlay=" + this.mTemplate.getEntityProgressTemplate().getLeft() + ":" + this.mTemplate.getEntityProgressTemplate().getTop();
         ArrayList arrayList = new ArrayList();
         arrayList.add("-hide_banner");
         arrayList.add("-y");
-        arrayList.add("-i");
+        arrayList.add("-value");
         arrayList.add(uri_media_video);
         File file = new File(this.mTemplate.getUri_bg_ffmpeg());
         if (file.exists() && file.isFile()) {
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(this.mTemplate.getUri_bg_ffmpeg());
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(this.mTemplate.getFolder_template() + "/line_progress.png");
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(this.mTemplate.getFolder_template() + "/line_bg.png");
             arrayList.add("-filter_complex");
             arrayList.add(str3);
-            if (str != null) {
+            if (textValue != null) {
                 arrayList.add("-c:v");
-                arrayList.add(str);
+                arrayList.add(textValue);
                 arrayList.add("-preset");
                 arrayList.add("fast");
                 arrayList.add("-crf");
@@ -641,7 +641,7 @@ public class ProgressViewActivity extends Base {
             arrayList.add("-r");
             arrayList.add(String.valueOf(this.mTemplate.getFps()));
             arrayList.add("-t");
-            arrayList.add(Math.max(i, 500) + "ms");
+            arrayList.add(Math.max(value, 500) + "ms");
             arrayList.add("-movflags");
             arrayList.add("+faststart");
             arrayList.add("-an");
@@ -677,23 +677,23 @@ public class ProgressViewActivity extends Base {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    private int addBasmala(EntityBismilahTemplate entityBismilahTemplate, int i, Semaphore semaphore, CountDownLatch countDownLatch, List<String> list, float f) {
-        String str;
+    private int addBasmala(EntityBismilahTemplate entityBismilahTemplate, int value, Semaphore semaphore, CountDownLatch countDownLatch, List<String> list, float floatValue) {
+        String textValue;
         String str2;
         String str3;
         String str4;
-        String str5;
+        String textValue5;
         String str6;
         String str7;
-        float f2;
+        float floatValue2;
         String str8;
         String str9;
-        int i2;
-        boolean z;
-        float f3;
+        int value2;
+        boolean isFlag;
+        float floatValue3;
         boolean z2;
         boolean z3;
-        int i3;
+        int value3;
         String str10;
         String str11;
         float f4;
@@ -717,7 +717,7 @@ public class ProgressViewActivity extends Base {
         float f5;
         String str27;
         String str28;
-        float f6;
+        float floatValue6;
         String str29;
         String str30;
         String str31;
@@ -735,20 +735,20 @@ public class ProgressViewActivity extends Base {
         float f9;
         String mSlideX2;
         if (entityBismilahTemplate == null) {
-            return i;
+            return value;
         }
         float abs = Math.abs(entityBismilahTemplate.getStart());
         float abs2 = Math.abs(entityBismilahTemplate.getEnd());
         File file = new File(this.mTemplate.getFolder_template() + "/" + entityBismilahTemplate.getFile());
         if (!file.exists() || !file.isFile() || file.length() <= 0) {
-            return i;
+            return value;
         }
         if (entityBismilahTemplate.getTransition() != null) {
             if (entityBismilahTemplate.getTransition().isOut()) {
-                f3 = 0.0f;
+                floatValue3 = 0.0f;
                 if (entityBismilahTemplate.getTransition().getDuration_out() > 0.0f) {
                     z2 = true;
-                    z3 = !entityBismilahTemplate.getTransition().isIn() && entityBismilahTemplate.getTransition().getDuration_in() > f3;
+                    z3 = !entityBismilahTemplate.getTransition().isIn() && entityBismilahTemplate.getTransition().getDuration_in() > floatValue3;
                     str2 = "/";
                     if (!z3 && z2) {
                         float duration_in = entityBismilahTemplate.getTransition().getDuration_in();
@@ -786,18 +786,18 @@ public class ProgressViewActivity extends Base {
                             String fadeInOut = fadeInOut(abs3 - abs, duration_in, duration_out);
                             int i5 = (int) (abs2 - abs);
                             str32 = "];";
-                            String generateVideoSegment = generateVideoSegment(entityBismilahTemplate, i, fadeInOut, i5, countDownLatch, semaphore);
+                            String generateVideoSegment = generateVideoSegment(entityBismilahTemplate, value, fadeInOut, i5, countDownLatch, semaphore);
                             if (generateVideoSegment != null) {
-                                list.add("-i");
+                                list.add("-value");
                                 list.add(generateVideoSegment);
-                                int i6 = i + 1;
+                                int i6 = value + 1;
                                 this.overlay.append("[").append(i6).append("]").append("setpts=PTS-STARTPTS+").append(abs).append("/TB").append("[seg").append(i6).append(str32);
                                 if (type_in.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
                                     f8 = btm_x - fromW;
-                                    i2 = i6;
+                                    value2 = i6;
                                     mSlideX = mSlideX(abs, duration_in, btm_x, fromW, -1.0f, 0.0f);
                                 } else {
-                                    i2 = i6;
+                                    value2 = i6;
                                     f8 = btm_x + fromW;
                                     mSlideX = mSlideX(abs, duration_in, btm_x, fromW, 1.0f, 0.0f);
                                 }
@@ -813,32 +813,32 @@ public class ProgressViewActivity extends Base {
                                 str31 = ",";
                                 str38 = "[ov";
                                 str30 = ":enable='between(t,";
-                                f6 = abs2;
+                                floatValue6 = abs2;
                                 str29 = ")'[ov";
-                                this.overlay.append(str38).append(i).append("][seg").append(i2).append("]overlay=x=").append(append.append(str31).append(f9).append("))))'").toString()).append(":y=").append(btm_y).append(str30).append(abs).append(str31).append(f6).append(str29).append(i2).append(str32);
+                                this.overlay.append(str38).append(value).append("][seg").append(value2).append("]overlay=x=").append(append.append(str31).append(f9).append("))))'").toString()).append(":y=").append(btm_y).append(str30).append(abs).append(str31).append(floatValue6).append(str29).append(value2).append(str32);
                                 z5 = true;
                             } else {
-                                f6 = abs2;
+                                floatValue6 = abs2;
                                 str38 = "[ov";
                                 str31 = ",";
                                 str30 = ":enable='between(t,";
                                 str29 = ")'[ov";
-                                i2 = i;
+                                value2 = value;
                                 z5 = false;
                             }
                             str27 = str38;
                             str28 = "]overlay=";
-                            str = str31;
+                            textValue = str31;
                             str9 = str28;
                             str4 = str29;
                             str7 = str32;
-                            str3 = "-i";
-                            z = z5;
-                            abs2 = f6;
+                            str3 = "-value";
+                            isFlag = z5;
+                            abs2 = floatValue6;
                             str6 = ":";
                             String str40 = str27;
-                            str5 = str30;
-                            f2 = abs;
+                            textValue5 = str30;
+                            floatValue2 = abs;
                             str8 = str40;
                         }
                         String str41 = str22;
@@ -852,19 +852,19 @@ public class ProgressViewActivity extends Base {
                             String str43 = str23;
                             String str44 = str24;
                             String str45 = str25;
-                            String generateVideoSegment2 = generateVideoSegment(entityBismilahTemplate, i, fadeInOut2, i7, countDownLatch, semaphore);
+                            String generateVideoSegment2 = generateVideoSegment(entityBismilahTemplate, value, fadeInOut2, i7, countDownLatch, semaphore);
                             if (generateVideoSegment2 != null) {
-                                list.add("-i");
+                                list.add("-value");
                                 list.add(generateVideoSegment2);
-                                int i8 = i + 1;
+                                int i8 = value + 1;
                                 StringBuilder append2 = this.overlay.append("[").append(i8).append("]").append(str45).append(abs).append(str44).append(str43).append(i8);
                                 str32 = "];";
                                 append2.append(str32);
                                 if (type_out.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-                                    i2 = i8;
+                                    value2 = i8;
                                     str37 = slideX(abs4, duration_out2, btm_x, fromW, 0.0f, 1.0f);
                                 } else {
-                                    i2 = i8;
+                                    value2 = i8;
                                     if (type_out.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
                                         str37 = slideX(abs4, duration_out2, btm_x, fromW, 0.0f, -1.0f);
                                     } else {
@@ -877,7 +877,7 @@ public class ProgressViewActivity extends Base {
                                 str36 = str42;
                                 f7 = abs2;
                                 str34 = str21;
-                                this.overlay.append(str35).append(i).append(str26).append(i2).append(str33).append(str37).append(str41).append(f5).append(str30).append(abs).append(str36).append(f7).append(str34).append(i2).append(str32);
+                                this.overlay.append(str35).append(value).append(str26).append(value2).append(str33).append(str37).append(str41).append(f5).append(str30).append(abs).append(str36).append(f7).append(str34).append(value2).append(str32);
                                 z5 = true;
                             } else {
                                 str32 = "];";
@@ -887,13 +887,13 @@ public class ProgressViewActivity extends Base {
                                 str35 = str17;
                                 f7 = abs2;
                                 str36 = str42;
-                                i2 = i;
+                                value2 = value;
                                 z5 = false;
                             }
                             String str46 = str35;
                             str28 = str33;
                             str31 = str36;
-                            f6 = f7;
+                            floatValue6 = f7;
                             str29 = str34;
                             str27 = str46;
                         } else {
@@ -909,23 +909,23 @@ public class ProgressViewActivity extends Base {
                             String str55 = str17;
                             if (type_in.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
                                 float duration_out3 = entityBismilahTemplate.getTransition().getDuration_out();
-                                String generateVideoSegment3 = generateVideoSegment(entityBismilahTemplate, i, fadeInOut(Math.abs(abs2 - duration_out3) - abs, duration_in, duration_out3), (int) (abs2 - abs), countDownLatch, semaphore);
+                                String generateVideoSegment3 = generateVideoSegment(entityBismilahTemplate, value, fadeInOut(Math.abs(abs2 - duration_out3) - abs, duration_in, duration_out3), (int) (abs2 - abs), countDownLatch, semaphore);
                                 if (generateVideoSegment3 != null) {
-                                    list.add("-i");
+                                    list.add("-value");
                                     list.add(generateVideoSegment3);
-                                    int i9 = i + 1;
+                                    int i9 = value + 1;
                                     StringBuilder append3 = this.overlay.append("[").append(i9).append("]").append(str53).append(abs).append(str52).append(str54).append(i9);
                                     str32 = "];";
                                     append3.append(str32);
-                                    i2 = i9;
+                                    value2 = i9;
                                     str27 = str55;
                                     str28 = str48;
-                                    StringBuilder append4 = this.overlay.append(str27).append(i).append(str50).append(i2).append(str28).append(slideX(abs, duration_in, btm_x, fromW, -1.0f, 0.0f)).append(str41).append(f10);
+                                    StringBuilder append4 = this.overlay.append(str27).append(value).append(str50).append(value2).append(str28).append(slideX(abs, duration_in, btm_x, fromW, -1.0f, 0.0f)).append(str41).append(f10);
                                     str30 = str51;
                                     str31 = str47;
-                                    f6 = abs2;
+                                    floatValue6 = abs2;
                                     str29 = str49;
-                                    append4.append(str30).append(abs).append(str31).append(f6).append(str29).append(i2).append(str32);
+                                    append4.append(str30).append(abs).append(str31).append(floatValue6).append(str29).append(value2).append(str32);
                                     z5 = true;
                                 } else {
                                     str29 = str49;
@@ -933,9 +933,9 @@ public class ProgressViewActivity extends Base {
                                     str30 = str51;
                                     str31 = str47;
                                     str32 = "];";
-                                    f6 = abs2;
+                                    floatValue6 = abs2;
                                     str27 = str55;
-                                    i2 = i;
+                                    value2 = value;
                                     z5 = false;
                                 }
                             } else {
@@ -943,55 +943,55 @@ public class ProgressViewActivity extends Base {
                                 str28 = str48;
                                 if (type_in.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
                                     float duration_out4 = entityBismilahTemplate.getTransition().getDuration_out();
-                                    String generateVideoSegment4 = generateVideoSegment(entityBismilahTemplate, i, fadeInOut(Math.abs(abs2 - duration_out4) - abs, duration_in, duration_out4), (int) (abs2 - abs), countDownLatch, semaphore);
+                                    String generateVideoSegment4 = generateVideoSegment(entityBismilahTemplate, value, fadeInOut(Math.abs(abs2 - duration_out4) - abs, duration_in, duration_out4), (int) (abs2 - abs), countDownLatch, semaphore);
                                     if (generateVideoSegment4 != null) {
-                                        list.add("-i");
+                                        list.add("-value");
                                         list.add(generateVideoSegment4);
-                                        int i10 = i + 1;
+                                        int i10 = value + 1;
                                         StringBuilder append5 = this.overlay.append("[").append(i10).append("]").append(str53).append(abs).append(str52).append(str54).append(i10);
                                         str32 = "];";
                                         append5.append(str32);
-                                        i2 = i10;
+                                        value2 = i10;
                                         str27 = str27;
                                         str28 = str28;
-                                        StringBuilder append6 = this.overlay.append(str27).append(i).append(str50).append(i2).append(str28).append(slideX(abs, duration_in, btm_x, fromW, 1.0f, 0.0f)).append(str41).append(f10);
+                                        StringBuilder append6 = this.overlay.append(str27).append(value).append(str50).append(value2).append(str28).append(slideX(abs, duration_in, btm_x, fromW, 1.0f, 0.0f)).append(str41).append(f10);
                                         str30 = str51;
                                         str31 = str47;
-                                        f6 = abs2;
+                                        floatValue6 = abs2;
                                         str29 = str49;
-                                        append6.append(str30).append(abs).append(str31).append(f6).append(str29).append(i2).append(str32);
+                                        append6.append(str30).append(abs).append(str31).append(floatValue6).append(str29).append(value2).append(str32);
                                         z5 = true;
                                     } else {
                                         str29 = str49;
                                         str30 = str51;
                                         str31 = str47;
                                         str32 = "];";
-                                        f6 = abs2;
+                                        floatValue6 = abs2;
                                         str28 = str28;
                                         str27 = str27;
                                     }
                                 } else {
-                                    f6 = abs2;
+                                    floatValue6 = abs2;
                                     str29 = str49;
                                     str30 = str51;
                                     str31 = str47;
                                     str32 = "];";
                                 }
-                                i2 = i;
+                                value2 = value;
                                 z5 = false;
                             }
                         }
-                        str = str31;
+                        textValue = str31;
                         str9 = str28;
                         str4 = str29;
                         str7 = str32;
-                        str3 = "-i";
-                        z = z5;
-                        abs2 = f6;
+                        str3 = "-value";
+                        isFlag = z5;
+                        abs2 = floatValue6;
                         str6 = ":";
                         String str402 = str27;
-                        str5 = str30;
-                        f2 = abs;
+                        textValue5 = str30;
+                        floatValue2 = abs;
                         str8 = str402;
                     } else if (!z3) {
                         float duration_in2 = entityBismilahTemplate.getTransition().getDuration_in();
@@ -999,19 +999,19 @@ public class ProgressViewActivity extends Base {
                         float btm_y2 = entityBismilahTemplate.getBtm_y();
                         float fromW2 = entityBismilahTemplate.getTransition().getFromW();
                         String type_in2 = entityBismilahTemplate.getTransition().getType_in();
-                        String generateVideoSegment5 = generateVideoSegment(entityBismilahTemplate, i, mFadeFilter(0.0f, duration_in2, true), (int) (abs2 - abs), countDownLatch, semaphore);
+                        String generateVideoSegment5 = generateVideoSegment(entityBismilahTemplate, value, mFadeFilter(0.0f, duration_in2, true), (int) (abs2 - abs), countDownLatch, semaphore);
                         if (generateVideoSegment5 != null) {
-                            list.add("-i");
+                            list.add("-value");
                             list.add(generateVideoSegment5);
-                            int i11 = i + 1;
+                            int i11 = value + 1;
                             this.overlay.append("[").append(i11).append("]").append("setpts=PTS-STARTPTS+").append(abs).append("/TB").append("[seg").append(i11).append("];");
                             if (type_in2.equals(TransitionType.FADE_IN.getValue())) {
                                 str13 = "]overlay=";
                                 f4 = abs2;
-                                this.overlay.append("[ov").append(i).append("][seg").append(i11).append(str13).append(btm_x2).append(":").append(btm_y2).append(":enable='between(t,").append(abs).append(",").append(f4).append(")'[ov").append(i11).append("];");
+                                this.overlay.append("[ov").append(value).append("][seg").append(i11).append(str13).append(btm_x2).append(":").append(btm_y2).append(":enable='between(t,").append(abs).append(",").append(f4).append(")'[ov").append(i11).append("];");
                                 str11 = ":";
                                 i4 = i11;
-                                str10 = "-i";
+                                str10 = "-value";
                                 str15 = ",";
                                 str12 = ":enable='between(t,";
                                 str14 = ")'[ov";
@@ -1020,27 +1020,27 @@ public class ProgressViewActivity extends Base {
                                 if (type_in2.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
                                     str11 = ":";
                                     i4 = i11;
-                                    this.overlay.append("[ov").append(i).append("][seg").append(i4).append(str13).append(slideX(abs, duration_in2, btm_x2, fromW2, -1.0f, 0.0f)).append(":y=").append(btm_y2).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'[ov").append(i4).append("];");
+                                    this.overlay.append("[ov").append(value).append("][seg").append(i4).append(str13).append(slideX(abs, duration_in2, btm_x2, fromW2, -1.0f, 0.0f)).append(":y=").append(btm_y2).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'[ov").append(i4).append("];");
                                     str15 = ",";
                                     str14 = ")'[ov";
-                                    str10 = "-i";
+                                    str10 = "-value";
                                     f4 = abs2;
                                     str12 = ":enable='between(t,";
                                 } else {
                                     str11 = ":";
                                     i4 = i11;
                                     if (type_in2.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-                                        str10 = "-i";
+                                        str10 = "-value";
                                         str12 = ":enable='between(t,";
                                         str15 = ",";
                                         f4 = abs2;
                                         str14 = ")'[ov";
                                         str16 = "];";
-                                        this.overlay.append("[ov").append(i).append("][seg").append(i4).append(str13).append(slideX(abs, duration_in2, btm_x2, fromW2, 1.0f, 0.0f)).append(":y=").append(btm_y2).append(str12).append(abs).append(str15).append(f4).append(str14).append(i4).append(str16);
+                                        this.overlay.append("[ov").append(value).append("][seg").append(i4).append(str13).append(slideX(abs, duration_in2, btm_x2, fromW2, 1.0f, 0.0f)).append(":y=").append(btm_y2).append(str12).append(abs).append(str15).append(f4).append(str14).append(i4).append(str16);
                                     } else {
                                         str15 = ",";
                                         str16 = "];";
-                                        str10 = "-i";
+                                        str10 = "-value";
                                         f4 = abs2;
                                         str14 = ")'[ov";
                                         str12 = ":enable='between(t,";
@@ -1051,7 +1051,7 @@ public class ProgressViewActivity extends Base {
                             str16 = "];";
                             z4 = true;
                         } else {
-                            str10 = "-i";
+                            str10 = "-value";
                             str11 = ":";
                             f4 = abs2;
                             str12 = ":enable='between(t,";
@@ -1059,21 +1059,21 @@ public class ProgressViewActivity extends Base {
                             str14 = ")'[ov";
                             str15 = ",";
                             str16 = "];";
-                            i4 = i;
+                            i4 = value;
                             z4 = false;
                         }
                         str7 = str16;
                         str4 = str14;
-                        i2 = i4;
-                        f2 = abs;
+                        value2 = i4;
+                        floatValue2 = abs;
                         str8 = "[ov";
                         str9 = str13;
                         str3 = str10;
-                        z = z4;
+                        isFlag = z4;
                         str6 = str11;
                         abs2 = f4;
-                        str = str15;
-                        str5 = str12;
+                        textValue = str15;
+                        textValue5 = str12;
                     } else if (z2) {
                         float duration_out5 = entityBismilahTemplate.getTransition().getDuration_out();
                         float abs5 = Math.abs(abs2 - duration_out5);
@@ -1082,104 +1082,104 @@ public class ProgressViewActivity extends Base {
                         float fromW3 = entityBismilahTemplate.getTransition().getFromW();
                         String type_out2 = entityBismilahTemplate.getTransition().getType_out();
                         int i12 = (int) (abs2 - abs);
-                        String generateVideoSegment6 = generateVideoSegment(entityBismilahTemplate, i, mFadeFilter(i12 - duration_out5, duration_out5, false), i12, countDownLatch, semaphore);
+                        String generateVideoSegment6 = generateVideoSegment(entityBismilahTemplate, value, mFadeFilter(i12 - duration_out5, duration_out5, false), i12, countDownLatch, semaphore);
                         if (generateVideoSegment6 != null) {
-                            list.add("-i");
+                            list.add("-value");
                             list.add(generateVideoSegment6);
-                            int i13 = i + 1;
+                            int i13 = value + 1;
                             if (type_out2.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
                                 this.overlay.append("[").append(i13).append("]").append("setpts=PTS-STARTPTS+").append(abs).append("/TB").append("[seg").append(i13).append("];");
-                                this.overlay.append("[ov").append(i).append("][seg").append(i13).append("]overlay=").append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, 1.0f)).append(":y=").append(btm_y3).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'").append("[ov").append(i13).append("];");
+                                this.overlay.append("[ov").append(value).append("][seg").append(i13).append("]overlay=").append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, 1.0f)).append(":y=").append(btm_y3).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'").append("[ov").append(i13).append("];");
                                 abs2 = abs2;
                                 str7 = "];";
-                                i3 = i13;
-                                str3 = "-i";
+                                value3 = i13;
+                                str3 = "-value";
                                 str4 = ")'[ov";
-                                str = ",";
+                                textValue = ",";
                                 str9 = "]overlay=";
                                 str6 = ":";
-                                str5 = ":enable='between(t,";
-                                f2 = abs;
+                                textValue5 = ":enable='between(t,";
+                                floatValue2 = abs;
                                 str8 = "[ov";
                             } else {
-                                str3 = "-i";
+                                str3 = "-value";
                                 str7 = "];";
                                 if (type_out2.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
                                     this.overlay.append("[").append(i13).append("]").append("setpts=PTS-STARTPTS+").append(abs).append("/TB").append("[seg").append(i13).append(str7);
                                     str8 = "[ov";
                                     str9 = "]overlay=";
-                                    f2 = abs;
+                                    floatValue2 = abs;
                                     str7 = str7;
-                                    this.overlay.append(str8).append(i).append("][seg").append(i13).append(str9).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, -1.0f)).append(":y=").append(btm_y3).append(":enable='between(t,").append(f2).append(",").append(abs2).append(")'").append(str8).append(i13).append(str7);
+                                    this.overlay.append(str8).append(value).append("][seg").append(i13).append(str9).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, -1.0f)).append(":y=").append(btm_y3).append(":enable='between(t,").append(floatValue2).append(",").append(abs2).append(")'").append(str8).append(i13).append(str7);
                                     abs2 = abs2;
-                                    i3 = i13;
-                                    str5 = ":enable='between(t,";
+                                    value3 = i13;
+                                    textValue5 = ":enable='between(t,";
                                     str6 = ":";
                                     str4 = ")'[ov";
-                                    str = ",";
+                                    textValue = ",";
                                 } else {
-                                    i3 = i13;
-                                    f2 = abs;
+                                    value3 = i13;
+                                    floatValue2 = abs;
                                     str8 = "[ov";
                                     str9 = "]overlay=";
                                     if (type_out2.equals(TransitionType.FADE_OUT.getValue())) {
-                                        this.overlay.append("[").append(i3).append("]").append("setpts=PTS-STARTPTS+").append(f2).append("/TB").append("[seg").append(i3).append(str7);
+                                        this.overlay.append("[").append(value3).append("]").append("setpts=PTS-STARTPTS+").append(floatValue2).append("/TB").append("[seg").append(value3).append(str7);
                                         str6 = ":";
-                                        str5 = ":enable='between(t,";
-                                        str = ",";
-                                        StringBuilder append7 = this.overlay.append(str8).append(i).append("][seg").append(i3).append(str9).append(btm_x3).append(str6).append(btm_y3).append(str5).append(f2).append(str);
+                                        textValue5 = ":enable='between(t,";
+                                        textValue = ",";
+                                        StringBuilder append7 = this.overlay.append(str8).append(value).append("][seg").append(value3).append(str9).append(btm_x3).append(str6).append(btm_y3).append(textValue5).append(floatValue2).append(textValue);
                                         abs2 = abs2;
                                         str4 = ")'[ov";
-                                        append7.append(abs2).append(str4).append(i3).append(str7);
+                                        append7.append(abs2).append(str4).append(value3).append(str7);
                                     } else {
                                         abs2 = abs2;
-                                        str = ",";
-                                        str5 = ":enable='between(t,";
+                                        textValue = ",";
+                                        textValue5 = ":enable='between(t,";
                                         str6 = ":";
                                         str4 = ")'[ov";
                                     }
                                 }
                             }
-                            i2 = i3;
-                            z = true;
+                            value2 = value3;
+                            isFlag = true;
                         } else {
-                            f2 = abs;
-                            str3 = "-i";
+                            floatValue2 = abs;
+                            str3 = "-value";
                             str7 = "];";
                             str8 = "[ov";
-                            str5 = ":enable='between(t,";
+                            textValue5 = ":enable='between(t,";
                             str9 = "]overlay=";
                             str6 = ":";
                             str4 = ")'[ov";
                             abs2 = abs2;
-                            str = ",";
+                            textValue = ",";
                         }
                     } else {
-                        str = ",";
-                        f2 = abs;
+                        textValue = ",";
+                        floatValue2 = abs;
                         str8 = "[ov";
                         str7 = "];";
-                        str3 = "-i";
-                        str5 = ":enable='between(t,";
+                        str3 = "-value";
+                        textValue5 = ":enable='between(t,";
                         str6 = ":";
                         str4 = ")'[ov";
                         abs2 = abs2;
                         str9 = "]overlay=";
                     }
-                    if (z) {
-                        return i2;
+                    if (isFlag) {
+                        return value2;
                     }
                     list.add(str3);
                     list.add(this.mTemplate.getFolder_template() + str2 + entityBismilahTemplate.getFile());
-                    int i14 = i2 + 1;
-                    this.overlay.append(str8).append(i2).append("][").append(i14).append(str9).append(entityBismilahTemplate.getBtm_x()).append(str6).append(entityBismilahTemplate.getBtm_y()).append(str5).append(f2).append(str).append(Math.abs(abs2 - f)).append(str4).append(i14).append(str7);
+                    int i14 = value2 + 1;
+                    this.overlay.append(str8).append(value2).append("][").append(i14).append(str9).append(entityBismilahTemplate.getBtm_x()).append(str6).append(entityBismilahTemplate.getBtm_y()).append(textValue5).append(floatValue2).append(textValue).append(Math.abs(abs2 - floatValue)).append(str4).append(i14).append(str7);
                     this.renderManager.addTask("basmal prerender", 0);
                     this.renderManager.nextTask();
                     countDownLatch.countDown();
                     return i14;
                 }
             } else {
-                f3 = 0.0f;
+                floatValue3 = 0.0f;
             }
             z2 = false;
             if (entityBismilahTemplate.getTransition().isIn()) {
@@ -1189,23 +1189,23 @@ public class ProgressViewActivity extends Base {
             }
             if (!z3) {
             }
-            if (z) {
+            if (isFlag) {
             }
         } else {
-            str = ",";
+            textValue = ",";
             str2 = "/";
-            str3 = "-i";
+            str3 = "-value";
             str4 = ")'[ov";
-            str5 = ":enable='between(t,";
+            textValue5 = ":enable='between(t,";
             str6 = ":";
             str7 = "];";
-            f2 = abs;
+            floatValue2 = abs;
             str8 = "[ov";
             str9 = "]overlay=";
         }
-        i2 = i;
-        z = false;
-        if (z) {
+        value2 = value;
+        isFlag = false;
+        if (isFlag) {
         }
     }
 
@@ -1230,8 +1230,8 @@ public class ProgressViewActivity extends Base {
                     }
                 }
                 if (!list.isEmpty()) {
-                    for (int i = 0; i < list.size(); i++) {
-                        EntityMedia entityMedia = (EntityMedia) list.get(i);
+                    for (int value = 0; value < list.size(); value++) {
+                        EntityMedia entityMedia = (EntityMedia) list.get(value);
                         if (entityMedia != null) {
                             try {
                                 if (entityMedia.getEnd() >= entityMedia.getStart() && entityMedia.getPath_ffmpeg_effect() == null && entityMedia.getUri() != null) {
@@ -1278,18 +1278,18 @@ public class ProgressViewActivity extends Base {
         Code decompiled incorrectly, please refer to instructions dump.
     */
     public void setupCommand(FfmpegCodecChecker.CodecInfo codecInfo) {
-        String str;
+        String textValue;
         String str2;
         Semaphore semaphore;
         CountDownLatch countDownLatch;
-        int i;
-        int i2;
+        int value;
+        int value2;
         CountDownLatch countDownLatch2;
         String str3;
         String str4;
-        String str5;
+        String textValue5;
         String str6;
-        int i3;
+        int value3;
         String str7;
         Semaphore semaphore2;
         CountDownLatch countDownLatch3;
@@ -1303,14 +1303,14 @@ public class ProgressViewActivity extends Base {
         int i9;
         String str10;
         ArrayList arrayList;
-        boolean z;
+        boolean isFlag;
         String str11;
         String str12;
         String str13;
         int i10;
         String str14;
         String str15;
-        float f;
+        float floatValue;
         int i11;
         int i12;
         String str16;
@@ -1322,12 +1322,12 @@ public class ProgressViewActivity extends Base {
         String str21;
         String str22;
         String str23;
-        float f2;
+        float floatValue2;
         int i13;
         String str24;
         String str25;
         String str26;
-        float f3;
+        float floatValue3;
         String str27;
         String str28;
         int i14;
@@ -1347,7 +1347,7 @@ public class ProgressViewActivity extends Base {
         String str39;
         float f4;
         float f5;
-        float f6;
+        float floatValue6;
         float f7;
         ArrayList arrayList5;
         String str40;
@@ -1388,33 +1388,33 @@ public class ProgressViewActivity extends Base {
         String str52 = "][";
         String str53 = "]overlay=";
         String str54 = "]";
-        String str55 = "-i";
+        String str55 = "-value";
         String str56 = "[ov";
         int i23 = i22;
         if (this.mTemplate.getIpad_type() == IpadType.IPAD.ordinal() || this.mTemplate.getIpad_type() == IpadType.IPAD_UNBLUR.ordinal() || this.mTemplate.getIpad_type() == IpadType.IPAD_CLASSIC.ordinal() || this.mTemplate.getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal() || this.mTemplate.getIpad_type() == IpadType.ROUND_RECT.ordinal() || this.mTemplate.getIpad_type() == IpadType.BOTTOM_RECT.ordinal() || this.mTemplate.getIpad_type() == IpadType.RECT.ordinal()) {
-            str = ":y=";
+            textValue = ":y=";
             str2 = "overlay=";
             File file = new File(this.mTemplate.getUri_bg_ffmpeg());
             if (file.exists() && file.isFile()) {
                 CountDownLatch countDownLatch4 = new CountDownLatch(this.mTemplate.getQuranEntityList().size() + this.mTemplate.getTranslationTemplateList().size() + (this.mTemplate.isVideoSquare() ? 1 : 0) + 1 + (this.mTemplate.getEntityBismilahTemplate() != null ? 1 : 0) + (this.mTemplate.getEntityIsti3adaTemplate() != null ? 1 : 0));
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(generateVideoTimer(max, countDownLatch4, semaphore5));
                 semaphore = semaphore5;
                 this.overlay.append("[").append(0).append("][").append(1).append("]overlay=").append(this.mTemplate.getEntityProgressTemplate().getLeft()).append(":").append(this.mTemplate.getmTimeModel().getPosY() + this.mTemplate.getEntityProgressTemplate().getTop()).append("[bg];");
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(this.mTemplate.getFolder_template() + "/line_progress.png");
                 this.overlay.append("[").append(2).append(":v]").append("loop=loop=-1:size=1:start=0").append(",format=rgba").append("[lp];");
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
                 if (this.mTemplate.getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal()) {
                     String str57 = "[tmp2]";
                     this.overlay.append("[lp][").append(3).append("]overlay=x='").append("(-" + this.mTemplate.getmTimeModel().getWidth_bitmap_progress() + "*(1-" + ("clip(t/" + ("(" + (max / 1000.0d) + ")") + ",0,1)") + "))").append("':y=0:shortest=0").append(str57).append(";");
-                    arrayList8.add("-i");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg_tmp.png");
                     this.overlay.append("[bg]").append(str57).append(str2).append(this.mTemplate.getEntityProgressTemplate().getLeft()).append(":").append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ps];");
-                    i = 4;
+                    value = 4;
                     str56 = "[ov";
                     this.overlay.append("[ps][").append(4).append("]overlay='if(lte(t,0),-100,").append(this.mTemplate.getEntityProgressTemplate().getLeft()).append(")':").append(this.mTemplate.getEntityProgressTemplate().getTop()).append(str56).append(4).append("];");
                     str53 = "]overlay=";
@@ -1424,77 +1424,77 @@ public class ProgressViewActivity extends Base {
                     this.overlay.append("[").append(3).append("]").append("[lp]overlay='if(lte(t,0),-").append(this.mTemplate.getmTimeModel().getWidth_bitmap_progress()).append(",min(").append(width_bitmap_progress).append(",(").append(width_bitmap_progress).append(" * ((cos((t / (").append(max).append("/1000.0) + 1) * PI) / 2) + 0.5))))':0[ov").append(2).append("];");
                     str53 = "]overlay=";
                     this.overlay.append("[bg]").append(str56).append(2).append(str53).append(this.mTemplate.getEntityProgressTemplate().getLeft()).append(":").append(this.mTemplate.getEntityProgressTemplate().getTop()).append(str56).append(3).append("];");
-                    i = 3;
+                    value = 3;
                 }
                 countDownLatch = countDownLatch4;
             } else {
                 semaphore = semaphore5;
                 countDownLatch = new CountDownLatch(this.mTemplate.getQuranEntityList().size() + this.mTemplate.getTranslationTemplateList().size() + (this.mTemplate.isVideoSquare() ? 1 : 0) + (this.mTemplate.getEntityBismilahTemplate() != null ? 1 : 0) + (this.mTemplate.getEntityIsti3adaTemplate() != null ? 1 : 0));
-                i = 0;
+                value = 0;
             }
-            i2 = i;
+            value2 = value;
             countDownLatch2 = countDownLatch;
         } else {
             CountDownLatch countDownLatch5 = new CountDownLatch(this.mTemplate.getQuranEntityList().size() + this.mTemplate.getTranslationTemplateList().size() + (this.mTemplate.isVideoSquare() ? 1 : 0) + (this.mTemplate.getEntityBismilahTemplate() != null ? 1 : 0) + (this.mTemplate.getEntityIsti3adaTemplate() != null ? 1 : 0));
             if (this.mTemplate.getIpad_type() == IpadType.HEART.ordinal()) {
                 File file2 = new File(this.mTemplate.getUri_bg_ffmpeg());
                 if (file2.exists() && file2.isFile()) {
-                    arrayList8.add("-i");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                 }
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
-                arrayList8.add("-f");
+                arrayList8.add("-floatValue");
                 arrayList8.add("lavfi");
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add("color=size=" + this.mTemplate.getWidth() + "x" + this.mTemplate.getmTimeModel().getHeightShape() + ":color=#00000000");
                 String valueOf = String.valueOf(max / 1000.0d);
                 float heightShape = this.mTemplate.getmTimeModel().getHeightShape();
                 this.overlay.append("[").append(2).append("][").append(1).append("]overlay=x=0:y='").append(heightShape).append("*(1-clip(t/").append(valueOf).append(",0,1))*0.8 + ").append(heightShape).append("*(1-(0.5-0.5*cos(PI*clip(t/").append(valueOf).append(",0,1))))*0.2'").append("[ov").append(1).append("];");
-                str = ":y=";
+                textValue = ":y=";
                 this.overlay.append("[0]").append("[ov").append(1).append("]overlay=").append(0).append(":").append(this.mTemplate.getEntityProgressTemplate().getTop() + this.mTemplate.getmTimeModel().getStartShape()).append("[ov").append(2).append("];");
-                arrayList8.add("-i");
+                arrayList8.add("-value");
                 arrayList8.add(this.mTemplate.getFolder_template() + "/line_progress.png");
                 this.overlay.append("[ov").append(2).append("]").append("[").append(3).append("]overlay=").append(0).append(":").append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ov").append(3).append("];");
-                i2 = 3;
+                value2 = 3;
                 str2 = "overlay=";
                 countDownLatch2 = countDownLatch5;
                 str52 = "][";
             } else {
-                str = ":y=";
+                textValue = ":y=";
                 if (this.mTemplate.getIpad_type() == IpadType.BATTERY.ordinal()) {
                     File file3 = new File(this.mTemplate.getUri_bg_ffmpeg());
                     if (file3.exists() && file3.isFile()) {
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                     }
                     arrayList8.add("-loop");
                     arrayList8.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-                    arrayList8.add("-i");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
                     double startShape = (-this.mTemplate.getmTimeModel().getWidthShape()) + this.mTemplate.getmTimeModel().getStartShape();
                     String valueOf2 = String.valueOf(max / 1000.0d);
                     float widthShape = this.mTemplate.getmTimeModel().getWidthShape();
-                    this.overlay.append("[0]").append("[").append(1).append("]").append("overlay=x='").append(startShape).append("+(").append(widthShape).append("*(clip(t/").append(valueOf2).append(",0,1))*0.8").append("+").append(widthShape).append("*(0.5-0.5*cos(PI*clip(t/").append(valueOf2).append(",0,1)))*0.2").append(")'").append(str).append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ov").append(1).append("];");
-                    arrayList8.add("-i");
+                    this.overlay.append("[0]").append("[").append(1).append("]").append("overlay=x='").append(startShape).append("+(").append(widthShape).append("*(clip(t/").append(valueOf2).append(",0,1))*0.8").append("+").append(widthShape).append("*(0.5-0.5*cos(PI*clip(t/").append(valueOf2).append(",0,1)))*0.2").append(")'").append(textValue).append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ov").append(1).append("];");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getFolder_template() + "/line_progress.png");
                     this.overlay.append("[ov").append(1).append("]").append("[").append(2).append("]overlay=0:").append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ov").append(2).append("];");
                     str2 = "overlay=";
                     countDownLatch2 = countDownLatch5;
                     str52 = "][";
-                    i2 = 2;
+                    value2 = 2;
                 } else if (this.mTemplate.getIpad_type() == IpadType.CASSET.ordinal() || this.mTemplate.getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
-                    str = str;
+                    textValue = textValue;
                     str2 = "overlay=";
                     str52 = "][";
                     File file4 = new File(this.mTemplate.getUri_bg_ffmpeg());
                     if (file4.exists() && file4.isFile()) {
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                     }
                     arrayList8.add("-loop");
                     arrayList8.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-                    arrayList8.add("-i");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
                     this.overlay.append("[").append(1).append("]").append("rotate=angle=0.4*PI*t:ow=iw:oh=ih:fillcolor=#00000000").append("[rot").append(1).append("];");
                     this.overlay.append("[0]").append("[rot").append(1).append("]").append(str2).append(this.mTemplate.getmTimeModel().getStartShape()).append(":").append(this.mTemplate.getmTimeModel().getHeightShape()).append("[ov").append(1).append("];");
@@ -1502,22 +1502,22 @@ public class ProgressViewActivity extends Base {
                     this.overlay.append("[ov").append(1).append("]").append("[rot").append(1).append("]").append(str2).append(this.mTemplate.getmTimeModel().getWidthShape()).append(":").append(this.mTemplate.getmTimeModel().getHeightShape()).append("[ov").append(1).append("];");
                     semaphore = semaphore5;
                     countDownLatch2 = countDownLatch5;
-                    i2 = 1;
+                    value2 = 1;
                 } else if (this.mTemplate.getIpad_type() == IpadType.CASSET_IMG.ordinal()) {
                     if (this.mTemplate.isVideoSquare()) {
                         arrayList8.add("-stream_loop");
                         arrayList8.add("-1");
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getUri_media_video());
                         String str58 = "(iw-" + this.mTemplate.getWidth() + ")/2";
                         String str59 = "(ih-" + this.mTemplate.getHeight() + ")/2";
-                        str = str;
+                        textValue = textValue;
                         int max2 = Math.max(this.mTemplate.getWidth(), this.mTemplate.getHeight());
                         str49 = "]overlay=";
                         this.overlay.append("[").append(0).append(":v]scale=").append(max2).append(":").append(max2).append(":force_original_aspect_ratio=increase[sc];[sc]crop=").append(this.mTemplate.getWidth()).append(":").append(this.mTemplate.getHeight()).append(":").append(str58).append(":").append(str59).append(",format=yuva420p").append("[ov").append(0).append("];");
                         File file5 = new File(this.mTemplate.getUri_bg_ffmpeg());
                         if (file5.exists() && file5.isFile()) {
-                            arrayList8.add("-i");
+                            arrayList8.add("-value");
                             arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                             str52 = "][";
                             this.overlay.append("[ov").append(0).append(str52).append(1).append("]overlay[ov").append(1).append("];");
@@ -1529,11 +1529,11 @@ public class ProgressViewActivity extends Base {
                         str50 = "[ov" + i21 + "]";
                     } else {
                         str49 = "]overlay=";
-                        str = str;
+                        textValue = textValue;
                         str52 = "][";
                         File file6 = new File(this.mTemplate.getUri_bg_ffmpeg());
                         if (file6.exists() && file6.isFile()) {
-                            arrayList8.add("-i");
+                            arrayList8.add("-value");
                             arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                         }
                         str50 = "[0]";
@@ -1541,7 +1541,7 @@ public class ProgressViewActivity extends Base {
                     }
                     arrayList8.add("-loop");
                     arrayList8.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-                    arrayList8.add("-i");
+                    arrayList8.add("-value");
                     arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
                     int i24 = i21 + 1;
                     this.overlay.append("[").append(i24).append("]").append("rotate=angle=0.4*PI*t:ow=iw:oh=ih:fillcolor=#00000000").append("[rot").append(i24).append("];");
@@ -1549,42 +1549,42 @@ public class ProgressViewActivity extends Base {
                     this.overlay.append(str50).append("[rot").append(i24).append("]").append(str2).append(this.mTemplate.getmTimeModel().getStartShape()).append(":").append(this.mTemplate.getmTimeModel().getHeightShape()).append("[ov").append(i24).append("];");
                     this.overlay.append("[").append(i24).append("]").append("rotate=angle=-0.5*PI*t:ow=iw:oh=ih:fillcolor=#00000000").append("[rot").append(i24).append("];");
                     this.overlay.append("[ov").append(i24).append("]").append("[rot").append(i24).append("]").append(str2).append(this.mTemplate.getmTimeModel().getWidthShape()).append(":").append(this.mTemplate.getmTimeModel().getHeightShape()).append("[ov").append(i24).append("];");
-                    i2 = i24;
+                    value2 = i24;
                     semaphore = semaphore5;
                     countDownLatch2 = countDownLatch5;
                     str53 = str49;
                 } else {
-                    str = str;
+                    textValue = textValue;
                     str2 = "overlay=";
                     str52 = "][";
                     File file7 = new File(this.mTemplate.getUri_bg_ffmpeg());
                     if (this.mTemplate.isVideoSquare() || !file7.exists() || !file7.isFile()) {
                         str53 = "]overlay=";
                     } else if (this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getFolder_template() + "/line_progress.png");
                         this.overlay.append("[").append(1).append("]").append("loop=loop=-1:size=1:start=0").append("[lp];");
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getFolder_template() + "/line_bg.png");
                         this.overlay.append("[lp]").append("[").append(2).append("]overlay=x=").append(-this.mTemplate.getmTimeModel().getWidth_bitmap_progress()).append(" + ( ((cos((t / (").append(max).append("/1000.0) + 1) * PI) / 2) + 0.5) * ").append(this.mTemplate.getmTimeModel().getWidth_bitmap_progress() - this.mTemplate.getmTimeModel().getProgress_offset()).append(" )").append(":y=0").append("[ov").append(1).append("];");
                         str53 = "]overlay=";
                         this.overlay.append("[0]").append("[ov").append(1).append(str53).append(this.mTemplate.getEntityProgressTemplate().getLeft()).append(":").append(this.mTemplate.getEntityProgressTemplate().getTop()).append("[ov").append(2).append("];");
                         semaphore = semaphore5;
                         countDownLatch2 = countDownLatch5;
-                        i2 = 2;
+                        value2 = 2;
                     } else {
                         str53 = "]overlay=";
                         arrayList8.add("-loop");
                         arrayList8.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(this.mTemplate.getUri_bg_ffmpeg());
                         this.overlay.append("[0]format=yuv420p[ov").append(0).append("];");
                     }
                     semaphore = semaphore5;
                     countDownLatch2 = countDownLatch5;
-                    i2 = 0;
+                    value2 = 0;
                 }
             }
             semaphore = semaphore5;
@@ -1597,10 +1597,10 @@ public class ProgressViewActivity extends Base {
                 if (this.mTemplate.getIpad_type() == IpadType.IPAD.ordinal() || this.mTemplate.getIpad_type() == IpadType.IPAD_UNBLUR.ordinal()) {
                     str3 = str53;
                     i23 = i23;
-                    str5 = str51;
+                    textValue5 = str51;
                     Semaphore semaphore6 = semaphore;
                     str6 = "];";
-                    i3 = i2;
+                    value3 = value2;
                     str7 = "[";
                     countDownLatch3 = countDownLatch2;
                     str8 = ":";
@@ -1609,26 +1609,26 @@ public class ProgressViewActivity extends Base {
                     if (squareBitmapModel != null) {
                         semaphore2 = semaphore6;
                         String preRenderMask_Rounded = preRenderMask_Rounded(squareBitmapModel, i4, countDownLatch3, semaphore2);
-                        arrayList8.add("-i");
+                        arrayList8.add("-value");
                         arrayList8.add(preRenderMask_Rounded);
-                        int i25 = i3 + 1;
-                        this.overlay.append(str56).append(i3).append("]").append(str7).append(i25).append(":v]").append(str2).append(squareBitmapModel.getPosX()).append(str8).append(squareBitmapModel.getPosY()).append(str56).append(i25).append(str6);
-                        i2 = i25;
+                        int i25 = value3 + 1;
+                        this.overlay.append(str56).append(value3).append("]").append(str7).append(i25).append(":v]").append(str2).append(squareBitmapModel.getPosX()).append(str8).append(squareBitmapModel.getPosY()).append(str56).append(i25).append(str6);
+                        value2 = i25;
                         i5 = i23;
                         float fps = (i5 / this.mTemplate.getFps()) * 2.0E-4f;
                         Semaphore semaphore7 = semaphore2;
                         int i26 = i4;
                         String str60 = str6;
-                        str9 = str5;
+                        str9 = textValue5;
                         String str61 = str8;
-                        int addBasmala = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), i2, semaphore2, countDownLatch3, arrayList8, fps), semaphore7, countDownLatch3, arrayList8, fps);
+                        int addBasmala = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), value2, semaphore2, countDownLatch3, arrayList8, fps), semaphore7, countDownLatch3, arrayList8, fps);
                         i6 = 0;
                         while (i6 < this.mTemplate.getQuranEntityList().size()) {
                             EntityQuranTemplate entityQuranTemplate = this.mTemplate.getQuranEntityList().get(i6);
                             float abs = Math.abs(entityQuranTemplate.getStart());
                             float abs2 = Math.abs(entityQuranTemplate.getEnd());
                             if (abs >= abs2) {
-                                f = fps;
+                                floatValue = fps;
                                 i11 = i6;
                                 i12 = addBasmala;
                                 str16 = str54;
@@ -1646,7 +1646,7 @@ public class ProgressViewActivity extends Base {
                                     if (entityQuranTemplate.getTransition() != null) {
                                         boolean z2 = entityQuranTemplate.getTransition().isOut() && entityQuranTemplate.getTransition().getDuration_out() > 0.0f;
                                         boolean z3 = entityQuranTemplate.getTransition().isIn() && entityQuranTemplate.getTransition().getDuration_in() > 0.0f;
-                                        f = fps;
+                                        floatValue = fps;
                                         String str62 = str61;
                                         String str63 = str56;
                                         if (z3 && z2) {
@@ -1662,13 +1662,13 @@ public class ProgressViewActivity extends Base {
                                                 str39 = ")'[ov";
                                                 f4 = btm_y;
                                                 f5 = btm_x;
-                                                f6 = abs2;
+                                                floatValue6 = abs2;
                                                 f7 = duration_in;
                                                 i11 = i6;
                                                 arrayList5 = arrayList8;
                                                 str40 = type_in;
                                                 str41 = str60;
-                                                str42 = str;
+                                                str42 = textValue;
                                                 f8 = abs;
                                                 str43 = "[seg";
                                                 i16 = addBasmala;
@@ -1686,12 +1686,12 @@ public class ProgressViewActivity extends Base {
                                                 i11 = i6;
                                                 arrayList5 = arrayList8;
                                                 str41 = str60;
-                                                str42 = str;
+                                                str42 = textValue;
                                                 str43 = "[seg";
                                                 i16 = addBasmala;
                                                 str16 = str54;
                                                 str45 = str63;
-                                                f6 = abs2;
+                                                floatValue6 = abs2;
                                                 str40 = type_in;
                                                 f8 = abs;
                                                 str44 = ":enable='between(t,";
@@ -1748,7 +1748,7 @@ public class ProgressViewActivity extends Base {
                                                         f12 = f9 - fromW;
                                                         mSlideX2 = mSlideX(abs3, duration_out, f9, fromW, 0.0f, -1.0f);
                                                     }
-                                                    this.overlay.append(str63).append(i27).append("][seg").append(i18).append("]overlay=x=").append("'if(lt(t," + abs + ")," + f11 + ",if(lt(t," + (abs + duration_in) + ")," + str48 + ",if(lt(t," + abs3 + ")," + f9 + ",if(lt(t," + (abs3 + duration_out) + ")," + mSlideX2 + "," + f12 + "))))'").append(str).append(btm_y).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'[ov").append(i18).append(str64);
+                                                    this.overlay.append(str63).append(i27).append("][seg").append(i18).append("]overlay=x=").append("'if(lt(t," + abs + ")," + f11 + ",if(lt(t," + (abs + duration_in) + ")," + str48 + ",if(lt(t," + abs3 + ")," + f9 + ",if(lt(t," + (abs3 + duration_out) + ")," + mSlideX2 + "," + f12 + "))))'").append(textValue).append(btm_y).append(":enable='between(t,").append(abs).append(",").append(abs2).append(")'[ov").append(i18).append(str64);
                                                     str23 = str63;
                                                     i12 = i18;
                                                     str18 = str55;
@@ -1762,15 +1762,15 @@ public class ProgressViewActivity extends Base {
                                             String str66 = str44;
                                             if (str40.equals(TransitionType.FADE_IN.getValue())) {
                                                 float duration_out2 = entityQuranTemplate.getTransition().getDuration_out();
-                                                float abs4 = Math.abs(f6 - duration_out2);
+                                                float abs4 = Math.abs(floatValue6 - duration_out2);
                                                 String type_out = entityQuranTemplate.getTransition().getType_out();
-                                                float f14 = f6;
+                                                float f14 = floatValue6;
                                                 float f15 = f4;
                                                 String str67 = str42;
                                                 String str68 = str46;
                                                 String str69 = str43;
                                                 String str70 = str45;
-                                                String generateVideoSegment2 = generateVideoSegment(entityQuranTemplate, i16, fadeInOut(abs4 - f8, f7, duration_out2), (int) (f6 - f8), countDownLatch3, semaphore7);
+                                                String generateVideoSegment2 = generateVideoSegment(entityQuranTemplate, i16, fadeInOut(abs4 - f8, f7, duration_out2), (int) (floatValue6 - f8), countDownLatch3, semaphore7);
                                                 if (generateVideoSegment2 == null) {
                                                     str20 = str41;
                                                     str18 = str55;
@@ -1779,7 +1779,7 @@ public class ProgressViewActivity extends Base {
                                                     arrayList2 = arrayList5;
                                                     str19 = str62;
                                                     str22 = str3;
-                                                    str = str67;
+                                                    textValue = str67;
                                                     str23 = str70;
                                                 } else {
                                                     ArrayList arrayList9 = arrayList5;
@@ -1808,7 +1808,7 @@ public class ProgressViewActivity extends Base {
                                                     }
                                                     str22 = str3;
                                                     this.overlay.append(str70).append(i16).append(str68).append(i17).append(str22).append(str47).append(str67).append(f15).append(str66).append(f8).append(str38).append(f14).append(str39).append(i17).append(str41);
-                                                    str = str67;
+                                                    textValue = str67;
                                                     str23 = str70;
                                                     i12 = i17;
                                                     str20 = str41;
@@ -1831,9 +1831,9 @@ public class ProgressViewActivity extends Base {
                                                 String str80 = str3;
                                                 if (str40.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
                                                     float duration_out3 = entityQuranTemplate.getTransition().getDuration_out();
-                                                    float f18 = f6;
+                                                    float f18 = floatValue6;
                                                     String str81 = str45;
-                                                    String generateVideoSegment3 = generateVideoSegment(entityQuranTemplate, i16, fadeInOut(Math.abs(f6 - duration_out3) - f8, f17, duration_out3), (int) (f6 - f8), countDownLatch3, semaphore7);
+                                                    String generateVideoSegment3 = generateVideoSegment(entityQuranTemplate, i16, fadeInOut(Math.abs(floatValue6 - duration_out3) - f8, f17, duration_out3), (int) (floatValue6 - f8), countDownLatch3, semaphore7);
                                                     if (generateVideoSegment3 == null) {
                                                         str17 = str74;
                                                         str16 = str78;
@@ -1844,7 +1844,7 @@ public class ProgressViewActivity extends Base {
                                                         str20 = str77;
                                                         str19 = str62;
                                                         str22 = str80;
-                                                        str = str76;
+                                                        textValue = str76;
                                                         str23 = str81;
                                                     } else {
                                                         arrayList6.add(str55);
@@ -1856,7 +1856,7 @@ public class ProgressViewActivity extends Base {
                                                         i17 = i30;
                                                         this.overlay.append(str81).append(i16).append(str73).append(i17).append(str80).append(slideX(f8, f17, f5, fromW, -1.0f, 0.0f)).append(str76).append(f16).append(str66).append(f8).append(str38).append(f18).append(str75).append(i17).append(str41);
                                                         str17 = str74;
-                                                        str = str76;
+                                                        textValue = str76;
                                                         str22 = str80;
                                                         str23 = str81;
                                                         i12 = i17;
@@ -1870,7 +1870,7 @@ public class ProgressViewActivity extends Base {
                                                     String str82 = str45;
                                                     String str83 = str38;
                                                     str16 = str78;
-                                                    float f19 = f6;
+                                                    float f19 = floatValue6;
                                                     if (str40.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
                                                         float duration_out4 = entityQuranTemplate.getTransition().getDuration_out();
                                                         String generateVideoSegment4 = generateVideoSegment(entityQuranTemplate, i16, fadeInOut(Math.abs(f19 - duration_out4) - f8, f17, duration_out4), (int) (f19 - f8), countDownLatch3, semaphore7);
@@ -1890,7 +1890,7 @@ public class ProgressViewActivity extends Base {
                                                             this.overlay.append(str74).append(i31).append(str16).append("setpts=PTS-STARTPTS+").append(f8).append("/TB").append(str79).append(i31).append(str77);
                                                             this.overlay.append(str82).append(i16).append(str73).append(i31).append(str80).append(slideX(f8, f17, f5, fromW, 1.0f, 0.0f)).append(str76).append(f16).append(str66).append(f8).append(str83).append(f19).append(str75).append(i31).append(str77);
                                                             str17 = str74;
-                                                            str = str76;
+                                                            textValue = str76;
                                                             str22 = str80;
                                                             str23 = str82;
                                                             str20 = str77;
@@ -1912,7 +1912,7 @@ public class ProgressViewActivity extends Base {
                                                         str19 = str62;
                                                     }
                                                     str23 = str82;
-                                                    str = str76;
+                                                    textValue = str76;
                                                 }
                                             }
                                         } else {
@@ -1921,9 +1921,9 @@ public class ProgressViewActivity extends Base {
                                             i11 = i6;
                                             int i32 = addBasmala;
                                             ArrayList arrayList10 = arrayList8;
-                                            f3 = abs;
+                                            floatValue3 = abs;
                                             String str86 = str7;
-                                            String str87 = str;
+                                            String str87 = textValue;
                                             String str88 = str3;
                                             if (z3) {
                                                 float duration_in2 = entityQuranTemplate.getTransition().getDuration_in();
@@ -1931,7 +1931,7 @@ public class ProgressViewActivity extends Base {
                                                 float btm_y2 = entityQuranTemplate.getBtm_y();
                                                 float fromW2 = entityQuranTemplate.getTransition().getFromW();
                                                 String type_in2 = entityQuranTemplate.getTransition().getType_in();
-                                                String generateVideoSegment5 = generateVideoSegment(entityQuranTemplate, i32, mFadeFilter(0.0f, duration_in2, true), (int) (abs2 - f3), countDownLatch3, semaphore7);
+                                                String generateVideoSegment5 = generateVideoSegment(entityQuranTemplate, i32, mFadeFilter(0.0f, duration_in2, true), (int) (abs2 - floatValue3), countDownLatch3, semaphore7);
                                                 if (generateVideoSegment5 == null) {
                                                     str17 = str86;
                                                     arrayList2 = arrayList10;
@@ -1940,16 +1940,16 @@ public class ProgressViewActivity extends Base {
                                                     str22 = str88;
                                                     str16 = str84;
                                                     str20 = str85;
-                                                    str = str87;
+                                                    textValue = str87;
                                                     str23 = str63;
                                                     str18 = str55;
                                                 } else {
                                                     arrayList10.add(str55);
                                                     arrayList10.add(generateVideoSegment5);
                                                     int i33 = i32 + 1;
-                                                    this.overlay.append(str86).append(i33).append(str84).append("setpts=PTS-STARTPTS+").append(f3).append("/TB").append("[seg").append(i33).append(str85);
+                                                    this.overlay.append(str86).append(i33).append(str84).append("setpts=PTS-STARTPTS+").append(floatValue3).append("/TB").append("[seg").append(i33).append(str85);
                                                     if (type_in2.equals(TransitionType.FADE_IN.getValue())) {
-                                                        this.overlay.append(str63).append(i32).append("][seg").append(i33).append(str88).append(btm_x2).append(str62).append(btm_y2).append(":enable='between(t,").append(f3).append(",").append(abs2).append(")'[ov").append(i33).append(str85);
+                                                        this.overlay.append(str63).append(i32).append("][seg").append(i33).append(str88).append(btm_x2).append(str62).append(btm_y2).append(":enable='between(t,").append(floatValue3).append(",").append(abs2).append(")'[ov").append(i33).append(str85);
                                                         str17 = str86;
                                                         str31 = str62;
                                                         str32 = str84;
@@ -1966,7 +1966,7 @@ public class ProgressViewActivity extends Base {
                                                             i15 = i33;
                                                             str34 = str88;
                                                             str33 = str87;
-                                                            this.overlay.append(str63).append(i32).append("][seg").append(i15).append(str34).append(slideX(f3, duration_in2, btm_x2, fromW2, -1.0f, 0.0f)).append(str33).append(btm_y2).append(":enable='between(t,").append(f3).append(",").append(abs2).append(")'[ov").append(i15).append(str85);
+                                                            this.overlay.append(str63).append(i32).append("][seg").append(i15).append(str34).append(slideX(floatValue3, duration_in2, btm_x2, fromW2, -1.0f, 0.0f)).append(str33).append(btm_y2).append(":enable='between(t,").append(floatValue3).append(",").append(abs2).append(")'[ov").append(i15).append(str85);
                                                         } else {
                                                             str17 = str86;
                                                             str31 = str62;
@@ -1979,7 +1979,7 @@ public class ProgressViewActivity extends Base {
                                                                 str36 = str33;
                                                                 arrayList4 = arrayList10;
                                                                 str37 = str34;
-                                                                this.overlay.append(str63).append(i32).append("][seg").append(i15).append(str37).append(slideX(f3, duration_in2, btm_x2, fromW2, 1.0f, 0.0f)).append(str36).append(btm_y2).append(":enable='between(t,").append(f3).append(",").append(abs2).append(")'[ov").append(i15).append(str85);
+                                                                this.overlay.append(str63).append(i32).append("][seg").append(i15).append(str37).append(slideX(floatValue3, duration_in2, btm_x2, fromW2, 1.0f, 0.0f)).append(str36).append(btm_y2).append(":enable='between(t,").append(floatValue3).append(",").append(abs2).append(")'[ov").append(i15).append(str85);
                                                             }
                                                         }
                                                         str35 = str55;
@@ -1995,21 +1995,21 @@ public class ProgressViewActivity extends Base {
                                                     arrayList2 = arrayList4;
                                                     str19 = str31;
                                                     str16 = str32;
-                                                    str = str36;
+                                                    textValue = str36;
                                                 }
                                                 str21 = str4;
                                             } else {
                                                 str17 = str86;
-                                                f2 = abs2;
+                                                floatValue2 = abs2;
                                                 String str89 = str55;
                                                 if (z2) {
                                                     float duration_out5 = entityQuranTemplate.getTransition().getDuration_out();
-                                                    float abs5 = Math.abs(f2 - duration_out5);
+                                                    float abs5 = Math.abs(floatValue2 - duration_out5);
                                                     float btm_x3 = entityQuranTemplate.getBtm_x();
                                                     float btm_y3 = entityQuranTemplate.getBtm_y();
                                                     float fromW3 = entityQuranTemplate.getTransition().getFromW();
                                                     String type_out2 = entityQuranTemplate.getTransition().getType_out();
-                                                    int i34 = (int) (f2 - f3);
+                                                    int i34 = (int) (floatValue2 - floatValue3);
                                                     str20 = str85;
                                                     String generateVideoSegment6 = generateVideoSegment(entityQuranTemplate, i32, mFadeFilter(i34 - duration_out5, duration_out5, false), i34, countDownLatch3, semaphore7);
                                                     if (generateVideoSegment6 == null) {
@@ -2018,7 +2018,7 @@ public class ProgressViewActivity extends Base {
                                                         str18 = str89;
                                                         str22 = str88;
                                                         arrayList2 = arrayList10;
-                                                        str = str87;
+                                                        textValue = str87;
                                                         str23 = str63;
                                                         str19 = str62;
                                                         str16 = str84;
@@ -2027,10 +2027,10 @@ public class ProgressViewActivity extends Base {
                                                         arrayList10.add(generateVideoSegment6);
                                                         int i35 = i32 + 1;
                                                         if (type_out2.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-                                                            this.overlay.append(str17).append(i35).append(str84).append("setpts=PTS-STARTPTS+").append(f3).append("/TB").append("[seg").append(i35).append(str20);
+                                                            this.overlay.append(str17).append(i35).append(str84).append("setpts=PTS-STARTPTS+").append(floatValue3).append("/TB").append("[seg").append(i35).append(str20);
                                                             str28 = str89;
-                                                            this.overlay.append(str63).append(i32).append("][seg").append(i35).append(str88).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, 1.0f)).append(str87).append(btm_y3).append(":enable='between(t,").append(f3).append(",").append(f2).append(")'").append(str63).append(i35).append(str20);
-                                                            str = str87;
+                                                            this.overlay.append(str63).append(i32).append("][seg").append(i35).append(str88).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, 1.0f)).append(str87).append(btm_y3).append(":enable='between(t,").append(floatValue3).append(",").append(floatValue2).append(")'").append(str63).append(i35).append(str20);
+                                                            textValue = str87;
                                                             str22 = str88;
                                                             str23 = str63;
                                                             arrayList3 = arrayList10;
@@ -2042,12 +2042,12 @@ public class ProgressViewActivity extends Base {
                                                             i14 = i35;
                                                             arrayList3 = arrayList10;
                                                             if (type_out2.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-                                                                this.overlay.append(str17).append(i14).append(str84).append("setpts=PTS-STARTPTS+").append(f3).append("/TB").append("[seg").append(i14).append(str20);
+                                                                this.overlay.append(str17).append(i14).append(str84).append("setpts=PTS-STARTPTS+").append(floatValue3).append("/TB").append("[seg").append(i14).append(str20);
                                                                 str29 = str84;
                                                                 str17 = str17;
                                                                 str23 = str63;
-                                                                this.overlay.append(str23).append(i32).append("][seg").append(i14).append(str88).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, -1.0f)).append(str87).append(btm_y3).append(":enable='between(t,").append(f3).append(",").append(f2).append(")'").append(str23).append(i14).append(str20);
-                                                                str = str87;
+                                                                this.overlay.append(str23).append(i32).append("][seg").append(i14).append(str88).append(slideX(abs5, duration_out5, btm_x3, fromW3, 0.0f, -1.0f)).append(str87).append(btm_y3).append(":enable='between(t,").append(floatValue3).append(",").append(floatValue2).append(")'").append(str23).append(i14).append(str20);
+                                                                textValue = str87;
                                                                 i14 = i14;
                                                                 str22 = str88;
                                                             } else {
@@ -2055,12 +2055,12 @@ public class ProgressViewActivity extends Base {
                                                                 str29 = str84;
                                                                 str23 = str63;
                                                                 str22 = str88;
-                                                                str = str87;
+                                                                textValue = str87;
                                                                 if (type_out2.equals(TransitionType.FADE_OUT.getValue())) {
                                                                     str30 = str29;
-                                                                    this.overlay.append(str17).append(i14).append(str30).append("setpts=PTS-STARTPTS+").append(f3).append("/TB").append("[seg").append(i14).append(str20);
+                                                                    this.overlay.append(str17).append(i14).append(str30).append("setpts=PTS-STARTPTS+").append(floatValue3).append("/TB").append("[seg").append(i14).append(str20);
                                                                     str19 = str62;
-                                                                    this.overlay.append(str23).append(i32).append("][seg").append(i14).append(str22).append(btm_x3).append(str19).append(btm_y3).append(":enable='between(t,").append(f3).append(",").append(f2).append(")'[ov").append(i14).append(str20);
+                                                                    this.overlay.append(str23).append(i32).append("][seg").append(i14).append(str22).append(btm_x3).append(str19).append(btm_y3).append(":enable='between(t,").append(floatValue3).append(",").append(floatValue2).append(")'[ov").append(i14).append(str20);
                                                                 }
                                                             }
                                                             str30 = str29;
@@ -2082,15 +2082,15 @@ public class ProgressViewActivity extends Base {
                                                     str19 = str62;
                                                     str25 = str84;
                                                     str23 = str63;
-                                                    str = str87;
+                                                    textValue = str87;
                                                     arrayList2 = arrayList10;
                                                     str18 = str89;
                                                 }
                                             }
                                         }
                                     } else {
-                                        f = fps;
-                                        f2 = abs2;
+                                        floatValue = fps;
+                                        floatValue2 = abs2;
                                         i13 = addBasmala;
                                         str17 = str7;
                                         str19 = str61;
@@ -2099,7 +2099,7 @@ public class ProgressViewActivity extends Base {
                                         str25 = str54;
                                         str23 = str56;
                                         str26 = ")'[ov";
-                                        f3 = abs;
+                                        floatValue3 = abs;
                                         str27 = ",";
                                         i11 = i6;
                                         str22 = str3;
@@ -2111,11 +2111,11 @@ public class ProgressViewActivity extends Base {
                                     int i36 = i13 + 1;
                                     str21 = str4;
                                     str16 = str25;
-                                    this.overlay.append(str23).append(i13).append(str21).append(i36).append(str22).append(entityQuranTemplate.getBtm_x()).append(str19).append(entityQuranTemplate.getBtm_y()).append(str24).append(f3).append(str27).append(Math.abs(f2 - f)).append(str26).append(i36).append(str20);
+                                    this.overlay.append(str23).append(i13).append(str21).append(i36).append(str22).append(entityQuranTemplate.getBtm_x()).append(str19).append(entityQuranTemplate.getBtm_y()).append(str24).append(floatValue3).append(str27).append(Math.abs(floatValue2 - floatValue)).append(str26).append(i36).append(str20);
                                     countDownLatch3.countDown();
                                     i12 = i36;
                                 } else {
-                                    f = fps;
+                                    floatValue = fps;
                                     i11 = i6;
                                     i12 = addBasmala;
                                     str16 = str54;
@@ -2140,7 +2140,7 @@ public class ProgressViewActivity extends Base {
                             i6 = i11 + 1;
                             addBasmala = i12;
                             str55 = str18;
-                            fps = f;
+                            fps = floatValue;
                             str7 = str17;
                         }
                         float f20 = fps;
@@ -2217,12 +2217,12 @@ public class ProgressViewActivity extends Base {
                                         } catch (Exception e) {
                                             e = e;
                                             arrayList = arrayList11;
-                                            z = false;
+                                            isFlag = false;
                                             e.printStackTrace();
                                             final ArrayList arrayList12 = arrayList;
                                             arrayList12.add("-filter_complex");
                                             arrayList12.add(this.overlay.toString());
-                                            if (z) {
+                                            if (isFlag) {
                                             }
                                             arrayList12.add("-y");
                                             arrayList12.add("-level");
@@ -2269,12 +2269,12 @@ public class ProgressViewActivity extends Base {
                                             arrayList11 = arrayList;
                                         } catch (Exception e2) {
                                             e = e2;
-                                            z = false;
+                                            isFlag = false;
                                             e.printStackTrace();
                                             final List arrayList122 = arrayList;
                                             arrayList122.add("-filter_complex");
                                             arrayList122.add(this.overlay.toString());
-                                            if (z) {
+                                            if (isFlag) {
                                             }
                                             arrayList122.add("-y");
                                             arrayList122.add("-level");
@@ -2324,15 +2324,15 @@ public class ProgressViewActivity extends Base {
                         if (i9 <= 0) {
                             try {
                                 this.overlay.append(str103).append("amix=inputs=").append(i9).append(":duration=longest:normalize=0:dropout_transition=0,volume=2[a]");
-                                z = true;
+                                isFlag = true;
                             } catch (Exception e4) {
                                 e = e4;
-                                z = true;
+                                isFlag = true;
                                 e.printStackTrace();
                                 final List arrayList1222 = arrayList;
                                 arrayList1222.add("-filter_complex");
                                 arrayList1222.add(this.overlay.toString());
-                                if (z) {
+                                if (isFlag) {
                                 }
                                 arrayList1222.add("-y");
                                 arrayList1222.add("-level");
@@ -2362,12 +2362,12 @@ public class ProgressViewActivity extends Base {
                                 thread22.start();
                             }
                         } else {
-                            z = false;
+                            isFlag = false;
                         }
                         final List arrayList12222 = arrayList;
                         arrayList12222.add("-filter_complex");
                         arrayList12222.add(this.overlay.toString());
-                        if (z) {
+                        if (isFlag) {
                             arrayList12222.add("-map");
                             arrayList12222.add(str10);
                             arrayList12222.add("-map");
@@ -2432,19 +2432,19 @@ public class ProgressViewActivity extends Base {
                         if (squareBitmapModel2 != null) {
                             semaphore4 = semaphore;
                             String preRenderMask_Circle = preRenderMask_Circle(squareBitmapModel2, max, countDownLatch2, semaphore4);
-                            arrayList8.add("-i");
+                            arrayList8.add("-value");
                             arrayList8.add(preRenderMask_Circle);
-                            int i41 = i2 + 1;
+                            int i41 = value2 + 1;
                             i20 = i23;
-                            this.overlay.append(str56).append(i2).append("]").append("[").append(i41).append(":v]").append(str2).append(squareBitmapModel2.getPosX()).append(":").append(squareBitmapModel2.getPosY()).append(str56).append(i41).append("];");
-                            i2 = i41;
+                            this.overlay.append(str56).append(value2).append("]").append("[").append(i41).append(":v]").append(str2).append(squareBitmapModel2.getPosX()).append(":").append(squareBitmapModel2.getPosY()).append(str56).append(i41).append("];");
+                            value2 = i41;
                         } else {
                             i20 = i23;
                             semaphore4 = semaphore;
                         }
                         str6 = "];";
                         countDownLatch3 = countDownLatch2;
-                        str5 = str51;
+                        textValue5 = str51;
                         i5 = i20;
                         str3 = str105;
                         str8 = ":";
@@ -2456,10 +2456,10 @@ public class ProgressViewActivity extends Base {
                         i23 = i23;
                         Semaphore semaphore8 = semaphore;
                         if (this.mTemplate.getIpad_type() == IpadType.BOTTOM_RECT.ordinal() || this.mTemplate.getIpad_type() == IpadType.IPAD_CLASSIC.ordinal()) {
-                            str5 = str51;
+                            textValue5 = str51;
                             SquareBitmapModel squareBitmapModel3 = this.mTemplate.getSquareBitmapModel();
                             if (squareBitmapModel3 != null) {
-                                int i42 = i2;
+                                int i42 = value2;
                                 i19 = max;
                                 str7 = "[";
                                 CountDownLatch countDownLatch7 = countDownLatch2;
@@ -2467,12 +2467,12 @@ public class ProgressViewActivity extends Base {
                                 str8 = ":";
                                 semaphore3 = semaphore8;
                                 str3 = str106;
-                                String preRender_NoMask = preRender_NoMask(squareBitmapModel3, max, countDownLatch7, semaphore8, str5);
-                                arrayList8.add("-i");
+                                String preRender_NoMask = preRender_NoMask(squareBitmapModel3, max, countDownLatch7, semaphore8, textValue5);
+                                arrayList8.add("-value");
                                 arrayList8.add(preRender_NoMask);
-                                i2 = i42 + 1;
+                                value2 = i42 + 1;
                                 str6 = "];";
-                                this.overlay.append(str56).append(i42).append("]").append(str7).append(i2).append(":v]").append(str2).append(squareBitmapModel3.getPosX()).append(str8).append(squareBitmapModel3.getPosY()).append(str56).append(i2).append(str6);
+                                this.overlay.append(str56).append(i42).append("]").append(str7).append(value2).append(":v]").append(str2).append(squareBitmapModel3.getPosX()).append(str8).append(squareBitmapModel3.getPosY()).append(str56).append(value2).append(str6);
                             } else {
                                 str6 = "];";
                                 semaphore3 = semaphore8;
@@ -2487,23 +2487,23 @@ public class ProgressViewActivity extends Base {
                             semaphore2 = semaphore3;
                         } else {
                             if (this.mTemplate.getIpad_type() == IpadType.BLACK_LAYER.ordinal() || this.mTemplate.getIpad_type() == IpadType.GRADIENT.ordinal() || this.mTemplate.getIpad_type() == IpadType.MASK_BRUSH.ordinal()) {
-                                str5 = str51;
-                                String preRenderVideo = preRenderVideo(max, countDownLatch2, semaphore8, str5);
-                                arrayList8.add("-i");
+                                textValue5 = str51;
+                                String preRenderVideo = preRenderVideo(max, countDownLatch2, semaphore8, textValue5);
+                                arrayList8.add("-value");
                                 arrayList8.add(preRenderVideo);
-                                this.overlay.append("[0]format=yuv420p[ov").append(i2).append("];");
+                                this.overlay.append("[0]format=yuv420p[ov").append(value2).append("];");
                             } else if (this.mTemplate.getIpad_type() == IpadType.BLUE_TYPE.ordinal()) {
-                                str5 = str51;
-                                String preRenderVideoHue = preRenderVideoHue(max, countDownLatch2, semaphore8, str5);
-                                arrayList8.add("-i");
+                                textValue5 = str51;
+                                String preRenderVideoHue = preRenderVideoHue(max, countDownLatch2, semaphore8, textValue5);
+                                arrayList8.add("-value");
                                 arrayList8.add(preRenderVideoHue);
-                                this.overlay.append("[0]format=yuv420p[ov").append(i2).append("];");
+                                this.overlay.append("[0]format=yuv420p[ov").append(value2).append("];");
                             } else {
-                                str5 = str51;
+                                textValue5 = str51;
                                 countDownLatch2.countDown();
                             }
                             str6 = "];";
-                            i3 = i2;
+                            value3 = value2;
                             countDownLatch3 = countDownLatch2;
                             str3 = str106;
                             str8 = ":";
@@ -2516,9 +2516,9 @@ public class ProgressViewActivity extends Base {
                     Semaphore semaphore72 = semaphore2;
                     int i262 = i4;
                     String str602 = str6;
-                    str9 = str5;
+                    str9 = textValue5;
                     String str612 = str8;
-                    int addBasmala2 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), i2, semaphore2, countDownLatch3, arrayList8, fps2), semaphore72, countDownLatch3, arrayList8, fps2);
+                    int addBasmala2 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), value2, semaphore2, countDownLatch3, arrayList8, fps2), semaphore72, countDownLatch3, arrayList8, fps2);
                     i6 = 0;
                     while (i6 < this.mTemplate.getQuranEntityList().size()) {
                     }
@@ -2552,7 +2552,7 @@ public class ProgressViewActivity extends Base {
                     final List arrayList122222 = arrayList;
                     arrayList122222.add("-filter_complex");
                     arrayList122222.add(this.overlay.toString());
-                    if (z) {
+                    if (isFlag) {
                     }
                     arrayList122222.add("-y");
                     arrayList122222.add("-level");
@@ -2581,15 +2581,15 @@ public class ProgressViewActivity extends Base {
                     this.workerThread = thread2222;
                     thread2222.start();
                 }
-                i2 = i3;
+                value2 = value3;
                 i5 = i23;
                 float fps22 = (i5 / this.mTemplate.getFps()) * 2.0E-4f;
                 Semaphore semaphore722 = semaphore2;
                 int i2622 = i4;
                 String str6022 = str6;
-                str9 = str5;
+                str9 = textValue5;
                 String str6122 = str8;
-                int addBasmala22 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), i2, semaphore2, countDownLatch3, arrayList8, fps22), semaphore722, countDownLatch3, arrayList8, fps22);
+                int addBasmala22 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), value2, semaphore2, countDownLatch3, arrayList8, fps22), semaphore722, countDownLatch3, arrayList8, fps22);
                 i6 = 0;
                 while (i6 < this.mTemplate.getQuranEntityList().size()) {
                 }
@@ -2623,7 +2623,7 @@ public class ProgressViewActivity extends Base {
                 final List arrayList1222222 = arrayList;
                 arrayList1222222.add("-filter_complex");
                 arrayList1222222.add(this.overlay.toString());
-                if (z) {
+                if (isFlag) {
                 }
                 arrayList1222222.add("-y");
                 arrayList1222222.add("-level");
@@ -2655,23 +2655,23 @@ public class ProgressViewActivity extends Base {
         }
         str3 = str53;
         str4 = str52;
-        str5 = str51;
+        textValue5 = str51;
         str6 = "];";
-        i3 = i2;
+        value3 = value2;
         str7 = "[";
         semaphore2 = semaphore;
         countDownLatch3 = countDownLatch2;
         str8 = ":";
         i4 = max;
-        i2 = i3;
+        value2 = value3;
         i5 = i23;
         float fps222 = (i5 / this.mTemplate.getFps()) * 2.0E-4f;
         Semaphore semaphore7222 = semaphore2;
         int i26222 = i4;
         String str60222 = str6;
-        str9 = str5;
+        str9 = textValue5;
         String str61222 = str8;
-        int addBasmala222 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), i2, semaphore2, countDownLatch3, arrayList8, fps222), semaphore7222, countDownLatch3, arrayList8, fps222);
+        int addBasmala222 = addBasmala(this.mTemplate.getEntityBismilahTemplate(), addBasmala(this.mTemplate.getEntityIsti3adaTemplate(), value2, semaphore2, countDownLatch3, arrayList8, fps222), semaphore7222, countDownLatch3, arrayList8, fps222);
         i6 = 0;
         while (i6 < this.mTemplate.getQuranEntityList().size()) {
         }
@@ -2705,7 +2705,7 @@ public class ProgressViewActivity extends Base {
         final List arrayList12222222 = arrayList;
         arrayList12222222.add("-filter_complex");
         arrayList12222222.add(this.overlay.toString());
-        if (z) {
+        if (isFlag) {
         }
         arrayList12222222.add("-y");
         arrayList12222222.add("-level");
@@ -2757,39 +2757,39 @@ public class ProgressViewActivity extends Base {
                 bufferedWriter.write("file '" + it.next() + "'\n");
             }
             bufferedWriter.close();
-            String str = this.mTemplate.getFolder_template() + "/final_video.mp4";
+            String textValue = this.mTemplate.getFolder_template() + "/final_video.mp4";
             ArrayList arrayList = new ArrayList();
             arrayList.add("-y");
-            arrayList.add("-f");
+            arrayList.add("-floatValue");
             arrayList.add("concat");
             arrayList.add("-safe");
             arrayList.add("0");
-            arrayList.add("-i");
+            arrayList.add("-value");
             arrayList.add(file.getAbsolutePath());
             arrayList.add("-c");
             arrayList.add("copy");
-            arrayList.add(str);
+            arrayList.add(textValue);
             FFmpegKit.executeWithArguments((String[]) arrayList.toArray(new String[0]));
-            return str;
+            return textValue;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private String generateVideoSegment(EntityQuranTemplate entityQuranTemplate, int i, String str, int i2, final CountDownLatch countDownLatch, final Semaphore semaphore) {
-        this.renderManager.addTask("anim prerender", i2);
-        String str2 = this.mTemplate.getFolder_template() + "/ayah_" + i + ".mov";
+    private String generateVideoSegment(EntityQuranTemplate entityQuranTemplate, int value, String textValue, int value2, final CountDownLatch countDownLatch, final Semaphore semaphore) {
+        this.renderManager.addTask("anim prerender", value2);
+        String str2 = this.mTemplate.getFolder_template() + "/ayah_" + value + ".mov";
         ArrayList arrayList = new ArrayList();
         arrayList.add("-y");
         arrayList.add("-loop");
         arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-        arrayList.add("-i");
+        arrayList.add("-value");
         arrayList.add(this.mTemplate.getFolder_template() + "/" + entityQuranTemplate.getFile());
         arrayList.add("-vf");
-        arrayList.add(str);
+        arrayList.add(textValue);
         arrayList.add("-t");
-        arrayList.add(String.valueOf(Math.max(i2, 1)));
+        arrayList.add(String.valueOf(Math.max(value2, 1)));
         arrayList.add("-c:v");
         arrayList.add("qtrle");
         arrayList.add("-pix_fmt");
@@ -2820,19 +2820,19 @@ public class ProgressViewActivity extends Base {
         updateNext(countDownLatch, semaphore);
     }
 
-    private String generateVideoSegment(EntityBismilahTemplate entityBismilahTemplate, int i, String str, int i2, final CountDownLatch countDownLatch, final Semaphore semaphore) {
-        this.renderManager.addTask("anim prerender", i2);
-        String str2 = this.mTemplate.getFolder_template() + "/bismilah_" + i + ".mov";
+    private String generateVideoSegment(EntityBismilahTemplate entityBismilahTemplate, int value, String textValue, int value2, final CountDownLatch countDownLatch, final Semaphore semaphore) {
+        this.renderManager.addTask("anim prerender", value2);
+        String str2 = this.mTemplate.getFolder_template() + "/bismilah_" + value + ".mov";
         ArrayList arrayList = new ArrayList();
         arrayList.add("-y");
         arrayList.add("-loop");
         arrayList.add(IcyHeaders.REQUEST_HEADER_ENABLE_METADATA_VALUE);
-        arrayList.add("-i");
+        arrayList.add("-value");
         arrayList.add(this.mTemplate.getFolder_template() + "/" + entityBismilahTemplate.getFile());
         arrayList.add("-vf");
-        arrayList.add(str);
+        arrayList.add(textValue);
         arrayList.add("-t");
-        arrayList.add(String.valueOf(Math.max(i2, 1)));
+        arrayList.add(String.valueOf(Math.max(value2, 1)));
         arrayList.add("-c:v");
         arrayList.add("qtrle");
         arrayList.add("-pix_fmt");
@@ -2863,17 +2863,17 @@ public class ProgressViewActivity extends Base {
         updateNext(countDownLatch, semaphore);
     }
 
-    private String getBitrate(int i, int i2, int i3) {
-        boolean z = i3 > 30;
-        int max = Math.max(i, i2);
+    private String getBitrate(int value, int value2, int value3) {
+        boolean isFlag = value3 > 30;
+        int max = Math.max(value, value2);
         if (max <= 720) {
-            return z ? "2000k" : "1500k";
+            return isFlag ? "2000k" : "1500k";
         }
         if (max <= 1280) {
-            return z ? "4000k" : "3000k";
+            return isFlag ? "4000k" : "3000k";
         }
         if (max <= 1920) {
-            return z ? "6000k" : "4500k";
+            return isFlag ? "6000k" : "4500k";
         }
         return "8000k";
     }
@@ -2891,8 +2891,8 @@ public class ProgressViewActivity extends Base {
             if (!contains2 && contains) {
                 return "h264_mediacodec";
             }
-            int i = Build.VERSION.SDK_INT;
-            if (i <= 29) {
+            int value = Build.VERSION.SDK_INT;
+            if (value <= 29) {
                 if (contains2) {
                     return "libx264";
                 }
@@ -2901,7 +2901,7 @@ public class ProgressViewActivity extends Base {
                 }
                 return null;
             }
-            if (i == 30) {
+            if (value == 30) {
                 if (contains2) {
                     return "libx264";
                 }
@@ -2994,9 +2994,9 @@ public class ProgressViewActivity extends Base {
                 }
                 ProgressViewActivity.this.displayedProgress += (100.0f - ProgressViewActivity.this.displayedProgress) * 0.45f;
                 ProgressViewActivity.this.progressIndicator.setProgress(Math.min(Math.max(Math.round(ProgressViewActivity.this.displayedProgress), 0), ProgressViewActivity.this.progressIndicator.getMax()));
-                boolean z = ((float) ProgressViewActivity.this.progressIndicator.getProgress()) >= 100.0f;
+                boolean isFlag = ((float) ProgressViewActivity.this.progressIndicator.getProgress()) >= 100.0f;
                 boolean z2 = Math.abs(ProgressViewActivity.this.displayedProgress - 100.0f) < 0.1f;
-                if (z || z2) {
+                if (isFlag || z2) {
                     ProgressViewActivity.this.progressIndicator.setProgress(100);
                     ProgressViewActivity.this.displayedProgress = 100.0f;
                     ProgressViewActivity.this.targetProgress = 100.0f;

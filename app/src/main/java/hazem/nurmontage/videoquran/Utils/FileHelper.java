@@ -12,8 +12,8 @@ public class FileHelper {
         this.context = context;
     }
 
-    public File createVideoFolder(String str) {
-        File file = new File(this.context.getExternalFilesDir(Environment.DIRECTORY_MOVIES), str);
+    public File createVideoFolder(String textValue) {
+        File file = new File(this.context.getExternalFilesDir(Environment.DIRECTORY_MOVIES), textValue);
         if (!file.exists()) {
             if (file.mkdirs()) {
                 System.out.println("Folder created successfully: " + file.getAbsolutePath());
@@ -25,8 +25,8 @@ public class FileHelper {
         return file;
     }
 
-    public File createPublicVideoFolder(String str) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), str);
+    public File createPublicVideoFolder(String textValue) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), textValue);
         if (!file.exists()) {
             if (file.mkdirs()) {
                 System.out.println("Folder created successfully: " + file.getAbsolutePath());

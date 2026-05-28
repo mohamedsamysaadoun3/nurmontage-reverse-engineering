@@ -59,9 +59,9 @@ public final class ActivityAdsTuufahBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivityAdsTuufahBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivityAdsTuufahBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_ads_tuufah, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

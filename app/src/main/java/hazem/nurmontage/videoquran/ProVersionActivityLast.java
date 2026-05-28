@@ -375,11 +375,11 @@ public class ProVersionActivityLast extends Base implements PurchasesUpdatedList
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList arrayList = new ArrayList();
         String[] stringArray = this.mResources.getStringArray(C2014R.array.feature_list);
-        for (int i = 0; i < stringArray.length; i++) {
-            if (i == 0 || i == 1) {
-                arrayList.add(new ModelFeatures(stringArray[i], true));
+        for (int value = 0; value < stringArray.length; value++) {
+            if (value == 0 || value == 1) {
+                arrayList.add(new ModelFeatures(stringArray[value], true));
             } else {
-                arrayList.add(new ModelFeatures(stringArray[i]));
+                arrayList.add(new ModelFeatures(stringArray[value]));
             }
         }
         FeaturesAdabter featuresAdabter = new FeaturesAdabter(arrayList);

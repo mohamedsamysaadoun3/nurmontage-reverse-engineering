@@ -64,9 +64,9 @@ public class VolumeFragment extends Fragment {
         seekBar.setProgress(volume);
         this.volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.VolumeFragment.1
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar2, int i, boolean z) {
-                if (z) {
-                    VolumeFragment.this.tvProgress.setText(String.valueOf(i));
+            public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                if (isFlag) {
+                    VolumeFragment.this.tvProgress.setText(String.valueOf(value));
                 }
             }
 
@@ -130,11 +130,11 @@ public class VolumeFragment extends Fragment {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void previewAudio() {
-        boolean z = this.isPlay;
-        this.isPlay = !z;
+        boolean isFlag = this.isPlay;
+        this.isPlay = !isFlag;
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iVolumeCallback;
         if (iEditMediaCallback != null) {
-            if (!z) {
+            if (!isFlag) {
                 iEditMediaCallback.startPreview();
                 this.btnPreview.setImageResource(C2014R.drawable.pause_24px);
             } else {
@@ -145,7 +145,7 @@ public class VolumeFragment extends Fragment {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void applyVolume(boolean z) {
+    public void applyVolume(boolean isFlag) {
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
         effectAudio.setVolume(this.volumeSeekBar.getProgress() / 100.0f);
         float start = effectAudio.getStart() / 1000.0f;
@@ -178,7 +178,7 @@ public class VolumeFragment extends Fragment {
         }
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iVolumeCallback;
         if (iEditMediaCallback != null) {
-            if (z) {
+            if (isFlag) {
                 iEditMediaCallback.updateEntity(EffectAudioType.VOLUME, this.entityAudio);
                 this.iVolumeCallback.onCmdAll(effectAudio);
             } else {
@@ -187,22 +187,22 @@ public class VolumeFragment extends Fragment {
         }
     }
 
-    private List<String> buildSpeedFilters(float f) {
+    private List<String> buildSpeedFilters(float speed) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (speed < 0.5f) {
+            while (speed < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                speed /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
+        } else if (speed > 2.0f) {
+            while (speed > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                speed /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         }
         return arrayList;
     }

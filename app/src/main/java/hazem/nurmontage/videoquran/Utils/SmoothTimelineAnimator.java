@@ -33,7 +33,7 @@ public class SmoothTimelineAnimator {
     public interface AnimatorListener {
         void onEnd();
 
-        void onUpdate(int i);
+        void onUpdate(int value);
     }
 
     public boolean isRunning() {
@@ -44,9 +44,9 @@ public class SmoothTimelineAnimator {
         return this.currentTimeMs;
     }
 
-    public SmoothTimelineAnimator(int i, int i2, AnimatorListener animatorListener) {
-        this.startCursorMs = i;
-        this.maxTimeMs = i2;
+    public SmoothTimelineAnimator(int value, int duration2, AnimatorListener animatorListener) {
+        this.startCursorMs = value;
+        this.maxTimeMs = duration2;
         this.listener = animatorListener;
     }
 

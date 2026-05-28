@@ -52,19 +52,19 @@ public class EffectBismilahFragment extends Fragment {
         void destroy(EntityBismilahTimeline entityBismilahTimeline);
 
         /* renamed from: in */
-        void mo582in(String str, EntityBismilahTimeline entityBismilahTimeline);
+        void mo582in(String textValue, EntityBismilahTimeline entityBismilahTimeline);
 
         void onHideFragment(EntityBismilahTimeline entityBismilahTimeline);
 
-        void out(String str, EntityBismilahTimeline entityBismilahTimeline);
+        void out(String textValue, EntityBismilahTimeline entityBismilahTimeline);
 
         void playing(EntityBismilahTimeline entityBismilahTimeline);
 
-        void remove(int i, EntityBismilahTimeline entityBismilahTimeline);
+        void remove(int value, EntityBismilahTimeline entityBismilahTimeline);
 
-        void updateDurationIn(float f, EntityBismilahTimeline entityBismilahTimeline);
+        void updateDurationIn(float ratio, EntityBismilahTimeline entityBismilahTimeline);
 
-        void updateDurationOut(float f, EntityBismilahTimeline entityBismilahTimeline);
+        void updateDurationOut(float ratio, EntityBismilahTimeline entityBismilahTimeline);
     }
 
     public static synchronized EffectBismilahFragment get(Transition transition, Resources resources, ITransition iTransition, EntityBismilahTimeline entityBismilahTimeline) {
@@ -143,8 +143,8 @@ public class EffectBismilahFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int i, boolean z) {
-                    EffectBismilahFragment.this.tvDuration.setText(String.valueOf(i / 10.0f));
+                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                    EffectBismilahFragment.this.tvDuration.setText(String.valueOf(value / 10.0f));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -219,15 +219,15 @@ public class EffectBismilahFragment extends Fragment {
             root.post(new Runnable() { // from class: hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.6
                 @Override // java.lang.Runnable
                 public void run() {
-                    int i;
+                    int value;
                     List<TransitionBismilahAdabters.TransitionItem> inTransition = EffectBismilahFragment.this.getInTransition();
                     if (EffectBismilahFragment.this.transition == null || !EffectBismilahFragment.this.transition.isIn()) {
-                        i = -1;
+                        value = -1;
                     } else {
                         EffectBismilahFragment effectBismilahFragment = EffectBismilahFragment.this;
-                        i = effectBismilahFragment.getIndex(inTransition, effectBismilahFragment.transition.getType_in());
+                        value = effectBismilahFragment.getIndex(inTransition, effectBismilahFragment.transition.getType_in());
                     }
-                    EffectBismilahFragment.this.transitionEntityAdabters = new TransitionBismilahAdabters(EffectBismilahFragment.this.iTransition, inTransition, i, EffectBismilahFragment.this.entityQuranTimeline);
+                    EffectBismilahFragment.this.transitionEntityAdabters = new TransitionBismilahAdabters(EffectBismilahFragment.this.iTransition, inTransition, value, EffectBismilahFragment.this.entityQuranTimeline);
                     EffectBismilahFragment.this.recyclerView.setAdapter(EffectBismilahFragment.this.transitionEntityAdabters);
                     EffectBismilahFragment effectBismilahFragment2 = EffectBismilahFragment.this;
                     effectBismilahFragment2.scroll(effectBismilahFragment2.transitionEntityAdabters.getSelect());
@@ -237,14 +237,14 @@ public class EffectBismilahFragment extends Fragment {
         return root;
     }
 
-    public void updateView(float f, Transition transition) {
+    public void updateView(float ratio, Transition transition) {
         this.transition = transition;
         if (this.seekBarDuration.getVisibility() != 0) {
             this.seekBarDuration.setVisibility(0);
             this.tvDuration.setVisibility(0);
         }
         this.btn_unEffect.setBackgroundResource(C2014R.drawable.circle_effect);
-        updateSeek(f, true);
+        updateSeek(ratio, true);
         visibleApplyAll();
     }
 
@@ -268,10 +268,10 @@ public class EffectBismilahFragment extends Fragment {
         this.iv_apply_all.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
     }
 
-    public void scroll(int i) {
+    public void scroll(int value) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
-        View findViewByPosition = linearLayoutManager.findViewByPosition(i);
-        linearLayoutManager.scrollToPositionWithOffset(i, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
+        View findViewByPosition = linearLayoutManager.findViewByPosition(value);
+        linearLayoutManager.scrollToPositionWithOffset(value, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
     }
 
     public void updateButton(Transition transition) {
@@ -280,17 +280,17 @@ public class EffectBismilahFragment extends Fragment {
         visibleSeekbar();
     }
 
-    public int getIndex(List<TransitionBismilahAdabters.TransitionItem> list, String str) {
-        for (int i = 0; i < list.size(); i++) {
-            if (str.equals(list.get(i).getType())) {
-                return i;
+    public int getIndex(List<TransitionBismilahAdabters.TransitionItem> list, String textValue) {
+        for (int value = 0; value < list.size(); value++) {
+            if (textValue.equals(list.get(value).getType())) {
+                return value;
             }
         }
         return -1;
     }
 
-    private void updateSeek(float f, boolean z) {
-        this.seekBarDuration.setProgress((int) (f * 4.0f));
+    private void updateSeek(float ratio, boolean isFlag) {
+        this.seekBarDuration.setProgress((int) (ratio * 4.0f));
         this.tvDuration.setText(String.valueOf(this.seekBarDuration.getProgress() / 10.0f));
     }
 
@@ -304,9 +304,9 @@ public class EffectBismilahFragment extends Fragment {
         this.tvDuration.setVisibility(8);
     }
 
-    public void loadTransition(int i) {
+    public void loadTransition(int value) {
         this.index = -1;
-        if (i == 0) {
+        if (value == 0) {
             List<TransitionBismilahAdabters.TransitionItem> inTransition = getInTransition();
             Transition transition = this.transition;
             if (transition != null) {
@@ -337,7 +337,7 @@ public class EffectBismilahFragment extends Fragment {
             }
             return;
         }
-        if (i == 1) {
+        if (value == 1) {
             List<TransitionBismilahAdabters.TransitionItem> outTransition = getOutTransition();
             Transition transition3 = this.transition;
             if (transition3 != null) {

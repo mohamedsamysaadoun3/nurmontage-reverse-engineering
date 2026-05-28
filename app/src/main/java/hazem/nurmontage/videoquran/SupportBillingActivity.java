@@ -201,16 +201,16 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
         updatePrice(this.view_price_1000$.getText().toString(), C2014R.id.view_1000, this.price_select);
     }
 
-    private void updatePrice(String str, int i, int i2) {
-        if (i == i2) {
+    private void updatePrice(String priceStr, int i, int value2) {
+        if (i == value2) {
             return;
         }
         ButtonCustumFont buttonCustumFont = this.btn_launch;
         if (buttonCustumFont != null) {
-            buttonCustumFont.setText(String.format(this.mResources.getString(C2014R.string.btn_launch_billing), str));
+            buttonCustumFont.setText(String.format(this.mResources.getString(C2014R.string.btn_launch_billing), priceStr));
         }
         findViewById(i).setBackgroundResource(C2014R.drawable.item_billing_select);
-        findViewById(i2).setBackgroundResource(C2014R.drawable.item_billing);
+        findViewById(value2).setBackgroundResource(C2014R.drawable.item_billing);
         this.price_select = i;
     }
 
@@ -308,8 +308,8 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void launchPurchaseFlow(String str) {
-        ProductDetails productDetails = this.productDetailsMap.get(str);
+    public void launchPurchaseFlow(String priceStr) {
+        ProductDetails productDetails = this.productDetailsMap.get(priceStr);
         if (productDetails == null) {
             return;
         }
@@ -344,8 +344,8 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
             }
             this.billingClient.consumeAsync(ConsumeParams.newBuilder().setPurchaseToken(purchase.getPurchaseToken()).build(), new ConsumeResponseListener() { // from class: hazem.nurmontage.videoquran.SupportBillingActivity$$ExternalSyntheticLambda0
                 @Override // com.android.billingclient.api.ConsumeResponseListener
-                public final void onConsumeResponse(BillingResult billingResult, String str) {
-                    SupportBillingActivity.this.m624x47956cb7(billingResult, str);
+                public final void onConsumeResponse(BillingResult billingResult, String priceStr) {
+                    SupportBillingActivity.this.m624x47956cb7(billingResult, priceStr);
                 }
             });
             return;
@@ -358,7 +358,7 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
     }
 
     /* renamed from: lambda$handlePurchase$6$hazem-nurmontage-videoquran-SupportBillingActivity */
-    /* synthetic */ void m624x47956cb7(BillingResult billingResult, String str) {
+    /* synthetic */ void m624x47956cb7(BillingResult billingResult, String priceStr) {
         if (billingResult.getResponseCode() == 0) {
             Toast.makeText(this, "Purchase consumed successfully", 0).show();
         } else {

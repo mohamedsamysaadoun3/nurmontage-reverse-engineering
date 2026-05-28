@@ -31,25 +31,25 @@ public class EntitySelectTool {
     private final RectF rectFScale;
     private float round;
 
-    public void setClick_apply(boolean z) {
-        this.isClick_apply = z;
+    public void setClick_apply(boolean isClicked) {
+        this.isClick_apply = isClicked;
     }
 
     public boolean isClick_apply() {
         return this.isClick_apply;
     }
 
-    public void setOnProgress(boolean z) {
-        this.isOnProgress = z;
+    public void setOnProgress(boolean isClicked) {
+        this.isOnProgress = isClicked;
     }
 
     public boolean isOnProgress() {
         return this.isOnProgress;
     }
 
-    public void setApply_Move(boolean z) {
-        this.isApply_Move = z;
-        if (z) {
+    public void setApply_Move(boolean isClicked) {
+        this.isApply_Move = isClicked;
+        if (isClicked) {
             setApply_Scale(false);
         }
     }
@@ -62,29 +62,29 @@ public class EntitySelectTool {
         return this.isApply_Scale;
     }
 
-    public void setApply_Scale(boolean z) {
-        this.isApply_Scale = z;
-        if (z) {
+    public void setApply_Scale(boolean isClicked) {
+        this.isApply_Scale = isClicked;
+        if (isClicked) {
             setApply_Move(false);
         }
     }
 
-    public void setApply_all(boolean z) {
-        this.isApply_all = z;
+    public void setApply_all(boolean isClicked) {
+        this.isApply_all = isClicked;
     }
 
-    public EntitySelectTool(int i, Context context) {
+    public EntitySelectTool(int value, Context context) {
         Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(context, "fonts/arabic/خط الإبل.otf");
         String str = LocaleHelper.getLanguage(context).equals("ar") ? "تطبيق على الكل" : "ApplyAll";
         Paint paint = new Paint(1);
         this.paint = paint;
         paint.setColor(-409555);
-        float f = i;
+        float f = value;
         paint.setStrokeWidth(0.005f * f);
         this.round = 0.02f * f;
         int i2 = (int) (f * 0.047f);
-        float f2 = i2;
-        RectF rectF = new RectF(0.0f, 0.0f, f2, f2);
+        float floatValue2 = i2;
+        RectF rectF = new RectF(0.0f, 0.0f, floatValue2, floatValue2);
         this.rectFScale = rectF;
         RectF rectF2 = new RectF(0.0f, 0.0f, i2 * 4, rectF.height());
         this.rectApplyAll = rectF2;
@@ -97,8 +97,8 @@ public class EntitySelectTool {
         Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
         this.bitmapScale = createBitmap;
         Canvas canvas = new Canvas(createBitmap);
-        canvas.drawCircle(canvas.getWidth() * 0.5f, canvas.getHeight() * 0.5f, f2 * 0.5f, paint);
-        int i3 = (int) (f2 * 0.1f);
+        canvas.drawCircle(canvas.getWidth() * 0.5f, canvas.getHeight() * 0.5f, floatValue2 * 0.5f, paint);
+        int i3 = (int) (floatValue2 * 0.1f);
         int i4 = i2 - i3;
         if (drawable != null) {
             drawable.setBounds(i3, i3, i4, i4);
@@ -128,7 +128,7 @@ public class EntitySelectTool {
         return this.isApply_all;
     }
 
-    public boolean isApply(EntityView entityView, float f, float f2) {
+    public boolean isApply(EntityView entityView, float f, float floatValue2) {
         if (!this.isApply_all) {
             return false;
         }
@@ -136,10 +136,10 @@ public class EntitySelectTool {
         this.rectApplyAll.right = entityView.getRect().right;
         this.rectApplyAll.top = (entityView.getRect().top - this.bitmapApplyAll.getHeight()) - this.offset_y_apply;
         this.rectApplyAll.bottom = entityView.getRect().top;
-        return this.rectApplyAll.contains(f, f2);
+        return this.rectApplyAll.contains(f, floatValue2);
     }
 
-    public boolean isScale(EntityView entityView, float f, float f2) {
+    public boolean isScale(EntityView entityView, float f, float floatValue2) {
         if (entityView instanceof TranslationQuranEntity) {
             this.rectFScale.top = entityView.getRect().top - (this.offset_y * 2.0f);
             this.rectFScale.left = entityView.getRect().left - this.offset_x;
@@ -151,7 +151,7 @@ public class EntitySelectTool {
         rectF.right = rectF.left + (this.bitmapScale.getWidth() * 1.5f);
         RectF rectF2 = this.rectFScale;
         rectF2.bottom = rectF2.top + (this.bitmapScale.getHeight() * 1.5f);
-        boolean contains = this.rectFScale.contains(f, f2);
+        boolean contains = this.rectFScale.contains(f, floatValue2);
         this.isOnScale = contains;
         setApply_Scale(contains);
         return this.isOnScale;

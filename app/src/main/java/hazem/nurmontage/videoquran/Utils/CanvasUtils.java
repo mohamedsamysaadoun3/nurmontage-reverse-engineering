@@ -6,12 +6,12 @@ import android.graphics.RectF;
 
 /* loaded from: classes2.dex */
 public class CanvasUtils {
-    public static Path drawCustomRoundedRect(Canvas canvas, float f, float f2, float f3, float f4, float f5, float f6) {
+    public static Path drawCustomRoundedRect(Canvas canvas, float f, float f2, float f3, float f4, float f5, float floatValue6) {
         Path path = new Path();
         float f7 = (f3 - f) / 2.0f;
         float f8 = (f4 - f2) / 2.0f;
         float min = Math.min(f5, Math.min(f7, f8));
-        float min2 = Math.min(f6, Math.min(f7, f8));
+        float min2 = Math.min(floatValue6, Math.min(f7, f8));
         path.moveTo(f, f2);
         path.lineTo(f3 - min, f2);
         if (min > 0.0f) {

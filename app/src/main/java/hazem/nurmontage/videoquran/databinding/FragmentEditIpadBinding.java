@@ -43,9 +43,9 @@ public final class FragmentEditIpadBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentEditIpadBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentEditIpadBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_edit_ipad, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

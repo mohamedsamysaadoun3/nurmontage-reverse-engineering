@@ -35,9 +35,9 @@ public final class ActivityAddReaderNameBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivityAddReaderNameBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivityAddReaderNameBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_add_reader_name, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

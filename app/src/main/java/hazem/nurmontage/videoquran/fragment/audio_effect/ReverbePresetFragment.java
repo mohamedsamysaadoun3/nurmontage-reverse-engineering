@@ -29,18 +29,18 @@ public class ReverbePresetFragment extends Fragment {
     private EditMediaFragment.IEditMediaCallback iEditMediaCallback;
     private ReverbeAdabter.IReverbPresetCallback iReverbPresetCallback = new ReverbeAdabter.IReverbPresetCallback() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.ReverbePresetFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.ReverbeAdabter.IReverbPresetCallback
-        public void cmd(String str, int i) {
+        public void cmd(String textValue, int value) {
             if (ReverbePresetFragment.this.iEditMediaCallback != null) {
                 EffectAudio effectAudio = ReverbePresetFragment.this.entityAudio.getEffectAudio();
-                if (str == null && ReverbePresetFragment.this.entityAudio.getEffectAudio().getReverbPreset() == null) {
+                if (textValue == null && ReverbePresetFragment.this.entityAudio.getEffectAudio().getReverbPreset() == null) {
                     ReverbePresetFragment.this.iEditMediaCallback.startPreview();
                     return;
                 }
-                effectAudio.setReverbPreset(str);
-                effectAudio.setReverbPreset_index_list(i);
+                effectAudio.setReverbPreset(textValue);
+                effectAudio.setReverbPreset_index_list(value);
                 float start = effectAudio.getStart() / 1000.0f;
                 float end = effectAudio.getEnd() / 1000.0f;
-                float f = end - start;
+                float speed = end - start;
                 ArrayList arrayList = new ArrayList();
                 arrayList.add(String.format(Locale.US, "atrim=start=%.2f:end=%.2f", Float.valueOf(start), Float.valueOf(end)));
                 arrayList.add("asetpts=N/SR/TB");
@@ -53,7 +53,7 @@ public class ReverbePresetFragment extends Fragment {
                 }
                 if (effectAudio.getFade_out() > 0) {
                     float fade_out = effectAudio.getFade_out() / 1000.0f;
-                    arrayList.add(String.format(Locale.US, "afade=t=out:st=%.2f:d=%.2f", Float.valueOf(f - fade_out), Float.valueOf(fade_out)));
+                    arrayList.add(String.format(Locale.US, "afade=t=out:st=%.2f:d=%.2f", Float.valueOf(speed - fade_out), Float.valueOf(fade_out)));
                 }
                 if (effectAudio.isEnhance()) {
                     arrayList.add(Common.ENHANCE_CMD);
@@ -177,22 +177,22 @@ public class ReverbePresetFragment extends Fragment {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public List<String> buildSpeedFilters(float f) {
+    public List<String> buildSpeedFilters(float speed) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (speed < 0.5f) {
+            while (speed < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                speed /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
+        } else if (speed > 2.0f) {
+            while (speed > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                speed /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         }
         return arrayList;
     }

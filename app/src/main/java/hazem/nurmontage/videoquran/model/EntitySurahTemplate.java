@@ -26,12 +26,12 @@ public class EntitySurahTemplate implements Serializable {
         return this.rectF;
     }
 
-    public void setStyle(int i) {
-        this.style = i;
+    public void setStyle(int value) {
+        this.style = value;
     }
 
-    public void setIndex_surah(int i) {
-        this.index_surah = i;
+    public void setIndex_surah(int value) {
+        this.index_surah = value;
     }
 
     public int getIndex_surah() {
@@ -42,12 +42,12 @@ public class EntitySurahTemplate implements Serializable {
         return this.style;
     }
 
-    public void setPreset(int i) {
-        this.preset = i;
+    public void setPreset(int value) {
+        this.preset = value;
     }
 
-    public void setClr(int i) {
-        this.clr = i;
+    public void setClr(int value) {
+        this.clr = value;
     }
 
     public int getPreset() {
@@ -58,8 +58,8 @@ public class EntitySurahTemplate implements Serializable {
         return this.clr;
     }
 
-    public void setName_font(String str) {
-        this.name_font = str;
+    public void setName_font(String name) {
+        this.name_font = name;
     }
 
     public String getName_font() {
@@ -70,45 +70,45 @@ public class EntitySurahTemplate implements Serializable {
         return this.factor_scale;
     }
 
-    public void setFactor_scale(float f) {
-        this.factor_scale = f;
+    public void setFactor_scale(float scale) {
+        this.factor_scale = scale;
     }
 
     public int getClrBg() {
         return this.clrBg;
     }
 
-    public void setClrBg(int i) {
-        this.clrBg = i;
+    public void setClrBg(int value) {
+        this.clrBg = value;
     }
 
     public boolean isHaveBg() {
         return this.isHaveBg;
     }
 
-    public void setHaveBg(boolean z) {
-        this.isHaveBg = z;
+    public void setHaveBg(boolean isFlag) {
+        this.isHaveBg = isFlag;
     }
 
-    public EntitySurahTemplate(String str, String str2, float f, float f2, MRectF mRectF, float f3, String str3, int i, int i2, int i3, int i4, boolean z, int i5) {
-        this.name = str;
-        this.clrBg = i5;
-        this.isHaveBg = z;
+    public EntitySurahTemplate(String name, String str2, float scale, float floatValue2, MRectF mRectF, float floatValue3, String surahName3, int value, int i2, int i3, int i4, boolean isFlag, int value5) {
+        this.name = name;
+        this.clrBg = value5;
+        this.isHaveBg = isFlag;
         this.style = i3;
         this.index_surah = i4;
-        this.clr = i;
+        this.clr = value;
         this.preset = i2;
         this.reader = str2;
-        this.left = f;
-        this.top = f2;
+        this.left = scale;
+        this.top = floatValue2;
         setRectF(mRectF);
-        this.factor_scale = f3;
-        this.name_font = str3;
+        this.factor_scale = floatValue3;
+        this.name_font = surahName3;
     }
 
-    public void setPos(float f, float f2) {
-        this.left = f;
-        this.top = f2;
+    public void setPos(float scale, float floatValue2) {
+        this.left = scale;
+        this.top = floatValue2;
     }
 
     public float getLeft() {
@@ -127,11 +127,11 @@ public class EntitySurahTemplate implements Serializable {
         return this.reader;
     }
 
-    public void setReader(String str) {
-        this.reader = str;
+    public void setReader(String name) {
+        this.reader = name;
     }
 
-    public void setName(String str) {
-        this.name = str;
+    public void setName(String name) {
+        this.name = name;
     }
 }

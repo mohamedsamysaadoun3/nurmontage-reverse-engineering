@@ -9,14 +9,14 @@ public class Gradient implements Serializable {
     private final int second;
     private final int three;
 
-    public Gradient(int i, int i2, int i3) {
-        this.color = i;
+    public Gradient(int value, int i2, int value3) {
+        this.color = value;
         this.second = i2;
-        this.three = i3;
+        this.three = value3;
     }
 
-    public void setAngle(int i) {
-        this.angle = i;
+    public void setAngle(int value) {
+        this.angle = value;
     }
 
     public int getAngle() {

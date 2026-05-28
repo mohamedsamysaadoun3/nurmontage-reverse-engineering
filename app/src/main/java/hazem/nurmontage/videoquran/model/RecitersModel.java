@@ -11,8 +11,8 @@ public class RecitersModel {
         return this.isTarteel;
     }
 
-    public RecitersModel(String str, int i, int i2) {
-        this.identifer = str;
+    public RecitersModel(String textValue, int i, int flags2) {
+        this.identifer = textValue;
         if (i < 10) {
             this.surah_index = "00" + i;
         } else if (i < 100) {
@@ -20,14 +20,14 @@ public class RecitersModel {
         } else {
             this.surah_index = "" + i;
         }
-        if (i2 < 10) {
-            this.number_aya = "00" + i2;
-        } else if (i2 < 100) {
-            this.number_aya = "0" + i2;
+        if (flags2 < 10) {
+            this.number_aya = "00" + flags2;
+        } else if (flags2 < 100) {
+            this.number_aya = "0" + flags2;
         } else {
-            this.number_aya = "" + i2;
+            this.number_aya = "" + flags2;
         }
-        this.isTarteel = !str.contains("_");
+        this.isTarteel = !textValue.contains("_");
     }
 
     public String getSurah_index() {

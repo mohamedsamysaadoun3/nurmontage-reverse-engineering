@@ -34,9 +34,9 @@ public final class LayoutDialogCopyrightBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static LayoutDialogCopyrightBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static LayoutDialogCopyrightBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.layout_dialog_copyright, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

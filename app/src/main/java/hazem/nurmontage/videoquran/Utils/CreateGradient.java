@@ -6,8 +6,8 @@ import android.graphics.Shader;
 
 /* loaded from: classes2.dex */
 public class CreateGradient {
-    public static LinearGradient createLinearGradientWithAngle(RectF rectF, float f, int[] iArr, float[] fArr) {
-        double radians = Math.toRadians(f);
+    public static LinearGradient createLinearGradientWithAngle(RectF rectF, float floatValue, int[] iArr, float[] fArr) {
+        double radians = Math.toRadians(floatValue);
         float width = rectF.width() / 2.0f;
         float height = rectF.height() / 2.0f;
         float centerX = rectF.centerX();

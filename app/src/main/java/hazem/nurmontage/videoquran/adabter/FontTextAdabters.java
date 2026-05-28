@@ -17,27 +17,27 @@ public class FontTextAdabters extends RecyclerView.Adapter<ViewHolder> {
     private FontFragment.IFontCallback iFontCallback;
     private int selected;
 
-    public FontTextAdabters(FontProvider fontProvider, FontFragment.IFontCallback iFontCallback, List<String> list, int i) {
+    public FontTextAdabters(FontProvider fontProvider, FontFragment.IFontCallback iFontCallback, List<String> list, int value) {
         this.iFontCallback = iFontCallback;
         this.fontList = list;
         this.fontProvider = fontProvider;
-        this.selected = i;
+        this.selected = value;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_font, viewGroup, false));
     }
 
-    public void setSelected(int i) {
+    public void setSelected(int value) {
         try {
             int i2 = this.selected;
-            this.selected = i;
+            this.selected = value;
             notifyItemChanged(i2);
             notifyItemChanged(this.selected);
             List<String> list = this.fontList;
             if (list != null) {
-                String str = list.get(i);
+                String str = list.get(value);
                 this.iFontCallback.onAdd(this.fontProvider.getFullName(str), this.fontProvider.getTypeface(str));
             }
         } catch (Exception unused) {
@@ -45,13 +45,13 @@ public class FontTextAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        String str = this.fontList.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        String str = this.fontList.get(value);
         viewHolder.nameFont.setText(str);
-        viewHolder.tvNumber.setText(String.valueOf(i + 1));
+        viewHolder.tvNumber.setText(String.valueOf(value + 1));
         try {
             viewHolder.nameFont.setTypeface(this.fontProvider.getTypeface(str));
-            if (this.selected == i) {
+            if (this.selected == value) {
                 viewHolder.nameFont.setTextColor(-14540254);
                 viewHolder.nameFont.setBackgroundResource(C2014R.drawable.btn_item_font_state);
             } else {
@@ -85,9 +85,9 @@ public class FontTextAdabters extends RecyclerView.Adapter<ViewHolder> {
                     if (FontTextAdabters.this.iFontCallback == null || FontTextAdabters.this.selected == ViewHolder.this.getAdapterPosition()) {
                         return;
                     }
-                    int i = FontTextAdabters.this.selected;
+                    int value = FontTextAdabters.this.selected;
                     FontTextAdabters.this.selected = ViewHolder.this.getAdapterPosition();
-                    FontTextAdabters.this.notifyItemChanged(i);
+                    FontTextAdabters.this.notifyItemChanged(value);
                     FontTextAdabters.this.notifyItemChanged(FontTextAdabters.this.selected);
                     String str = (String) FontTextAdabters.this.fontList.get(FontTextAdabters.this.selected);
                     FontTextAdabters.this.iFontCallback.onAdd(FontTextAdabters.this.fontProvider.getFullName(str), FontTextAdabters.this.fontProvider.getTypeface(str));

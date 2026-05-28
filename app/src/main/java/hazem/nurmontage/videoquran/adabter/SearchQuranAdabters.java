@@ -21,7 +21,7 @@ public class SearchQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
     private int maxSelected = -1;
 
     public interface ISearchQuranCallback {
-        void onClick(int i, int i2, ItemQuranSearch itemQuranSearch);
+        void onClick(int value, int value2, ItemQuranSearch itemQuranSearch);
     }
 
     public SearchQuranAdabters(ISearchQuranCallback iSearchQuranCallback) {
@@ -33,13 +33,13 @@ public class SearchQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_search_quran, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        ItemQuranSearch itemQuranSearch = this.searchList.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        ItemQuranSearch itemQuranSearch = this.searchList.get(value);
         if (itemQuranSearch.getAya() != null) {
             viewHolder.name.setText(itemQuranSearch.getSurahName() + " (" + itemQuranSearch.getTo() + ")");
             if (itemQuranSearch.getStartSpannable() != -1) {
@@ -52,8 +52,8 @@ public class SearchQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
         } else {
             viewHolder.name.setText(String.valueOf(itemQuranSearch.getSurahIndex()));
         }
-        int i2 = this.minSelected;
-        viewHolder.itemView.setBackgroundColor(i2 != -1 && i >= i2 && i <= this.maxSelected ? -14540254 : 0);
+        int value2 = this.minSelected;
+        viewHolder.itemView.setBackgroundColor(value2 != -1 && value >= value2 && value <= this.maxSelected ? -14540254 : 0);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

@@ -15,7 +15,7 @@ public class WaveformView extends View {
     private float progress;
 
     public interface OnWaveformClickListener {
-        void onProgressChanged(float f);
+        void onProgressChanged(float floatValue);
     }
 
     public void setOnWaveformClickListener(OnWaveformClickListener onWaveformClickListener) {
@@ -53,8 +53,8 @@ public class WaveformView extends View {
         this.paint.setStyle(Paint.Style.FILL);
     }
 
-    public void setProgress(float f) {
-        this.progress = f;
+    public void setProgress(float floatValue) {
+        this.progress = floatValue;
         invalidate();
     }
 
@@ -69,10 +69,10 @@ public class WaveformView extends View {
             if (i >= this.amplitudes.length) {
                 return;
             }
-            float f = (r4[i] / 100.0f) * height;
+            float floatValue = (r4[i] / 100.0f) * height;
             float f2 = i;
             float f3 = f2 * (length + length);
-            float f4 = (height - f) / 2.0f;
+            float f4 = (height - floatValue) / 2.0f;
             float length2 = f2 / r4.length;
             float f5 = this.progress;
             if (f5 > 0.0f && length2 < f5) {
@@ -80,7 +80,7 @@ public class WaveformView extends View {
             } else {
                 this.paint.setColor(-12303292);
             }
-            canvas.drawRoundRect(f3, f4, f3 + length, f4 + f, 5.0f, 5.0f, this.paint);
+            canvas.drawRoundRect(f3, f4, f3 + length, f4 + floatValue, 5.0f, 5.0f, this.paint);
             i++;
         }
     }

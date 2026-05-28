@@ -79,9 +79,9 @@ public class RatingBottomSheetDialog extends BottomSheetDialogFragment {
         }
     }
 
-    public static void setNeverAskAgain(Context context, boolean z) {
+    public static void setNeverAskAgain(Context context, boolean isFlag) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putBoolean(KEY_NEVER_ASK_AGAIN, z);
+        edit.putBoolean(KEY_NEVER_ASK_AGAIN, isFlag);
         edit.apply();
     }
 

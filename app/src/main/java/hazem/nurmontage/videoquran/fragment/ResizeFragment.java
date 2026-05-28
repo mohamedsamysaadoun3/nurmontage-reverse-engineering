@@ -35,9 +35,9 @@ public class ResizeFragment extends Fragment {
     public ResizeFragment() {
     }
 
-    public static ResizeFragment getInstance(DimensionAdabters.IDimensionCallback iDimensionCallback, Resources resources, String str) {
+    public static ResizeFragment getInstance(DimensionAdabters.IDimensionCallback iDimensionCallback, Resources resources, String textValue) {
         if (instance == null) {
-            instance = new ResizeFragment(iDimensionCallback, resources, str);
+            instance = new ResizeFragment(iDimensionCallback, resources, textValue);
         }
         return instance;
     }
@@ -53,9 +53,9 @@ public class ResizeFragment extends Fragment {
         }
     }
 
-    public ResizeFragment(DimensionAdabters.IDimensionCallback iDimensionCallback, Resources resources, String str) {
+    public ResizeFragment(DimensionAdabters.IDimensionCallback iDimensionCallback, Resources resources, String textValue) {
         this.iDimensionCallback = iDimensionCallback;
-        this.selectResize = str;
+        this.selectResize = textValue;
         this.res = resources;
     }
 
@@ -82,11 +82,11 @@ public class ResizeFragment extends Fragment {
             DimensionAdabters dimensionAdabters = new DimensionAdabters(aLl, this.iDimensionCallback, getListDimension(getActivity(), aLl), this.posSelectResize);
             this.adabter = dimensionAdabters;
             this.recyclerView.setAdapter(dimensionAdabters);
-            int i = this.posSelectResize;
-            if (i > 0) {
-                this.recyclerView.scrollToPosition(i - 1);
+            int value = this.posSelectResize;
+            if (value > 0) {
+                this.recyclerView.scrollToPosition(value - 1);
             } else {
-                this.recyclerView.scrollToPosition(i);
+                this.recyclerView.scrollToPosition(value);
             }
         }
         return root;
@@ -95,10 +95,10 @@ public class ResizeFragment extends Fragment {
     public List<Pair<Integer, Integer>> getListDimension(Activity activity, List<ItemDimension> list) {
         int screenWidth = (int) (ScreenUtils.getScreenWidth(activity) * 0.27f);
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < list.size(); i++) {
-            ItemDimension itemDimension = list.get(i);
+        for (int value = 0; value < list.size(); value++) {
+            ItemDimension itemDimension = list.get(value);
             if (itemDimension.getId().equals(this.selectResize)) {
-                this.posSelectResize = i;
+                this.posSelectResize = value;
             }
             arrayList.add(Utils.getDimension(itemDimension.getResizeType(), screenWidth));
         }

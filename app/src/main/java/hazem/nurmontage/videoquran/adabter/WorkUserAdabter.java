@@ -29,36 +29,36 @@ public class WorkUserAdabter extends RecyclerView.Adapter<ViewHolder> {
     public interface IWorkUserCallback {
         void onClick(Template template);
 
-        void toMenu(Template template, View view, int i);
+        void toMenu(Template template, View view, int value);
     }
 
-    public WorkUserAdabter(String str, List<Template> list, IWorkUserCallback iWorkUserCallback, int i, int i2) {
+    public WorkUserAdabter(String textValue, List<Template> list, IWorkUserCallback iWorkUserCallback, int value, int value2) {
         this.images = list;
         this.iWorkUserCallback = iWorkUserCallback;
-        this.f390w = i;
-        this.f389h = i2;
-        this.APP_VERSION = str;
+        this.f390w = value;
+        this.f389h = value2;
+        this.APP_VERSION = textValue;
     }
 
-    public void remove(int i) {
+    public void remove(int value) {
         try {
-            if (i < this.images.size()) {
-                this.images.remove(i);
+            if (value < this.images.size()) {
+                this.images.remove(value);
             }
-            notifyItemRemoved(i);
+            notifyItemRemoved(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void add(int i, Template template) {
+    public void add(int value, Template template) {
         try {
-            if (i < this.images.size()) {
-                this.images.add(i, template);
+            if (value < this.images.size()) {
+                this.images.add(value, template);
             } else {
                 this.images.add(template);
             }
-            notifyItemInserted(i);
+            notifyItemInserted(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,13 +98,13 @@ public class WorkUserAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_work_user, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Template template = this.images.get(i);
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        Template template = this.images.get(value);
         if (template.getFileInfo() != null) {
             viewHolder.tvName.setText(template.getFileInfo().formattedDate);
             viewHolder.tvDate.setText(template.getFileInfo().timedDate);

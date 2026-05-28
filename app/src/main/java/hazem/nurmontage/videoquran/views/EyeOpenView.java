@@ -26,8 +26,8 @@ public class EyeOpenView extends View {
     private float radiusYFull;
     private float wrapOffset;
 
-    private float map(float f, float f2, float f3, float f4, float f5) {
-        return f4 + (((f - f2) / (f3 - f2)) * (f5 - f4));
+    private float map(float f, float f2, float f3, float f4, float floatValue5) {
+        return f4 + (((f - f2) / (f3 - f2)) * (floatValue5 - f4));
     }
 
     public EyeOpenView(Context context) {
@@ -81,14 +81,14 @@ public class EyeOpenView extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int i, int i2, int i3, int i4) {
+    protected void onSizeChanged(int i, int i2, int i3, int size4) {
         float f = i;
         this.centerX = f / 2.0f;
         float f2 = i2;
         this.centerY = f2 / 2.0f;
         this.radiusX = f * 0.4f;
         this.radiusYFull = f2 * 0.2f;
-        super.onSizeChanged(i, i2, i3, i4);
+        super.onSizeChanged(i, i2, i3, size4);
     }
 
     @Override // android.view.View

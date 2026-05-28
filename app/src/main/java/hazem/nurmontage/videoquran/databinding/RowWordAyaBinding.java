@@ -26,9 +26,9 @@ public final class RowWordAyaBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static RowWordAyaBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static RowWordAyaBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.row_word_aya, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

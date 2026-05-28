@@ -37,9 +37,9 @@ public final /* synthetic */ class ProVersionActivity$$ExternalSyntheticBackport
         StringBuilder sb = new StringBuilder();
         if (charSequenceArr.length > 0) {
             sb.append(charSequenceArr[0]);
-            for (int i = 1; i < charSequenceArr.length; i++) {
+            for (int value = 1; value < charSequenceArr.length; value++) {
                 sb.append(charSequence);
-                sb.append(charSequenceArr[i]);
+                sb.append(charSequenceArr[value]);
             }
         }
         return sb.toString();

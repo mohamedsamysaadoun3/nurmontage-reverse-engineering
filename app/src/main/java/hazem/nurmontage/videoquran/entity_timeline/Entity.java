@@ -62,7 +62,7 @@ public abstract class Entity {
 
     public abstract void draw(Canvas canvas);
 
-    public abstract void draw(Canvas canvas, int i, int i2);
+    public abstract void draw(Canvas canvas, int color, int value2);
 
     public abstract float getDownX();
 
@@ -87,19 +87,19 @@ public abstract class Entity {
     public void release() {
     }
 
-    public abstract void setDownX(float f);
+    public abstract void setDownX(float floatValue);
 
-    public abstract void setLastLeft(float f);
+    public abstract void setLastLeft(float floatValue);
 
-    public abstract void setLastRight(float f);
+    public abstract void setLastRight(float floatValue);
 
-    public abstract void setRight(float f);
+    public abstract void setRight(float floatValue);
 
-    public abstract void setSelect(boolean z);
+    public abstract void setSelect(boolean isSelected);
 
-    public abstract void setX(float f);
+    public abstract void setX(float floatValue);
 
-    public abstract void setY(float f);
+    public abstract void setY(float floatValue);
 
     public abstract void updateStartTrim();
 
@@ -111,44 +111,44 @@ public abstract class Entity {
         this.entitiesGroup = list;
     }
 
-    public void setSelectMultiple(boolean z) {
-        this.isSelectMultiple = z;
+    public void setSelectMultiple(boolean isSelected) {
+        this.isSelectMultiple = isSelected;
     }
 
     public boolean isSelectMultiple() {
         return this.isSelectMultiple;
     }
 
-    public void setVisible(boolean z) {
-        this.isVisible = z;
+    public void setVisible(boolean isSelected) {
+        this.isVisible = isSelected;
     }
 
     public StackEntity getCurrentStackEntity() {
         return this.currentStackEntity;
     }
 
-    public void setColor_select_multiple(int i) {
-        this.color_select_multiple = i;
+    public void setColor_select_multiple(int color) {
+        this.color_select_multiple = color;
     }
 
-    public void setSecond_in_screen(float f) {
-        this.second_in_screen = f;
+    public void setSecond_in_screen(float floatValue) {
+        this.second_in_screen = floatValue;
     }
 
     public float getSecond_in_screen() {
         return this.second_in_screen;
     }
 
-    public void setAudio_id(String str) {
-        this.audio_id = str;
+    public void setAudio_id(String textValue) {
+        this.audio_id = textValue;
     }
 
     public String getAudio_id() {
         return this.audio_id;
     }
 
-    public void setFrame_id(String str) {
-        this.frame_id = str;
+    public void setFrame_id(String textValue) {
+        this.frame_id = textValue;
     }
 
     public String getFrame_id() {
@@ -163,16 +163,16 @@ public abstract class Entity {
         return this.index_start_thumbnail;
     }
 
-    public void setTrimLeft(boolean z) {
-        this.isTrimLeft = z;
+    public void setTrimLeft(boolean isSelected) {
+        this.isTrimLeft = isSelected;
     }
 
     public boolean isTrimLeft() {
         return this.isTrimLeft;
     }
 
-    public void setSplit(boolean z) {
-        this.isSplit = z;
+    public void setSplit(boolean isSelected) {
+        this.isSplit = isSelected;
     }
 
     public float getRound() {
@@ -191,12 +191,12 @@ public abstract class Entity {
         return this.fade_out;
     }
 
-    public void setFade_in(float f) {
-        this.fade_in = f;
+    public void setFade_in(float floatValue) {
+        this.fade_in = floatValue;
     }
 
-    public void setFade_out(float f) {
-        this.fade_out = f;
+    public void setFade_out(float floatValue) {
+        this.fade_out = floatValue;
     }
 
     public boolean isSelect() {
@@ -214,8 +214,8 @@ public abstract class Entity {
         this.currentStackEntity = new StackEntity(new RectF(this.rect.left / getmScaleFactor(), this.rect.top / getmScaleFactor(), this.rect.right / getmScaleFactor(), this.rect.bottom / getmScaleFactor()), this.offset, this.end, this.start, this.left, this.right, this.max, getOffset_right(), getOffset_left());
     }
 
-    public void setIndex(int i) {
-        this.index = i;
+    public void setIndex(int color) {
+        this.index = color;
     }
 
     public int getIndex() {
@@ -230,8 +230,8 @@ public abstract class Entity {
         return this.entityView;
     }
 
-    public Entity(float f) {
-        this.second_in_screen = f;
+    public Entity(float floatValue) {
+        this.second_in_screen = floatValue;
         Paint paint = new Paint(1);
         this.paintStroke = paint;
         paint.setColor(this.color_select_multiple);
@@ -243,37 +243,37 @@ public abstract class Entity {
         return this.visible;
     }
 
-    public void visible(boolean z) {
-        this.visible = z;
+    public void visible(boolean isSelected) {
+        this.visible = isSelected;
     }
 
-    public void setmScaleFactor(float f) {
-        this.mScaleFactor = f;
+    public void setmScaleFactor(float floatValue) {
+        this.mScaleFactor = floatValue;
     }
 
     public float getmScaleFactor() {
         return this.mScaleFactor;
     }
 
-    public void updateRect(float f) {
-        if (f == this.mScaleFactor) {
+    public void updateRect(float floatValue) {
+        if (floatValue == this.mScaleFactor) {
             return;
         }
         RectF rectF = this.rect;
-        rectF.left = (rectF.left / this.mScaleFactor) * f;
+        rectF.left = (rectF.left / this.mScaleFactor) * floatValue;
         RectF rectF2 = this.rect;
-        rectF2.right = (rectF2.right / this.mScaleFactor) * f;
+        rectF2.right = (rectF2.right / this.mScaleFactor) * floatValue;
         setX(this.rect.left);
         setRight(this.rect.right);
-        this.mScaleFactor = f;
+        this.mScaleFactor = floatValue;
     }
 
     public void update(Canvas canvas) {
         this.paint.setColor(this.color);
         if (!this.isVideo) {
             RectF rectF = this.rect;
-            float f = this.round;
-            canvas.drawRoundRect(rectF, f, f, this.paint);
+            float floatValue = this.round;
+            canvas.drawRoundRect(rectF, floatValue, floatValue, this.paint);
             canvas.save();
             canvas.clipRect(this.rect);
             draw(canvas);
@@ -283,8 +283,8 @@ public abstract class Entity {
             this.path.reset();
             Path path = this.path;
             RectF rectF2 = this.rect;
-            float f2 = this.round;
-            path.addRoundRect(rectF2, f2, f2, Path.Direction.CW);
+            float floatValue2 = this.round;
+            path.addRoundRect(rectF2, floatValue2, floatValue2, Path.Direction.CW);
             canvas.clipPath(this.path);
             draw(canvas);
             canvas.restore();
@@ -344,25 +344,25 @@ public abstract class Entity {
         }
     }
 
-    public void update(Canvas canvas, int i, int i2) {
+    public void update(Canvas canvas, int color, int value2) {
         this.paint.setColor(this.color);
         if (!this.isVideo) {
             RectF rectF = this.rect;
-            float f = this.round;
-            canvas.drawRoundRect(rectF, f, f, this.paint);
+            float floatValue = this.round;
+            canvas.drawRoundRect(rectF, floatValue, floatValue, this.paint);
             canvas.save();
             canvas.clipRect(this.rect);
-            draw(canvas, i, i2);
+            draw(canvas, color, value2);
             canvas.restore();
         } else {
             canvas.save();
             this.path.reset();
             Path path = this.path;
             RectF rectF2 = this.rect;
-            float f2 = this.round;
-            path.addRoundRect(rectF2, f2, f2, Path.Direction.CW);
+            float floatValue2 = this.round;
+            path.addRoundRect(rectF2, floatValue2, floatValue2, Path.Direction.CW);
             canvas.clipPath(this.path);
-            draw(canvas, i, i2);
+            draw(canvas, color, value2);
             canvas.restore();
         }
         if (this.isSelect) {
@@ -415,8 +415,8 @@ public abstract class Entity {
         }
     }
 
-    public void setOffset_left(float f) {
-        this.offset_left = f;
+    public void setOffset_left(float floatValue) {
+        this.offset_left = floatValue;
     }
 
     public float getOffset_left() {
@@ -431,21 +431,21 @@ public abstract class Entity {
         return this.offset_right;
     }
 
-    public void setOffset_right(float f) {
-        this.offset_right = f;
+    public void setOffset_right(float floatValue) {
+        this.offset_right = floatValue;
     }
 
     public float getOnDown() {
         return this.onDown;
     }
 
-    public void setOffset(float f) {
-        this.offset = f;
+    public void setOffset(float floatValue) {
+        this.offset = floatValue;
     }
 
-    public void setOnTapTime(float f, float f2) {
-        this.onTapTime = f;
-        this.onDown = f2;
+    public void setOnTapTime(float floatValue, float floatValue2) {
+        this.onTapTime = floatValue;
+        this.onDown = floatValue2;
     }
 
     public float getOnTapTime() {

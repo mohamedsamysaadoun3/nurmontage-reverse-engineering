@@ -43,9 +43,9 @@ public final class FragmentRemoveNoiceBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentRemoveNoiceBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentRemoveNoiceBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_remove_noice, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

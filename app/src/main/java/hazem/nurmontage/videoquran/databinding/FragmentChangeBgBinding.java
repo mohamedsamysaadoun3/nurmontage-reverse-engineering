@@ -47,9 +47,9 @@ public final class FragmentChangeBgBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentChangeBgBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentChangeBgBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_change_bg, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

@@ -22,22 +22,22 @@ public class LocaleHelper {
         return getPersistedData(context, "en");
     }
 
-    public static void setLocale(String str) {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(str));
+    public static void setLocale(String textValue) {
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(textValue));
     }
 
-    public static Context setLocale(Context context, String str) {
-        persist(context, str);
-        return updateResources(context, str);
+    public static Context setLocale(Context context, String textValue) {
+        persist(context, textValue);
+        return updateResources(context, textValue);
     }
 
-    public static String getPersistedData(Context context, String str) {
-        return context.getSharedPreferences("ActPreference", 0).getString(SELECTED_LANGUAGE, str);
+    public static String getPersistedData(Context context, String textValue) {
+        return context.getSharedPreferences("ActPreference", 0).getString(SELECTED_LANGUAGE, textValue);
     }
 
-    public static void persist(Context context, String str) {
+    public static void persist(Context context, String textValue) {
         SharedPreferences.Editor edit = context.getSharedPreferences("ActPreference", 0).edit();
-        edit.putString(SELECTED_LANGUAGE, str);
+        edit.putString(SELECTED_LANGUAGE, textValue);
         edit.apply();
     }
 
@@ -51,16 +51,16 @@ public class LocaleHelper {
         return context.getSharedPreferences("ActPreference", 0).getBoolean("userIsChoice", false);
     }
 
-    public static Context updateResources(Context context, String str) {
-        Locale locale = new Locale(str);
+    public static Context updateResources(Context context, String textValue) {
+        Locale locale = new Locale(textValue);
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale));
         Configuration configuration = context.getResources().getConfiguration();
         configuration.setLocale(locale);
         return context.createConfigurationContext(configuration);
     }
 
-    public static Context updateResourcesLegacy(Context context, String str) {
-        Locale locale = new Locale(str);
+    public static Context updateResourcesLegacy(Context context, String textValue) {
+        Locale locale = new Locale(textValue);
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale));
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();

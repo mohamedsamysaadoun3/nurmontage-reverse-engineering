@@ -24,28 +24,28 @@ public class ExploreAdabters extends RecyclerView.Adapter<MyViewHolder> {
     public interface IExplore {
         void done();
 
-        void folder(File file, String str, String str2);
+        void folder(File file, String textValue, String textValue2);
     }
 
-    public ExploreAdabters(List<ExploreItem> list, int i, IExplore iExplore, String str) {
+    public ExploreAdabters(List<ExploreItem> list, int value, IExplore iExplore, String textValue) {
         this.exploreItems = list;
-        this.size = i;
+        this.size = value;
         this.iExplore = iExplore;
-        this.folder_select = str;
+        this.folder_select = textValue;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_explore, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-        RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(this.exploreItems.get(i).getFirstFilePath());
+    public void onBindViewHolder(MyViewHolder myViewHolder, int value) {
+        RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(this.exploreItems.get(value).getFirstFilePath());
         int i2 = this.size;
         load.override(i2, i2).centerCrop().placeholder(C2014R.drawable.image_24px).into(myViewHolder.imageView);
-        myViewHolder.tv_name.setText(this.exploreItems.get(i).getName());
-        myViewHolder.tv_size.setText(this.exploreItems.get(i).getSize());
+        myViewHolder.tv_name.setText(this.exploreItems.get(value).getName());
+        myViewHolder.tv_size.setText(this.exploreItems.get(value).getSize());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

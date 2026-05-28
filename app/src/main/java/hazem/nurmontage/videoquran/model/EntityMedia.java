@@ -71,12 +71,12 @@ public class EntityMedia implements Serializable {
         return this.path_ffmpeg_effect;
     }
 
-    public void setPath_ffmpeg_effect(String str) {
-        this.path_ffmpeg_effect = str;
+    public void setPath_ffmpeg_effect(String filePath) {
+        this.path_ffmpeg_effect = filePath;
     }
 
-    public void setVideo_path(String str) {
-        this.video_path = str;
+    public void setVideo_path(String filePath) {
+        this.video_path = filePath;
     }
 
     public String getVideo_path() {
@@ -87,12 +87,12 @@ public class EntityMedia implements Serializable {
         return this.path_ffmpeg;
     }
 
-    public void setPath_ffmpeg(String str) {
-        this.path_ffmpeg = str;
+    public void setPath_ffmpeg(String filePath) {
+        this.path_ffmpeg = filePath;
     }
 
-    public void setApplyEffectInPreview(boolean z) {
-        this.isApplyEffectInPreview = z;
+    public void setApplyEffectInPreview(boolean isFlag) {
+        this.isApplyEffectInPreview = isFlag;
     }
 
     public float getPosXFFmpeg() {
@@ -103,8 +103,8 @@ public class EntityMedia implements Serializable {
         return this.volume;
     }
 
-    public void setVolume(float f) {
-        this.volume = f;
+    public void setVolume(float floatValue) {
+        this.volume = floatValue;
     }
 
     public int getIndex_end_thumbnail() {
@@ -123,16 +123,16 @@ public class EntityMedia implements Serializable {
         return this.duration_fade_out;
     }
 
-    public void setId_raw(int i) {
-        this.id_raw = i;
+    public void setId_raw(int resId) {
+        this.id_raw = resId;
     }
 
     public int getId_raw() {
         return this.id_raw;
     }
 
-    public void setName(String str) {
-        this.name = str;
+    public void setName(String filePath) {
+        this.name = filePath;
     }
 
     public String getName() {
@@ -143,8 +143,8 @@ public class EntityMedia implements Serializable {
         return this.offset_left;
     }
 
-    public void setOffset_left(float f) {
-        this.offset_left = f;
+    public void setOffset_left(float floatValue) {
+        this.offset_left = floatValue;
     }
 
     public float getMax() {
@@ -155,12 +155,12 @@ public class EntityMedia implements Serializable {
         return this.offset;
     }
 
-    public void setOffset(float f) {
-        this.offset = f;
+    public void setOffset(float floatValue) {
+        this.offset = floatValue;
     }
 
-    public void setStart_original(int i) {
-        this.start_original = i;
+    public void setStart_original(int resId) {
+        this.start_original = resId;
     }
 
     public int getStart_original() {
@@ -179,12 +179,12 @@ public class EntityMedia implements Serializable {
         return this.isSoundEnable;
     }
 
-    public void setSoundEnable(boolean z) {
-        this.isSoundEnable = z;
+    public void setSoundEnable(boolean isFlag) {
+        this.isSoundEnable = isFlag;
     }
 
-    public void setScale(float f) {
-        this.mScale = f;
+    public void setScale(float floatValue) {
+        this.mScale = floatValue;
     }
 
     public float getScale() {
@@ -195,81 +195,81 @@ public class EntityMedia implements Serializable {
         return this.f419h;
     }
 
-    public EntityMedia(String str, int i, float f, float f2, float f3, float f4, int i2, float f5, float f6, float f7, float f8, float f9, float f10, float f11) {
+    public EntityMedia(String filePath, int resId, float floatValue, float f2, float f3, float f4, int value2, float f5, float floatValue6, float f7, float f8, float f9, float f10, float floatValue11) {
         this.volume = 1.0f;
         this.isSoundEnable = true;
         this.f421x = 0.0f;
-        this.posXFFmpeg = f11;
+        this.posXFFmpeg = floatValue11;
         this.f422y = 0.0f;
         this.f420w = 1.0f;
         this.mScale = 1.0f;
-        this.uri = str;
+        this.uri = filePath;
         this.offset_left = f7;
-        this.offset_right = f6;
+        this.offset_right = floatValue6;
         this.max = f8;
         this.offset = f5;
-        this.start_original = i;
-        this.start = f;
+        this.start_original = resId;
+        this.start = floatValue;
         this.end = f2;
         this.posX = f3;
         this.posY = f4;
         this.duration_fade_in = f9;
         this.duration_fade_out = f10;
-        this.time = i2;
+        this.time = value2;
     }
 
-    public EntityMedia(String str) {
+    public EntityMedia(String filePath) {
         this.volume = 1.0f;
         this.isSoundEnable = true;
         this.f421x = 0.0f;
         this.f422y = 0.0f;
         this.f420w = 1.0f;
         this.mScale = 1.0f;
-        this.uri = str;
+        this.uri = filePath;
     }
 
-    public EntityMedia(String str, float f, float f2, float f3, float f4, float f5, float f6) {
+    public EntityMedia(String filePath, float floatValue, float f2, float f3, float f4, float f5, float floatValue6) {
         this.volume = 1.0f;
         this.isSoundEnable = true;
         this.f421x = 0.0f;
         this.f422y = 0.0f;
         this.f420w = 1.0f;
         this.mScale = 1.0f;
-        this.uri = str;
-        this.start = f;
+        this.uri = filePath;
+        this.start = floatValue;
         this.end = f2;
         this.posX = f3;
         this.posY = f4;
         this.duration_fade_in = f5;
-        this.duration_fade_out = f6;
+        this.duration_fade_out = floatValue6;
     }
 
-    public void setUri(String str) {
-        this.uri = str;
+    public void setUri(String filePath) {
+        this.uri = filePath;
     }
 
     public float getOffset_right() {
         return this.offset_right;
     }
 
-    public EntityMedia(String str, int i, float f, float f2, int i2, float f3, float f4, float f5, float f6, float f7, boolean z, float f8, float f9, float f10, float f11) {
+    public EntityMedia(String filePath, int resId, float floatValue, float f2, int value2, float f3, float f4, float f5, float floatValue6, float f7, boolean isFlag, float f8, float f9, float f10, float floatValue11) {
         this.volume = 1.0f;
         this.mScale = 1.0f;
-        this.uri = str;
-        this.start = f;
+        this.uri = filePath;
+        this.start = floatValue;
         this.offset = f7;
         this.duration_fade_in = f9;
         this.duration_fade_out = f10;
         this.max = f8;
         this.end = f2;
-        this.posXFFmpeg = f11;
-        this.time = i2;
-        this.start_original = i;
+        this.posXFFmpeg = floatValue11;
+        this.time = value2;
+        this.start_original = resId;
         this.f421x = f3;
-        this.f419h = f6;
+        this.f419h = floatValue6;
         this.f422y = f4;
         this.f420w = f5;
-        this.isSoundEnable = z;
+        this.isSoundEnable = isFlag;
     }
 
     public float getTopX() {
@@ -296,8 +296,8 @@ public class EntityMedia implements Serializable {
         return this.time;
     }
 
-    public void setTime(int i) {
-        this.time = i;
+    public void setTime(int resId) {
+        this.time = resId;
     }
 
     public String getUri() {
@@ -308,24 +308,24 @@ public class EntityMedia implements Serializable {
         return this.start;
     }
 
-    public void setStart(float f) {
-        this.start = f;
+    public void setStart(float floatValue) {
+        this.start = floatValue;
     }
 
-    public void setDuration_fade_in(float f) {
-        this.duration_fade_in = f;
+    public void setDuration_fade_in(float floatValue) {
+        this.duration_fade_in = floatValue;
     }
 
-    public void setDuration_fade_out(float f) {
-        this.duration_fade_out = f;
+    public void setDuration_fade_out(float floatValue) {
+        this.duration_fade_out = floatValue;
     }
 
     public float getEnd() {
         return this.end;
     }
 
-    public void setEnd(float f) {
-        this.end = f;
+    public void setEnd(float floatValue) {
+        this.end = floatValue;
     }
 
     public EntityMedia duplicate() {

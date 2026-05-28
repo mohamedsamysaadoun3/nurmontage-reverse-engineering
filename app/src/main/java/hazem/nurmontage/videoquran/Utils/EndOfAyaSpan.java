@@ -15,17 +15,17 @@ public class EndOfAyaSpan extends ReplacementSpan {
     private String number;
     private VectorDrawable vectorDrawable;
 
-    public EndOfAyaSpan(VectorDrawable vectorDrawable, Typeface typeface, String str) {
+    public EndOfAyaSpan(VectorDrawable vectorDrawable, Typeface typeface, String textValue) {
         this.vectorDrawable = vectorDrawable;
         this.fontNumber = typeface;
-        this.number = str;
+        this.number = textValue;
     }
 
     @Override // android.text.style.ReplacementSpan
-    public void draw(Canvas canvas, CharSequence charSequence, int i, int i2, float f, int i3, int i4, int i5, Paint paint) {
-        String substring = charSequence.toString().substring(i, i2);
+    public void draw(Canvas canvas, CharSequence charSequence, int i, int size2, float floatValue, int i3, int i4, int value5, Paint paint) {
+        String substring = charSequence.toString().substring(i, size2);
         if (substring != null && !substring.equals(" نص")) {
-            canvas.drawText(charSequence, i, i2, f, i4, paint);
+            canvas.drawText(charSequence, i, size2, floatValue, i4, paint);
             return;
         }
         float measureText = paint.measureText(substring);
@@ -39,9 +39,9 @@ public class EndOfAyaSpan extends ReplacementSpan {
             paint.setTextSize(paint.getTextSize() * 0.7f);
         }
         Rect rect = new Rect();
-        String str = this.number;
-        paint.getTextBounds(str, 0, str.length(), rect);
-        RectF rectF = new RectF((int) f, i3, (int) (measureText + f), i5);
+        String textValue = this.number;
+        paint.getTextBounds(textValue, 0, textValue.length(), rect);
+        RectF rectF = new RectF((int) floatValue, i3, (int) (measureText + floatValue), value5);
         float width = rectF.width() * 0.43f;
         float height = rectF.height() * 0.42f;
         this.vectorDrawable.setBounds((int) (rectF.centerX() - width), (int) (rectF.centerY() - height), (int) (rectF.centerX() + width), (int) (rectF.centerY() + height));
@@ -59,7 +59,7 @@ public class EndOfAyaSpan extends ReplacementSpan {
     }
 
     @Override // android.text.style.ReplacementSpan
-    public int getSize(Paint paint, CharSequence charSequence, int i, int i2, Paint.FontMetricsInt fontMetricsInt) {
-        return Math.round(paint.measureText(charSequence, i, i2));
+    public int getSize(Paint paint, CharSequence charSequence, int i, int size2, Paint.FontMetricsInt fontMetricsInt) {
+        return Math.round(paint.measureText(charSequence, i, size2));
     }
 }

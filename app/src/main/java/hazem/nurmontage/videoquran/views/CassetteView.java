@@ -35,8 +35,8 @@ public class CassetteView extends View {
         init();
     }
 
-    public CassetteView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public CassetteView(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         this.labelText = "Titanium – David Guetta Ft. Sia";
         init();
     }
@@ -89,14 +89,14 @@ public class CassetteView extends View {
         path.close();
         canvas.drawPath(path, this.paintFloor);
         RectF rectF = new RectF(0.12f * f3, 0.32f * f, 0.92f * f3, 0.72f * f);
-        float f4 = f3 * 0.1f;
+        float floatValue4 = f3 * 0.1f;
         float f5 = f * 0.3f;
         float f6 = 0.9f * f3;
-        RectF rectF2 = new RectF(f4, f5, f6, f2);
+        RectF rectF2 = new RectF(floatValue4, f5, f6, f2);
         canvas.drawRoundRect(rectF, 20.0f, 20.0f, this.paintShadow);
         canvas.drawRoundRect(rectF2, 20.0f, 20.0f, this.paintBody);
         Path path2 = new Path();
-        path2.moveTo(f4, f5);
+        path2.moveTo(floatValue4, f5);
         path2.lineTo(f6, f5);
         float f7 = f3 * 0.85f;
         float f8 = f * 0.35f;
@@ -106,7 +106,7 @@ public class CassetteView extends View {
         path2.close();
         canvas.drawPath(path2, this.paintAccent);
         Path path3 = new Path();
-        path3.moveTo(f4, f2);
+        path3.moveTo(floatValue4, f2);
         path3.lineTo(f6, f2);
         float f10 = f * 0.65f;
         path3.lineTo(f7, f10);
@@ -137,25 +137,25 @@ public class CassetteView extends View {
         canvas.drawCircle(f7, f21, f19, this.paintScrew);
     }
 
-    private void drawInnerGear(Canvas canvas, float f, float f2, float f3, float f4, int i, Paint paint) {
+    private void drawInnerGear(Canvas canvas, float f, float f2, float f3, float floatValue4, int value, Paint paint) {
         float f5;
         float f6;
         Path path = new Path();
-        int i2 = i * 2;
+        int i2 = value * 2;
         double d = 6.283185307179586d / i2;
-        for (int i3 = 0; i3 < i2; i3++) {
-            double d2 = i3 * d;
-            if (i3 % 2 == 0) {
+        for (int value3 = 0; value3 < i2; value3++) {
+            double d2 = value3 * d;
+            if (value3 % 2 == 0) {
                 f5 = f;
                 f6 = f3;
             } else {
                 f5 = f;
-                f6 = f4;
+                f6 = floatValue4;
             }
             double d3 = f6;
             float cos = (float) (f5 + (Math.cos(d2) * d3));
             float sin = (float) (f2 + (d3 * Math.sin(d2)));
-            if (i3 == 0) {
+            if (value3 == 0) {
                 path.moveTo(cos, sin);
             } else {
                 path.lineTo(cos, sin);

@@ -5,9 +5,9 @@ public class YoutuberModel {
     private int img;
     private String lnk;
 
-    public YoutuberModel(String str, int i) {
-        this.lnk = str;
-        this.img = i;
+    public YoutuberModel(String textValue, int flags) {
+        this.lnk = textValue;
+        this.img = flags;
     }
 
     public int getImg() {

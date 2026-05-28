@@ -5,13 +5,13 @@ public class ModelFeatures {
     private boolean isForFree;
     private String name;
 
-    public ModelFeatures(String str, boolean z) {
-        this.name = str;
-        this.isForFree = z;
+    public ModelFeatures(String textValue, boolean isFlag) {
+        this.name = textValue;
+        this.isForFree = isFlag;
     }
 
-    public ModelFeatures(String str) {
-        this.name = str;
+    public ModelFeatures(String textValue) {
+        this.name = textValue;
     }
 
     public boolean isForFree() {

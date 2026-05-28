@@ -9,25 +9,25 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
 public class FastWaveformExtractorPro {
-    public static float[] extract(String str, int i) throws Exception {
+    public static float[] extract(String textValue, int value) throws Exception {
         float[] fArr;
         long j;
         char c;
         MediaExtractor mediaExtractor = new MediaExtractor();
-        mediaExtractor.setDataSource(str);
-        int i2 = 0;
+        mediaExtractor.setDataSource(textValue);
+        int value2 = 0;
         while (true) {
-            if (i2 >= mediaExtractor.getTrackCount()) {
-                i2 = -1;
+            if (value2 >= mediaExtractor.getTrackCount()) {
+                value2 = -1;
                 break;
             }
-            if (mediaExtractor.getTrackFormat(i2).getString("mime").startsWith("audio/")) {
+            if (mediaExtractor.getTrackFormat(value2).getString("mime").startsWith("audio/")) {
                 break;
             }
-            i2++;
+            value2++;
         }
-        mediaExtractor.selectTrack(i2);
-        MediaFormat trackFormat = mediaExtractor.getTrackFormat(i2);
+        mediaExtractor.selectTrack(value2);
+        MediaFormat trackFormat = mediaExtractor.getTrackFormat(value2);
         MediaCodec createDecoderByType = MediaCodec.createDecoderByType(trackFormat.getString("mime"));
         createDecoderByType.configure(trackFormat, (Surface) null, (MediaCrypto) null, 0);
         createDecoderByType.start();
@@ -77,28 +77,28 @@ public class FastWaveformExtractorPro {
         createDecoderByType.stop();
         createDecoderByType.release();
         mediaExtractor.release();
-        return downsample(fArr2, i3, i);
+        return downsample(fArr2, i3, value);
     }
 
-    private static float computeMaxAmp(ByteBuffer byteBuffer, int i) {
+    private static float computeMaxAmp(ByteBuffer byteBuffer, int value) {
         byteBuffer.position(0);
         float f = 0.0f;
-        for (int i2 = 0; i2 < i - 1; i2 += 2) {
-            f = Math.max(f, Math.abs((int) byteBuffer.getShort(i2)));
+        for (int value2 = 0; value2 < value - 1; value2 += 2) {
+            f = Math.max(f, Math.abs((int) byteBuffer.getShort(value2)));
         }
         return f / 32767.0f;
     }
 
-    private static float[] downsample(float[] fArr, int i, int i2) {
-        float[] fArr2 = new float[i2];
-        float f = i / i2;
+    private static float[] downsample(float[] fArr, int value, int value2) {
+        float[] fArr2 = new float[value2];
+        float f = value / value2;
         int i3 = 0;
-        while (i3 < i2) {
+        while (i3 < value2) {
             int i4 = i3 + 1;
             int i5 = (int) (i4 * f);
             float f2 = 0.0f;
-            for (int i6 = (int) (i3 * f); i6 < i5 && i6 < i; i6++) {
-                f2 = Math.max(f2, fArr[i6]);
+            for (int value6 = (int) (i3 * f); value6 < i5 && value6 < value; value6++) {
+                f2 = Math.max(f2, fArr[value6]);
             }
             fArr2[i3] = f2;
             i3 = i4;

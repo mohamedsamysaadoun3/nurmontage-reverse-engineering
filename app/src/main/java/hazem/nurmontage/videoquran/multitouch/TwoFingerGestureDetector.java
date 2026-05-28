@@ -18,10 +18,10 @@ public abstract class TwoFingerGestureDetector extends BaseGestureDetector {
     private float mRightSlopEdge;
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected abstract void handleInProgressEvent(int i, MotionEvent motionEvent);
+    protected abstract void handleInProgressEvent(int value, MotionEvent motionEvent);
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected abstract void handleStartProgressEvent(int i, MotionEvent motionEvent);
+    protected abstract void handleStartProgressEvent(int value, MotionEvent motionEvent);
 
     public TwoFingerGestureDetector(Context context) {
         super(context);
@@ -83,18 +83,18 @@ public abstract class TwoFingerGestureDetector extends BaseGestureDetector {
         return (z && z2) || z || z2;
     }
 
-    protected static float getRawX(MotionEvent motionEvent, int i) {
+    protected static float getRawX(MotionEvent motionEvent, int value) {
         float x = motionEvent.getX() - motionEvent.getRawX();
-        if (i < motionEvent.getPointerCount()) {
-            return motionEvent.getX(i) + x;
+        if (value < motionEvent.getPointerCount()) {
+            return motionEvent.getX(value) + x;
         }
         return 0.0f;
     }
 
-    protected static float getRawY(MotionEvent motionEvent, int i) {
+    protected static float getRawY(MotionEvent motionEvent, int value) {
         float y = motionEvent.getY() - motionEvent.getRawY();
-        if (i < motionEvent.getPointerCount()) {
-            return motionEvent.getY(i) + y;
+        if (value < motionEvent.getPointerCount()) {
+            return motionEvent.getY(value) + y;
         }
         return 0.0f;
     }

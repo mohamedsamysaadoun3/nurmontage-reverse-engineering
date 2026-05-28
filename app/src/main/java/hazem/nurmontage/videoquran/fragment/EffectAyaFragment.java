@@ -48,26 +48,26 @@ public class EffectAyaFragment extends Fragment {
     private TextCustumFont tv_apply_all;
 
     public interface ITransition {
-        void applyAll(int i, EntityQuranTimeline entityQuranTimeline);
+        void applyAll(int value, EntityQuranTimeline entityQuranTimeline);
 
         void destroy(EntityQuranTimeline entityQuranTimeline);
 
         /* renamed from: in */
-        void mo581in(String str, EntityQuranTimeline entityQuranTimeline);
+        void mo581in(String textValue, EntityQuranTimeline entityQuranTimeline);
 
         void onHideFragment(EntityQuranTimeline entityQuranTimeline);
 
-        void out(String str, EntityQuranTimeline entityQuranTimeline);
+        void out(String textValue, EntityQuranTimeline entityQuranTimeline);
 
         void playing(EntityQuranTimeline entityQuranTimeline);
 
-        void remove(int i, EntityQuranTimeline entityQuranTimeline);
+        void remove(int value, EntityQuranTimeline entityQuranTimeline);
 
         void toSubscribe();
 
-        void updateDurationIn(float f, EntityQuranTimeline entityQuranTimeline);
+        void updateDurationIn(float ratio, EntityQuranTimeline entityQuranTimeline);
 
-        void updateDurationOut(float f, EntityQuranTimeline entityQuranTimeline);
+        void updateDurationOut(float ratio, EntityQuranTimeline entityQuranTimeline);
     }
 
     public static synchronized EffectAyaFragment get(Transition transition, Resources resources, ITransition iTransition, EntityQuranTimeline entityQuranTimeline) {
@@ -95,14 +95,14 @@ public class EffectAyaFragment extends Fragment {
     public EffectAyaFragment() {
     }
 
-    public void updateView(float f, Transition transition) {
+    public void updateView(float ratio, Transition transition) {
         this.transition = transition;
         if (this.seekBarDuration.getVisibility() != 0) {
             this.seekBarDuration.setVisibility(0);
             this.tvDuration.setVisibility(0);
         }
         this.btn_unEffect.setBackgroundResource(C2014R.drawable.circle_effect);
-        updateSeek(f, true);
+        updateSeek(ratio, true);
         visibleApplyAll();
     }
 
@@ -157,8 +157,8 @@ public class EffectAyaFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int i, boolean z) {
-                    EffectAyaFragment.this.tvDuration.setText(String.valueOf(i / 10.0f));
+                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                    EffectAyaFragment.this.tvDuration.setText(String.valueOf(value / 10.0f));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -233,15 +233,15 @@ public class EffectAyaFragment extends Fragment {
             root.post(new Runnable() { // from class: hazem.nurmontage.videoquran.fragment.EffectAyaFragment.6
                 @Override // java.lang.Runnable
                 public void run() {
-                    int i;
+                    int value;
                     List<TransitionEntityAdabters.TransitionItem> inTransition = EffectAyaFragment.this.getInTransition();
                     if (EffectAyaFragment.this.transition == null || !EffectAyaFragment.this.transition.isIn()) {
-                        i = -1;
+                        value = -1;
                     } else {
                         EffectAyaFragment effectAyaFragment = EffectAyaFragment.this;
-                        i = effectAyaFragment.getIndex(inTransition, effectAyaFragment.transition.getType_in());
+                        value = effectAyaFragment.getIndex(inTransition, effectAyaFragment.transition.getType_in());
                     }
-                    int i2 = i;
+                    int i2 = value;
                     EffectAyaFragment.this.transitionEntityAdabters = new TransitionEntityAdabters(BillingPreferences.isSubscribed(EffectAyaFragment.this.getContext()), EffectAyaFragment.this.iTransition, inTransition, i2, EffectAyaFragment.this.entityQuranTimeline);
                     EffectAyaFragment.this.recyclerView.setAdapter(EffectAyaFragment.this.transitionEntityAdabters);
                     EffectAyaFragment effectAyaFragment2 = EffectAyaFragment.this;
@@ -272,10 +272,10 @@ public class EffectAyaFragment extends Fragment {
         this.iv_apply_all.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
     }
 
-    public void scroll(int i) {
+    public void scroll(int value) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
-        View findViewByPosition = linearLayoutManager.findViewByPosition(i);
-        linearLayoutManager.scrollToPositionWithOffset(i, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
+        View findViewByPosition = linearLayoutManager.findViewByPosition(value);
+        linearLayoutManager.scrollToPositionWithOffset(value, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
     }
 
     public void updateButton(Transition transition) {
@@ -284,17 +284,17 @@ public class EffectAyaFragment extends Fragment {
         visibleSeekbar();
     }
 
-    public int getIndex(List<TransitionEntityAdabters.TransitionItem> list, String str) {
-        for (int i = 0; i < list.size(); i++) {
-            if (str.equals(list.get(i).getType())) {
-                return i;
+    public int getIndex(List<TransitionEntityAdabters.TransitionItem> list, String textValue) {
+        for (int value = 0; value < list.size(); value++) {
+            if (textValue.equals(list.get(value).getType())) {
+                return value;
             }
         }
         return -1;
     }
 
-    private void updateSeek(float f, boolean z) {
-        this.seekBarDuration.setProgress((int) (f * 4.0f));
+    private void updateSeek(float ratio, boolean isFlag) {
+        this.seekBarDuration.setProgress((int) (ratio * 4.0f));
         this.tvDuration.setText(String.valueOf(this.seekBarDuration.getProgress() / 10.0f));
     }
 
@@ -308,9 +308,9 @@ public class EffectAyaFragment extends Fragment {
         this.tvDuration.setVisibility(8);
     }
 
-    public void loadTransition(int i) {
+    public void loadTransition(int value) {
         this.index = -1;
-        if (i == 0) {
+        if (value == 0) {
             List<TransitionEntityAdabters.TransitionItem> inTransition = getInTransition();
             Transition transition = this.transition;
             if (transition != null) {
@@ -341,7 +341,7 @@ public class EffectAyaFragment extends Fragment {
             }
             return;
         }
-        if (i == 1) {
+        if (value == 1) {
             List<TransitionEntityAdabters.TransitionItem> outTransition = getOutTransition();
             Transition transition3 = this.transition;
             if (transition3 != null) {

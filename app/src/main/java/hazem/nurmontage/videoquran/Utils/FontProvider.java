@@ -61,24 +61,24 @@ public class FontProvider {
         this.fontNamesQuran = new ArrayList(new TreeSet(this.fontNameToTypefaceFileQuran.keySet()));
     }
 
-    public String getFullName(String str) {
-        return this.fontNameToTypefaceFileQuran.get(str);
+    public String getFullName(String name) {
+        return this.fontNameToTypefaceFileQuran.get(name);
     }
 
-    public Typeface getTypeface(String str) {
-        if (str == null) {
+    public Typeface getTypeface(String name) {
+        if (name == null) {
             return Typeface.DEFAULT;
         }
         try {
-            if (TextUtils.isEmpty(str)) {
+            if (TextUtils.isEmpty(name)) {
                 return Typeface.DEFAULT;
             }
-            if (this.typefaces.get(str) == null) {
-                Typeface createFromAsset = Typeface.createFromAsset(this.resources.getAssets(), "fonts/arabic/" + this.fontNameToTypefaceFileQuran.get(str));
-                this.typefaces.put(str, createFromAsset);
+            if (this.typefaces.get(name) == null) {
+                Typeface createFromAsset = Typeface.createFromAsset(this.resources.getAssets(), "fonts/arabic/" + this.fontNameToTypefaceFileQuran.get(name));
+                this.typefaces.put(name, createFromAsset);
                 return createFromAsset;
             }
-            return this.typefaces.get(str);
+            return this.typefaces.get(name);
         } catch (Exception unused) {
             return Typeface.DEFAULT;
         }
@@ -107,8 +107,8 @@ public class FontProvider {
         return this.fontNamesQuran;
     }
 
-    public void setDefaultFontName(String str) {
-        this.DEFAULT_FONT_NAME = str;
+    public void setDefaultFontName(String name) {
+        this.DEFAULT_FONT_NAME = name;
     }
 
     public String getDefaultFontName() {

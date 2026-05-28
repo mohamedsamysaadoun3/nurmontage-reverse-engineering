@@ -20,12 +20,12 @@ public class TransitionEntityAdabters extends RecyclerView.Adapter<ViewHolder> {
     private int select;
     private String type = "in";
 
-    public TransitionEntityAdabters(boolean z, EffectAyaFragment.ITransition iTransition, List<TransitionItem> list, int i, EntityQuranTimeline entityQuranTimeline) {
+    public TransitionEntityAdabters(boolean isFlag, EffectAyaFragment.ITransition iTransition, List<TransitionItem> list, int value, EntityQuranTimeline entityQuranTimeline) {
         this.iTransition = iTransition;
-        this.select = i;
+        this.select = value;
         this.list = list;
         this.max = list.size();
-        this.isSubscribe = z;
+        this.isSubscribe = isFlag;
         this.entityQuranTimeline = entityQuranTimeline;
     }
 
@@ -33,10 +33,10 @@ public class TransitionEntityAdabters extends RecyclerView.Adapter<ViewHolder> {
         return this.select;
     }
 
-    public void update(List<TransitionItem> list, String str, int i) {
-        this.select = i;
+    public void update(List<TransitionItem> list, String textValue, int value) {
+        this.select = value;
         this.list = list;
-        this.type = str;
+        this.type = textValue;
         this.max = list.size();
         notifyDataSetChanged();
     }
@@ -46,31 +46,31 @@ public class TransitionEntityAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public void unselect() {
-        int i = this.select;
-        if (i == -1) {
+        int value = this.select;
+        if (value == -1) {
             return;
         }
         this.select = -1;
-        notifyItemChanged(i);
+        notifyItemChanged(value);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_anim, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
         if (!this.isSubscribe) {
-            if (i > 10) {
+            if (value > 10) {
                 viewHolder.disableView.setVisibility(0);
             } else {
                 viewHolder.disableView.setVisibility(8);
             }
         }
-        viewHolder.animationItem.setRotation(this.list.get(i).getAngle());
-        viewHolder.animationItem.setImageResource(this.list.get(i).getId_ressource());
-        if (i == this.select) {
+        viewHolder.animationItem.setRotation(this.list.get(value).getAngle());
+        viewHolder.animationItem.setImageResource(this.list.get(value).getId_ressource());
+        if (value == this.select) {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_item_menu_select);
         } else {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_effect);
@@ -101,9 +101,9 @@ public class TransitionEntityAdabters extends RecyclerView.Adapter<ViewHolder> {
                         if (TransitionEntityAdabters.this.select == ViewHolder.this.getAdapterPosition()) {
                             return;
                         }
-                        int i = TransitionEntityAdabters.this.select;
+                        int value = TransitionEntityAdabters.this.select;
                         TransitionEntityAdabters.this.select = ViewHolder.this.getAdapterPosition();
-                        TransitionEntityAdabters.this.notifyItemChanged(i);
+                        TransitionEntityAdabters.this.notifyItemChanged(value);
                         TransitionEntityAdabters.this.notifyItemChanged(TransitionEntityAdabters.this.select);
                         if (TransitionEntityAdabters.this.type != null) {
                             if (TransitionEntityAdabters.this.type.equals("in")) {
@@ -123,10 +123,10 @@ public class TransitionEntityAdabters extends RecyclerView.Adapter<ViewHolder> {
         private int id_ressource;
         private String type;
 
-        public TransitionItem(String str, int i, int i2) {
-            this.type = str;
-            this.id_ressource = i;
-            this.angle = i2;
+        public TransitionItem(String textValue, int value, int value2) {
+            this.type = textValue;
+            this.id_ressource = value;
+            this.angle = value2;
         }
 
         public int getAngle() {

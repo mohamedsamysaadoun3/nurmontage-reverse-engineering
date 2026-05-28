@@ -19,8 +19,8 @@ public class EditTextCustumFont extends AppCompatEditText {
         init(context);
     }
 
-    public EditTextCustumFont(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public EditTextCustumFont(Context context, AttributeSet attributeSet, int value) {
+        super(context, attributeSet, value);
         init(context);
     }
 

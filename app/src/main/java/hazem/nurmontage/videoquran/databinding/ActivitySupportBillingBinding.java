@@ -57,9 +57,9 @@ public final class ActivitySupportBillingBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivitySupportBillingBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivitySupportBillingBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_support_billing, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

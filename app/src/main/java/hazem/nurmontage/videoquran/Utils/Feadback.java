@@ -11,7 +11,7 @@ import java.util.Locale;
 
 /* loaded from: classes2.dex */
 public class Feadback {
-    public static void reportBug(Context context, String str, String str2) {
+    public static void reportBug(Context context, String str, String textValue2) {
         long j;
         String str3;
         try {
@@ -28,7 +28,7 @@ public class Feadback {
             e2.printStackTrace();
             str3 = "";
         }
-        String str4 = str2 + "\n\n\n\"cmd = " + str + "\n\nFirst Install Time : " + format + "\nTime ago :" + timeDifference + "\nApp Name: " + context.getString(C2014R.string.app_name) + "\nApp Version: " + str3 + (BillingPreferences.isSubscribed(context) ? "*" : "") + "\nDevice Platform: Android(" + Build.MODEL + ")\nDevice OS: " + Build.VERSION.RELEASE;
+        String str4 = textValue2 + "\n\n\n\"cmd = " + str + "\n\nFirst Install Time : " + format + "\nTime ago :" + timeDifference + "\nApp Name: " + context.getString(C2014R.string.app_name) + "\nApp Version: " + str3 + (BillingPreferences.isSubscribed(context) ? "*" : "") + "\nDevice Platform: Android(" + Build.MODEL + ")\nDevice OS: " + Build.VERSION.RELEASE;
         if (BillingPreferences.isSubscribed(context)) {
             str4 = str4 + ".";
         }
@@ -36,7 +36,7 @@ public class Feadback {
         String[] strArr = {"nurmontage.contact@gmail.com"};
         intent.putExtra("android.intent.extra.EMAIL", strArr);
         intent.putExtra("android.intent.extra.BCC", strArr);
-        intent.putExtra("android.intent.extra.SUBJECT", str2);
+        intent.putExtra("android.intent.extra.SUBJECT", textValue2);
         intent.putExtra("android.intent.extra.TEXT", str4);
         intent.setType("message/rfc822");
         intent.setFlags(268435456);
@@ -44,7 +44,7 @@ public class Feadback {
             Intent intent2 = new Intent("android.intent.action.SEND");
             intent2.putExtra("android.intent.extra.EMAIL", strArr);
             intent2.putExtra("android.intent.extra.BCC", strArr);
-            intent2.putExtra("android.intent.extra.SUBJECT", str2);
+            intent2.putExtra("android.intent.extra.SUBJECT", textValue2);
             intent2.putExtra("android.intent.extra.TEXT", str4);
             intent2.setType("message/rfc822");
             intent2.setPackage("com.google.android.gm");
@@ -74,9 +74,9 @@ public class Feadback {
         return ((int) (new Date(System.currentTimeMillis()).getTime() - date.getTime())) / 1000;
     }
 
-    protected static String getReadableTime(int i) {
-        int i2 = i / 3600;
-        int i3 = i - (i2 * 3600);
+    protected static String getReadableTime(int duration) {
+        int i2 = duration / 3600;
+        int i3 = duration - (i2 * 3600);
         int i4 = i3 / 60;
         int i5 = i3 - (i4 * 60);
         String str = i2 > 0 ? i2 + " hour " : "";

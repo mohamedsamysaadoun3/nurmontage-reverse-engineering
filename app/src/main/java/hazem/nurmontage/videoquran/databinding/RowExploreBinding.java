@@ -33,9 +33,9 @@ public final class RowExploreBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static RowExploreBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static RowExploreBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.row_explore, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

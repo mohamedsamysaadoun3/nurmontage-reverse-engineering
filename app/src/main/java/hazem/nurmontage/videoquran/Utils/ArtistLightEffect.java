@@ -13,7 +13,7 @@ import android.graphics.Shader;
 
 /* loaded from: classes2.dex */
 public class ArtistLightEffect {
-    public static Bitmap apply(Bitmap bitmap, float f, float f2) {
+    public static Bitmap apply(Bitmap bitmap, float f, float floatValue2) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -26,14 +26,14 @@ public class ArtistLightEffect {
         float f3 = width;
         float f4 = height;
         int saveLayer = canvas.saveLayer(0.0f, 0.0f, f3, f4, null);
-        RadialGradient radialGradient = new RadialGradient(f, f2, Math.max(width, height) * 0.45f, new int[]{Color.parseColor("#8844FFAA"), Color.parseColor("#33226655"), 0}, new float[]{0.0f, 0.55f, 1.0f}, Shader.TileMode.CLAMP);
+        RadialGradient radialGradient = new RadialGradient(f, floatValue2, Math.max(width, height) * 0.45f, new int[]{Color.parseColor("#8844FFAA"), Color.parseColor("#33226655"), 0}, new float[]{0.0f, 0.55f, 1.0f}, Shader.TileMode.CLAMP);
         Paint paint2 = new Paint(1);
         paint2.setShader(radialGradient);
         paint2.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.OVERLAY));
         canvas.drawRect(0.0f, 0.0f, f3, f4, paint2);
         canvas.restoreToCount(saveLayer);
         int saveLayer2 = canvas.saveLayer(0.0f, 0.0f, f3, f4, null);
-        RadialGradient radialGradient2 = new RadialGradient(f, f2, Math.max(width, height) * 0.25f, new int[]{Color.parseColor("#5533FFAA"), 0}, (float[]) null, Shader.TileMode.CLAMP);
+        RadialGradient radialGradient2 = new RadialGradient(f, floatValue2, Math.max(width, height) * 0.25f, new int[]{Color.parseColor("#5533FFAA"), 0}, (float[]) null, Shader.TileMode.CLAMP);
         Paint paint3 = new Paint(1);
         paint3.setShader(radialGradient2);
         paint3.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));

@@ -13,13 +13,13 @@ public class ItemQuranSearch implements Serializable {
     /* renamed from: to */
     private final int f432to;
 
-    public ItemQuranSearch(String str, String str2, int i, int i2, int i3, int i4) {
+    public ItemQuranSearch(String str, String textValue2, int i, int i2, int i3, int value4) {
         this.aya = str;
-        this.surahName = str2;
+        this.surahName = textValue2;
         this.f432to = i;
         this.surahIndex = i2;
         this.startSpannable = i3;
-        this.endSpannble = i4;
+        this.endSpannble = value4;
     }
 
     public int getEndSpannble() {

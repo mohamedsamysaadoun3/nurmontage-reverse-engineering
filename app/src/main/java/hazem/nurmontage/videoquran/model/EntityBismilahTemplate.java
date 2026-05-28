@@ -36,8 +36,8 @@ public class EntityBismilahTemplate implements Serializable {
         return this.rectF;
     }
 
-    public void setHeight(float f) {
-        this.height = f;
+    public void setHeight(float dimension) {
+        this.height = dimension;
     }
 
     public float getHeight() {
@@ -48,12 +48,12 @@ public class EntityBismilahTemplate implements Serializable {
         return this.factor_size;
     }
 
-    public void setFactor_size(float f) {
-        this.factor_size = f;
+    public void setFactor_size(float dimension) {
+        this.factor_size = dimension;
     }
 
-    public void setX(float f) {
-        this.f417x = f;
+    public void setX(float dimension) {
+        this.f417x = dimension;
     }
 
     public float getX() {
@@ -64,36 +64,36 @@ public class EntityBismilahTemplate implements Serializable {
         return this.f418y;
     }
 
-    public void setY(float f) {
-        this.f418y = f;
+    public void setY(float dimension) {
+        this.f418y = dimension;
     }
 
     public float getScale() {
         return this.scale;
     }
 
-    public void setScale(float f) {
-        this.scale = f;
+    public void setScale(float dimension) {
+        this.scale = dimension;
     }
 
     public int getPreset() {
         return this.preset;
     }
 
-    public void setPreset(int i) {
-        this.preset = i;
+    public void setPreset(int value) {
+        this.preset = value;
     }
 
-    public void setFile(String str) {
-        this.file = str;
+    public void setFile(String filePath) {
+        this.file = filePath;
     }
 
-    public void setFile_in(String str) {
-        this.file_in = str;
+    public void setFile_in(String filePath) {
+        this.file_in = filePath;
     }
 
-    public void setFile_out(String str) {
-        this.file_out = str;
+    public void setFile_out(String filePath) {
+        this.file_out = filePath;
     }
 
     public String getFile() {
@@ -108,14 +108,14 @@ public class EntityBismilahTemplate implements Serializable {
         return this.file_out;
     }
 
-    public EntityBismilahTemplate(Transition transition, float f, float f2, float f3, float f4, float f5, float f6, String str, int i, int i2) {
-        this.aya = str;
-        this.preset = i2;
+    public EntityBismilahTemplate(Transition transition, float dimension, float f2, float f3, float f4, float f5, float floatValue6, String filePath, int value, int value2) {
+        this.aya = filePath;
+        this.preset = value2;
         this.transition = transition;
-        this.start = f;
-        this.color = i;
+        this.start = dimension;
+        this.color = value;
         this.end = f2;
-        this.right = f6;
+        this.right = floatValue6;
         this.left = f5;
         this.btm_x = f3;
         this.btm_y = f4;
@@ -149,16 +149,16 @@ public class EntityBismilahTemplate implements Serializable {
         return this.right;
     }
 
-    public void setAya(String str) {
-        this.aya = str;
+    public void setAya(String filePath) {
+        this.aya = filePath;
     }
 
-    public void setEnd(float f) {
-        this.end = f;
+    public void setEnd(float dimension) {
+        this.end = dimension;
     }
 
-    public void setStart(float f) {
-        this.start = f;
+    public void setStart(float dimension) {
+        this.start = dimension;
     }
 
     public float getEnd() {

@@ -38,9 +38,9 @@ public final class FragmentEditSNameBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static FragmentEditSNameBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static FragmentEditSNameBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.fragment_edit_s__name, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

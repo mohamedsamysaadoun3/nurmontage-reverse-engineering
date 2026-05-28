@@ -51,28 +51,28 @@ public class EntityQuranTemplate implements Serializable {
         return this.factor_sizeTrl;
     }
 
-    public void setHeight(float f) {
-        this.height = f;
+    public void setHeight(float dimension) {
+        this.height = dimension;
     }
 
     public float getHeight() {
         return this.height;
     }
 
-    public void setFactor_sizeTrl(float f) {
-        this.factor_sizeTrl = f;
+    public void setFactor_sizeTrl(float dimension) {
+        this.factor_sizeTrl = dimension;
     }
 
     public float getFactor_size() {
         return this.factor_size;
     }
 
-    public void setFactor_size(float f) {
-        this.factor_size = f;
+    public void setFactor_size(float dimension) {
+        this.factor_size = dimension;
     }
 
-    public void setX(float f) {
-        this.f423x = f;
+    public void setX(float dimension) {
+        this.f423x = dimension;
     }
 
     public float getX() {
@@ -83,24 +83,24 @@ public class EntityQuranTemplate implements Serializable {
         return this.f424y;
     }
 
-    public void setY(float f) {
-        this.f424y = f;
+    public void setY(float dimension) {
+        this.f424y = dimension;
     }
 
     public float getScale() {
         return this.scale;
     }
 
-    public void setScale(float f) {
-        this.scale = f;
+    public void setScale(float dimension) {
+        this.scale = dimension;
     }
 
-    public void setStartWord_index(int i) {
-        this.startWord_index = i;
+    public void setStartWord_index(int position) {
+        this.startWord_index = position;
     }
 
-    public void setEndWord_index(int i) {
-        this.endWord_index = i;
+    public void setEndWord_index(int position) {
+        this.endWord_index = position;
     }
 
     public int getStartWord_index() {
@@ -115,24 +115,24 @@ public class EntityQuranTemplate implements Serializable {
         return this.preset;
     }
 
-    public void setPreset(int i) {
-        this.preset = i;
+    public void setPreset(int position) {
+        this.preset = position;
     }
 
     public int getColorTrsl() {
         return this.colorTrsl;
     }
 
-    public void setColorTrsl(int i) {
-        this.colorTrsl = i;
+    public void setColorTrsl(int position) {
+        this.colorTrsl = position;
     }
 
-    public void setTranslation_complete(String str) {
-        this.translation_complete = str;
+    public void setTranslation_complete(String textValue) {
+        this.translation_complete = textValue;
     }
 
-    public void setTranslation(String str) {
-        this.translation = str;
+    public void setTranslation(String textValue) {
+        this.translation = textValue;
     }
 
     public String getTranslation() {
@@ -147,24 +147,24 @@ public class EntityQuranTemplate implements Serializable {
         return this.icon;
     }
 
-    public void setIcon(String str) {
-        this.icon = str;
+    public void setIcon(String textValue) {
+        this.icon = textValue;
     }
 
     public String getComplete_aya() {
         return this.complete_aya;
     }
 
-    public void setFile(String str) {
-        this.file = str;
+    public void setFile(String textValue) {
+        this.file = textValue;
     }
 
-    public void setFile_in(String str) {
-        this.file_in = str;
+    public void setFile_in(String textValue) {
+        this.file_in = textValue;
     }
 
-    public void setFile_out(String str) {
-        this.file_out = str;
+    public void setFile_out(String textValue) {
+        this.file_out = textValue;
     }
 
     public String getFile() {
@@ -179,19 +179,19 @@ public class EntityQuranTemplate implements Serializable {
         return this.file_out;
     }
 
-    public EntityQuranTemplate(Transition transition, float f, float f2, float f3, float f4, float f5, float f6, String str, String str2, String str3, int i, int i2, int i3, int i4, int i5) {
-        this.aya = str;
+    public EntityQuranTemplate(Transition transition, float dimension, float f2, float f3, float f4, float f5, float floatValue6, String textValue, String str2, String textValue3, int position, int i2, int i3, int i4, int value5) {
+        this.aya = textValue;
         this.colorTrsl = i4;
-        this.preset = i5;
+        this.preset = value5;
         this.complete_aya = str2;
         this.transition = transition;
-        this.start = f;
+        this.start = dimension;
         this.color = i3;
         this.end = f2;
-        this.name_font = str3;
+        this.name_font = textValue3;
         this.number = i2;
-        this.indexNumber = i;
-        this.right = f6;
+        this.indexNumber = position;
+        this.right = floatValue6;
         this.left = f5;
         this.btm_x = f3;
         this.btm_y = f4;
@@ -217,16 +217,16 @@ public class EntityQuranTemplate implements Serializable {
         return this.indexNumber;
     }
 
-    public void setIndexNumber(int i) {
-        this.indexNumber = i;
+    public void setIndexNumber(int position) {
+        this.indexNumber = position;
     }
 
     public int getNumber() {
         return this.number;
     }
 
-    public void setNumber(int i) {
-        this.number = i;
+    public void setNumber(int position) {
+        this.number = position;
     }
 
     public float getLeft() {
@@ -245,16 +245,16 @@ public class EntityQuranTemplate implements Serializable {
         return this.right;
     }
 
-    public void setAya(String str) {
-        this.aya = str;
+    public void setAya(String textValue) {
+        this.aya = textValue;
     }
 
-    public void setEnd(float f) {
-        this.end = f;
+    public void setEnd(float dimension) {
+        this.end = dimension;
     }
 
-    public void setStart(float f) {
-        this.start = f;
+    public void setStart(float dimension) {
+        this.start = dimension;
     }
 
     public float getEnd() {

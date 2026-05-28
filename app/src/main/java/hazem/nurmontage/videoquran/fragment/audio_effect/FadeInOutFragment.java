@@ -84,8 +84,8 @@ public class FadeInOutFragment extends Fragment {
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int i, boolean z) {
-                FadeInOutFragment.this.hint_fade_in.setText(String.valueOf(i));
+            public void onProgressChanged(SeekBar seekBar, int value, boolean isFlag) {
+                FadeInOutFragment.this.hint_fade_in.setText(String.valueOf(value));
             }
         });
         this.fadeOutSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.FadeInOutFragment.2
@@ -98,8 +98,8 @@ public class FadeInOutFragment extends Fragment {
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int i, boolean z) {
-                FadeInOutFragment.this.hint_fade_out.setText(String.valueOf(i));
+            public void onProgressChanged(SeekBar seekBar, int value, boolean isFlag) {
+                FadeInOutFragment.this.hint_fade_out.setText(String.valueOf(value));
             }
         });
         root.findViewById(C2014R.id.btn_done).setOnClickListener(new View.OnClickListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.FadeInOutFragment$$ExternalSyntheticLambda0
@@ -151,11 +151,11 @@ public class FadeInOutFragment extends Fragment {
     }
 
     private void previewAudio() {
-        boolean z = this.isPlay;
-        this.isPlay = !z;
+        boolean isFlag = this.isPlay;
+        this.isPlay = !isFlag;
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iEditMediaCallback;
         if (iEditMediaCallback != null) {
-            if (!z) {
+            if (!isFlag) {
                 applyFade(false, true);
                 this.btnPreview.setImageResource(C2014R.drawable.pause_24px);
             } else {
@@ -165,10 +165,10 @@ public class FadeInOutFragment extends Fragment {
         }
     }
 
-    private void applyFade(boolean z, boolean z2) {
+    private void applyFade(boolean isFlag, boolean z2) {
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
         if (this.entityAudio.getFade_in() == this.fadeInSeekBar.getProgress() && this.entityAudio.getFade_out() == this.fadeOutSeekBar.getProgress()) {
-            if (z) {
+            if (isFlag) {
                 this.iEditMediaCallback.onDone();
                 return;
             }
@@ -207,7 +207,7 @@ public class FadeInOutFragment extends Fragment {
         String join = TextUtils.join(",", arrayList);
         EditMediaFragment.IEditMediaCallback iEditMediaCallback = this.iEditMediaCallback;
         if (iEditMediaCallback != null) {
-            if (z) {
+            if (isFlag) {
                 iEditMediaCallback.updateEntity(EffectAudioType.FADE, this.entityAudio);
                 this.iEditMediaCallback.onCmdAll(effectAudio);
             } else if (z2) {
@@ -218,22 +218,22 @@ public class FadeInOutFragment extends Fragment {
         }
     }
 
-    private List<String> buildSpeedFilters(float f) {
+    private List<String> buildSpeedFilters(float speed) {
         ArrayList arrayList = new ArrayList();
-        if (f < 0.5f) {
-            while (f < 0.5f) {
+        if (speed < 0.5f) {
+            while (speed < 0.5f) {
                 arrayList.add("atempo=0.5");
-                f /= 0.5f;
+                speed /= 0.5f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
-        } else if (f > 2.0f) {
-            while (f > 2.0f) {
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
+        } else if (speed > 2.0f) {
+            while (speed > 2.0f) {
                 arrayList.add("atempo=2.0");
-                f /= 2.0f;
+                speed /= 2.0f;
             }
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         } else {
-            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(f)));
+            arrayList.add(String.format(Locale.US, "atempo=%.2f", Float.valueOf(speed)));
         }
         return arrayList;
     }

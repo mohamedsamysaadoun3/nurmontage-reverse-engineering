@@ -14,8 +14,8 @@ public class FeaturesAdabter extends RecyclerView.Adapter<ViewHolder> {
     private boolean isSubscibe;
     private List<ModelFeatures> list;
 
-    public void setSubscribe(boolean z) {
-        this.isSubscibe = z;
+    public void setSubscribe(boolean isSubscribed) {
+        this.isSubscibe = isSubscribed;
         notifyDataSetChanged();
     }
 
@@ -33,13 +33,13 @@ public class FeaturesAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_feature, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.text.setText(this.list.get(i).getName());
+    public void onBindViewHolder(ViewHolder viewHolder, int value) {
+        viewHolder.text.setText(this.list.get(value).getName());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

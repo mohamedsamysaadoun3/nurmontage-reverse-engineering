@@ -15,13 +15,13 @@ import androidx.media3.common.MimeTypes;
 public class UtilsFileLast {
     private static final String TAG = "UtilsFileLast";
 
-    private static String extractNumericId(String str) {
-        return str;
+    private static String extractNumericId(String textValue) {
+        return textValue;
     }
 
-    public static Typeface loadFontFromAsset(Context context, String str) {
+    public static Typeface loadFontFromAsset(Context context, String textValue) {
         try {
-            return Typeface.createFromAsset(context.getAssets(), str);
+            return Typeface.createFromAsset(context.getAssets(), textValue);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -42,9 +42,9 @@ public class UtilsFileLast {
                 String documentId = DocumentsContract.getDocumentId(uri);
                 String[] split = documentId.split(":");
                 if ("primary".equalsIgnoreCase(split[0])) {
-                    String str = Environment.getExternalStorageDirectory() + "/" + split[1];
-                    Log.d(TAG, "External storage path (primary): " + str);
-                    return str;
+                    String textValue = Environment.getExternalStorageDirectory() + "/" + split[1];
+                    Log.d(TAG, "External storage path (primary): " + textValue);
+                    return textValue;
                 }
                 Log.d(TAG, "External storage path (non-primary): " + documentId);
                 String pathFromTreeUri = getPathFromTreeUri(context, DocumentsContract.buildTreeDocumentUri("com.android.externalstorage.documents", documentId), split[1]);
@@ -143,12 +143,12 @@ public class UtilsFileLast {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    private static String getDataColumn(Context context, Uri uri, String str, String[] strArr) {
+    private static String getDataColumn(Context context, Uri uri, String textValue, String[] strArr) {
         Cursor cursor;
         ?? r0 = 0;
         try {
             try {
-                cursor = context.getContentResolver().query(uri, new String[]{"_data"}, str, strArr, null);
+                cursor = context.getContentResolver().query(uri, new String[]{"_data"}, textValue, strArr, null);
                 if (cursor != null) {
                     try {
                         if (cursor.moveToFirst()) {
@@ -203,7 +203,7 @@ public class UtilsFileLast {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    private static String getPathFromTreeUri(Context context, Uri uri, String str) {
+    private static String getPathFromTreeUri(Context context, Uri uri, String textValue) {
         Cursor cursor;
         Cursor cursor2;
         String pathFromTreeUri;
@@ -218,9 +218,9 @@ public class UtilsFileLast {
                                 String string = cursor.getString(cursor.getColumnIndexOrThrow("document_id"));
                                 String string2 = cursor.getString(cursor.getColumnIndexOrThrow("_display_name"));
                                 String string3 = cursor.getString(cursor.getColumnIndexOrThrow("mime_type"));
-                                if (string2.equals(str)) {
+                                if (string2.equals(textValue)) {
                                     if ("vnd.android.document/directory".equals(string3)) {
-                                        String pathFromTreeUri2 = getPathFromTreeUri(context, DocumentsContract.buildDocumentUriUsingTree(uri, string), str);
+                                        String pathFromTreeUri2 = getPathFromTreeUri(context, DocumentsContract.buildDocumentUriUsingTree(uri, string), textValue);
                                         if (pathFromTreeUri2 != null) {
                                             if (cursor != null) {
                                                 cursor.close();
@@ -236,7 +236,7 @@ public class UtilsFileLast {
                                             return dataColumn;
                                         }
                                     }
-                                } else if (string3.equals("vnd.android.document/directory") && (pathFromTreeUri = getPathFromTreeUri(context, DocumentsContract.buildDocumentUriUsingTree(uri, string), str)) != null) {
+                                } else if (string3.equals("vnd.android.document/directory") && (pathFromTreeUri = getPathFromTreeUri(context, DocumentsContract.buildDocumentUriUsingTree(uri, string), textValue)) != null) {
                                     if (cursor != null) {
                                         cursor.close();
                                     }

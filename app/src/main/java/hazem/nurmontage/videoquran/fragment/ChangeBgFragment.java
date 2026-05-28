@@ -49,17 +49,17 @@ public class ChangeBgFragment extends Fragment {
         void onUploadVideo();
     }
 
-    public static ChangeBgFragment getInstance(IChangeBgCallback iChangeBgCallback, Resources resources, String str) {
+    public static ChangeBgFragment getInstance(IChangeBgCallback iChangeBgCallback, Resources resources, String textValue) {
         if (instance == null) {
-            instance = new ChangeBgFragment(iChangeBgCallback, resources, str);
+            instance = new ChangeBgFragment(iChangeBgCallback, resources, textValue);
         }
         return instance;
     }
 
-    public ChangeBgFragment(IChangeBgCallback iChangeBgCallback, Resources resources, String str) {
+    public ChangeBgFragment(IChangeBgCallback iChangeBgCallback, Resources resources, String textValue) {
         this.callback = iChangeBgCallback;
         this.res = resources;
-        this.selectedBg = str;
+        this.selectedBg = textValue;
     }
 
     public ChangeBgFragment() {
@@ -267,9 +267,9 @@ public class ChangeBgFragment extends Fragment {
         if (this.selectedBg == null) {
             return 0;
         }
-        for (int i = 0; i < list.size(); i++) {
-            if (this.selectedBg.equals(list.get(i).getName_drawable())) {
-                return i;
+        for (int value = 0; value < list.size(); value++) {
+            if (this.selectedBg.equals(list.get(value).getName_drawable())) {
+                return value;
             }
         }
         return 0;

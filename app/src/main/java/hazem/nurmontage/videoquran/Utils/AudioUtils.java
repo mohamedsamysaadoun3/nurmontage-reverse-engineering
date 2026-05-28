@@ -25,25 +25,25 @@ public class AudioUtils {
     public interface Callback {
         void onError(Exception exc);
 
-        void onSuccess(String str);
+        void onSuccess(String textValue);
     }
 
-    public static void copyToLocalAsync(final Context context, final String str, final String str2, final Callback callback) {
+    public static void copyToLocalAsync(final Context context, final String textValue, final String textValue2, final Callback callback) {
         executor.execute(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AudioUtils$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                AudioUtils.lambda$copyToLocalAsync$2(str, context, str2, callback);
+                AudioUtils.lambda$copyToLocalAsync$2(textValue, context, textValue2, callback);
             }
         });
     }
 
-    static /* synthetic */ void lambda$copyToLocalAsync$2(String str, Context context, String str2, final Callback callback) {
+    static /* synthetic */ void lambda$copyToLocalAsync$2(String textValue, Context context, String textValue2, final Callback callback) {
         final String copyFromUri;
         try {
-            if (str.startsWith("http")) {
-                copyFromUri = downloadFile(context, str, str2);
+            if (textValue.startsWith("http")) {
+                copyFromUri = downloadFile(context, textValue, textValue2);
             } else {
-                copyFromUri = copyFromUri(context, Uri.parse(str), str2);
+                copyFromUri = copyFromUri(context, Uri.parse(textValue), textValue2);
             }
             mainHandler.post(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AudioUtils$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
@@ -61,9 +61,9 @@ public class AudioUtils {
         }
     }
 
-    static /* synthetic */ void lambda$copyToLocalAsync$0(String str, Callback callback) {
-        if (str != null) {
-            callback.onSuccess(str);
+    static /* synthetic */ void lambda$copyToLocalAsync$0(String textValue, Callback callback) {
+        if (textValue != null) {
+            callback.onSuccess(textValue);
         } else {
             callback.onError(new Exception("Failed to process file"));
         }
@@ -77,12 +77,12 @@ public class AudioUtils {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static String downloadFile(Context context, String str, String str2) {
+    public static String downloadFile(Context context, String textValue, String textValue2) {
         HttpURLConnection httpURLConnection;
         ?? r2 = 0;
         try {
             try {
-                httpURLConnection = (HttpURLConnection) new URL(str).openConnection();
+                httpURLConnection = (HttpURLConnection) new URL(textValue).openConnection();
                 try {
                     httpURLConnection.setConnectTimeout(15000);
                     httpURLConnection.setReadTimeout(15000);
@@ -95,7 +95,7 @@ public class AudioUtils {
                         return null;
                     }
                     InputStream inputStream = httpURLConnection.getInputStream();
-                    File file = new File(str2);
+                    File file = new File(textValue2);
                     if (!file.exists()) {
                         file.mkdirs();
                     }
@@ -126,7 +126,7 @@ public class AudioUtils {
                 }
             } catch (Throwable th) {
                 th = th;
-                r2 = str;
+                r2 = textValue;
                 if (r2 != 0) {
                     r2.disconnect();
                 }
@@ -143,14 +143,14 @@ public class AudioUtils {
         }
     }
 
-    public static String copyFromUri(Context context, Uri uri, String str) {
+    public static String copyFromUri(Context context, Uri uri, String textValue) {
         String addUniqueSuffix;
         try {
             InputStream openInputStream = context.getContentResolver().openInputStream(uri);
             if (openInputStream == null) {
                 return null;
             }
-            File file = new File(str);
+            File file = new File(textValue);
             if (!file.exists()) {
                 file.mkdirs();
             }
@@ -200,8 +200,8 @@ public class AudioUtils {
         return uri.getLastPathSegment();
     }
 
-    private static String addUniqueSuffix(String str) {
-        int lastIndexOf = str.lastIndexOf(".");
-        return (lastIndexOf > 0 ? str.substring(0, lastIndexOf) : str) + "_" + UUID.randomUUID() + (lastIndexOf > 0 ? str.substring(lastIndexOf) : "");
+    private static String addUniqueSuffix(String textValue) {
+        int lastIndexOf = textValue.lastIndexOf(".");
+        return (lastIndexOf > 0 ? textValue.substring(0, lastIndexOf) : textValue) + "_" + UUID.randomUUID() + (lastIndexOf > 0 ? textValue.substring(lastIndexOf) : "");
     }
 }

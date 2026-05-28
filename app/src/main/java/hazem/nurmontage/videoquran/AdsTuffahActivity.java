@@ -102,14 +102,14 @@ public class AdsTuffahActivity extends Base {
         });
         this.waveformViewAfter.setOnWaveformClickListener(new WaveformView.OnWaveformClickListener() { // from class: hazem.nurmontage.videoquran.AdsTuffahActivity$$ExternalSyntheticLambda3
             @Override // hazem.nurmontage.videoquran.views.WaveformView.OnWaveformClickListener
-            public final void onProgressChanged(float f) {
-                AdsTuffahActivity.this.m918lambda$onCreate$3$hazemnurmontagevideoquranAdsTuffahActivity(f);
+            public final void onProgressChanged(float floatValue) {
+                AdsTuffahActivity.this.m918lambda$onCreate$3$hazemnurmontagevideoquranAdsTuffahActivity(floatValue);
             }
         });
         this.waveformViewBefore.setOnWaveformClickListener(new WaveformView.OnWaveformClickListener() { // from class: hazem.nurmontage.videoquran.AdsTuffahActivity$$ExternalSyntheticLambda4
             @Override // hazem.nurmontage.videoquran.views.WaveformView.OnWaveformClickListener
-            public final void onProgressChanged(float f) {
-                AdsTuffahActivity.this.m919lambda$onCreate$4$hazemnurmontagevideoquranAdsTuffahActivity(f);
+            public final void onProgressChanged(float floatValue) {
+                AdsTuffahActivity.this.m919lambda$onCreate$4$hazemnurmontagevideoquranAdsTuffahActivity(floatValue);
             }
         });
         findViewById(C2014R.id.btn_tuffah).setOnClickListener(new View.OnClickListener() { // from class: hazem.nurmontage.videoquran.AdsTuffahActivity.4
@@ -145,24 +145,24 @@ public class AdsTuffahActivity extends Base {
     }
 
     /* renamed from: lambda$onCreate$3$hazem-nurmontage-videoquran-AdsTuffahActivity, reason: not valid java name */
-    /* synthetic */ void m918lambda$onCreate$3$hazemnurmontagevideoquranAdsTuffahActivity(float f) {
+    /* synthetic */ void m918lambda$onCreate$3$hazemnurmontagevideoquranAdsTuffahActivity(float floatValue) {
         if (this.mediaPlayer != null) {
-            this.mediaPlayer.seekTo((int) (r0.getDuration() * f));
+            this.mediaPlayer.seekTo((int) (r0.getDuration() * floatValue));
             if (this.mediaPlayer.isPlaying()) {
                 return;
             }
-            this.waveformViewAfter.setProgress(f);
+            this.waveformViewAfter.setProgress(floatValue);
         }
     }
 
     /* renamed from: lambda$onCreate$4$hazem-nurmontage-videoquran-AdsTuffahActivity, reason: not valid java name */
-    /* synthetic */ void m919lambda$onCreate$4$hazemnurmontagevideoquranAdsTuffahActivity(float f) {
+    /* synthetic */ void m919lambda$onCreate$4$hazemnurmontagevideoquranAdsTuffahActivity(float floatValue) {
         if (this.mediaPlayer != null) {
-            this.mediaPlayer.seekTo((int) (r0.getDuration() * f));
+            this.mediaPlayer.seekTo((int) (r0.getDuration() * floatValue));
             if (this.mediaPlayer.isPlaying()) {
                 return;
             }
-            this.waveformViewBefore.setProgress(f);
+            this.waveformViewBefore.setProgress(floatValue);
         }
     }
 
@@ -183,12 +183,12 @@ public class AdsTuffahActivity extends Base {
         }
     }
 
-    private void setupMediaPlayer(int i) {
+    private void setupMediaPlayer(int value) {
         MediaPlayer mediaPlayer = this.mediaPlayer;
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
-        MediaPlayer create = MediaPlayer.create(this, i);
+        MediaPlayer create = MediaPlayer.create(this, value);
         this.mediaPlayer = create;
         create.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // from class: hazem.nurmontage.videoquran.AdsTuffahActivity$$ExternalSyntheticLambda5
             @Override // android.media.MediaPlayer.OnCompletionListener
@@ -207,22 +207,22 @@ public class AdsTuffahActivity extends Base {
         this.handler.removeCallbacks(this.updateProgressTask);
     }
 
-    private void switchAudio(int i, ImageButton imageButton, WaveformView waveformView) {
+    private void switchAudio(int value, ImageButton imageButton, WaveformView waveformView) {
         this.btnPlayPauseAfter.setImageResource(C2014R.drawable.play_btn);
         this.btnPlayPause.setImageResource(C2014R.drawable.play_btn);
         this.currentWave = waveformView;
         this.currentBtn = imageButton;
-        if (this.currentResId == i) {
+        if (this.currentResId == value) {
             togglePlayback();
             return;
         }
-        this.currentResId = i;
+        this.currentResId = value;
         this.handler.removeCallbacks(this.updateProgressTask);
         MediaPlayer mediaPlayer = this.mediaPlayer;
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             this.mediaPlayer.stop();
         }
-        setupMediaPlayer(i);
+        setupMediaPlayer(value);
         this.isPlaying = false;
         this.currentWave.setProgress(0.0f);
         this.currentBtn.setImageResource(C2014R.drawable.play_btn);

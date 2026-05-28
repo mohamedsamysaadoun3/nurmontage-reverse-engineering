@@ -29,11 +29,11 @@ public abstract class EntityView {
 
     public abstract boolean isVisible();
 
-    public abstract void postTranslate(float f, float f2);
+    public abstract void postTranslate(float scale, float floatValue2);
 
-    public abstract void scale(float f, int i, int i2);
+    public abstract void scale(float scale, int i, int value2);
 
-    public abstract void setVisible(boolean z);
+    public abstract void setVisible(boolean isVisible);
 
     public int getMax_w() {
         return this.max_w;
@@ -43,16 +43,16 @@ public abstract class EntityView {
         return this.max_h;
     }
 
-    public void setFactorSizeTrl(float f) {
-        this.factorSizeTrl = f;
+    public void setFactorSizeTrl(float scale) {
+        this.factorSizeTrl = scale;
     }
 
     public float getFactorSizeTrl() {
         return this.factorSizeTrl;
     }
 
-    public void setFcSize(float f) {
-        this.factorSize = f;
+    public void setFcSize(float scale) {
+        this.factorSize = scale;
     }
 
     public float getFactorSize() {
@@ -63,8 +63,8 @@ public abstract class EntityView {
         return this.factor_scale;
     }
 
-    public void setFactor_scale(float f) {
-        this.factor_scale = f;
+    public void setFactor_scale(float scale) {
+        this.factor_scale = scale;
     }
 
     public void setEntityTrslTimeline(EntityTrslTimeline entityTrslTimeline) {
@@ -87,8 +87,8 @@ public abstract class EntityView {
         return this.rect;
     }
 
-    public void setCanvasWH(int i, int i2) {
-        this.canvasH = i2;
+    public void setCanvasWH(int i, int value2) {
+        this.canvasH = value2;
         this.canvasW = i;
     }
 
@@ -115,7 +115,7 @@ public abstract class EntityView {
         return this.isAnimTest;
     }
 
-    public void setAnimTest(boolean z) {
-        this.isAnimTest = z;
+    public void setAnimTest(boolean isVisible) {
+        this.isAnimTest = isVisible;
     }
 }

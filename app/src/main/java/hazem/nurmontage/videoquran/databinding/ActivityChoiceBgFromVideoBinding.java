@@ -41,9 +41,9 @@ public final class ActivityChoiceBgFromVideoBinding implements ViewBinding {
         return inflate(layoutInflater, null, false);
     }
 
-    public static ActivityChoiceBgFromVideoBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean z) {
+    public static ActivityChoiceBgFromVideoBinding inflate(LayoutInflater layoutInflater, ViewGroup viewGroup, boolean isFlag) {
         View inflate = layoutInflater.inflate(C2014R.layout.activity_choice_bg_from_video, viewGroup, false);
-        if (z) {
+        if (isFlag) {
             viewGroup.addView(inflate);
         }
         return bind(inflate);

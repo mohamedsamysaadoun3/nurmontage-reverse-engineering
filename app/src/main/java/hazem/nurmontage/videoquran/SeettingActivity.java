@@ -477,7 +477,7 @@ public class SeettingActivity extends Base implements PurchasesUpdatedListener {
         }
     }
 
-    private void dialogStateSubscribe(final boolean z) {
+    private void dialogStateSubscribe(final boolean isSubscribed) {
         runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.SeettingActivity.19
             @Override // java.lang.Runnable
             public void run() {
@@ -487,7 +487,7 @@ public class SeettingActivity extends Base implements PurchasesUpdatedListener {
                     SeettingActivity.this.dialog.requestWindowFeature(1);
                     SeettingActivity.this.dialog.getWindow().setLayout(-1, -2);
                     SeettingActivity.this.dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                    if (z) {
+                    if (isSubscribed) {
                         View inflate = LayoutInflater.from(SeettingActivity.this).inflate(C2014R.layout.layout_pro_done, (ViewGroup) null);
                         SeettingActivity.this.dialog.setContentView(inflate);
                         ((TextCustumFontBold) inflate.findViewById(C2014R.id.dialog_title)).setText(SeettingActivity.this.mResources.getString(C2014R.string.premium_activated));

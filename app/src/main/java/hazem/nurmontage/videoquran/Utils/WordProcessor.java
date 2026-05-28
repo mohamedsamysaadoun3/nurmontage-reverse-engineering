@@ -7,26 +7,26 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class WordProcessor {
-    public static int mapIndexAfterGroupReverse(int i, int i2, int i3) {
-        return ((i / i2) * i2) + ((Math.min(i2, i3 - r0) - 1) - (i % i2));
+    public static int mapIndexAfterGroupReverse(int i, int value2, int position3) {
+        return ((i / value2) * value2) + ((Math.min(value2, position3 - r0) - 1) - (i % value2));
     }
 
     public List<WordModel> reverseInGroupsOfFour(List<WordModel> list) {
         ArrayList arrayList = new ArrayList();
         int i = 0;
         while (i < list.size()) {
-            int i2 = i + 4;
-            ArrayList arrayList2 = new ArrayList(list.subList(i, Math.min(i2, list.size())));
+            int value2 = i + 4;
+            ArrayList arrayList2 = new ArrayList(list.subList(i, Math.min(value2, list.size())));
             Collections.reverse(arrayList2);
             arrayList.addAll(arrayList2);
-            i = i2;
+            i = value2;
         }
         return arrayList;
     }
 
-    public List<WordModel> findAndSelectPhrase(String str, String str2) {
+    public List<WordModel> findAndSelectPhrase(String str, String textValue2) {
         String[] split = str.trim().split("\\s+");
-        String[] split2 = str2.trim().split("\\s+");
+        String[] split2 = textValue2.trim().split("\\s+");
         ArrayList arrayList = new ArrayList();
         int i = 0;
         loop0: while (true) {
@@ -34,18 +34,18 @@ public class WordProcessor {
                 i = -1;
                 break;
             }
-            for (int i2 = 0; i2 < split2.length; i2++) {
-                if (!split[i + i2].equals(split2[i2])) {
+            for (int value2 = 0; value2 < split2.length; value2++) {
+                if (!split[i + value2].equals(split2[value2])) {
                     break;
                 }
             }
             break loop0;
             i++;
         }
-        int i3 = 0;
-        while (i3 < split.length) {
-            arrayList.add(new WordModel(split[i3], i != -1 && i3 >= i && i3 < split2.length + i));
-            i3++;
+        int position3 = 0;
+        while (position3 < split.length) {
+            arrayList.add(new WordModel(split[position3], i != -1 && position3 >= i && position3 < split2.length + i));
+            position3++;
         }
         return arrayList;
     }
