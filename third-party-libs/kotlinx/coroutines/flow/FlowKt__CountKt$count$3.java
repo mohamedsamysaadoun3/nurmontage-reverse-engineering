@@ -1,0 +1,28 @@
+package kotlinx.coroutines.flow;
+
+import androidx.media3.exoplayer.upstream.CmcdData;
+import kotlin.Metadata;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.DebugMetadata;
+
+/* compiled from: Count.kt */
+@Metadata(m669k = 3, m670mv = {1, 6, 0}, m672xi = 48)
+@DebugMetadata(m684c = "kotlinx.coroutines.flow.FlowKt__CountKt", m685f = "Count.kt", m686i = {0}, m687l = {30}, m688m = "count", m689n = {CmcdData.OBJECT_TYPE_INIT_SEGMENT}, m690s = {"L$0"})
+/* loaded from: classes2.dex */
+final class FlowKt__CountKt$count$3<T> extends ContinuationImpl {
+    Object L$0;
+    int label;
+    /* synthetic */ Object result;
+
+    FlowKt__CountKt$count$3(Continuation<? super FlowKt__CountKt$count$3> continuation) {
+        super(continuation);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        this.result = obj;
+        this.label |= Integer.MIN_VALUE;
+        return FlowKt.count(null, null, this);
+    }
+}

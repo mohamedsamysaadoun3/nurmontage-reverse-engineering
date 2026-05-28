@@ -1,0 +1,11 @@
+package kotlin.collections.unsigned;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import kotlin.Metadata;
+
+@Metadata(m667d1 = {"kotlin/collections/unsigned/UArraysKt___UArraysJvmKt", "kotlin/collections/unsigned/UArraysKt___UArraysKt"}, m669k = 4, m670mv = {1, 9, 0}, m671pn = "kotlin.collections", m672xi = ConstraintLayout.LayoutParams.Table.LAYOUT_EDITOR_ABSOLUTEX)
+/* loaded from: classes2.dex */
+public final class UArraysKt extends UArraysKt___UArraysKt {
+    private UArraysKt() {
+    }
+}

@@ -1,0 +1,26 @@
+# APK files
+*.apk
+*.xapk
+*.apks
+
+# Build outputs
+build/
+.gradle/
+local.properties
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Tools
+apktool.jar
+
+# Temp files
+*.tmp
+*.log
