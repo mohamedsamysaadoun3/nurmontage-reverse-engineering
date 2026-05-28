@@ -112,11 +112,11 @@ public class EditTextFragment extends Fragment {
             int indexOf = complete_aya.indexOf(txt);
             int i2 = indexOf == 0 ? 1 : 0;
             int length = split.length;
-            int value3 = 0;
+            int index = 0;
             int i4 = 0;
             int i5 = 0;
-            while (value3 < length) {
-                String textValue = split[value3];
+            while (index < length) {
+                String textValue = split[index];
                 if (!textValue.equals("-1")) {
                     if (i2 == 0) {
                         if (i4 == indexOf) {
@@ -134,7 +134,7 @@ public class EditTextFragment extends Fragment {
                         arrayList.add(new WordModel(textValue, false));
                     }
                 }
-                value3++;
+                index++;
                 value = 1;
             }
         } else {
@@ -184,11 +184,11 @@ public class EditTextFragment extends Fragment {
             int indexOf = complete_aya.indexOf(txt);
             int i2 = indexOf == 0 ? 1 : 0;
             int length = split.length;
-            int value3 = 0;
+            int index = 0;
             int i4 = 0;
             int i5 = 0;
-            while (value3 < length) {
-                String textValue = split[value3];
+            while (index < length) {
+                String textValue = split[index];
                 if (!textValue.equals("-1")) {
                     if (i2 == 0) {
                         if (i4 == indexOf) {
@@ -206,15 +206,15 @@ public class EditTextFragment extends Fragment {
                         arrayList.add(new WordModel(textValue, false));
                     }
                 }
-                value3++;
+                index++;
                 value = 1;
             }
         } else {
             int i6 = 0;
             while (i6 < split.length) {
-                String str2 = split[i6];
-                if (!str2.equals("-1")) {
-                    arrayList.add(new WordModel(str2, i6 >= startWord_index && i6 < endWord_index));
+                String textValue = split[i6];
+                if (!textValue.equals("-1")) {
+                    arrayList.add(new WordModel(textValue, i6 >= startWord_index && i6 < endWord_index));
                 }
                 i6++;
             }
@@ -229,9 +229,9 @@ public class EditTextFragment extends Fragment {
 
     public static int findFirstDigitIndex(String textValue) {
         if (textValue != null && !textValue.isEmpty()) {
-            for (int value = 0; value < textValue.length(); value++) {
-                if (Character.isDigit(textValue.charAt(value))) {
-                    return value;
+            for (int counter = 0; counter < textValue.length(); counter++) {
+                if (Character.isDigit(textValue.charAt(counter))) {
+                    return counter;
                 }
             }
         }
@@ -244,18 +244,18 @@ public class EditTextFragment extends Fragment {
         StringBuilder sb2 = new StringBuilder();
         List<WordModel> list = this.wordAyaAdabter.getList();
         String[] split = this.quranEntity.getTranslation_complete() != null ? this.quranEntity.getTranslation_complete().split(",") : null;
-        int value = -1;
+        int index = -1;
         int i2 = 0;
-        for (int value3 = 0; value3 < list.size(); value3++) {
-            WordModel wordModel = list.get(value3);
+        for (int index32 = 0; index32 < list.size(); index32++) {
+            WordModel wordModel = list.get(index32);
             if (wordModel.isSelected()) {
-                if (value == -1) {
-                    value = value3;
+                if (index == -1) {
+                    index = index32;
                 }
                 i2++;
                 sb.append(wordModel.getW()).append(" ");
-                if (split != null && value3 < split.length) {
-                    sb2.append(split[value3]).append(" ");
+                if (split != null && index32 < split.length) {
+                    sb2.append(split[index32]).append(" ");
                 }
             }
         }
@@ -264,12 +264,12 @@ public class EditTextFragment extends Fragment {
         } else {
             this.quranEntity.setTranslation(null);
         }
-        int i4 = i2 + value;
+        int i4 = i2 + index;
         if (this.quranEntity.getNumber() != -1) {
             i4++;
         }
         this.quranEntity.setEndWord_index(i4);
-        this.quranEntity.setStartWord_index(value);
+        this.quranEntity.setStartWord_index(index);
         return sb.toString().trim();
     }
 

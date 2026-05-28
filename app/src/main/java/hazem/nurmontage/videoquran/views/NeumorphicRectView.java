@@ -42,8 +42,8 @@ public class NeumorphicRectView extends View {
         init();
     }
 
-    public NeumorphicRectView(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public NeumorphicRectView(Context context, AttributeSet attributeSet, int colorValue) {
+        super(context, attributeSet, colorValue);
         this.cornerRadius = 40.0f;
         this.shadowOffset = 20.0f;
         this.baseColor = Color.parseColor("#398B89");
@@ -76,10 +76,10 @@ public class NeumorphicRectView extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int i2, int i3, int size4) {
-        super.onSizeChanged(value, i2, i3, size4);
+    protected void onSizeChanged(int index, int i2, int i3, int size4) {
+        super.onSizeChanged(index, i2, i3, size4);
         float f = this.shadowOffset;
-        this.rect.set(f * 1.5f, f * 1.5f, value - (f * 1.5f), i2 - (f * 1.5f));
+        this.rect.set(f * 1.5f, f * 1.5f, index - (f * 1.5f), i2 - (f * 1.5f));
         this.backgroundPaint.setShader(new LinearGradient(this.rect.left, this.rect.top, this.rect.right, this.rect.bottom, Color.argb(255, (int) (Color.red(this.baseColor) * 1.1f), (int) (Color.green(this.baseColor) * 1.1f), (int) (Color.blue(this.baseColor) * 1.1f)), Color.argb(255, (int) (Color.red(this.baseColor) * 0.9f), (int) (Color.green(this.baseColor) * 0.9f), (int) (Color.blue(this.baseColor) * 0.9f)), Shader.TileMode.CLAMP));
     }
 
@@ -90,10 +90,10 @@ public class NeumorphicRectView extends View {
         float f = this.cornerRadius;
         canvas.drawRoundRect(rectF, f, f, this.lightShadowPaint);
         RectF rectF2 = this.rect;
-        float f2 = this.cornerRadius;
-        canvas.drawRoundRect(rectF2, f2, f2, this.darkShadowPaint);
+        float value = this.cornerRadius;
+        canvas.drawRoundRect(rectF2, value, value, this.darkShadowPaint);
         RectF rectF3 = this.rect;
-        float f3 = this.cornerRadius;
-        canvas.drawRoundRect(rectF3, f3, f3, this.backgroundPaint);
+        float value5 = this.cornerRadius;
+        canvas.drawRoundRect(rectF3, value5, value5, this.backgroundPaint);
     }
 }

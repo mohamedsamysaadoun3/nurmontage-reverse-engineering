@@ -87,11 +87,11 @@ public class VideoFrameSelectorView extends View {
                 try {
                     mediaMetadataRetriever.setDataSource(getContext(), this.videoUri);
                     long parseLong = Long.parseLong(mediaMetadataRetriever.extractMetadata(9)) / this.frameCount;
-                    for (int value = 0; value < this.frameCount; value++) {
-                        long j = value * parseLong * 1000;
-                        Bitmap frameAtTime = mediaMetadataRetriever.getFrameAtTime(j, 2);
+                    for (int counter = 0; counter < this.frameCount; counter++) {
+                        long durationMs = counter * parseLong * 1000;
+                        Bitmap frameAtTime = mediaMetadataRetriever.getFrameAtTime(durationMs, 2);
                         if (frameAtTime != null) {
-                            this.frameBitmaps.add(new BitmapFrame(frameAtTime, j));
+                            this.frameBitmaps.add(new BitmapFrame(frameAtTime, durationMs));
                         }
                     }
                     mediaMetadataRetriever.release();
@@ -113,11 +113,11 @@ public class VideoFrameSelectorView extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int i2, int i3, int size4) {
-        super.onSizeChanged(value, i2, i3, size4);
+    protected void onSizeChanged(int count, int i2, int i3, int size4) {
+        super.onSizeChanged(count, i2, i3, size4);
         int i5 = this.frameCount;
         if (i5 > 0) {
-            float f = (value * 1.0f) / i5;
+            float f = (count * 1.0f) / i5;
             this.frameWidth = f;
             this.frameHeight = f;
             this.cursorX = f / 2.0f;
@@ -136,14 +136,14 @@ public class VideoFrameSelectorView extends View {
         }
         canvas.save();
         canvas.translate(0.0f, (getHeight() - this.frameHeight) * 0.5f);
-        for (int value = 0; value < this.frameBitmaps.size(); value++) {
-            float f2 = this.frameWidth;
-            float f3 = value * (this.frameSpacing + f2);
-            this.frameRect.set(f3, 0.0f, f2 + f3, this.frameHeight);
+        for (int index = 0; index < this.frameBitmaps.size(); index++) {
+            float widthRatio = this.frameWidth;
+            float f3 = index * (this.frameSpacing + widthRatio);
+            this.frameRect.set(f3, 0.0f, widthRatio + f3, this.frameHeight);
             RectF rectF = this.frameRect;
             float f4 = this.cornerRadius;
             canvas.drawRoundRect(rectF, f4, f4, this.framePaint);
-            Bitmap bitmap = this.frameBitmaps.get(value).bitmap;
+            Bitmap bitmap = this.frameBitmaps.get(index).bitmap;
             if (bitmap != null) {
                 canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()), this.frameRect, (Paint) null);
             }
@@ -159,9 +159,9 @@ public class VideoFrameSelectorView extends View {
         if (action == 0 || action == 2) {
             float max = Math.max(0.0f, Math.min(motionEvent.getX(), getWidth()));
             this.cursorX = max;
-            int value = (int) (max / (this.frameWidth + this.frameSpacing));
-            this.selectedFrameIndex = value;
-            this.selectedFrameIndex = Math.max(0, Math.min(value, this.frameCount - 1));
+            int count = (int) (max / (this.frameWidth + this.frameSpacing));
+            this.selectedFrameIndex = count;
+            this.selectedFrameIndex = Math.max(0, Math.min(count, this.frameCount - 1));
             invalidate();
             return true;
         }
@@ -169,11 +169,11 @@ public class VideoFrameSelectorView extends View {
     }
 
     public BitmapFrame getFrameBitmap() {
-        int value = this.selectedFrameIndex;
-        if (value < 0 || value >= this.frameBitmaps.size()) {
+        int index = this.selectedFrameIndex;
+        if (index < 0 || index >= this.frameBitmaps.size()) {
             return null;
         }
-        return this.frameBitmaps.get(value);
+        return this.frameBitmaps.get(index);
     }
 
     public void setOnFrameSelectedListener(OnFrameSelectedListener onFrameSelectedListener) {

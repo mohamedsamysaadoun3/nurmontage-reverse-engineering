@@ -293,8 +293,8 @@ public abstract class Entity {
             this.paintStroke.setStrokeWidth(this.rect.height() * 0.05f);
             this.paintStroke.setColor(this.color_select_multiple);
             RectF rectF3 = this.rect;
-            float f3 = this.round;
-            canvas.drawRoundRect(rectF3, f3, f3, this.paintStroke);
+            float xPosition = this.round;
+            canvas.drawRoundRect(rectF3, xPosition, xPosition, this.paintStroke);
             this.paint.setColor(this.color_select_multiple);
             if (getTrim_type() == 0) {
                 this.rectFLeft.left = this.rect.left - this.rectFLeft.width();
@@ -339,12 +339,12 @@ public abstract class Entity {
             this.paintStroke.setStrokeWidth(this.rect.height() * 0.025f);
             this.paintStroke.setColor(-8355712);
             RectF rectF8 = this.rect;
-            float f8 = this.round;
-            canvas.drawRoundRect(rectF8, f8, f8, this.paintStroke);
+            float widthRatio = this.round;
+            canvas.drawRoundRect(rectF8, widthRatio, widthRatio, this.paintStroke);
         }
     }
 
-    public void update(Canvas canvas, int color, int value2) {
+    public void update(Canvas canvas, int color, int width45) {
         this.paint.setColor(this.color);
         if (!this.isVideo) {
             RectF rectF = this.rect;
@@ -352,7 +352,7 @@ public abstract class Entity {
             canvas.drawRoundRect(rectF, floatValue, floatValue, this.paint);
             canvas.save();
             canvas.clipRect(this.rect);
-            draw(canvas, color, value2);
+            draw(canvas, color, width45);
             canvas.restore();
         } else {
             canvas.save();
@@ -362,7 +362,7 @@ public abstract class Entity {
             float floatValue2 = this.round;
             path.addRoundRect(rectF2, floatValue2, floatValue2, Path.Direction.CW);
             canvas.clipPath(this.path);
-            draw(canvas, color, value2);
+            draw(canvas, color, width45);
             canvas.restore();
         }
         if (this.isSelect) {
@@ -410,7 +410,7 @@ public abstract class Entity {
             this.paintStroke.setStrokeWidth(this.rect.height() * 0.025f);
             this.paintStroke.setColor(-8355712);
             RectF rectF8 = this.rect;
-            float f8 = this.round;
+            float widthRatio = this.round;
             canvas.drawRoundRect(rectF8, f8, f8, this.paintStroke);
         }
     }

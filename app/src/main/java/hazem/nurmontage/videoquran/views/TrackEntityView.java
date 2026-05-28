@@ -157,9 +157,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
         void enableUndo(boolean isEnabled);
 
-        void fadeInAudio(float floatValue);
+        void fadeInAudio(float zoomLevel);
 
-        void fadeOutAudio(float floatValue);
+        void fadeOutAudio(float zoomLevel);
 
         void onAddStack(EntityAction entityAction);
 
@@ -171,9 +171,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
         void onPlayVibration();
 
-        void onSeekPlayer(float floatValue);
+        void onSeekPlayer(float zoomLevel);
 
-        void onSelectEntity(Entity entity, float floatValue);
+        void onSelectEntity(Entity entity, float zoomLevel);
 
         void onSelectMultiple(int value);
 
@@ -225,13 +225,13 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         return this.entityListAudio;
     }
 
-    public Pair<Integer, EntityAudio> getEntityAudioNotDeleted(int value) {
-        while (value < this.entityListAudio.size()) {
-            EntityAudio entityAudio = this.entityListAudio.get(value);
+    public Pair<Integer, EntityAudio> getEntityAudioNotDeleted(int index) {
+        while (index < this.entityListAudio.size()) {
+            EntityAudio entityAudio = this.entityListAudio.get(index);
             if (entityAudio.visible()) {
-                return new Pair<>(Integer.valueOf(value), entityAudio);
+                return new Pair<>(Integer.valueOf(index), entityAudio);
             }
-            value++;
+            index++;
         }
         return null;
     }
@@ -257,9 +257,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         return this.scaleFactor;
     }
 
-    public void setScaleFactor(float floatValue) {
-        this.scaleFactor = floatValue;
-        this.scrolled_with_zoom = floatValue * this.currentPosition;
+    public void setScaleFactor(float zoomLevel) {
+        this.scaleFactor = zoomLevel;
+        this.scrolled_with_zoom = zoomLevel * this.currentPosition;
     }
 
     public TrackEntityView(Context context) {
@@ -330,9 +330,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress || !TrackEntityView.this.isPassScroll || (TrackEntityView.this.selectedEntity != null && TrackEntityView.this.selectedEntity.getTrim_type() != -1)) {
-                    return super.onScroll(motionEvent, motionEvent2, floatValue, floatValue2);
+                    return super.onScroll(motionEvent, motionEvent2, zoomLevel, panOffset);
                 }
                 if (!TrackEntityView.this.isScaleListener && motionEvent2.getEventTime() - motionEvent.getEventTime() >= 107 && TrackEntityView.this.isPass(motionEvent2)) {
                     if (TrackEntityView.this.isPlaying()) {
@@ -361,7 +361,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress) {
                     return true;
                 }
@@ -379,14 +379,14 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 float abs2 = Math.abs(motionEvent2.getRawY() - TrackEntityView.this.eventY);
                 TrackEntityView.this.eventX = motionEvent2.getRawX();
                 TrackEntityView.this.eventY = motionEvent2.getRawY();
-                if (motionEvent2.getRawX() > motionEvent.getRawX() ? floatValue < 0.0f : floatValue > 0.0f) {
-                    floatValue *= -1.0f;
+                if (motionEvent2.getRawX() > motionEvent.getRawX() ? zoomLevel < 0.0f : zoomLevel > 0.0f) {
+                    zoomLevel *= -1.0f;
                 }
                 if (abs2 > abs * 1.2f) {
-                    TrackEntityView.this.target = floatValue2;
+                    TrackEntityView.this.target = panOffset;
                     TrackEntityView.this.flingY();
                 } else {
-                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) floatValue, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
+                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) zoomLevel, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
                     TrackEntityView.this.invalidate();
                 }
                 return true;
@@ -463,9 +463,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress || !TrackEntityView.this.isPassScroll || (TrackEntityView.this.selectedEntity != null && TrackEntityView.this.selectedEntity.getTrim_type() != -1)) {
-                    return super.onScroll(motionEvent, motionEvent2, floatValue, floatValue2);
+                    return super.onScroll(motionEvent, motionEvent2, zoomLevel, panOffset);
                 }
                 if (!TrackEntityView.this.isScaleListener && motionEvent2.getEventTime() - motionEvent.getEventTime() >= 107 && TrackEntityView.this.isPass(motionEvent2)) {
                     if (TrackEntityView.this.isPlaying()) {
@@ -494,7 +494,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress) {
                     return true;
                 }
@@ -512,14 +512,14 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 float abs2 = Math.abs(motionEvent2.getRawY() - TrackEntityView.this.eventY);
                 TrackEntityView.this.eventX = motionEvent2.getRawX();
                 TrackEntityView.this.eventY = motionEvent2.getRawY();
-                if (motionEvent2.getRawX() > motionEvent.getRawX() ? floatValue < 0.0f : floatValue > 0.0f) {
-                    floatValue *= -1.0f;
+                if (motionEvent2.getRawX() > motionEvent.getRawX() ? zoomLevel < 0.0f : zoomLevel > 0.0f) {
+                    zoomLevel *= -1.0f;
                 }
                 if (abs2 > abs * 1.2f) {
-                    TrackEntityView.this.target = floatValue2;
+                    TrackEntityView.this.target = panOffset;
                     TrackEntityView.this.flingY();
                 } else {
-                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) floatValue, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
+                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) zoomLevel, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
                     TrackEntityView.this.invalidate();
                 }
                 return true;
@@ -588,14 +588,14 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (TrackEntityView.this.SPEED < 0.0f) {
                         currentTimeMillis *= -1.0f;
                     }
-                    float floatValue = currentTimeMillis + TrackEntityView.this.SPEED;
+                    float zoomLevel = currentTimeMillis + TrackEntityView.this.SPEED;
                     if (TrackEntityView.this.selectedEntity == null) {
                         return;
                     }
                     if (TrackEntityView.this.selectedEntity.getTrim_type() == 1) {
                         RectF rect = TrackEntityView.this.selectedEntity.getRect();
-                        float floatValue2 = rect.right + floatValue;
-                        rect.right = floatValue2;
+                        float panOffset = rect.right + zoomLevel;
+                        rect.right = panOffset;
                         if (rect.right - TrackEntityView.this.selectedEntity.getRect().left <= TrackEntityView.this.max_trim) {
                             TrackEntityView.this.selectedEntity.getRect().right = TrackEntityView.this.selectedEntity.getRect().left + TrackEntityView.this.max_trim;
                             TrackEntityView.this.selectedEntity.setLastRight(TrackEntityView.this.selectedEntity.getRect().right);
@@ -605,7 +605,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         }
                         if (TrackEntityView.this.selectedEntity instanceof EntityQuranTimeline) {
                             EntityQuranTimeline entityQuranTimeline = (EntityQuranTimeline) TrackEntityView.this.selectedEntity;
-                            if (entityQuranTimeline.getIndex() + 1 < TrackEntityView.this.entityListQuran.size() && (previewOrNextEntityQuran2 = (trackEntityView4 = TrackEntityView.this).getPreviewOrNextEntityQuran(trackEntityView4.entityListQuran, entityQuranTimeline.getIndex() + 1, true)) != null && floatValue2 > previewOrNextEntityQuran2.getRect().left) {
+                            if (entityQuranTimeline.getIndex() + 1 < TrackEntityView.this.entityListQuran.size() && (previewOrNextEntityQuran2 = (trackEntityView4 = TrackEntityView.this).getPreviewOrNextEntityQuran(trackEntityView4.entityListQuran, entityQuranTimeline.getIndex() + 1, true)) != null && panOffset > previewOrNextEntityQuran2.getRect().left) {
                                 TrackEntityView.this.selectedEntity.getRect().right = previewOrNextEntityQuran2.getRect().left;
                                 TrackEntityView.this.selectedEntity.setLastRight(TrackEntityView.this.selectedEntity.getRect().right);
                                 TrackEntityView.this.autoScrollHandler.removeCallbacks(this);
@@ -616,7 +616,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         }
                         if (TrackEntityView.this.selectedEntity instanceof EntityTrslTimeline) {
                             EntityTrslTimeline entityTrslTimeline = (EntityTrslTimeline) TrackEntityView.this.selectedEntity;
-                            if (entityTrslTimeline.getIndex() + 1 < TrackEntityView.this.entityListTrslQuran.size() && (previewOrNextEntityTrslQuran2 = (trackEntityView3 = TrackEntityView.this).getPreviewOrNextEntityTrslQuran(trackEntityView3.entityListTrslQuran, entityTrslTimeline.getIndex() + 1, true)) != null && floatValue2 > previewOrNextEntityTrslQuran2.getRect().left) {
+                            if (entityTrslTimeline.getIndex() + 1 < TrackEntityView.this.entityListTrslQuran.size() && (previewOrNextEntityTrslQuran2 = (trackEntityView3 = TrackEntityView.this).getPreviewOrNextEntityTrslQuran(trackEntityView3.entityListTrslQuran, entityTrslTimeline.getIndex() + 1, true)) != null && panOffset > previewOrNextEntityTrslQuran2.getRect().left) {
                                 TrackEntityView.this.selectedEntity.getRect().right = previewOrNextEntityTrslQuran2.getRect().left;
                                 TrackEntityView.this.selectedEntity.setLastRight(TrackEntityView.this.selectedEntity.getRect().right);
                                 TrackEntityView.this.autoScrollHandler.removeCallbacks(this);
@@ -625,11 +625,11 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 return;
                             }
                         }
-                        TrackEntityView.this.selectedEntity.getRect().right = floatValue2;
+                        TrackEntityView.this.selectedEntity.getRect().right = panOffset;
                         TrackEntityView.this.selectedEntity.setLastRight(TrackEntityView.this.selectedEntity.getRect().right);
                     } else if (TrackEntityView.this.selectedEntity.getTrim_type() == 0) {
                         RectF rect2 = TrackEntityView.this.selectedEntity.getRect();
-                        float f3 = rect2.left + floatValue;
+                        float f3 = rect2.left + zoomLevel;
                         rect2.left = f3;
                         if (f3 < 0.0f) {
                             TrackEntityView.this.selectedEntity.getRect().left = 0.0f;
@@ -678,7 +678,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         TrackEntityView.this.selectedEntity.setLastLeft(TrackEntityView.this.selectedEntity.getRect().left);
                         TrackEntityView.this.selectedEntity.updateStartTrim();
                     }
-                    TrackEntityView.this.currentPosition -= floatValue / TrackEntityView.this.scaleFactor;
+                    TrackEntityView.this.currentPosition -= zoomLevel / TrackEntityView.this.scaleFactor;
                     if (TrackEntityView.this.currentPosition > 0.0f) {
                         TrackEntityView.this.currentPosition = 0.0f;
                         TrackEntityView trackEntityView5 = TrackEntityView.this;
@@ -715,16 +715,16 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (TrackEntityView.this.SPEED < 0.0f) {
                         currentTimeMillis *= -1.0f;
                     }
-                    float floatValue = currentTimeMillis + TrackEntityView.this.SPEED;
+                    float zoomLevel = currentTimeMillis + TrackEntityView.this.SPEED;
                     float width = TrackEntityView.this.selectedEntity.getRect().width();
-                    float floatValue2 = TrackEntityView.this.selectedEntity.getRect().left + floatValue;
-                    if (floatValue2 < 0.0f) {
-                        floatValue2 = 0.0f;
+                    float panOffset = TrackEntityView.this.selectedEntity.getRect().left + zoomLevel;
+                    if (panOffset < 0.0f) {
+                        panOffset = 0.0f;
                     }
-                    float f3 = floatValue2 + width;
+                    float f3 = panOffset + width;
                     if (TrackEntityView.this.selectedEntity instanceof EntityQuranTimeline) {
                         EntityQuranTimeline entityQuranTimeline = (EntityQuranTimeline) TrackEntityView.this.selectedEntity;
-                        if (entityQuranTimeline.getIndex() > 0 && (previewOrNextEntityQuran3 = (trackEntityView6 = TrackEntityView.this).getPreviewOrNextEntityQuran(trackEntityView6.entityListQuran, entityQuranTimeline.getIndex() - 1, false)) != null && floatValue2 <= previewOrNextEntityQuran3.getRect().right) {
+                        if (entityQuranTimeline.getIndex() > 0 && (previewOrNextEntityQuran3 = (trackEntityView6 = TrackEntityView.this).getPreviewOrNextEntityQuran(trackEntityView6.entityListQuran, entityQuranTimeline.getIndex() - 1, false)) != null && panOffset <= previewOrNextEntityQuran3.getRect().right) {
                             TrackEntityView.this.selectedEntity.setX(previewOrNextEntityQuran3.getRect().right);
                             TrackEntityView.this.selectedEntity.setRight(previewOrNextEntityQuran3.getRect().right + width);
                             TrackEntityView.this.pass = false;
@@ -745,7 +745,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     }
                     if (TrackEntityView.this.selectedEntity instanceof EntityTrslTimeline) {
                         EntityTrslTimeline entityTrslTimeline = (EntityTrslTimeline) TrackEntityView.this.selectedEntity;
-                        if (entityTrslTimeline.getIndex() > 0 && (previewOrNextEntityTrslQuran = (trackEntityView4 = TrackEntityView.this).getPreviewOrNextEntityTrslQuran(trackEntityView4.entityListTrslQuran, entityTrslTimeline.getIndex() - 1, false)) != null && floatValue2 <= previewOrNextEntityTrslQuran.getRect().right) {
+                        if (entityTrslTimeline.getIndex() > 0 && (previewOrNextEntityTrslQuran = (trackEntityView4 = TrackEntityView.this).getPreviewOrNextEntityTrslQuran(trackEntityView4.entityListTrslQuran, entityTrslTimeline.getIndex() - 1, false)) != null && panOffset <= previewOrNextEntityTrslQuran.getRect().right) {
                             TrackEntityView.this.selectedEntity.setX(previewOrNextEntityTrslQuran.getRect().right);
                             TrackEntityView.this.selectedEntity.setRight(previewOrNextEntityTrslQuran.getRect().right + width);
                             TrackEntityView.this.pass = false;
@@ -766,7 +766,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     }
                     if (TrackEntityView.this.selectedEntity instanceof EntityAudio) {
                         EntityAudio entityAudio = (EntityAudio) TrackEntityView.this.selectedEntity;
-                        if (entityAudio.getIndex() > 0 && (previewOrNextEntityAudio2 = (trackEntityView2 = TrackEntityView.this).getPreviewOrNextEntityAudio(trackEntityView2.entityListAudio, entityAudio.getIndex() - 1, false)) != null && floatValue2 <= previewOrNextEntityAudio2.getRect().right) {
+                        if (entityAudio.getIndex() > 0 && (previewOrNextEntityAudio2 = (trackEntityView2 = TrackEntityView.this).getPreviewOrNextEntityAudio(trackEntityView2.entityListAudio, entityAudio.getIndex() - 1, false)) != null && panOffset <= previewOrNextEntityAudio2.getRect().right) {
                             TrackEntityView.this.selectedEntity.setX(previewOrNextEntityAudio2.getRect().right);
                             TrackEntityView.this.selectedEntity.setRight(previewOrNextEntityAudio2.getRect().right + width);
                             TrackEntityView.this.pass = false;
@@ -785,7 +785,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                             return;
                         }
                     }
-                    TrackEntityView.this.currentPosition -= floatValue / TrackEntityView.this.scaleFactor;
+                    TrackEntityView.this.currentPosition -= zoomLevel / TrackEntityView.this.scaleFactor;
                     if (TrackEntityView.this.currentPosition > 0.0f) {
                         TrackEntityView.this.currentPosition = 0.0f;
                         TrackEntityView trackEntityView7 = TrackEntityView.this;
@@ -797,7 +797,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     }
                     TrackEntityView trackEntityView8 = TrackEntityView.this;
                     trackEntityView8.scrolled_with_zoom = trackEntityView8.currentPosition * TrackEntityView.this.scaleFactor;
-                    TrackEntityView.this.selectedEntity.getRect().left = floatValue2;
+                    TrackEntityView.this.selectedEntity.getRect().left = panOffset;
                     TrackEntityView.this.selectedEntity.getRect().right = f3;
                     TrackEntityView.this.isMove = true;
                     TrackEntityView.this.invalidate();
@@ -807,8 +807,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         };
     }
 
-    public TrackEntityView(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public TrackEntityView(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         this.entityListAudio = new ArrayList();
         this.entityListQuran = new ArrayList();
         this.entityListTrslQuran = new ArrayList();
@@ -875,9 +875,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress || !TrackEntityView.this.isPassScroll || (TrackEntityView.this.selectedEntity != null && TrackEntityView.this.selectedEntity.getTrim_type() != -1)) {
-                    return super.onScroll(motionEvent, motionEvent2, floatValue, floatValue2);
+                    return super.onScroll(motionEvent, motionEvent2, zoomLevel, panOffset);
                 }
                 if (!TrackEntityView.this.isScaleListener && motionEvent2.getEventTime() - motionEvent.getEventTime() >= 107 && TrackEntityView.this.isPass(motionEvent2)) {
                     if (TrackEntityView.this.isPlaying()) {
@@ -906,7 +906,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
 
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float floatValue, float floatValue2) {
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float zoomLevel, float panOffset) {
                 if (TrackEntityView.this.isProgress) {
                     return true;
                 }
@@ -924,14 +924,14 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 float abs2 = Math.abs(motionEvent2.getRawY() - TrackEntityView.this.eventY);
                 TrackEntityView.this.eventX = motionEvent2.getRawX();
                 TrackEntityView.this.eventY = motionEvent2.getRawY();
-                if (motionEvent2.getRawX() > motionEvent.getRawX() ? floatValue < 0.0f : floatValue > 0.0f) {
-                    floatValue *= -1.0f;
+                if (motionEvent2.getRawX() > motionEvent.getRawX() ? zoomLevel < 0.0f : zoomLevel > 0.0f) {
+                    zoomLevel *= -1.0f;
                 }
                 if (abs2 > abs * 1.2f) {
-                    TrackEntityView.this.target = floatValue2;
+                    TrackEntityView.this.target = panOffset;
                     TrackEntityView.this.flingY();
                 } else {
-                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) floatValue, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
+                    TrackEntityView.this.scroller.fling((int) TrackEntityView.this.currentPosition, 0, (int) zoomLevel, 0, (int) (-TrackEntityView.this.timeLineW), 0, 0, 0);
                     TrackEntityView.this.invalidate();
                 }
                 return true;
@@ -940,27 +940,27 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         init();
     }
 
-    public void init(int value, int value2) {
-        if (value <= 0 || value2 <= 0) {
+    public void init(int width, int width88) {
+        if (width <= 0 || width88 <= 0) {
             return;
         }
-        float floatValue = value;
-        this.SPEED = 0.04f * floatValue;
+        float zoomLevel = width;
+        this.SPEED = 0.04f * zoomLevel;
         Paint paint = new Paint(1);
         this.paint_time = paint;
         paint.setColor(-8355712);
         this.paint_time.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"));
-        this.radius = 0.006f * floatValue;
-        this.paint_time.setTextSize(floatValue * 0.023f);
+        this.radius = 0.006f * zoomLevel;
+        this.paint_time.setTextSize(zoomLevel * 0.023f);
         Paint paint2 = new Paint(1);
         this.paintMaker = paint2;
         paint2.setColor(-1);
         this.paintMaker.setStrokeWidth(this.radius * 0.5f);
         this.markerHeight = this.radius * 3.0f;
         this.m_pos_y_marker = this.paintMaker.getStrokeWidth() * 4.0f;
-        float floatValue2 = this.radius;
-        this.paddingCursur = 4.0f * floatValue2;
-        float f3 = (this.width_screen * 0.5f) - (floatValue2 * 0.5f);
+        float panOffset = this.radius;
+        this.paddingCursur = 4.0f * panOffset;
+        float f3 = (this.width_screen * 0.5f) - (panOffset * 0.5f);
         this.centerX = f3;
         this.DETECT_RIGHT_MOVE = 0.4f * f3;
         this.DETECT_LEFT_MOVE = f3 * 0.45f;
@@ -996,19 +996,19 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         drawable2.draw(canvas);
     }
 
-    public void setMaxTime(int value) {
-        this.maxTime = value;
-        this.timeLineW = (value * getSecond_in_screen()) / 1000.0f;
+    public void setMaxTime(int resourceId) {
+        this.maxTime = resourceId;
+        this.timeLineW = (resourceId * getSecond_in_screen()) / 1000.0f;
     }
 
-    public void setSecond_in_screen(float floatValue, int value, int value2) {
-        this.second_in_screen = floatValue;
-        this.duration = value;
-        this.width_screen = value2;
-        float floatValue2 = 0.03f * floatValue;
-        this.f449dx = floatValue2;
-        this.TOLERANCE_X = floatValue2;
-        this.max_trim = floatValue * 0.2f;
+    public void setSecond_in_screen(float zoomLevel, int width, int width92) {
+        this.second_in_screen = zoomLevel;
+        this.duration = width;
+        this.width_screen = width92;
+        float panOffset = 0.03f * zoomLevel;
+        this.f449dx = panOffset;
+        this.TOLERANCE_X = panOffset;
+        this.max_trim = zoomLevel * 0.2f;
     }
 
     public float getTextSize() {
@@ -1020,7 +1020,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public void onLayout(boolean isEnabled, int value, int value2, int value3, int value4) {
+    public void onLayout(boolean isEnabled, int resourceId, int resourceId95, int resourceId95, int resourceId95) {
         if (isEnabled) {
             updateGestureExclusion();
         }
@@ -1042,23 +1042,23 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     @Override // android.view.View
-    public void onWindowSystemUiVisibilityChanged(int value) {
-        super.onWindowSystemUiVisibilityChanged(value);
+    public void onWindowSystemUiVisibilityChanged(int resourceId) {
+        super.onWindowSystemUiVisibilityChanged(resourceId);
         updateGestureExclusion();
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int value2, int value3, int value4) {
-        super.onSizeChanged(value, value2, value3, value4);
-        if (value2 < 1 || value < 1) {
+    protected void onSizeChanged(int size, int size100, int size100, int size100) {
+        super.onSizeChanged(size, size100, size100, size100);
+        if (size100 < 1 || size < 1) {
             return;
         }
-        float floatValue = value2;
-        this.maxBottom = 0.78f * floatValue;
-        this.start_y_draw = 0.18f * floatValue;
-        this.canvas_top_Y = 0.1f * floatValue;
-        this.posY = 0.05f * floatValue;
-        this.f450p = floatValue * 0.026f;
+        float zoomLevel = size100;
+        this.maxBottom = 0.78f * zoomLevel;
+        this.start_y_draw = 0.18f * zoomLevel;
+        this.canvas_top_Y = 0.1f * zoomLevel;
+        this.posY = 0.05f * zoomLevel;
+        this.f450p = zoomLevel * 0.026f;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x016d, code lost:
@@ -1075,28 +1075,28 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         try {
             EntityAudio audio = getAudio();
             if (audio != null) {
-                float floatValue = audio.getRect().top;
+                float zoomLevel = audio.getRect().top;
                 float width = canvas.getWidth() * 0.15f;
-                float floatValue2 = audio.getRect().bottom;
+                float panOffset = audio.getRect().bottom;
                 if (this.rectItemAudio == null) {
-                    RectF rectF = new RectF(0.0f, floatValue, width, floatValue2);
+                    RectF rectF = new RectF(0.0f, zoomLevel, width, panOffset);
                     this.rectItemAudio = rectF;
                     float width2 = rectF.width() * 0.15f;
                     float height = this.rectItemAudio.height() * 0.6f;
-                    float f3 = width - width2;
-                    float f4 = f3 - height;
-                    float f5 = height / 2.0f;
-                    this.rectSquareAudio = new RectF(f4, this.rectItemAudio.centerY() - f5, f3, this.rectItemAudio.centerY() + f5);
-                    this.pathItemAudio = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, floatValue, width, floatValue2, 100.0f, 100.0f);
+                    float widthRatio = width - width2;
+                    float widthRatio104 = widthRatio - height;
+                    float widthRatio104 = height / 2.0f;
+                    this.rectSquareAudio = new RectF(widthRatio104, this.rectItemAudio.centerY() - widthRatio104, widthRatio, this.rectItemAudio.centerY() + widthRatio104);
+                    this.pathItemAudio = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, zoomLevel, width, panOffset, 100.0f, 100.0f);
                 }
                 this.paintItem.setColor(this.clr_btn_audio);
                 canvas.drawPath(this.pathItemAudio, this.paintItem);
                 this.paintItem.setColor(Common.COLOR_BLOCK_AUDIO);
                 canvas.drawRoundRect(this.rectSquareAudio, 2.0f, 2.0f, this.paintItem);
-                int value = (int) (this.rectItemAudio.right - this.rectSquareAudio.right);
+                int index = (int) (this.rectItemAudio.right - this.rectSquareAudio.right);
                 if (this.clr_btn_audio != -13421771) {
                     Drawable drawable = ContextCompat.getDrawable(getContext(), C2014R.drawable.checked_timeline);
-                    drawable.setBounds(value, (int) this.rectSquareAudio.top, (int) (value + this.rectSquareAudio.width()), (int) this.rectSquareAudio.bottom);
+                    drawable.setBounds(index, (int) this.rectSquareAudio.top, (int) (value + this.rectSquareAudio.width()), (int) this.rectSquareAudio.bottom);
                     drawable.draw(canvas);
                 }
             }
@@ -1107,18 +1107,18 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 if (quran != null) {
                     float floatValue6 = quran.getRect().top;
                     float width3 = canvas.getWidth() * 0.15f;
-                    float f7 = quran.getRect().bottom;
+                    float yPosition = quran.getRect().bottom;
                     RectF rectF2 = this.rectFItemQuran;
                     if (rectF2 == null || rectF2.top != floatValue6) {
-                        RectF rectF3 = new RectF(0.0f, floatValue6, width3, f7);
+                        RectF rectF3 = new RectF(0.0f, floatValue6, width3, yPosition);
                         this.rectFItemQuran = rectF3;
                         float width4 = rectF3.width() * 0.15f;
                         float height2 = this.rectFItemQuran.height() * 0.6f;
-                        float f8 = width3 - width4;
-                        float f9 = f8 - height2;
-                        float f10 = height2 / 2.0f;
-                        this.rectSquareQuran = new RectF(f9, this.rectFItemQuran.centerY() - f10, f8, this.rectFItemQuran.centerY() + f10);
-                        this.pathItemQuran = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, floatValue6, width3, f7, 100.0f, 100.0f);
+                        float yPosition108 = width3 - width4;
+                        float yPosition108 = yPosition108 - height2;
+                        float yPosition108 = height2 / 2.0f;
+                        this.rectSquareQuran = new RectF(yPosition108, this.rectFItemQuran.centerY() - yPosition108, yPosition108, this.rectFItemQuran.centerY() + yPosition108);
+                        this.pathItemQuran = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, floatValue6, width3, yPosition, 100.0f, 100.0f);
                     }
                     this.paintItem.setColor(this.clr_btn_quran);
                     canvas.drawPath(this.pathItemQuran, this.paintItem);
@@ -1126,27 +1126,27 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     canvas.drawRoundRect(this.rectSquareQuran, 2.0f, 2.0f, this.paintItem);
                     if (this.clr_btn_quran != -13421771) {
                         Drawable drawable2 = ContextCompat.getDrawable(getContext(), C2014R.drawable.checked_timeline);
-                        int value2 = (int) (this.rectFItemQuran.right - this.rectSquareQuran.right);
+                        int colorValue = (int) (this.rectFItemQuran.right - this.rectSquareQuran.right);
                         drawable2.setBounds(value2, (int) this.rectSquareQuran.top, (int) (value2 + this.rectSquareQuran.width()), (int) this.rectSquareQuran.bottom);
                         drawable2.draw(canvas);
                     }
                 }
                 trslQuran = getTrslQuran();
                 if (trslQuran == null) {
-                    float f11 = trslQuran.getRect().top;
+                    float yPosition = trslQuran.getRect().top;
                     float width5 = canvas.getWidth() * 0.15f;
-                    float f12 = trslQuran.getRect().bottom;
+                    float yPosition110 = trslQuran.getRect().bottom;
                     RectF rectF4 = this.rectFItemTrslQuran;
-                    if (rectF4 == null || rectF4.top != f11) {
-                        RectF rectF5 = new RectF(0.0f, f11, width5, f12);
+                    if (rectF4 == null || rectF4.top != yPosition) {
+                        RectF rectF5 = new RectF(0.0f, yPosition, width5, yPosition110);
                         this.rectFItemTrslQuran = rectF5;
                         float width6 = rectF5.width() * 0.15f;
                         float height3 = this.rectFItemTrslQuran.height() * 0.6f;
-                        float f13 = width5 - width6;
-                        float f14 = f13 - height3;
-                        float f15 = height3 / 2.0f;
-                        this.rectSquareTrslQuran = new RectF(f14, this.rectFItemTrslQuran.centerY() - f15, f13, this.rectFItemTrslQuran.centerY() + f15);
-                        this.pathItemTrslQuran = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, f11, width5, f12, 100.0f, 100.0f);
+                        float yPosition111 = width5 - width6;
+                        float yPosition111 = yPosition111 - height3;
+                        float yPosition111 = height3 / 2.0f;
+                        this.rectSquareTrslQuran = new RectF(yPosition111, this.rectFItemTrslQuran.centerY() - yPosition111, yPosition111, this.rectFItemTrslQuran.centerY() + yPosition111);
+                        this.pathItemTrslQuran = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, yPosition, width5, yPosition110, 100.0f, 100.0f);
                     }
                     this.paintItem.setColor(this.clr_btn_trsl);
                     canvas.drawPath(this.pathItemTrslQuran, this.paintItem);
@@ -1154,7 +1154,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     canvas.drawRoundRect(this.rectSquareTrslQuran, 2.0f, 2.0f, this.paintItem);
                     if (this.clr_btn_trsl != -13421771) {
                         Drawable drawable3 = ContextCompat.getDrawable(getContext(), C2014R.drawable.checked_timeline);
-                        int value3 = (int) (this.rectFItemTrslQuran.right - this.rectSquareTrslQuran.right);
+                        int colorValue = (int) (this.rectFItemTrslQuran.right - this.rectSquareTrslQuran.right);
                         drawable3.setBounds(value3, (int) this.rectSquareTrslQuran.top, (int) (value3 + this.rectSquareTrslQuran.width()), (int) this.rectSquareTrslQuran.bottom);
                         drawable3.draw(canvas);
                         return;
@@ -1166,17 +1166,17 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             EntityBismilahTimeline entityBismilahTimeline = this.mIsi3adaTimeline;
             float f16 = entityBismilahTimeline.getRect().top;
             float width7 = canvas.getWidth() * 0.15f;
-            float f17 = entityBismilahTimeline.getRect().bottom;
+            float yPosition = entityBismilahTimeline.getRect().bottom;
             RectF rectF6 = this.rectFItemQuran;
             if (rectF6 == null || rectF6.top != f16) {
-                RectF rectF7 = new RectF(0.0f, f16, width7, f17);
+                RectF rectF7 = new RectF(0.0f, f16, width7, yPosition);
                 this.rectFItemQuran = rectF7;
                 float width8 = rectF7.width() * 0.15f;
                 float height4 = this.rectFItemQuran.height() * 0.6f;
-                float f18 = width7 - width8;
-                float f19 = f18 - height4;
-                float f20 = height4 / 2.0f;
-                this.rectSquareQuran = new RectF(f19, this.rectFItemQuran.centerY() - f20, f18, this.rectFItemQuran.centerY() + f20);
+                float yPosition113 = width7 - width8;
+                float yPosition113 = yPosition113 - height4;
+                float yPosition113 = height4 / 2.0f;
+                this.rectSquareQuran = new RectF(yPosition113, this.rectFItemQuran.centerY() - yPosition113, yPosition113, this.rectFItemQuran.centerY() + f20);
                 this.pathItemQuran = CanvasUtils.drawCustomRoundedRect(canvas, 0.0f, f16, width7, f17, 100.0f, 100.0f);
             }
             this.paintItem.setColor(this.clr_btn_quran);
@@ -1185,7 +1185,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             canvas.drawRoundRect(this.rectSquareQuran, 2.0f, 2.0f, this.paintItem);
             if (this.clr_btn_quran != -13421771) {
                 Drawable drawable4 = ContextCompat.getDrawable(getContext(), C2014R.drawable.checked_timeline);
-                int value4 = (int) (this.rectFItemQuran.right - this.rectSquareQuran.right);
+                int colorValue = (int) (this.rectFItemQuran.right - this.rectSquareQuran.right);
                 drawable4.setBounds(value4, (int) this.rectSquareQuran.top, (int) (value4 + this.rectSquareQuran.width()), (int) this.rectSquareQuran.bottom);
                 drawable4.draw(canvas);
             }
@@ -1213,10 +1213,10 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         super.onDraw(canvas);
     }
 
-    public void setSecond_in_screen(float floatValue) {
-        this.second_in_screen = floatValue;
-        this.f449dx = 0.03f * floatValue;
-        this.max_trim = floatValue * 0.2f;
+    public void setSecond_in_screen(float zoomLevel) {
+        this.second_in_screen = zoomLevel;
+        this.f449dx = 0.03f * zoomLevel;
+        this.max_trim = zoomLevel * 0.2f;
     }
 
     public float getSecond_in_screenNoScale() {
@@ -1246,8 +1246,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         canvas.translate(0.0f, this.mScrollY);
         drawAllEntities(canvas, abs, abs2);
         if (this.isCheckLine) {
-            float floatValue = this.startXLine;
-            canvas.drawLine(floatValue, 0.0f, floatValue, getHeight() - this.mScrollY, this.paintLineCheck);
+            float zoomLevel = this.startXLine;
+            canvas.drawLine(zoomLevel, 0.0f, zoomLevel, getHeight() - this.mScrollY, this.paintLineCheck);
         }
         canvas.restore();
         if (this.isCheckLineCursur) {
@@ -1259,34 +1259,34 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    private void drawMarker(Canvas canvas, float floatValue, float floatValue2) {
-        float strokeWidth = floatValue + this.paintMaker.getStrokeWidth();
-        float f3 = this.posY + this.m_pos_y_marker;
-        canvas.drawLine(strokeWidth, f3, strokeWidth, f3 + floatValue2, this.paintMaker);
+    private void drawMarker(Canvas canvas, float zoomLevel, float panOffset) {
+        float strokeWidth = zoomLevel + this.paintMaker.getStrokeWidth();
+        float widthRatio = this.posY + this.m_pos_y_marker;
+        canvas.drawLine(strokeWidth, f3, strokeWidth, f3 + panOffset, this.paintMaker);
     }
 
     public void setiTrimLineCallback(ITrimLineCallback iTrimLineCallback) {
         this.iTrimLineCallback = iTrimLineCallback;
     }
 
-    private void drawTimeBar(Canvas canvas, int value, int value2, float floatValue) {
+    private void drawTimeBar(Canvas canvas, int width, int width128, float zoomLevel) {
         String formatTimeLabel;
-        float floatValue2 = this.scaleFactor;
-        float f3 = 4.0f;
-        if (floatValue2 >= 4.0f) {
+        float panOffset = this.scaleFactor;
+        float scaleFactor132 = 4.0f;
+        if (panOffset >= 4.0f) {
             f3 = 0.25f;
-        } else if (floatValue2 >= 2.0f) {
+        } else if (panOffset >= 2.0f) {
             f3 = 0.5f;
-        } else if (floatValue2 >= 0.8f) {
+        } else if (panOffset >= 0.8f) {
             f3 = 2.0f;
-        } else if (floatValue2 < 0.4f) {
-            f3 = floatValue2 > 0.25f ? 6.0f : 8.0f;
+        } else if (panOffset < 0.4f) {
+            f3 = panOffset > 0.25f ? 6.0f : 8.0f;
         }
-        float f4 = value;
-        float f5 = floatValue * f3 * 0.2f;
-        for (float floatValue6 = f4 - (f4 % f3); floatValue6 <= value2; floatValue6 += f3) {
-            float f7 = floatValue6 * floatValue;
-            float f8 = f7 / floatValue;
+        float scaleFactor128 = width;
+        float scaleFactor128 = zoomLevel * f3 * 0.2f;
+        for (float floatValue6 = scaleFactor128 - (scaleFactor128 % f3); floatValue6 <= width128; floatValue6 += f3) {
+            float widthRatio = floatValue6 * zoomLevel;
+            float f8 = widthRatio / zoomLevel;
             drawMarker(canvas, f7, this.markerHeight);
             if (this.isArabic_lang) {
                 formatTimeLabel = formatTimeLabelArabic(f8);
@@ -1294,42 +1294,42 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 formatTimeLabel = formatTimeLabel(f8);
             }
             canvas.drawText(formatTimeLabel, f7 - this.w_time_item, this.posY, this.paint_time);
-            for (int value3 = 1; value3 <= 4; value3++) {
-                drawMarker(canvas, (value3 * f5) + f7, this.markerHeight / 2.0f);
+            for (int counter = 1; counter <= 4; counter++) {
+                drawMarker(canvas, (counter * scaleFactor128) + f7, this.markerHeight / 2.0f);
             }
         }
     }
 
-    private String formatTimeLabel(float floatValue) {
-        if (floatValue < 60.0f) {
-            if (Math.abs(floatValue - 14.0f) < 0.01d) {
+    private String formatTimeLabel(float zoomLevel) {
+        if (zoomLevel < 60.0f) {
+            if (Math.abs(zoomLevel - 14.0f) < 0.01d) {
                 return String.format(Locale.ENGLISH, "14s", new Object[0]);
             }
-            if (Math.abs(floatValue - Math.round(floatValue)) < 0.01d) {
-                return String.format(Locale.ENGLISH, "%ds", Integer.valueOf((int) floatValue));
+            if (Math.abs(zoomLevel - Math.round(zoomLevel)) < 0.01d) {
+                return String.format(Locale.ENGLISH, "%ds", Integer.valueOf((int) zoomLevel));
             }
-            return String.format(Locale.ENGLISH, "%.2fs", Float.valueOf(floatValue));
+            return String.format(Locale.ENGLISH, "%.2fs", Float.valueOf(zoomLevel));
         }
-        int value = (int) (floatValue / 60.0f);
-        int round = Math.round(floatValue % 60.0f);
+        int index = (int) (zoomLevel / 60.0f);
+        int round = Math.round(zoomLevel % 60.0f);
         if (round == 0) {
             return String.format(Locale.ENGLISH, "%dm", Integer.valueOf(value));
         }
         return String.format(Locale.ENGLISH, "%dm %ds", Integer.valueOf(value), Integer.valueOf(round));
     }
 
-    private String formatTimeLabelArabic(float floatValue) {
-        if (floatValue < 60.0f) {
-            if (Math.abs(floatValue - 14.0f) < 0.01d) {
+    private String formatTimeLabelArabic(float zoomLevel) {
+        if (zoomLevel < 60.0f) {
+            if (Math.abs(zoomLevel - 14.0f) < 0.01d) {
                 return String.format(Locale.ENGLISH, "14ث", new Object[0]);
             }
-            if (Math.abs(floatValue - Math.round(floatValue)) < 0.01d) {
-                return String.format(Locale.ENGLISH, "%dث", Integer.valueOf((int) floatValue));
+            if (Math.abs(zoomLevel - Math.round(zoomLevel)) < 0.01d) {
+                return String.format(Locale.ENGLISH, "%dث", Integer.valueOf((int) zoomLevel));
             }
-            return String.format(Locale.ENGLISH, "%.2fث", Float.valueOf(floatValue));
+            return String.format(Locale.ENGLISH, "%.2fث", Float.valueOf(zoomLevel));
         }
-        int value = (int) (floatValue / 60.0f);
-        int round = Math.round(floatValue % 60.0f);
+        int index = (int) (zoomLevel / 60.0f);
+        int round = Math.round(zoomLevel % 60.0f);
         if (round == 0) {
             return String.format(Locale.ENGLISH, "%dد", Integer.valueOf(value));
         }
@@ -1353,7 +1353,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     private float drawBasmala(Canvas canvas, RectF rectF) {
-        float floatValue;
+        float zoomLevel;
         if (isExist(this.bismilahTimeline)) {
             this.bismilahTimeline.updateRect(this.scaleFactor);
             if (this.bismilahTimeline.getEntityView() != null) {
@@ -1375,12 +1375,12 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             if (RectF.intersects(rectF, this.bismilahTimeline.getRect())) {
                 this.bismilahTimeline.update(canvas);
             }
-            floatValue = this.bismilahTimeline.getRect().bottom;
+            zoomLevel = this.bismilahTimeline.getRect().bottom;
         } else {
-            floatValue = 0.0f;
+            zoomLevel = 0.0f;
         }
         if (!isExist(this.mIsi3adaTimeline)) {
-            return floatValue;
+            return zoomLevel;
         }
         this.mIsi3adaTimeline.updateRect(this.scaleFactor);
         if (this.mIsi3adaTimeline.getEntityView() != null) {
@@ -1405,26 +1405,26 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         return this.mIsi3adaTimeline.getRect().bottom;
     }
 
-    private void drawAllEntities(Canvas canvas, int value, int value2) {
-        float floatValue;
-        float floatValue2;
-        float f3;
-        float f4;
-        float f5;
+    private void drawAllEntities(Canvas canvas, int index, int index146) {
+        float zoomLevel;
+        float panOffset;
+        float scaleFactor146;
+        float scaleFactor146;
+        float scaleFactor146;
         float floatValue6;
-        float f7 = this.start_y_draw;
-        this.f451y = f7;
-        float f8 = this.scrolled_with_zoom;
-        float f9 = this.centerX;
-        float f10 = -f8;
-        RectF rectF = new RectF(f10 - f9, (-this.mScrollY) + this.f451y, f10 + f9, canvas.getHeight() - this.mScrollY);
+        float scaleFactor146 = this.start_y_draw;
+        this.f451y = scaleFactor146;
+        float scaleFactor146 = this.scrolled_with_zoom;
+        float scaleFactor146 = this.centerX;
+        float scaleFactor146 = -scaleFactor146;
+        RectF rectF = new RectF(scaleFactor146 - scaleFactor146, (-this.mScrollY) + this.f451y, scaleFactor146 + scaleFactor146, canvas.getHeight() - this.mScrollY);
         for (int value3 = 0; value3 < this.entityListAudio.size(); value3++) {
             EntityAudio entityAudio = this.entityListAudio.get(value3);
             if (entityAudio.visible()) {
                 if (this.selectedEntity == entityAudio && !isPlaying()) {
                     this.selectedEntity.setY(this.f451y);
                     this.selectedEntity.updateRect(this.scaleFactor);
-                    f5 = entityAudio.getRect().bottom;
+                    scaleFactor146 = entityAudio.getRect().bottom;
                     floatValue6 = this.f450p;
                 } else {
                     entityAudio.updateRect(this.scaleFactor);
@@ -1443,13 +1443,13 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (RectF.intersects(rectF, entityAudio.getRect())) {
                         entityAudio.update(canvas);
                     }
-                    f5 = entityAudio.getRect().bottom;
+                    scaleFactor146 = entityAudio.getRect().bottom;
                     floatValue6 = this.f450p;
                 }
-                f7 = f5 + floatValue6;
+                scaleFactor146 = scaleFactor146 + floatValue6;
             }
         }
-        this.f451y = f7;
+        this.f451y = scaleFactor146;
         float max = Math.max(this.start_y_draw, drawBasmala(canvas, rectF) + this.f450p);
         for (int value4 = 0; value4 < this.entityListQuran.size(); value4++) {
             EntityQuranTimeline entityQuranTimeline = this.entityListQuran.get(value4);
@@ -1457,8 +1457,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 if (this.selectedEntity == entityQuranTimeline && !isPlaying()) {
                     entityQuranTimeline.updateRect(this.scaleFactor);
                     this.selectedEntity.setY(this.f451y);
-                    f3 = entityQuranTimeline.getRect().bottom;
-                    f4 = this.f450p;
+                    scaleFactor146 = entityQuranTimeline.getRect().bottom;
+                    scaleFactor146 = this.f450p;
                 } else {
                     entityQuranTimeline.updateRect(this.scaleFactor);
                     if (entityQuranTimeline.getEntityView() != null) {
@@ -1480,10 +1480,10 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (RectF.intersects(rectF, entityQuranTimeline.getRect())) {
                         entityQuranTimeline.update(canvas);
                     }
-                    f3 = entityQuranTimeline.getRect().bottom;
-                    f4 = this.f450p;
+                    scaleFactor146 = entityQuranTimeline.getRect().bottom;
+                    scaleFactor146 = this.f450p;
                 }
-                max = f3 + f4;
+                max = scaleFactor146 + scaleFactor146;
             }
         }
         this.f451y = max;
@@ -1493,8 +1493,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 if (this.selectedEntity == entityTrslTimeline && !isPlaying()) {
                     entityTrslTimeline.updateRect(this.scaleFactor);
                     this.selectedEntity.setY(this.f451y);
-                    floatValue = entityTrslTimeline.getRect().bottom;
-                    floatValue2 = this.f450p;
+                    zoomLevel = entityTrslTimeline.getRect().bottom;
+                    panOffset = this.f450p;
                 } else {
                     entityTrslTimeline.updateRect(this.scaleFactor);
                     if (entityTrslTimeline.getEntityView() != null) {
@@ -1513,10 +1513,10 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (RectF.intersects(rectF, entityTrslTimeline.getRect())) {
                         entityTrslTimeline.update(canvas);
                     }
-                    floatValue = entityTrslTimeline.getRect().bottom;
-                    floatValue2 = this.f450p;
+                    zoomLevel = entityTrslTimeline.getRect().bottom;
+                    panOffset = this.f450p;
                 }
-                max = floatValue + floatValue2;
+                max = zoomLevel + panOffset;
             }
         }
         this.f451y = max;
@@ -1544,7 +1544,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     this.iTrimLineCallback.onUpdate();
                 }
             }
-            this.selectedEntity.update(canvas, value, value2);
+            this.selectedEntity.update(canvas, index, index146);
             return;
         }
         if (this.selectedEntity.getEntityView() == null || !this.selectedEntity.getEntityView().isVisible()) {
@@ -1564,19 +1564,19 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         if (transition.isIn()) {
             int round = Math.round((quranEntity.getEntityQuran().getRect().left / getSecond_in_screen()) * 1000.0f);
             int duration_in = (int) (transition.getDuration_in() * 1000.0f);
-            float floatValue = round;
-            if (abs < (duration_in * 0.5f) + floatValue) {
+            float zoomLevel = round;
+            if (abs < (duration_in * 0.5f) + zoomLevel) {
                 quranEntity.runIn(duration_in, false, transition.getType_in());
-            } else if (!transition.isOut() && (abs < floatValue || abs >= round + duration_in)) {
+            } else if (!transition.isOut() && (abs < zoomLevel || abs >= round + duration_in)) {
                 quranEntity.endAnimator();
             }
         }
         if (!quranEntity.isAnimRun() && transition.isOut()) {
             int second_in_screen = (int) ((quranEntity.getEntityQuran().getRect().right / getSecond_in_screen()) * 1000.0f);
             int duration_out = (int) (transition.getDuration_out() * 1000.0f);
-            float floatValue2 = second_in_screen - duration_out;
-            float f3 = (duration_out * 0.5f) + floatValue2;
-            if (abs >= floatValue2 && abs < f3) {
+            float panOffset = second_in_screen - duration_out;
+            float xPosition = (duration_out * 0.5f) + panOffset;
+            if (abs >= panOffset && abs < xPosition) {
                 quranEntity.runOut(duration_out, false, transition.getType_out());
             } else if (abs >= second_in_screen) {
                 quranEntity.endAnimator();
@@ -1593,19 +1593,19 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         if (transition.isIn()) {
             int round = Math.round((bismilahEntity.getBismilahTimeline().getRect().left / getSecond_in_screen()) * 1000.0f);
             int duration_in = (int) (transition.getDuration_in() * 1000.0f);
-            float floatValue = round;
-            if (abs < (duration_in * 0.5f) + floatValue) {
+            float zoomLevel = round;
+            if (abs < (duration_in * 0.5f) + zoomLevel) {
                 bismilahEntity.runIn(duration_in, false, transition.getType_in());
-            } else if (!transition.isOut() && (abs < floatValue || abs >= round + duration_in)) {
+            } else if (!transition.isOut() && (abs < zoomLevel || abs >= round + duration_in)) {
                 bismilahEntity.endAnimator();
             }
         }
         if (!bismilahEntity.isAnimRun() && transition.isOut()) {
             int second_in_screen = (int) ((bismilahEntity.getBismilahTimeline().getRect().right / getSecond_in_screen()) * 1000.0f);
             int duration_out = (int) (transition.getDuration_out() * 1000.0f);
-            float floatValue2 = second_in_screen - duration_out;
-            float f3 = (duration_out * 0.5f) + floatValue2;
-            if (abs >= floatValue2 && abs < f3) {
+            float panOffset = second_in_screen - duration_out;
+            float xPosition = (duration_out * 0.5f) + panOffset;
+            if (abs >= panOffset && abs < xPosition) {
                 bismilahEntity.runOut(duration_out, false, transition.getType_out());
             } else if (abs >= second_in_screen) {
                 bismilahEntity.endAnimator();
@@ -1789,17 +1789,17 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     public void translateToRight(boolean isEnabled) {
         EntityBismilahTimeline entityBismilahTimeline = isEnabled ? this.mIsi3adaTimeline : this.bismilahTimeline;
-        float floatValue = entityBismilahTimeline.getRect().right;
-        if (isEnabled && isExist(this.bismilahTimeline) && floatValue >= this.bismilahTimeline.getRect().left) {
-            float width = this.bismilahTimeline.getRect().width() + floatValue;
-            float floatValue2 = floatValue - this.bismilahTimeline.getRect().left;
+        float zoomLevel = entityBismilahTimeline.getRect().right;
+        if (isEnabled && isExist(this.bismilahTimeline) && zoomLevel >= this.bismilahTimeline.getRect().left) {
+            float width = this.bismilahTimeline.getRect().width() + zoomLevel;
+            float panOffset = zoomLevel - this.bismilahTimeline.getRect().left;
             this.bismilahTimeline.setCurrentRect();
-            this.bismilahTimeline.setX(floatValue);
+            this.bismilahTimeline.setX(zoomLevel);
             this.bismilahTimeline.setRight(width);
             for (int index = this.bismilahTimeline.getIndex(); index < this.entityListQuran.size(); index++) {
                 EntityQuranTimeline entityQuranTimeline = this.entityListQuran.get(index);
                 if (entityQuranTimeline.visible()) {
-                    float f3 = entityQuranTimeline.getRect().left + floatValue2;
+                    float f3 = entityQuranTimeline.getRect().left + panOffset;
                     float width2 = entityQuranTimeline.getRect().width() + f3;
                     entityQuranTimeline.setCurrentRect();
                     entityQuranTimeline.setX(f3);
@@ -1809,21 +1809,21 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             return;
         }
         EntityQuranTimeline previewOrNextEntityQuran = getPreviewOrNextEntityQuran(this.entityListQuran, entityBismilahTimeline.getIndex(), true);
-        if (previewOrNextEntityQuran == null || floatValue < previewOrNextEntityQuran.getRect().left) {
+        if (previewOrNextEntityQuran == null || zoomLevel < previewOrNextEntityQuran.getRect().left) {
             return;
         }
-        float f4 = floatValue - previewOrNextEntityQuran.getRect().left;
-        float width3 = previewOrNextEntityQuran.getRect().width() + floatValue;
+        float f4 = zoomLevel - previewOrNextEntityQuran.getRect().left;
+        float width3 = previewOrNextEntityQuran.getRect().width() + zoomLevel;
         previewOrNextEntityQuran.setCurrentRect();
-        previewOrNextEntityQuran.setX(floatValue);
+        previewOrNextEntityQuran.setX(zoomLevel);
         previewOrNextEntityQuran.setRight(width3);
         for (int index2 = entityBismilahTimeline.getIndex() + 1; index2 < this.entityListQuran.size(); index2++) {
             EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(index2);
             if (entityQuranTimeline2.visible()) {
-                float f5 = entityQuranTimeline2.getRect().left + f4;
-                float width4 = entityQuranTimeline2.getRect().width() + f5;
+                float xPosition = entityQuranTimeline2.getRect().left + f4;
+                float width4 = entityQuranTimeline2.getRect().width() + xPosition;
                 entityQuranTimeline2.setCurrentRect();
-                entityQuranTimeline2.setX(f5);
+                entityQuranTimeline2.setX(xPosition);
                 entityQuranTimeline2.setRight(width4);
             }
         }
@@ -1831,23 +1831,23 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     public void translateToRight() {
         EntityBismilahTimeline entityBismilahTimeline = this.bismilahTimeline;
-        float floatValue = entityBismilahTimeline.getRect().right;
+        float zoomLevel = entityBismilahTimeline.getRect().right;
         EntityQuranTimeline previewOrNextEntityQuran = getPreviewOrNextEntityQuran(this.entityListQuran, entityBismilahTimeline.getIndex(), true);
-        if (previewOrNextEntityQuran == null || floatValue < previewOrNextEntityQuran.getRect().left) {
+        if (previewOrNextEntityQuran == null || zoomLevel < previewOrNextEntityQuran.getRect().left) {
             return;
         }
-        float floatValue2 = floatValue - previewOrNextEntityQuran.getRect().left;
-        float width = previewOrNextEntityQuran.getRect().width() + floatValue;
+        float panOffset = zoomLevel - previewOrNextEntityQuran.getRect().left;
+        float width = previewOrNextEntityQuran.getRect().width() + zoomLevel;
         previewOrNextEntityQuran.setCurrentRect();
-        previewOrNextEntityQuran.setX(floatValue);
+        previewOrNextEntityQuran.setX(zoomLevel);
         previewOrNextEntityQuran.setRight(width);
         for (int index = entityBismilahTimeline.getIndex() + 1; index < this.entityListQuran.size(); index++) {
             EntityQuranTimeline entityQuranTimeline = this.entityListQuran.get(index);
             if (entityQuranTimeline.visible()) {
-                float f3 = entityQuranTimeline.getRect().left + floatValue2;
-                float width2 = entityQuranTimeline.getRect().width() + f3;
+                float xPosition = entityQuranTimeline.getRect().left + panOffset;
+                float width2 = entityQuranTimeline.getRect().width() + xPosition;
                 entityQuranTimeline.setCurrentRect();
-                entityQuranTimeline.setX(f3);
+                entityQuranTimeline.setX(xPosition);
                 entityQuranTimeline.setRight(width2);
             }
         }
@@ -1981,7 +1981,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 entityQuranTimeline.setRight(abs);
                 if (entityQuranTimeline.getRect().right > previewOrNextEntityQuran2.getRect().left) {
                     float width = entityQuranTimeline.getRect().right + previewOrNextEntityQuran2.getRect().width();
-                    float floatValue = entityQuranTimeline.getRect().right - previewOrNextEntityQuran2.getRect().left;
+                    float zoomLevel = entityQuranTimeline.getRect().right - previewOrNextEntityQuran2.getRect().left;
                     previewOrNextEntityQuran2.setCurrentRect();
                     previewOrNextEntityQuran2.setX(entityQuranTimeline.getRect().right);
                     previewOrNextEntityQuran2.setRight(width);
@@ -1994,9 +1994,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     for (int index = entityQuranTimeline.getIndex() + 2; index < getEntityListQuran().size(); index++) {
                         EntityQuranTimeline entityQuranTimeline2 = getEntityListQuran().get(index);
                         entityQuranTimeline2.setCurrentRect();
-                        float floatValue2 = entityQuranTimeline2.getRect().left + floatValue;
-                        float width2 = entityQuranTimeline2.getRect().width() + floatValue2;
-                        entityQuranTimeline2.setX(floatValue2);
+                        float panOffset = entityQuranTimeline2.getRect().left + zoomLevel;
+                        float width2 = entityQuranTimeline2.getRect().width() + panOffset;
+                        entityQuranTimeline2.setX(panOffset);
                         entityQuranTimeline2.setRight(width2);
                         invalidate();
                         entityQuranTimeline2.onChange();
@@ -2193,7 +2193,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         if (Math.abs(getCurrentPosition()) - entityBismilahTimeline.getRect().left >= this.second_in_screen && entityBismilahTimeline.getIndex() < getEntityListQuran().size() && (previewOrNextEntityQuran = getPreviewOrNextEntityQuran(getEntityListQuran(), entityBismilahTimeline.getIndex(), true)) != null) {
             if (entityBismilahTimeline.getRect().right > previewOrNextEntityQuran.getRect().left) {
                 float width = entityBismilahTimeline.getRect().right + previewOrNextEntityQuran.getRect().width();
-                float floatValue = entityBismilahTimeline.getRect().right - previewOrNextEntityQuran.getRect().left;
+                float zoomLevel = entityBismilahTimeline.getRect().right - previewOrNextEntityQuran.getRect().left;
                 previewOrNextEntityQuran.setCurrentRect();
                 previewOrNextEntityQuran.setX(entityBismilahTimeline.getRect().right);
                 previewOrNextEntityQuran.setRight(width);
@@ -2206,9 +2206,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 for (int index = entityBismilahTimeline.getIndex() + 1; index < getEntityListQuran().size(); index++) {
                     EntityQuranTimeline entityQuranTimeline = getEntityListQuran().get(index);
                     entityQuranTimeline.setCurrentRect();
-                    float floatValue2 = entityQuranTimeline.getRect().left + floatValue;
-                    float width2 = entityQuranTimeline.getRect().width() + floatValue2;
-                    entityQuranTimeline.setX(floatValue2);
+                    float panOffset = entityQuranTimeline.getRect().left + zoomLevel;
+                    float width2 = entityQuranTimeline.getRect().width() + panOffset;
+                    entityQuranTimeline.setX(panOffset);
                     entityQuranTimeline.setRight(width2);
                     invalidate();
                     entityQuranTimeline.onChange();
@@ -2331,9 +2331,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     public void translateToEnd() {
         this.current_cursur_position = this.maxTime;
-        float floatValue = ((-r0) * this.second_in_screen) / 1000.0f;
-        this.currentPosition = floatValue;
-        this.scrolled_with_zoom = floatValue * this.scaleFactor;
+        float zoomLevel = ((-r0) * this.second_in_screen) / 1000.0f;
+        this.currentPosition = zoomLevel;
+        this.scrolled_with_zoom = zoomLevel * this.scaleFactor;
         invalidate();
     }
 
@@ -2377,9 +2377,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             return;
         }
         this.current_cursur_position = Math.round((entity.getRect().left + (this.selectedEntity.getRect().width() * 0.5f)) / getSecond_in_screen()) * 1000;
-        float floatValue = ((-r0) * this.second_in_screen) / 1000.0f;
-        this.currentPosition = floatValue;
-        this.scrolled_with_zoom = floatValue * this.scaleFactor;
+        float zoomLevel = ((-r0) * this.second_in_screen) / 1000.0f;
+        this.currentPosition = zoomLevel;
+        this.scrolled_with_zoom = zoomLevel * this.scaleFactor;
         invalidate();
     }
 
@@ -2409,9 +2409,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public void splitAudio(EntityAudio entityAudio, int value) {
-        if (value < this.entityListAudio.size()) {
-            this.entityListAudio.add(value, entityAudio);
+    public void splitAudio(EntityAudio entityAudio, int count) {
+        if (count < this.entityListAudio.size()) {
+            this.entityListAudio.add(count, entityAudio);
         } else {
             this.entityListAudio.add(entityAudio);
         }
@@ -2451,8 +2451,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             if (list != null && !list.isEmpty()) {
                 ArrayList arrayList = new ArrayList();
                 EntityQuranTimeline entityQuranTimeline = null;
-                for (int value = 0; value < this.entityListQuran.size(); value++) {
-                    EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(value);
+                for (int index = 0; index < this.entityListQuran.size(); index++) {
+                    EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(index);
                     if (entityQuranTimeline2.visible() && entityQuranTimeline2.isSelect()) {
                         if (entityQuranTimeline == null) {
                             entityQuranTimeline = entityQuranTimeline2;
@@ -2583,28 +2583,28 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         invalidate();
     }
 
-    public void addAudio(EntityAudio entityAudio, int value) {
-        if (value < this.entityListAudio.size()) {
-            entityAudio.setIndex(value);
-            this.entityListAudio.add(value, entityAudio);
-            float floatValue = entityAudio.getRect().right;
+    public void addAudio(EntityAudio entityAudio, int index) {
+        if (index < this.entityListAudio.size()) {
+            entityAudio.setIndex(index);
+            this.entityListAudio.add(index, entityAudio);
+            float zoomLevel = entityAudio.getRect().right;
             while (true) {
-                value++;
-                if (value >= this.entityListAudio.size()) {
+                index++;
+                if (index >= this.entityListAudio.size()) {
                     break;
                 }
-                EntityAudio entityAudio2 = this.entityListAudio.get(value);
+                EntityAudio entityAudio2 = this.entityListAudio.get(index);
                 if (entityAudio2.visible()) {
                     float width = entityAudio2.getRect().width();
                     entityAudio2.setCurrentRect();
-                    entityAudio2.setX(floatValue);
-                    entityAudio2.setRight(floatValue + width);
-                    entityAudio2.setIndex(value);
-                    floatValue = entityAudio2.getRect().right;
+                    entityAudio2.setX(zoomLevel);
+                    entityAudio2.setRight(zoomLevel + width);
+                    entityAudio2.setIndex(index);
+                    zoomLevel = entityAudio2.getRect().right;
                 }
             }
         } else {
-            entityAudio.setIndex(value);
+            entityAudio.setIndex(index);
             this.entityListAudio.add(entityAudio);
         }
         this.entityList.push(new Pair<>(entityAudio, EntityAction.ADD));
@@ -2644,28 +2644,28 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public void addTrslQuran(EntityTrslTimeline entityTrslTimeline, int value) {
-        if (value < this.entityListTrslQuran.size()) {
-            entityTrslTimeline.setIndex(value);
-            this.entityListTrslQuran.add(value, entityTrslTimeline);
-            float floatValue = entityTrslTimeline.getRect().right;
+    public void addTrslQuran(EntityTrslTimeline entityTrslTimeline, int index) {
+        if (index < this.entityListTrslQuran.size()) {
+            entityTrslTimeline.setIndex(index);
+            this.entityListTrslQuran.add(index, entityTrslTimeline);
+            float zoomLevel = entityTrslTimeline.getRect().right;
             while (true) {
-                value++;
-                if (value >= this.entityListTrslQuran.size()) {
+                index++;
+                if (index >= this.entityListTrslQuran.size()) {
                     break;
                 }
-                EntityTrslTimeline entityTrslTimeline2 = this.entityListTrslQuran.get(value);
+                EntityTrslTimeline entityTrslTimeline2 = this.entityListTrslQuran.get(index);
                 if (entityTrslTimeline2.visible()) {
                     float width = entityTrslTimeline2.getRect().width();
                     entityTrslTimeline2.setCurrentRect();
-                    entityTrslTimeline2.setX(floatValue);
-                    entityTrslTimeline2.setRight(floatValue + width);
-                    entityTrslTimeline2.setIndex(value);
-                    floatValue = entityTrslTimeline2.getRect().right;
+                    entityTrslTimeline2.setX(zoomLevel);
+                    entityTrslTimeline2.setRight(zoomLevel + width);
+                    entityTrslTimeline2.setIndex(index);
+                    zoomLevel = entityTrslTimeline2.getRect().right;
                 }
             }
         } else {
-            entityTrslTimeline.setIndex(value);
+            entityTrslTimeline.setIndex(index);
             this.entityListTrslQuran.add(entityTrslTimeline);
         }
         this.entityList.push(new Pair<>(entityTrslTimeline, EntityAction.ADD));
@@ -2675,28 +2675,28 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public void addQuran(EntityQuranTimeline entityQuranTimeline, int value) {
-        if (value < this.entityListQuran.size()) {
-            entityQuranTimeline.setIndex(value);
-            this.entityListQuran.add(value, entityQuranTimeline);
-            float floatValue = entityQuranTimeline.getRect().right;
+    public void addQuran(EntityQuranTimeline entityQuranTimeline, int index) {
+        if (index < this.entityListQuran.size()) {
+            entityQuranTimeline.setIndex(index);
+            this.entityListQuran.add(index, entityQuranTimeline);
+            float zoomLevel = entityQuranTimeline.getRect().right;
             while (true) {
-                value++;
-                if (value >= this.entityListQuran.size()) {
+                index++;
+                if (index >= this.entityListQuran.size()) {
                     break;
                 }
-                EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(value);
+                EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(index);
                 if (entityQuranTimeline2.visible()) {
                     float width = entityQuranTimeline2.getRect().width();
                     entityQuranTimeline2.setCurrentRect();
-                    entityQuranTimeline2.setX(floatValue);
-                    entityQuranTimeline2.setRight(floatValue + width);
-                    entityQuranTimeline2.setIndex(value);
-                    floatValue = entityQuranTimeline2.getRect().right;
+                    entityQuranTimeline2.setX(zoomLevel);
+                    entityQuranTimeline2.setRight(zoomLevel + width);
+                    entityQuranTimeline2.setIndex(index);
+                    zoomLevel = entityQuranTimeline2.getRect().right;
                 }
             }
         } else {
-            entityQuranTimeline.setIndex(value);
+            entityQuranTimeline.setIndex(index);
             this.entityListQuran.add(entityQuranTimeline);
         }
         this.entityList.push(new Pair<>(entityQuranTimeline, EntityAction.ADD));
@@ -2706,22 +2706,22 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public void addQuran_split(EntityQuranTimeline entityQuranTimeline, int value) {
-        if (value < this.entityListQuran.size()) {
-            entityQuranTimeline.setIndex(value);
-            this.entityListQuran.add(value, entityQuranTimeline);
+    public void addQuran_split(EntityQuranTimeline entityQuranTimeline, int index) {
+        if (index < this.entityListQuran.size()) {
+            entityQuranTimeline.setIndex(index);
+            this.entityListQuran.add(index, entityQuranTimeline);
             while (true) {
-                value++;
-                if (value >= this.entityListQuran.size()) {
+                index++;
+                if (index >= this.entityListQuran.size()) {
                     break;
                 }
-                EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(value);
+                EntityQuranTimeline entityQuranTimeline2 = this.entityListQuran.get(index);
                 if (entityQuranTimeline2.visible()) {
-                    entityQuranTimeline2.setIndex(value);
+                    entityQuranTimeline2.setIndex(index);
                 }
             }
         } else {
-            entityQuranTimeline.setIndex(value);
+            entityQuranTimeline.setIndex(index);
             this.entityListQuran.add(entityQuranTimeline);
         }
         this.entityList.push(new Pair<>(entityQuranTimeline, EntityAction.SPLIT));
@@ -2731,22 +2731,22 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public void addQuran_split(EntityTrslTimeline entityTrslTimeline, int value) {
-        if (value < this.entityListTrslQuran.size()) {
-            entityTrslTimeline.setIndex(value);
-            this.entityListTrslQuran.add(value, entityTrslTimeline);
+    public void addQuran_split(EntityTrslTimeline entityTrslTimeline, int index) {
+        if (index < this.entityListTrslQuran.size()) {
+            entityTrslTimeline.setIndex(index);
+            this.entityListTrslQuran.add(index, entityTrslTimeline);
             while (true) {
-                value++;
-                if (value >= this.entityListTrslQuran.size()) {
+                index++;
+                if (index >= this.entityListTrslQuran.size()) {
                     break;
                 }
-                EntityTrslTimeline entityTrslTimeline2 = this.entityListTrslQuran.get(value);
+                EntityTrslTimeline entityTrslTimeline2 = this.entityListTrslQuran.get(index);
                 if (entityTrslTimeline2.visible()) {
-                    entityTrslTimeline2.setIndex(value);
+                    entityTrslTimeline2.setIndex(index);
                 }
             }
         } else {
-            entityTrslTimeline.setIndex(value);
+            entityTrslTimeline.setIndex(index);
             this.entityListTrslQuran.add(entityTrslTimeline);
         }
         this.entityList.push(new Pair<>(entityTrslTimeline, EntityAction.SPLIT));
@@ -2760,8 +2760,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         return this.duration;
     }
 
-    public void setDuration(int value) {
-        this.duration = value;
+    public void setDuration(int resourceId) {
+        this.duration = resourceId;
     }
 
     public float getXCursur() {
@@ -2778,12 +2778,12 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     public boolean isPass(MotionEvent motionEvent) {
         long eventTime = motionEvent.getEventTime();
-        long j = this.lastTime;
-        long j2 = eventTime - j;
-        if (this.isDetectChange || j == 0) {
-            int value = this.countMove + 1;
-            this.countMove = value;
-            if (value > 3) {
+        long durationMs = this.lastTime;
+        long durationMs282 = eventTime - durationMs;
+        if (this.isDetectChange || durationMs == 0) {
+            int count = this.countMove + 1;
+            this.countMove = count;
+            if (count > 3) {
                 this.isDetectChange = false;
                 this.countMove = 0;
             }
@@ -2799,23 +2799,23 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     private void updateMediaIndex() {
-        for (int value = 0; value < this.entityListAudio.size(); value++) {
-            this.entityListAudio.get(value).setIndex(value);
+        for (int index = 0; index < this.entityListAudio.size(); index++) {
+            this.entityListAudio.get(index).setIndex(index);
         }
     }
 
     private void updateIndex() {
-        for (int value = 0; value < this.entityListQuran.size(); value++) {
-            EntityQuranTimeline entityQuranTimeline = this.entityListQuran.get(value);
-            entityQuranTimeline.setIndex(value);
-            entityQuranTimeline.getQuranEntity().setIndex(value);
+        for (int index = 0; index < this.entityListQuran.size(); index++) {
+            EntityQuranTimeline entityQuranTimeline = this.entityListQuran.get(index);
+            entityQuranTimeline.setIndex(index);
+            entityQuranTimeline.getQuranEntity().setIndex(index);
         }
     }
 
     private void updateTrslIndex() {
-        for (int value = 0; value < this.entityListTrslQuran.size(); value++) {
-            EntityTrslTimeline entityTrslTimeline = this.entityListTrslQuran.get(value);
-            entityTrslTimeline.setIndex(value);
+        for (int index289 = 0; index289 < this.entityListTrslQuran.size(); index289++) {
+            EntityTrslTimeline entityTrslTimeline = this.entityListTrslQuran.get(index289);
+            entityTrslTimeline.setIndex(index289);
             entityTrslTimeline.getQuranEntity().setIndex(value);
         }
     }
@@ -2883,8 +2883,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         }
                     }
                     if (entityQuranTimeline == null) {
-                        for (int value2 = 0; value2 < this.entityListTrslQuran.size(); value2++) {
-                            EntityTrslTimeline entityTrslTimeline = this.entityListTrslQuran.get(value2);
+                        for (int index = 0; index < this.entityListTrslQuran.size(); index++) {
+                            EntityTrslTimeline entityTrslTimeline = this.entityListTrslQuran.get(index);
                             if (entityTrslTimeline != this.selectedEntity && entityTrslTimeline.visible()) {
                                 boolean contains5 = entityTrslTimeline.contains(pointF);
                                 this.isPassScroll = !contains5 && entityTrslTimeline.getTrim_type() == -1;
@@ -2909,8 +2909,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         }
                     }
                     if (entityQuranTimeline == null) {
-                        for (int value3 = 0; value3 < this.entityListAudio.size(); value3++) {
-                            EntityAudio entityAudio = this.entityListAudio.get(value3);
+                        for (int index = 0; index < this.entityListAudio.size(); index++) {
+                            EntityAudio entityAudio = this.entityListAudio.get(index);
                             if (entityAudio != this.selectedEntity && entityAudio.visible()) {
                                 boolean contains6 = entityAudio.contains(pointF);
                                 this.isPassScroll = !contains6 && entityAudio.getTrim_type() == -1;
@@ -3058,10 +3058,10 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             if (currX > 0.0f) {
                 this.currentPosition = 0.0f;
             }
-            float floatValue = this.currentPosition * this.scaleFactor;
-            this.scrolled_with_zoom = floatValue;
+            float zoomLevel = this.currentPosition * this.scaleFactor;
+            this.scrolled_with_zoom = zoomLevel;
             if (!this.isPlaying && (iTrimLineCallback = this.iTrimLineCallback) != null) {
-                iTrimLineCallback.onSeekPlayer(floatValue);
+                iTrimLineCallback.onSeekPlayer(zoomLevel);
             }
             invalidate();
         }
@@ -3081,17 +3081,17 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             return;
         }
         float width = previewOrNextEntityAudio.getRect().width() + entityAudio.getRect().right;
-        float floatValue = entityAudio.getRect().right - previewOrNextEntityAudio.getRect().left;
+        float zoomLevel = entityAudio.getRect().right - previewOrNextEntityAudio.getRect().left;
         previewOrNextEntityAudio.setCurrentRect();
         previewOrNextEntityAudio.setX(entityAudio.getRect().right);
         previewOrNextEntityAudio.setRight(width);
         for (int index = entityAudio.getIndex() + 2; index < this.entityListAudio.size(); index++) {
             EntityAudio entityAudio2 = this.entityListAudio.get(index);
             if (entityAudio2.visible()) {
-                float floatValue2 = entityAudio2.getRect().left + floatValue;
-                float width2 = entityAudio2.getRect().width() + floatValue2;
+                float panOffset = entityAudio2.getRect().left + zoomLevel;
+                float width2 = entityAudio2.getRect().width() + panOffset;
                 entityAudio2.setCurrentRect();
-                entityAudio2.setX(floatValue2);
+                entityAudio2.setX(panOffset);
                 entityAudio2.setRight(width2);
             }
         }
@@ -3106,7 +3106,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         EntityTrslTimeline previewOrNextEntityTrslQuran2;
         EntityQuranTimeline previewOrNextEntityQuran;
         EntityQuranTimeline previewOrNextEntityQuran2;
-        float floatValue;
+        float zoomLevel;
         EntityTrslTimeline previewOrNextEntityTrslQuran3;
         EntityQuranTimeline previewOrNextEntityQuran3;
         EntityAudio previewOrNextEntityAudio3;
@@ -3252,9 +3252,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (entity5 instanceof EntityAudio) {
                         EntityAudio entityAudio2 = (EntityAudio) entity5;
                         float offset_right = entityAudio2.getOffset_right() * entityAudio2.getmScaleFactor();
-                        float floatValue2 = (this.selectedEntity.getRect().right + offset_right) - left;
+                        float panOffset = (this.selectedEntity.getRect().right + offset_right) - left;
                         float max = entityAudio2.getMax() * entityAudio2.getmScaleFactor();
-                        if (floatValue2 > max) {
+                        if (panOffset > max) {
                             Entity entity6 = this.selectedEntity;
                             entity6.setX((entity6.getRect().right + offset_right) - max);
                             entityAudio2.updateStartTrim();
@@ -3311,13 +3311,13 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         return true;
                     }
                     if (this.onThink && this.pass) {
-                        float f3 = this.selectedEntity.getRect().left;
-                        float f4 = this.scrolled_with_zoom;
-                        float f5 = f3 + f4;
+                        float scaleFactor = this.selectedEntity.getRect().left;
+                        float scaleFactor341 = this.scrolled_with_zoom;
+                        float scaleFactor341 = scaleFactor + scaleFactor341;
                         float floatValue6 = this.TOLERANCE_X;
-                        if (f5 >= (-floatValue6) && f5 < floatValue6) {
+                        if (scaleFactor341 >= (-floatValue6) && scaleFactor341 < floatValue6) {
                             this.onThink = false;
-                            float f7 = -f4;
+                            float f7 = -scaleFactor341;
                             this.selectedEntity.setX(f7);
                             this.selectedEntity.updateStartTrim();
                             Entity entity10 = this.selectedEntity;
@@ -3425,14 +3425,14 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                             if (this.selectedEntity.getRect().left + getCurrentPosition() > this.DETECT_RIGHT_MOVE) {
                                 if (!this.isAutoScroll) {
                                     if (left > this.selectedEntity.getRect().left) {
-                                        float f8 = this.SPEED;
+                                        float speedFactor = this.SPEED;
                                         if (f8 < 0.0f) {
                                             this.SPEED = f8 * (-1.0f);
                                         }
                                     } else {
-                                        float f9 = this.SPEED;
-                                        if (f9 > 0.0f) {
-                                            this.SPEED = f9 * (-1.0f);
+                                        float speedFactor356 = this.SPEED;
+                                        if (speedFactor356 > 0.0f) {
+                                            this.SPEED = speedFactor356 * (-1.0f);
                                         }
                                     }
                                     this.isAutoScroll = true;
@@ -3448,7 +3448,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                             }
                         } else if (this.selectedEntity.getRect().left > 0.0f && this.selectedEntity.getRect().left + getCurrentPosition() < (-this.DETECT_LEFT_MOVE)) {
                             if (!this.isAutoScroll) {
-                                float f10 = this.SPEED;
+                                float xPosition = this.SPEED;
                                 if (f10 < 0.0f) {
                                     this.SPEED = f10 * (-1.0f);
                                 }
@@ -3456,9 +3456,9 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 this.time_start = System.currentTimeMillis();
                                 this.autoScrollHandler.postDelayed(this.autoScrollRunnable, 100L);
                             } else {
-                                float f11 = this.SPEED;
-                                if (f11 > 0.0f) {
-                                    this.SPEED = f11 * (-1.0f);
+                                float speedFactor = this.SPEED;
+                                if (speedFactor > 0.0f) {
+                                    this.SPEED = speedFactor * (-1.0f);
                                 }
                             }
                         } else if (this.isAutoScroll) {
@@ -3486,20 +3486,20 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         return false;
                     }
                     float right = this.selectedEntity.getRight() + x2;
-                    boolean z2 = right - this.selectedEntity.getRect().left > this.max_trim;
-                    if (!z2) {
+                    boolean isVisible = right - this.selectedEntity.getRect().left > this.max_trim;
+                    if (!isVisible) {
                         right = this.selectedEntity.getRect().left + this.max_trim;
                     }
                     Entity entity16 = this.selectedEntity;
                     if (entity16 instanceof EntityAudio) {
                         EntityAudio entityAudio3 = (EntityAudio) entity16;
-                        floatValue = right - entity16.getRect().left;
+                        zoomLevel = right - entity16.getRect().left;
                         float max2 = (entityAudio3.getMax() * entityAudio3.getmScaleFactor()) - (entityAudio3.getOffset_left() * entityAudio3.getmScaleFactor());
-                        if (floatValue > max2) {
+                        if (zoomLevel > max2) {
                             right = this.selectedEntity.getRect().left + max2;
                         } else if (entityAudio3.getIndex() + 1 < this.entityListAudio.size() && (previewOrNextEntityAudio3 = getPreviewOrNextEntityAudio(this.entityListAudio, entityAudio3.getIndex() + 1, true)) != null && right > previewOrNextEntityAudio3.getRect().left) {
                             this.selectedEntity.getRect().right = right;
-                            if (floatValue == -1.0f) {
+                            if (zoomLevel == -1.0f) {
                                 Entity entity17 = this.selectedEntity;
                                 entity17.setLastRight(entity17.getRight() + x2);
                             } else {
@@ -3526,16 +3526,16 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                             return true;
                         }
                     } else {
-                        floatValue = -1.0f;
+                        zoomLevel = -1.0f;
                     }
                     if (this.onThink && this.pass) {
-                        float f14 = this.selectedEntity.getRect().right;
-                        float f15 = this.scrolled_with_zoom;
-                        float f16 = f14 + f15;
-                        float f17 = this.TOLERANCE_X;
-                        if (f16 >= (-f17) && f16 < f17) {
+                        float scaleFactor = this.selectedEntity.getRect().right;
+                        float scaleFactor371 = this.scrolled_with_zoom;
+                        float scaleFactor371 = scaleFactor + scaleFactor371;
+                        float scaleFactor370 = this.TOLERANCE_X;
+                        if (f16 >= (-scaleFactor370) && f16 < scaleFactor370) {
                             this.onThink = false;
-                            float f18 = (-f15) + f17;
+                            float f18 = (-f15) + scaleFactor370;
                             Entity entity19 = this.selectedEntity;
                             if (entity19 instanceof EntityAudio) {
                                 entity19.setX(entity19.getRect().right - this.selectedEntity.getRect().width());
@@ -3626,7 +3626,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     Entity entity23 = this.selectedEntity;
                     if (entity23 instanceof EntityAudio) {
                         entity23.getRect().right = right;
-                        if (floatValue == -1.0f) {
+                        if (zoomLevel == -1.0f) {
                             Entity entity24 = this.selectedEntity;
                             entity24.setLastRight(entity24.getRight() + x2);
                         } else {
@@ -3665,12 +3665,12 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 if (this.selectedEntity.getRect().right + getCurrentPosition() > this.DETECT_RIGHT_MOVE) {
                                     if (!this.isAutoScroll) {
                                         if (right > this.selectedEntity.getRect().right) {
-                                            float f21 = this.SPEED;
+                                            float speedFactor = this.SPEED;
                                             if (f21 < 0.0f) {
                                                 this.SPEED = f21 * (-1.0f);
                                             }
                                         } else {
-                                            float f22 = this.SPEED;
+                                            float speedFactor = this.SPEED;
                                             if (f22 > 0.0f) {
                                                 this.SPEED = f22 * (-1.0f);
                                             }
@@ -3688,15 +3688,15 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 }
                             } else if (this.selectedEntity.getRect().right > 0.0f && this.selectedEntity.getRect().right + getCurrentPosition() < (-this.DETECT_LEFT_MOVE)) {
                                 if (!this.isAutoScroll) {
-                                    float f23 = this.SPEED;
-                                    if (f23 < 0.0f) {
+                                    float speedFactor = this.SPEED;
+                                    if (speedFactor < 0.0f) {
                                         this.SPEED = f23 * (-1.0f);
                                     }
                                     this.isAutoScroll = true;
                                     this.time_start = System.currentTimeMillis();
                                     this.autoScrollHandler.postDelayed(this.autoScrollRunnable, 100L);
                                 } else {
-                                    float f24 = this.SPEED;
+                                    float value = this.SPEED;
                                     if (f24 > 0.0f) {
                                         this.SPEED = f24 * (-1.0f);
                                     }
@@ -3736,12 +3736,12 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 if (this.selectedEntity.getRect().right + getCurrentPosition() > this.DETECT_RIGHT_MOVE) {
                                     if (!this.isAutoScroll) {
                                         if (right > this.selectedEntity.getRect().right) {
-                                            float f27 = this.SPEED;
+                                            float speedFactor = this.SPEED;
                                             if (f27 < 0.0f) {
                                                 this.SPEED = f27 * (-1.0f);
                                             }
                                         } else {
-                                            float f28 = this.SPEED;
+                                            float speedFactor = this.SPEED;
                                             if (f28 > 0.0f) {
                                                 this.SPEED = f28 * (-1.0f);
                                             }
@@ -3759,8 +3759,8 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 }
                             } else if (this.selectedEntity.getRect().right > 0.0f && this.selectedEntity.getRect().right + getCurrentPosition() < (-this.DETECT_LEFT_MOVE)) {
                                 if (!this.isAutoScroll) {
-                                    float f29 = this.SPEED;
-                                    if (f29 < 0.0f) {
+                                    float speedFactor = this.SPEED;
+                                    if (speedFactor < 0.0f) {
                                         this.SPEED = f29 * (-1.0f);
                                     }
                                     this.isAutoScroll = true;
@@ -3782,7 +3782,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     if (entity28 instanceof EntityBismilahTimeline) {
                         EntityBismilahTimeline entityBismilahTimeline = (EntityBismilahTimeline) entity28;
                         if (entityBismilahTimeline == this.mIsi3adaTimeline && isExist(this.bismilahTimeline) && right >= this.bismilahTimeline.getRect().left) {
-                            float f31 = right - this.bismilahTimeline.getRect().left;
+                            float speedFactor405 = right - this.bismilahTimeline.getRect().left;
                             float width8 = this.bismilahTimeline.getRect().width() + right;
                             this.bismilahTimeline.setCurrentRect();
                             this.bismilahTimeline.setX(right);
@@ -3790,7 +3790,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                             for (int index4 = this.bismilahTimeline.getIndex(); index4 < this.entityListQuran.size(); index4++) {
                                 EntityQuranTimeline entityQuranTimeline5 = this.entityListQuran.get(index4);
                                 if (entityQuranTimeline5.visible()) {
-                                    float f32 = entityQuranTimeline5.getRect().left + f31;
+                                    float f32 = entityQuranTimeline5.getRect().left + speedFactor405;
                                     float width9 = entityQuranTimeline5.getRect().width() + f32;
                                     entityQuranTimeline5.setCurrentRect();
                                     entityQuranTimeline5.setX(f32);
@@ -3829,7 +3829,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 if (this.selectedEntity.getRect().right + getCurrentPosition() > this.DETECT_RIGHT_MOVE) {
                                     if (!this.isAutoScroll) {
                                         if (right > this.selectedEntity.getRect().right) {
-                                            float f35 = this.SPEED;
+                                            float speedFactor = this.SPEED;
                                             if (f35 < 0.0f) {
                                                 this.SPEED = f35 * (-1.0f);
                                             }
@@ -3852,17 +3852,17 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                                 }
                             } else if (this.selectedEntity.getRect().right > 0.0f && this.selectedEntity.getRect().right + getCurrentPosition() < (-this.DETECT_LEFT_MOVE)) {
                                 if (!this.isAutoScroll) {
-                                    float f37 = this.SPEED;
-                                    if (f37 < 0.0f) {
+                                    float speedFactor = this.SPEED;
+                                    if (speedFactor < 0.0f) {
                                         this.SPEED = f37 * (-1.0f);
                                     }
                                     this.isAutoScroll = true;
                                     this.time_start = System.currentTimeMillis();
                                     this.autoScrollHandler.postDelayed(this.autoScrollRunnable, 100L);
                                 } else {
-                                    float f38 = this.SPEED;
-                                    if (f38 > 0.0f) {
-                                        this.SPEED = f38 * (-1.0f);
+                                    float speedFactor = this.SPEED;
+                                    if (speedFactor > 0.0f) {
+                                        this.SPEED = speedFactor * (-1.0f);
                                     }
                                 }
                             } else if (this.isAutoScroll) {
@@ -3896,7 +3896,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 if (left2 < 0.0f) {
                     left2 = 0.0f;
                 }
-                float f39 = left2 + width12;
+                float xPosition = left2 + width12;
                 Entity entity29 = this.selectedEntity;
                 if (entity29 instanceof EntityQuranTimeline) {
                     EntityQuranTimeline entityQuranTimeline7 = (EntityQuranTimeline) entity29;
@@ -3907,7 +3907,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         invalidate();
                         return true;
                     }
-                    if (entityQuranTimeline7.getIndex() + 1 < getEntityListQuran().size() && (previewOrNextEntityQuran = getPreviewOrNextEntityQuran(this.entityListQuran, entityQuranTimeline7.getIndex() + 1, true)) != null && f39 >= previewOrNextEntityQuran.getRect().left) {
+                    if (entityQuranTimeline7.getIndex() + 1 < getEntityListQuran().size() && (previewOrNextEntityQuran = getPreviewOrNextEntityQuran(this.entityListQuran, entityQuranTimeline7.getIndex() + 1, true)) != null && xPosition >= previewOrNextEntityQuran.getRect().left) {
                         this.selectedEntity.setX(previewOrNextEntityQuran.getRect().left - width12);
                         this.selectedEntity.setRight(previewOrNextEntityQuran.getRect().left);
                         this.pass = false;
@@ -3994,17 +3994,17 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 if (this.selectedEntity.getRect().right < f39) {
                     if (this.selectedEntity.getRect().left + getCurrentPosition() > this.DETECT_RIGHT_MOVE) {
                         if (!this.isAutoMove) {
-                            float f40 = this.SPEED;
-                            if (f40 > 0.0f) {
+                            float speedFactor = this.SPEED;
+                            if (speedFactor > 0.0f) {
                                 this.SPEED = f40 * (-1.0f);
                             }
                             this.isAutoMove = true;
                             this.time_start = System.currentTimeMillis();
                             this.autoScrollHandler.postDelayed(this.autoMoveRunnable, 100L);
                         } else {
-                            float f41 = this.SPEED;
-                            if (f41 < 0.0f) {
-                                this.SPEED = f41 * (-1.0f);
+                            float speedFactor = this.SPEED;
+                            if (speedFactor < 0.0f) {
+                                this.SPEED = speedFactor * (-1.0f);
                             }
                         }
                     } else if (this.isAutoMove) {
@@ -4013,7 +4013,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                     }
                 } else if (this.selectedEntity.getRect().left > 0.0f && this.selectedEntity.getRect().left + getCurrentPosition() < (-this.DETECT_LEFT_MOVE)) {
                     if (!this.isAutoMove) {
-                        float f42 = this.SPEED;
+                        float speedFactor = this.SPEED;
                         if (f42 < 0.0f) {
                             this.SPEED = f42 * (-1.0f);
                         }
@@ -4021,7 +4021,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                         this.time_start = System.currentTimeMillis();
                         this.autoScrollHandler.postDelayed(this.autoMoveRunnable, 100L);
                     } else {
-                        float f43 = this.SPEED;
+                        float speedFactor = this.SPEED;
                         if (f43 > 0.0f) {
                             this.SPEED = f43 * (-1.0f);
                         }
@@ -4049,13 +4049,13 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         this.objectAnimator.start();
     }
 
-    public void setFlingY(float floatValue) {
-        this.target = floatValue;
-        if (floatValue <= 0.0f) {
+    public void setFlingY(float zoomLevel) {
+        this.target = zoomLevel;
+        if (zoomLevel <= 0.0f) {
             if (this.f451y + this.mScrollY >= getHeight()) {
-                float floatValue2 = this.mScrollY + (this.target / 100.0f);
-                this.mScrollY = floatValue2;
-                if (this.f451y + floatValue2 < getHeight()) {
+                float panOffset = this.mScrollY + (this.target / 100.0f);
+                this.mScrollY = panOffset;
+                if (this.f451y + panOffset < getHeight()) {
                     this.mScrollY = getHeight() - this.f451y;
                 }
                 invalidate();
@@ -4063,10 +4063,10 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             }
             return;
         }
-        float f3 = this.mScrollY;
-        if (f3 < 0.0f) {
-            float f4 = f3 + (floatValue / 100.0f);
-            this.mScrollY = f4;
+        float heightRatio = this.mScrollY;
+        if (heightRatio < 0.0f) {
+            float heightRatio436 = f3 + (zoomLevel / 100.0f);
+            this.mScrollY = heightRatio436;
             if (f4 > 0.0f) {
                 this.mScrollY = 0.0f;
             }
@@ -4074,51 +4074,51 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         }
     }
 
-    public EntityAudio getPreviewOrNextEntityAudio(List<EntityAudio> list, int value, boolean isEnabled) {
+    public EntityAudio getPreviewOrNextEntityAudio(List<EntityAudio> list, int index, boolean isEnabled) {
         if (isEnabled) {
-            while (value < list.size()) {
-                if (list.get(value).visible()) {
-                    return list.get(value);
+            while (index < list.size()) {
+                if (list.get(index).visible()) {
+                    return list.get(index);
                 }
-                value++;
+                index++;
             }
             return null;
         }
-        while (value >= 0 && value < list.size()) {
-            if (list.get(value).visible()) {
-                return list.get(value);
+        while (index >= 0 && index < list.size()) {
+            if (list.get(index).visible()) {
+                return list.get(index);
             }
-            value--;
+            index--;
         }
         return null;
     }
 
-    public EntityQuranTimeline getPreviewOrNextEntityQuran(List<EntityQuranTimeline> list, int value, boolean isEnabled) {
+    public EntityQuranTimeline getPreviewOrNextEntityQuran(List<EntityQuranTimeline> list, int index, boolean isEnabled) {
         if (isEnabled) {
-            while (value < list.size()) {
-                if (list.get(value).visible()) {
-                    return list.get(value);
+            while (index < list.size()) {
+                if (list.get(index).visible()) {
+                    return list.get(index);
                 }
-                value++;
+                index++;
             }
             return null;
         }
-        while (value >= 0 && value < list.size()) {
-            if (list.get(value).visible()) {
-                return list.get(value);
+        while (index >= 0 && index < list.size()) {
+            if (list.get(index).visible()) {
+                return list.get(index);
             }
-            value--;
+            index--;
         }
         return null;
     }
 
-    public EntityTrslTimeline getPreviewOrNextEntityTrslQuran(List<EntityTrslTimeline> list, int value, boolean isEnabled) {
+    public EntityTrslTimeline getPreviewOrNextEntityTrslQuran(List<EntityTrslTimeline> list, int index, boolean isEnabled) {
         if (isEnabled) {
-            while (value < list.size()) {
-                if (list.get(value).visible()) {
-                    return list.get(value);
+            while (index < list.size()) {
+                if (list.get(index).visible()) {
+                    return list.get(index);
                 }
-                value++;
+                index++;
             }
             return null;
         }
@@ -4169,63 +4169,63 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     public void calculMaxTime() {
-        float floatValue;
-        float floatValue2;
+        float zoomLevel;
+        float panOffset;
         float scaleFactor;
         EntityAudio audio = getAudio();
-        float f3 = 0.0f;
+        float scaleFactor446 = 0.0f;
         if (audio == null || audio.getRect() == null) {
-            floatValue = 0.0f;
+            zoomLevel = 0.0f;
         } else if (audio.getmScaleFactor() != getScaleFactor()) {
-            floatValue = (audio.getRect().right / audio.getmScaleFactor()) * getScaleFactor();
+            zoomLevel = (audio.getRect().right / audio.getmScaleFactor()) * getScaleFactor();
         } else {
-            floatValue = audio.getRect().right;
+            zoomLevel = audio.getRect().right;
         }
         EntityQuranTimeline quran = getQuran();
         if (quran == null || quran.getRect() == null) {
             if (isExist(this.bismilahTimeline)) {
                 if (this.bismilahTimeline.getmScaleFactor() != getScaleFactor()) {
-                    floatValue2 = this.bismilahTimeline.getRect().right / this.bismilahTimeline.getmScaleFactor();
+                    panOffset = this.bismilahTimeline.getRect().right / this.bismilahTimeline.getmScaleFactor();
                     scaleFactor = getScaleFactor();
-                    f3 = scaleFactor * floatValue2;
+                    scaleFactor446 = scaleFactor * panOffset;
                 } else {
-                    f3 = this.bismilahTimeline.getRect().right;
+                    scaleFactor446 = this.bismilahTimeline.getRect().right;
                 }
             } else if (isExist(this.mIsi3adaTimeline)) {
                 if (this.mIsi3adaTimeline.getmScaleFactor() != getScaleFactor()) {
-                    floatValue2 = this.mIsi3adaTimeline.getRect().right / this.mIsi3adaTimeline.getmScaleFactor();
+                    panOffset = this.mIsi3adaTimeline.getRect().right / this.mIsi3adaTimeline.getmScaleFactor();
                     scaleFactor = getScaleFactor();
-                    f3 = scaleFactor * floatValue2;
+                    scaleFactor446 = scaleFactor * panOffset;
                 } else {
-                    f3 = this.mIsi3adaTimeline.getRect().right;
+                    scaleFactor446 = this.mIsi3adaTimeline.getRect().right;
                 }
             }
         } else if (quran.getmScaleFactor() != getScaleFactor()) {
-            f3 = (quran.getRect().right / quran.getmScaleFactor()) * getScaleFactor();
+            scaleFactor446 = (quran.getRect().right / quran.getmScaleFactor()) * getScaleFactor();
         } else {
-            f3 = quran.getRect().right;
+            scaleFactor446 = quran.getRect().right;
         }
         EntityTrslTimeline trslQuran = getTrslQuran();
         if (trslQuran != null && trslQuran.getRect() != null) {
             if (trslQuran.getmScaleFactor() != getScaleFactor()) {
-                f3 = Math.max((trslQuran.getRect().right / trslQuran.getmScaleFactor()) * getScaleFactor(), f3);
+                scaleFactor446 = Math.max((trslQuran.getRect().right / trslQuran.getmScaleFactor()) * getScaleFactor(), scaleFactor446);
             } else {
-                f3 = Math.max(trslQuran.getRect().right, f3);
+                scaleFactor446 = Math.max(trslQuran.getRect().right, scaleFactor446);
             }
         }
-        float max = Math.max(f3, floatValue);
+        float max = Math.max(scaleFactor446, zoomLevel);
         int second_in_screen = (int) ((max / getSecond_in_screen()) * 1000.0f);
         this.maxTime = second_in_screen;
         this.duration = (int) (second_in_screen / 1000.0f);
         this.timeLineW = max / this.scaleFactor;
     }
 
-    public void update_current_cursur_position(int value) {
-        this.current_cursur_position = value;
+    public void update_current_cursur_position(int resourceId) {
+        this.current_cursur_position = resourceId;
     }
 
-    public void setCurrent_cursur_position(int value) {
-        this.current_cursur_position = value;
+    public void setCurrent_cursur_position(int resourceId) {
+        this.current_cursur_position = resourceId;
     }
 
     public float getTimeLineW() {
@@ -4244,26 +4244,26 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
         return this.maxTime;
     }
 
-    public void updateCursur(int value) {
-        this.current_cursur_position = value;
-        float floatValue = ((-value) * this.second_in_screen) / 1000.0f;
-        this.currentPosition = floatValue;
-        this.scrolled_with_zoom = floatValue * this.scaleFactor;
+    public void updateCursur(int resourceId) {
+        this.current_cursur_position = resourceId;
+        float zoomLevel = ((-resourceId) * this.second_in_screen) / 1000.0f;
+        this.currentPosition = zoomLevel;
+        this.scrolled_with_zoom = zoomLevel * this.scaleFactor;
         invalidate();
     }
 
-    public void setPosCursur(int value) {
-        this.current_cursur_position = value;
-        float floatValue = ((-value) * this.second_in_screen) / 1000.0f;
-        this.currentPosition = floatValue;
-        this.scrolled_with_zoom = floatValue * this.scaleFactor;
+    public void setPosCursur(int resourceId) {
+        this.current_cursur_position = resourceId;
+        float zoomLevel = ((-value) * this.second_in_screen) / 1000.0f;
+        this.currentPosition = zoomLevel;
+        this.scrolled_with_zoom = zoomLevel * this.scaleFactor;
         invalidate();
     }
 
-    public void updateCursur(float floatValue) {
-        float floatValue2 = -floatValue;
-        this.currentPosition = floatValue2;
-        this.scrolled_with_zoom = floatValue2 * this.scaleFactor;
+    public void updateCursur(float zoomLevel) {
+        float panOffset = -zoomLevel;
+        this.currentPosition = panOffset;
+        this.scrolled_with_zoom = panOffset * this.scaleFactor;
         invalidate();
     }
 
@@ -4391,15 +4391,15 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public boolean handleItemInteraction(float floatValue, float floatValue2) {
-        int value;
+    public boolean handleItemInteraction(float zoomLevel, float panOffset) {
+        int index;
         boolean isEnabled;
         RectF rectF = this.rectFItemQuran;
-        boolean z2 = rectF != null && rectF.contains(floatValue, floatValue2);
+        boolean isEnabled473 = rectF != null && rectF.contains(zoomLevel, panOffset);
         RectF rectF2 = this.rectItemAudio;
-        boolean z3 = rectF2 != null && rectF2.contains(floatValue, floatValue2);
+        boolean isEnabled473 = rectF2 != null && rectF2.contains(zoomLevel, panOffset);
         RectF rectF3 = this.rectFItemTrslQuran;
-        boolean z4 = rectF3 != null && rectF3.contains(floatValue, floatValue2);
+        boolean isEnabled473 = rectF3 != null && rectF3.contains(zoomLevel, panOffset);
         if (z2 || z3 || z4) {
             Entity entity = this.selectedEntity;
             if (entity != null) {
@@ -4422,7 +4422,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             ITrimLineCallback iTrimLineCallback = this.iTrimLineCallback;
             if (iTrimLineCallback != null && (z2 || z3 || z4)) {
                 this.selectedEntity = null;
-                iTrimLineCallback.onSelectMultiple(value);
+                iTrimLineCallback.onSelectMultiple(resourceId);
             }
             invalidate();
         }
@@ -4431,7 +4431,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     private int processQuranItemsSelection() {
         List<EntityQuranTimeline> list = this.entityListQuran;
-        int value = 0;
+        int resourceId = 0;
         if (list == null) {
             return 0;
         }
@@ -4441,7 +4441,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 entityQuranTimeline.setSelect(!isSelect);
                 entityQuranTimeline.setSelectMultiple(!isSelect);
                 if (entityQuranTimeline.isSelect()) {
-                    value++;
+                    resourceId++;
                 }
             }
         }
@@ -4450,7 +4450,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
             this.bismilahTimeline.setSelect(!isSelect2);
             this.bismilahTimeline.setSelectMultiple(!isSelect2);
             if (this.bismilahTimeline.isSelect()) {
-                value++;
+                resourceId++;
             }
         }
         if (isExist(this.mIsi3adaTimeline)) {
@@ -4471,7 +4471,7 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
 
     private int processTrslQuranItemsSelection() {
         List<EntityTrslTimeline> list = this.entityListTrslQuran;
-        int value = 0;
+        int index = 0;
         if (list == null) {
             return 0;
         }
@@ -4481,21 +4481,21 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 entityTrslTimeline.setSelect(!isSelect);
                 entityTrslTimeline.setSelectMultiple(!isSelect);
                 if (entityTrslTimeline.isSelect()) {
-                    value++;
+                    index++;
                 }
             }
         }
-        if (value > 0) {
+        if (index > 0) {
             this.clr_btn_trsl = -794718;
         } else {
             this.clr_btn_trsl = -13421771;
         }
-        return value;
+        return index;
     }
 
     private int processAudioItemsSelection() {
         List<EntityAudio> list = this.entityListAudio;
-        int value = 0;
+        int index = 0;
         if (list == null) {
             return 0;
         }
@@ -4505,16 +4505,16 @@ public class TrackEntityView extends FrameLayout implements View.OnTouchListener
                 entityAudio.setSelect(!isSelect);
                 entityAudio.setSelectMultiple(!isSelect);
                 if (entityAudio.isSelect()) {
-                    value++;
+                    index++;
                 }
             }
         }
-        if (value > 0) {
+        if (index > 0) {
             this.clr_btn_audio = -794718;
         } else {
             this.clr_btn_audio = -13421771;
         }
-        return value;
+        return index;
     }
 
     private boolean deselectAllQuranItems() {

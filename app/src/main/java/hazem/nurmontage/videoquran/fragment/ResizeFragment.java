@@ -95,10 +95,10 @@ public class ResizeFragment extends Fragment {
     public List<Pair<Integer, Integer>> getListDimension(Activity activity, List<ItemDimension> list) {
         int screenWidth = (int) (ScreenUtils.getScreenWidth(activity) * 0.27f);
         ArrayList arrayList = new ArrayList();
-        for (int value = 0; value < list.size(); value++) {
-            ItemDimension itemDimension = list.get(value);
+        for (int index = 0; index < list.size(); index++) {
+            ItemDimension itemDimension = list.get(index);
             if (itemDimension.getId().equals(this.selectResize)) {
-                this.posSelectResize = value;
+                this.posSelectResize = index;
             }
             arrayList.add(Utils.getDimension(itemDimension.getResizeType(), screenWidth));
         }

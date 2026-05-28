@@ -143,8 +143,8 @@ public class EffectBismilahFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
-                    EffectBismilahFragment.this.tvDuration.setText(String.valueOf(value / 10.0f));
+                public void onProgressChanged(SeekBar seekBar2, int resourceId, boolean isFlag) {
+                    EffectBismilahFragment.this.tvDuration.setText(String.valueOf(resourceId / 10.0f));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -219,15 +219,15 @@ public class EffectBismilahFragment extends Fragment {
             root.post(new Runnable() { // from class: hazem.nurmontage.videoquran.fragment.EffectBismilahFragment.6
                 @Override // java.lang.Runnable
                 public void run() {
-                    int value;
+                    int index;
                     List<TransitionBismilahAdabters.TransitionItem> inTransition = EffectBismilahFragment.this.getInTransition();
                     if (EffectBismilahFragment.this.transition == null || !EffectBismilahFragment.this.transition.isIn()) {
-                        value = -1;
+                        index = -1;
                     } else {
                         EffectBismilahFragment effectBismilahFragment = EffectBismilahFragment.this;
-                        value = effectBismilahFragment.getIndex(inTransition, effectBismilahFragment.transition.getType_in());
+                        index = effectBismilahFragment.getIndex(inTransition, effectBismilahFragment.transition.getType_in());
                     }
-                    EffectBismilahFragment.this.transitionEntityAdabters = new TransitionBismilahAdabters(EffectBismilahFragment.this.iTransition, inTransition, value, EffectBismilahFragment.this.entityQuranTimeline);
+                    EffectBismilahFragment.this.transitionEntityAdabters = new TransitionBismilahAdabters(EffectBismilahFragment.this.iTransition, inTransition, index, EffectBismilahFragment.this.entityQuranTimeline);
                     EffectBismilahFragment.this.recyclerView.setAdapter(EffectBismilahFragment.this.transitionEntityAdabters);
                     EffectBismilahFragment effectBismilahFragment2 = EffectBismilahFragment.this;
                     effectBismilahFragment2.scroll(effectBismilahFragment2.transitionEntityAdabters.getSelect());
@@ -268,10 +268,10 @@ public class EffectBismilahFragment extends Fragment {
         this.iv_apply_all.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
     }
 
-    public void scroll(int value) {
+    public void scroll(int width) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
-        View findViewByPosition = linearLayoutManager.findViewByPosition(value);
-        linearLayoutManager.scrollToPositionWithOffset(value, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
+        View findViewByPosition = linearLayoutManager.findViewByPosition(width);
+        linearLayoutManager.scrollToPositionWithOffset(width, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
     }
 
     public void updateButton(Transition transition) {
@@ -281,9 +281,9 @@ public class EffectBismilahFragment extends Fragment {
     }
 
     public int getIndex(List<TransitionBismilahAdabters.TransitionItem> list, String textValue) {
-        for (int value = 0; value < list.size(); value++) {
-            if (textValue.equals(list.get(value).getType())) {
-                return value;
+        for (int index = 0; index < list.size(); index++) {
+            if (textValue.equals(list.get(index).getType())) {
+                return index;
             }
         }
         return -1;
@@ -304,9 +304,9 @@ public class EffectBismilahFragment extends Fragment {
         this.tvDuration.setVisibility(8);
     }
 
-    public void loadTransition(int value) {
+    public void loadTransition(int index32) {
         this.index = -1;
-        if (value == 0) {
+        if (index32 == 0) {
             List<TransitionBismilahAdabters.TransitionItem> inTransition = getInTransition();
             Transition transition = this.transition;
             if (transition != null) {
@@ -337,7 +337,7 @@ public class EffectBismilahFragment extends Fragment {
             }
             return;
         }
-        if (value == 1) {
+        if (index32 == 1) {
             List<TransitionBismilahAdabters.TransitionItem> outTransition = getOutTransition();
             Transition transition3 = this.transition;
             if (transition3 != null) {

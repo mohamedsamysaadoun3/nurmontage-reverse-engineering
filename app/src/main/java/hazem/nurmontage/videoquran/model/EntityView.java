@@ -87,8 +87,8 @@ public abstract class EntityView {
         return this.rect;
     }
 
-    public void setCanvasWH(int i, int value2) {
-        this.canvasH = value2;
+    public void setCanvasWH(int i, int resourceId) {
+        this.canvasH = resourceId;
         this.canvasW = i;
     }
 

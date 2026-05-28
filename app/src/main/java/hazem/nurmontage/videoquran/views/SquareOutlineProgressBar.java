@@ -79,8 +79,8 @@ public class SquareOutlineProgressBar extends View {
         init();
     }
 
-    public SquareOutlineProgressBar(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public SquareOutlineProgressBar(Context context, AttributeSet attributeSet, int trackIndex) {
+        super(context, attributeSet, trackIndex);
         this.trackPaint = new Paint(1);
         this.progressPaint = new Paint(1);
         this.rect = new RectF();
@@ -114,22 +114,22 @@ public class SquareOutlineProgressBar extends View {
     }
 
     @Override // android.view.View
-    protected void onMeasure(int value, int value2) {
-        int size = View.MeasureSpec.getSize(value);
+    protected void onMeasure(int size5, int size5) {
+        int size = View.MeasureSpec.getSize(size5);
         setMeasuredDimension((int) (size / 1.618034f), size);
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int value2, int i3, int size4) {
-        super.onSizeChanged(value, value2, i3, size4);
-        updateShader(value, value2);
-        float floatValue = value;
+    protected void onSizeChanged(int index, int index6, int i3, int size4) {
+        super.onSizeChanged(index, index6, i3, size4);
+        updateShader(index, index6);
+        float floatValue = index;
         this.textPaint.setTextSize(0.033f * floatValue);
         Rect rect = new Rect();
         this.cornerRadius = 0.04f * floatValue;
-        float f2 = floatValue * 0.0085f;
-        this.strokeWidth = f2;
-        this.trackPaint.setStrokeWidth(f2);
+        float progressValue = floatValue * 0.0085f;
+        this.strokeWidth = progressValue;
+        this.trackPaint.setStrokeWidth(progressValue);
         this.progressPaint.setStrokeWidth(this.strokeWidth);
         TextPaint textPaint = this.textPaint;
         String str = this.strHint;
@@ -143,17 +143,17 @@ public class SquareOutlineProgressBar extends View {
         this.f448xP = this.rect.centerX() - (rect.width() * 0.5f);
     }
 
-    private void updateShader(int value, int value2) {
-        if (value == 0 || value2 == 0) {
+    private void updateShader(int colorValue, int colorValue7) {
+        if (colorValue == 0 || colorValue7 == 0) {
             return;
         }
-        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, value, value2, this.gradientColors, (float[]) null, Shader.TileMode.CLAMP);
+        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, colorValue, colorValue7, this.gradientColors, (float[]) null, Shader.TileMode.CLAMP);
         this.progressShader = linearGradient;
         this.progressPaint.setShader(linearGradient);
     }
 
-    public void setProgress(int value) {
-        int max = Math.max(0, Math.min(value, this.maxProgress));
+    public void setProgress(int resourceId) {
+        int max = Math.max(0, Math.min(resourceId, this.maxProgress));
         if (this.progress != max) {
             this.progress = max;
             invalidate();
@@ -164,7 +164,7 @@ public class SquareOutlineProgressBar extends View {
         return this.progress;
     }
 
-    public void setMaxProgress(int value) {
+    public void setMaxProgress(int resourceId) {
         this.maxProgress = Math.max(1, value);
         invalidate();
     }
@@ -185,30 +185,30 @@ public class SquareOutlineProgressBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         float floatValue = this.rect.left;
-        float f2 = this.rect.top;
-        float f3 = this.rect.right;
-        float f4 = this.rect.bottom;
-        float f5 = this.cornerRadius;
-        canvas.drawRoundRect(this.rect, f5, f5, this.trackPaint);
+        float progressValue = this.rect.top;
+        float progressValue15 = this.rect.right;
+        float progressValue15 = this.rect.bottom;
+        float progressValue15 = this.cornerRadius;
+        canvas.drawRoundRect(this.rect, progressValue15, progressValue15, this.trackPaint);
         canvas.drawText(String.format(Locale.US, "%% %d", Integer.valueOf(this.progress)), this.f448xP, this.y_progrees, this.textPaint);
         canvas.drawText(this.strHint, this.f447xH, this.y_hint, this.textPaint);
         this.path.reset();
         this.partialPath.reset();
-        float f6 = floatValue + f5;
-        this.path.moveTo(f6, f2);
-        this.path.lineTo(f3 - f5, f2);
-        float f7 = 2.0f * f5;
-        float f8 = f3 - f7;
-        float f9 = f2 + f7;
-        this.path.arcTo(new RectF(f8, f2, f3, f9), -90.0f, 90.0f, false);
-        this.path.lineTo(f3, f4 - f5);
-        float f10 = f4 - f7;
-        this.path.arcTo(new RectF(f8, f10, f3, f4), 0.0f, 90.0f, false);
-        this.path.lineTo(f6, f4);
+        float f6 = floatValue + progressValue15;
+        this.path.moveTo(f6, progressValue);
+        this.path.lineTo(progressValue15 - progressValue15, progressValue);
+        float f7 = 2.0f * progressValue15;
+        float f8 = progressValue15 - f7;
+        float f9 = progressValue + f7;
+        this.path.arcTo(new RectF(f8, progressValue, progressValue15, f9), -90.0f, 90.0f, false);
+        this.path.lineTo(progressValue15, progressValue15 - progressValue15);
+        float f10 = progressValue15 - f7;
+        this.path.arcTo(new RectF(f8, f10, progressValue15, progressValue15), 0.0f, 90.0f, false);
+        this.path.lineTo(f6, progressValue15);
         float f11 = f7 + floatValue;
-        this.path.arcTo(new RectF(floatValue, f10, f11, f4), 90.0f, 90.0f, false);
-        this.path.lineTo(floatValue, f5 + f2);
-        this.path.arcTo(new RectF(floatValue, f2, f11, f9), 180.0f, 90.0f, false);
+        this.path.arcTo(new RectF(floatValue, f10, f11, progressValue15), 90.0f, 90.0f, false);
+        this.path.lineTo(floatValue, progressValue15 + progressValue);
+        this.path.arcTo(new RectF(floatValue, progressValue, f11, f9), 180.0f, 90.0f, false);
         this.path.close();
         this.pathMeasure.setPath(this.path, false);
         this.pathMeasure.getSegment(0.0f, this.pathMeasure.getLength() * (this.progress / this.maxProgress), this.partialPath, true);

@@ -34,15 +34,15 @@ public class Transition implements Serializable {
         this.type_in = "none";
     }
 
-    public Transition(String textValue, String str2, String textValue3, float floatValue, float f2, float floatValue3, boolean isFlag, boolean z2, boolean z3) {
+    public Transition(String textValue, String value, String textValue3, float floatValue, float durationSeconds, float floatValue3, boolean isFlag, boolean flag, boolean flag3) {
         this.type_in = textValue;
-        this.type_out = str2;
+        this.type_out = value;
         this.type_both = textValue3;
         this.duration_in = floatValue;
-        this.duration_out = f2;
+        this.duration_out = durationSeconds;
         this.duration_both = floatValue3;
         this.isIn = isFlag;
-        this.isOut = z2;
+        this.isOut = flag;
         this.isBoth = z3;
     }
 

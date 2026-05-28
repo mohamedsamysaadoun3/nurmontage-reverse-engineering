@@ -126,11 +126,11 @@ public class EntityBismilahTimeline extends Entity {
         return this.rect;
     }
 
-    public EntityBismilahTimeline(BismilahEntity bismilahEntity, float floatValue, float f2, float f3, float f4, float floatValue5) {
+    public EntityBismilahTimeline(BismilahEntity bismilahEntity, float floatValue, float xPosition, float xPosition22, float xPosition22, float floatValue5) {
         super(floatValue5);
-        this.f411h = f3;
+        this.f411h = xPosition22;
         this.quranEntity = bismilahEntity;
-        this.rect = new RectF(floatValue, f2, f4, f3);
+        this.rect = new RectF(floatValue, xPosition, xPosition22, xPosition22);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_QURAN;
@@ -143,10 +143,10 @@ public class EntityBismilahTimeline extends Entity {
         this.textBound = new Rect();
         this.paintText.getTextBounds(this.quranEntity.getTxt(), 0, this.quranEntity.getTxt().length(), this.textBound);
         this.centerY = this.rect.top + (this.rect.height() * 0.5f) + (this.textBound.height() * 0.5f);
-        this.rectFLeft = new RectF(0.0f, 0.0f, 0.46f * f3, f3);
-        this.rectFRight = new RectF(0.0f, 0.0f, this.rectFLeft.width(), f3);
+        this.rectFLeft = new RectF(0.0f, 0.0f, 0.46f * xPosition22, xPosition22);
+        this.rectFRight = new RectF(0.0f, 0.0f, this.rectFLeft.width(), xPosition22);
         this.round = this.rectFRight.width() * 0.5f;
-        this.padding = f3 * 0.07f;
+        this.padding = xPosition22 * 0.07f;
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
@@ -162,7 +162,7 @@ public class EntityBismilahTimeline extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void draw(Canvas canvas, int i, int value2) {
+    public void draw(Canvas canvas, int i, int resourceId) {
         canvas.drawText(this.quranEntity.getTxt().replace(Common.NUMBER_CHAR, "..."), this.round + this.rect.left, this.centerY, this.paintText);
     }
 

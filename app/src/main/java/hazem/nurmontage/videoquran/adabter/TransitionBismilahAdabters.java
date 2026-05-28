@@ -19,9 +19,9 @@ public class TransitionBismilahAdabters extends RecyclerView.Adapter<ViewHolder>
     private int select;
     private String type = "in";
 
-    public TransitionBismilahAdabters(EffectBismilahFragment.ITransition iTransition, List<TransitionItem> list, int value, EntityBismilahTimeline entityBismilahTimeline) {
+    public TransitionBismilahAdabters(EffectBismilahFragment.ITransition iTransition, List<TransitionItem> list, int count, EntityBismilahTimeline entityBismilahTimeline) {
         this.iTransition = iTransition;
-        this.select = value;
+        this.select = count;
         this.list = list;
         this.max = list.size();
         this.entityQuranTimeline = entityBismilahTimeline;
@@ -31,8 +31,8 @@ public class TransitionBismilahAdabters extends RecyclerView.Adapter<ViewHolder>
         return this.select;
     }
 
-    public void update(List<TransitionItem> list, String textValue, int value) {
-        this.select = value;
+    public void update(List<TransitionItem> list, String textValue, int count) {
+        this.select = count;
         this.list = list;
         this.type = textValue;
         this.max = list.size();
@@ -44,24 +44,24 @@ public class TransitionBismilahAdabters extends RecyclerView.Adapter<ViewHolder>
     }
 
     public void unselect() {
-        int value = this.select;
-        if (value == -1) {
+        int resourceId = this.select;
+        if (resourceId == -1) {
             return;
         }
         this.select = -1;
-        notifyItemChanged(value);
+        notifyItemChanged(resourceId);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_anim, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        viewHolder.animationItem.setRotation(this.list.get(value).getAngle());
-        viewHolder.animationItem.setImageResource(this.list.get(value).getId_ressource());
-        if (value == this.select) {
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        viewHolder.animationItem.setRotation(this.list.get(index).getAngle());
+        viewHolder.animationItem.setImageResource(this.list.get(index).getId_ressource());
+        if (index == this.select) {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_item_menu_select);
         } else {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_effect);
@@ -87,9 +87,9 @@ public class TransitionBismilahAdabters extends RecyclerView.Adapter<ViewHolder>
                     if (TransitionBismilahAdabters.this.iTransition == null || TransitionBismilahAdabters.this.select == ViewHolder.this.getAdapterPosition()) {
                         return;
                     }
-                    int value = TransitionBismilahAdabters.this.select;
+                    int index = TransitionBismilahAdabters.this.select;
                     TransitionBismilahAdabters.this.select = ViewHolder.this.getAdapterPosition();
-                    TransitionBismilahAdabters.this.notifyItemChanged(value);
+                    TransitionBismilahAdabters.this.notifyItemChanged(index);
                     TransitionBismilahAdabters.this.notifyItemChanged(TransitionBismilahAdabters.this.select);
                     if (TransitionBismilahAdabters.this.type != null) {
                         if (TransitionBismilahAdabters.this.type.equals("in")) {
@@ -108,9 +108,9 @@ public class TransitionBismilahAdabters extends RecyclerView.Adapter<ViewHolder>
         private int id_ressource;
         private String type;
 
-        public TransitionItem(String textValue, int value, int value2) {
+        public TransitionItem(String textValue, int resourceId, int resourceId13) {
             this.type = textValue;
-            this.id_ressource = value;
+            this.id_ressource = resourceId;
             this.angle = value2;
         }
 

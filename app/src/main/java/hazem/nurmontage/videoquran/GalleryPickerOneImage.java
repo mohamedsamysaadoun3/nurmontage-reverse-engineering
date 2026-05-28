@@ -64,7 +64,7 @@ public class GalleryPickerOneImage extends Base {
     };
     private GalleryPickerVideo.IPicker iPicker = new GalleryPickerVideo.IPicker() { // from class: hazem.nurmontage.videoquran.GalleryPickerOneImage.2
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(VideoItem videoItem, int value) {
+        public void onAdd(VideoItem videoItem, int resourceId) {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
@@ -77,7 +77,7 @@ public class GalleryPickerOneImage extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(PhotoItem photoItem, int value) {
+        public void onAdd(PhotoItem photoItem, int resourceId) {
             GalleryPickerOneImage.this.mPhotoItem = photoItem;
         }
     };
@@ -218,7 +218,7 @@ public class GalleryPickerOneImage extends Base {
             @Override // java.lang.Runnable
             public void run() {
                 HashSet hashSet;
-                int value;
+                int index;
                 String textValue;
                 int i2;
                 String textValue2;
@@ -243,17 +243,17 @@ public class GalleryPickerOneImage extends Base {
                         if (listFiles != null) {
                             int length = listFiles.length;
                             int i6 = i3;
-                            String str4 = null;
+                            String filePath = null;
                             while (i3 < length) {
                                 int i7 = length;
                                 File file2 = listFiles[i3];
                                 File[] fileArr = listFiles;
                                 if (GalleryPickerOneImage.this.isImageFile(file2)) {
                                     i6++;
-                                    if (str4 == null) {
-                                        str4 = file2.getAbsolutePath();
+                                    if (filePath == null) {
+                                        filePath = file2.getAbsolutePath();
                                         if (str3 == null) {
-                                            str3 = str4;
+                                            str3 = filePath;
                                         }
                                     }
                                 }
@@ -262,7 +262,7 @@ public class GalleryPickerOneImage extends Base {
                                 listFiles = fileArr;
                             }
                             i2 = i6;
-                            textValue2 = str4;
+                            textValue2 = filePath;
                         } else {
                             i2 = 0;
                             textValue2 = null;
@@ -312,18 +312,18 @@ public class GalleryPickerOneImage extends Base {
                         if (listFiles2 != null) {
                             int length2 = listFiles2.length;
                             int i9 = 0;
-                            value = 0;
-                            String str7 = null;
+                            index = 0;
+                            String filePath = null;
                             while (i9 < length2) {
                                 HashSet hashSet3 = hashSet2;
                                 File file4 = listFiles2[i9];
                                 File[] fileArr2 = listFiles2;
                                 if (GalleryPickerOneImage.this.isImageFile(file4)) {
-                                    value++;
-                                    if (str7 == null) {
-                                        str7 = file4.getAbsolutePath();
+                                    index++;
+                                    if (filePath == null) {
+                                        filePath = file4.getAbsolutePath();
                                         if (str6 == null) {
-                                            str6 = str7;
+                                            str6 = filePath;
                                         }
                                     }
                                 }
@@ -335,12 +335,12 @@ public class GalleryPickerOneImage extends Base {
                             textValue = str7;
                         } else {
                             hashSet = hashSet2;
-                            value = 0;
+                            index = 0;
                             textValue = null;
                         }
-                        if (value > 0) {
-                            i4 += value;
-                            arrayList.add(new ExploreItem(file3, parent2, "" + value, file3.getName(), textValue));
+                        if (index > 0) {
+                            i4 += index;
+                            arrayList.add(new ExploreItem(file3, parent2, "" + index, file3.getName(), textValue));
                         }
                     }
                     arrayList2.add(new PhotoItem(parent2, ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow("_id"))).toString(), false));

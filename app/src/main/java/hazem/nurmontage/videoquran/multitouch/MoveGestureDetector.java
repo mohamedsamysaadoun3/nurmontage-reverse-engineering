@@ -45,9 +45,9 @@ public class MoveGestureDetector extends BaseGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleStartProgressEvent(int value, MotionEvent motionEvent) {
-        if (value != 0) {
-            if (value != 2) {
+    protected void handleStartProgressEvent(int resourceId, MotionEvent motionEvent) {
+        if (resourceId != 0) {
+            if (resourceId != 2) {
                 return;
             }
             this.mGestureInProgress = this.mListener.onMoveBegin(this);
@@ -60,9 +60,9 @@ public class MoveGestureDetector extends BaseGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleInProgressEvent(int value, MotionEvent motionEvent) {
-        if (value != 1) {
-            if (value == 2) {
+    protected void handleInProgressEvent(int resourceId, MotionEvent motionEvent) {
+        if (resourceId != 1) {
+            if (resourceId == 2) {
                 updateStateByEvent(motionEvent);
                 if (this.mCurrPressure / this.mPrevPressure <= 0.67f || !this.mListener.onMove(this)) {
                     return;
@@ -71,7 +71,7 @@ public class MoveGestureDetector extends BaseGestureDetector {
                 this.mPrevEvent = MotionEvent.obtain(motionEvent);
                 return;
             }
-            if (value != 3) {
+            if (resourceId != 3) {
                 return;
             }
         }
@@ -93,12 +93,12 @@ public class MoveGestureDetector extends BaseGestureDetector {
     private PointF determineFocalPoint(MotionEvent motionEvent) {
         int pointerCount = motionEvent.getPointerCount();
         float f = 0.0f;
-        float f2 = 0.0f;
-        for (int value = 0; value < pointerCount; value++) {
-            f += motionEvent.getX(value);
-            f2 += motionEvent.getY(value);
+        float value12 = 0.0f;
+        for (int counter = 0; counter < pointerCount; counter++) {
+            f += motionEvent.getX(counter);
+            value12 += motionEvent.getY(counter);
         }
-        float f3 = pointerCount;
+        float value = pointerCount;
         return new PointF(f / f3, f2 / f3);
     }
 

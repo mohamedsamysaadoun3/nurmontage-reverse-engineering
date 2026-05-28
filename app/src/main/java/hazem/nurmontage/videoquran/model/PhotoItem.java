@@ -9,15 +9,15 @@ public class PhotoItem {
     private int number;
     private String path;
 
-    public void setAdabter_pos(int value) {
-        this.adabter_pos = value;
+    public void setAdabter_pos(int resourceId) {
+        this.adabter_pos = resourceId;
     }
 
     public int getAdabter_pos() {
         return this.adabter_pos;
     }
 
-    public void setNumber(int value) {
+    public void setNumber(int resourceId) {
         this.number = value;
     }
 

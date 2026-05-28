@@ -18,7 +18,7 @@ public class FastWaveform {
         MediaExtractor mediaExtractor;
         int i2;
         MediaFormat mediaFormat;
-        long j;
+        long durationMs;
         float[] fArr = new float[requestCode];
         try {
             mediaExtractor = new MediaExtractor();
@@ -62,11 +62,11 @@ public class FastWaveform {
                     createDecoderByType.queueInputBuffer(dequeueInputBuffer, 0, readSampleData, mediaExtractor.getSampleTime(), 0);
                     mediaExtractor.advance();
                 }
-                j = Renderer.DEFAULT_DURATION_TO_PROGRESS_US;
+                durationMs = Renderer.DEFAULT_DURATION_TO_PROGRESS_US;
             } else {
-                j = 10000;
+                durationMs = 10000;
             }
-            int dequeueOutputBuffer = createDecoderByType.dequeueOutputBuffer(bufferInfo, j);
+            int dequeueOutputBuffer = createDecoderByType.dequeueOutputBuffer(bufferInfo, durationMs);
             if (dequeueOutputBuffer >= 0) {
                 ByteBuffer outputBuffer = createDecoderByType.getOutputBuffer(dequeueOutputBuffer);
                 outputBuffer.order(ByteOrder.LITTLE_ENDIAN);

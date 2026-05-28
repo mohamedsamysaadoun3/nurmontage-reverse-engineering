@@ -269,9 +269,9 @@ public class EntityAudio extends Entity {
         setOffset_left(getOffset_left() + this.tmpOffset);
         this.tmpOffset = 0.0f;
         float scale = this.start;
-        float f2 = this.min_duration;
-        if (scale < f2) {
-            this.start = f2;
+        float scaleFactor = this.min_duration;
+        if (scale < scaleFactor) {
+            this.start = scaleFactor;
         }
         this.left = this.lastLeft;
     }
@@ -306,20 +306,20 @@ public class EntityAudio extends Entity {
         return entityAudio;
     }
 
-    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float f2, float f3, float f4, float f5, float floatValue6, int duration, float f7, float f8, float floatValue9) {
-        super(f3);
+    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float scaleFactor, float scaleFactor54, float scaleFactor54, float scaleFactor54, float floatValue6, int duration, float scaleFactor54, float scaleFactor54, float floatValue9) {
+        super(scaleFactor54);
         this.effectAudio = new EffectAudio();
-        setOffset_right(f8);
-        setOffset(f7);
+        setOffset_right(scaleFactor54);
+        setOffset(scaleFactor54);
         setOffset_left(floatValue9);
         this.duration = duration * 1000;
         this.end = duration;
         this.second_in_screen = floatValue6;
         setVisible(true);
         this.uri = uri;
-        this.max = f5;
-        this.f410h = f3;
-        this.rect = new RectF(scale, f2, f4, f3);
+        this.max = scaleFactor54;
+        this.f410h = scaleFactor54;
+        this.rect = new RectF(scale, scaleFactor, scaleFactor54, scaleFactor54);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_AUDIO;
@@ -327,20 +327,20 @@ public class EntityAudio extends Entity {
         this.paintLine = paint;
         paint.setColor(-2434342);
         this.paintLine.setStyle(Paint.Style.STROKE);
-        this.paintLine.setStrokeWidth(0.01f * f3);
+        this.paintLine.setStrokeWidth(0.01f * scaleFactor54);
         Paint paint2 = new Paint(1);
         this.paintPath = paint2;
         paint2.setColor(-1236326096);
         this.paintPath.setStyle(Paint.Style.FILL);
         this.path = new Path();
-        this.rectFLeft = new RectF(0.0f, 0.0f, 0.46f * f3, f3);
-        this.rectFRight = new RectF(0.0f, 0.0f, this.rectFLeft.width(), f3);
+        this.rectFLeft = new RectF(0.0f, 0.0f, 0.46f * scaleFactor54, scaleFactor54);
+        this.rectFRight = new RectF(0.0f, 0.0f, this.rectFLeft.width(), scaleFactor54);
         this.round = this.rectFRight.width() * 0.5f;
-        this.padding = f3 * 0.07f;
+        this.padding = scaleFactor55 * 0.07f;
     }
 
-    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float f2, float f3, float f4, float f5, float floatValue6, int duration) {
-        super(f3);
+    public EntityAudio(Bitmap bitmap, Uri uri, float scale, float scaleFactor, float scaleFactor55, float scaleFactor55, float scaleFactor55, float floatValue6, int duration) {
+        super(scaleFactor55);
         this.effectAudio = new EffectAudio();
         setOffset_right(0.0f);
         setOffset(0.0f);
@@ -349,9 +349,9 @@ public class EntityAudio extends Entity {
         this.second_in_screen = floatValue6;
         setVisible(true);
         this.uri = uri;
-        this.max = f5;
-        this.f410h = f3;
-        this.rect = new RectF(scale, f2, f4, f3);
+        this.max = scaleFactor55;
+        this.f410h = scaleFactor55;
+        this.rect = new RectF(scale, scaleFactor, scaleFactor55, scaleFactor55);
         this.left = this.rect.left;
         this.right = this.rect.right;
         this.color = Common.COLOR_BLOCK_AUDIO;
@@ -359,7 +359,7 @@ public class EntityAudio extends Entity {
         this.paintLine = paint;
         paint.setColor(-2434342);
         this.paintLine.setStyle(Paint.Style.STROKE);
-        this.paintLine.setStrokeWidth(0.01f * f3);
+        this.paintLine.setStrokeWidth(0.01f * scaleFactor55);
         Paint paint2 = new Paint(1);
         this.paintPath = paint2;
         paint2.setColor(-1236326096);
@@ -393,7 +393,7 @@ public class EntityAudio extends Entity {
         this.amps = fArr;
     }
 
-    public void setAmps(float[] fArr, int duration, int value2) {
+    public void setAmps(float[] fArr, int duration, int resourceId) {
         this.amps = fArr;
         this.renderer = new WaveformBitmapRenderer(fArr, duration, value2, Common.COLOR_WAVE_INT);
     }
@@ -407,7 +407,7 @@ public class EntityAudio extends Entity {
     }
 
     @Override // hazem.nurmontage.videoquran.entity_timeline.Entity
-    public void draw(Canvas canvas, int duration, int value2) {
+    public void draw(Canvas canvas, int duration, int resourceId) {
         try {
             drawWave(canvas, this.rect);
         } catch (Exception e) {

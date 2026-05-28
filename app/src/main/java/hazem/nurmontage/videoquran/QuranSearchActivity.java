@@ -70,7 +70,7 @@ public class QuranSearchActivity extends Base {
     };
     private final SearchQuranAdabters.ISearchQuranCallback iSearchQuranCallback = new SearchQuranAdabters.ISearchQuranCallback() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity.4
         @Override // hazem.nurmontage.videoquran.adabter.SearchQuranAdabters.ISearchQuranCallback
-        public void onClick(int value, int value2, ItemQuranSearch itemQuranSearch) {
+        public void onClick(int surahNumber, int surahNumber2, ItemQuranSearch itemQuranSearch) {
             QuranSearchActivity.this.indexSurah = itemQuranSearch.getSurahIndex();
             if (!QuranSearchActivity.this.isFullSurah) {
                 QuranSearchActivity quranSearchActivity = QuranSearchActivity.this;
@@ -80,12 +80,12 @@ public class QuranSearchActivity extends Base {
                 QuranSearchActivity.this.btnDone.performClick();
                 return;
             }
-            QuranSearchActivity.this.mFrom = value;
-            QuranSearchActivity.this.mTo = value2;
+            QuranSearchActivity.this.mFrom = surahNumber;
+            QuranSearchActivity.this.mTo = surahNumber2;
             if (QuranSearchActivity.this.btnDone.getVisibility() != 0) {
                 QuranSearchActivity.this.btnDone.setVisibility(0);
             }
-            QuranSearchActivity.this.btnDone.setText(QuranSearchActivity.this.getResources().getString(C2014R.string.from_to, Integer.valueOf(value + 1), Integer.valueOf(value2 + 1)));
+            QuranSearchActivity.this.btnDone.setText(QuranSearchActivity.this.getResources().getString(C2014R.string.from_to, Integer.valueOf(surahNumber + 1), Integer.valueOf(surahNumber2 + 1)));
         }
     };
 
@@ -152,7 +152,7 @@ public class QuranSearchActivity extends Base {
         this.editText.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ReadexPro_Medium.ttf"));
         this.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() { // from class: hazem.nurmontage.videoquran.QuranSearchActivity$$ExternalSyntheticLambda3
             @Override // android.widget.TextView.OnEditorActionListener
-            public final boolean onEditorAction(TextView textView, int value, KeyEvent keyEvent) {
+            public final boolean onEditorAction(TextView textView, int index, KeyEvent keyEvent) {
                 return QuranSearchActivity.this.m613xff99d684(textView, value, keyEvent);
             }
         });
@@ -179,8 +179,8 @@ public class QuranSearchActivity extends Base {
     }
 
     /* renamed from: lambda$onCreate$2$hazem-nurmontage-videoquran-QuranSearchActivity */
-    /* synthetic */ boolean m613xff99d684(TextView textView, int value, KeyEvent keyEvent) {
-        if (value != 3) {
+    /* synthetic */ boolean m613xff99d684(TextView textView, int index, KeyEvent keyEvent) {
+        if (index != 3) {
             return false;
         }
         closeKeyboard();
@@ -315,14 +315,14 @@ public class QuranSearchActivity extends Base {
 
     private int getIndexSurah(String textValue) {
         String normalizeArabic = normalizeArabic(textValue);
-        int value = 0;
+        int count = 0;
         while (true) {
             String[] strArr = this.surahNames;
-            if (value >= strArr.length) {
+            if (count >= strArr.length) {
                 return -1;
             }
-            if (normalizeArabic(strArr[value].split("-")[0].trim()).contains(normalizeArabic)) {
-                return value;
+            if (normalizeArabic(strArr[count].split("-")[0].trim()).contains(normalizeArabic)) {
+                return count;
             }
             value++;
         }
@@ -416,10 +416,10 @@ public class QuranSearchActivity extends Base {
     }
 
     /* renamed from: lambda$searchAllQuran$5$hazem-nurmontage-videoquran-QuranSearchActivity */
-    /* synthetic */ void m616xd5958f6e(int value, String textValue, String textValue2, int value2, int value3) {
+    /* synthetic */ void m616xd5958f6e(int count, String textValue, String textValue2, int count49, int count49) {
         if (this.searchQuranAdapter != null) {
-            int countIndex = Utils.countIndex(Utils.countSpace(value, textValue), textValue2);
-            this.searchQuranAdapter.add(new ItemQuranSearch(textValue2, this.surahNames[value2], value3 + 1, value2, countIndex, Utils.countIndex(countIndex, Utils.countSpace(this.javaBM.getmPattern()), textValue2)));
+            int countIndex = Utils.countIndex(Utils.countSpace(count, textValue), textValue2);
+            this.searchQuranAdapter.add(new ItemQuranSearch(textValue2, this.surahNames[count49], count49 + 1, count49, countIndex, Utils.countIndex(countIndex, Utils.countSpace(this.javaBM.getmPattern()), textValue2)));
             updateCount();
         }
     }

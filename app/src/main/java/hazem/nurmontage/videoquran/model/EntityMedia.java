@@ -103,8 +103,8 @@ public class EntityMedia implements Serializable {
         return this.volume;
     }
 
-    public void setVolume(float floatValue) {
-        this.volume = floatValue;
+    public void setVolume(float mediaPosition) {
+        this.volume = mediaPosition;
     }
 
     public int getIndex_end_thumbnail() {
@@ -143,8 +143,8 @@ public class EntityMedia implements Serializable {
         return this.offset_left;
     }
 
-    public void setOffset_left(float floatValue) {
-        this.offset_left = floatValue;
+    public void setOffset_left(float mediaPosition) {
+        this.offset_left = mediaPosition;
     }
 
     public float getMax() {
@@ -155,8 +155,8 @@ public class EntityMedia implements Serializable {
         return this.offset;
     }
 
-    public void setOffset(float floatValue) {
-        this.offset = floatValue;
+    public void setOffset(float mediaPosition) {
+        this.offset = mediaPosition;
     }
 
     public void setStart_original(int resId) {
@@ -183,8 +183,8 @@ public class EntityMedia implements Serializable {
         this.isSoundEnable = isFlag;
     }
 
-    public void setScale(float floatValue) {
-        this.mScale = floatValue;
+    public void setScale(float mediaPosition) {
+        this.mScale = mediaPosition;
     }
 
     public float getScale() {
@@ -195,7 +195,7 @@ public class EntityMedia implements Serializable {
         return this.f419h;
     }
 
-    public EntityMedia(String filePath, int resId, float floatValue, float f2, float f3, float f4, int value2, float f5, float floatValue6, float f7, float f8, float f9, float f10, float floatValue11) {
+    public EntityMedia(String filePath, int resId, float mediaPosition, float scaleFactor, float scaleFactor37, float scaleFactor37, int resourceId, float scaleFactor37, float floatValue6, float scaleFactor37, float scaleFactor37, float scaleFactor37, float scaleFactor37, float floatValue11) {
         this.volume = 1.0f;
         this.isSoundEnable = true;
         this.f421x = 0.0f;
@@ -204,15 +204,15 @@ public class EntityMedia implements Serializable {
         this.f420w = 1.0f;
         this.mScale = 1.0f;
         this.uri = filePath;
-        this.offset_left = f7;
+        this.offset_left = scaleFactor37;
         this.offset_right = floatValue6;
-        this.max = f8;
-        this.offset = f5;
+        this.max = scaleFactor37;
+        this.offset = scaleFactor37;
         this.start_original = resId;
-        this.start = floatValue;
-        this.end = f2;
-        this.posX = f3;
-        this.posY = f4;
+        this.start = mediaPosition;
+        this.end = scaleFactor;
+        this.posX = scaleFactor37;
+        this.posY = scaleFactor37;
         this.duration_fade_in = f9;
         this.duration_fade_out = f10;
         this.time = value2;
@@ -228,7 +228,7 @@ public class EntityMedia implements Serializable {
         this.uri = filePath;
     }
 
-    public EntityMedia(String filePath, float floatValue, float f2, float f3, float f4, float f5, float floatValue6) {
+    public EntityMedia(String filePath, float mediaPosition, float scaleFactor, float scaleFactor39, float scaleFactor39, float scaleFactor39, float floatValue6) {
         this.volume = 1.0f;
         this.isSoundEnable = true;
         this.f421x = 0.0f;
@@ -236,7 +236,7 @@ public class EntityMedia implements Serializable {
         this.f420w = 1.0f;
         this.mScale = 1.0f;
         this.uri = filePath;
-        this.start = floatValue;
+        this.start = mediaPosition;
         this.end = f2;
         this.posX = f3;
         this.posY = f4;
@@ -252,16 +252,16 @@ public class EntityMedia implements Serializable {
         return this.offset_right;
     }
 
-    public EntityMedia(String filePath, int resId, float floatValue, float f2, int value2, float f3, float f4, float f5, float floatValue6, float f7, boolean isFlag, float f8, float f9, float f10, float floatValue11) {
+    public EntityMedia(String filePath, int resId, float mediaPosition, float scaleFactor, int resourceId, float scaleFactor42, float scaleFactor42, float scaleFactor42, float floatValue6, float scaleFactor42, boolean isFlag, float scaleFactor42, float scaleFactor42, float scaleFactor42, float floatValue11) {
         this.volume = 1.0f;
         this.mScale = 1.0f;
         this.uri = filePath;
-        this.start = floatValue;
-        this.offset = f7;
-        this.duration_fade_in = f9;
-        this.duration_fade_out = f10;
-        this.max = f8;
-        this.end = f2;
+        this.start = mediaPosition;
+        this.offset = scaleFactor42;
+        this.duration_fade_in = scaleFactor42;
+        this.duration_fade_out = scaleFactor42;
+        this.max = scaleFactor42;
+        this.end = scaleFactor;
         this.posXFFmpeg = floatValue11;
         this.time = value2;
         this.start_original = resId;
@@ -308,24 +308,24 @@ public class EntityMedia implements Serializable {
         return this.start;
     }
 
-    public void setStart(float floatValue) {
-        this.start = floatValue;
+    public void setStart(float mediaPosition) {
+        this.start = mediaPosition;
     }
 
-    public void setDuration_fade_in(float floatValue) {
-        this.duration_fade_in = floatValue;
+    public void setDuration_fade_in(float mediaPosition) {
+        this.duration_fade_in = mediaPosition;
     }
 
-    public void setDuration_fade_out(float floatValue) {
-        this.duration_fade_out = floatValue;
+    public void setDuration_fade_out(float mediaPosition) {
+        this.duration_fade_out = mediaPosition;
     }
 
     public float getEnd() {
         return this.end;
     }
 
-    public void setEnd(float floatValue) {
-        this.end = floatValue;
+    public void setEnd(float mediaPosition) {
+        this.end = mediaPosition;
     }
 
     public EntityMedia duplicate() {

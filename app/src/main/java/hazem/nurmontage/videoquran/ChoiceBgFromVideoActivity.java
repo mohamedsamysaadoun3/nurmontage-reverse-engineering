@@ -91,7 +91,7 @@ public class ChoiceBgFromVideoActivity extends Base {
         videoFrameSelectorView.setVideoUri(uri);
         videoFrameSelectorView.setOnFrameSelectedListener(new VideoFrameSelectorView.OnFrameSelectedListener() { // from class: hazem.nurmontage.videoquran.ChoiceBgFromVideoActivity.3
             @Override // hazem.nurmontage.videoquran.views.VideoFrameSelectorView.OnFrameSelectedListener
-            public void onFrameSelected(int value, Bitmap bitmap) {
+            public void onFrameSelected(int frameIndex, Bitmap bitmap) {
                 if (bitmap == null || ChoiceBgFromVideoActivity.this.imageView == null) {
                     return;
                 }

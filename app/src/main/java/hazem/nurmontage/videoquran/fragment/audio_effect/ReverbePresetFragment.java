@@ -29,7 +29,7 @@ public class ReverbePresetFragment extends Fragment {
     private EditMediaFragment.IEditMediaCallback iEditMediaCallback;
     private ReverbeAdabter.IReverbPresetCallback iReverbPresetCallback = new ReverbeAdabter.IReverbPresetCallback() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.ReverbePresetFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.ReverbeAdabter.IReverbPresetCallback
-        public void cmd(String textValue, int value) {
+        public void cmd(String textValue, int index) {
             if (ReverbePresetFragment.this.iEditMediaCallback != null) {
                 EffectAudio effectAudio = ReverbePresetFragment.this.entityAudio.getEffectAudio();
                 if (textValue == null && ReverbePresetFragment.this.entityAudio.getEffectAudio().getReverbPreset() == null) {
@@ -37,7 +37,7 @@ public class ReverbePresetFragment extends Fragment {
                     return;
                 }
                 effectAudio.setReverbPreset(textValue);
-                effectAudio.setReverbPreset_index_list(value);
+                effectAudio.setReverbPreset_index_list(index);
                 float start = effectAudio.getStart() / 1000.0f;
                 float end = effectAudio.getEnd() / 1000.0f;
                 float speed = end - start;

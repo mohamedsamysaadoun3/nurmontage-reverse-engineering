@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 public class TimeFormatter {
     private long totalDurationMs;
 
-    public static String timeToString(long j) {
-        return TimeUnit.MILLISECONDS.toHours(j) + ":" + (TimeUnit.MILLISECONDS.toMinutes(j) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(j))) + ":" + (TimeUnit.MILLISECONDS.toSeconds(j) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(j))) + "." + (TimeUnit.MILLISECONDS.toMillis(j) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(j)));
+    public static String timeToString(long durationMs) {
+        return TimeUnit.MILLISECONDS.toHours(durationMs) + ":" + (TimeUnit.MILLISECONDS.toMinutes(durationMs) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(durationMs))) + ":" + (TimeUnit.MILLISECONDS.toSeconds(durationMs) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(durationMs))) + "." + (TimeUnit.MILLISECONDS.toMillis(durationMs) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(durationMs)));
     }
 
     public TimeFormatter(long j) {
@@ -21,14 +21,14 @@ public class TimeFormatter {
     }
 
     public Pair<String, String> formatTime(long j) {
-        return new Pair<>(formatMsToTime(j), formatMsToTime(this.totalDurationMs - j));
+        return new Pair<>(formatMsToTime(durationMs), formatMsToTime(this.totalDurationMs - durationMs));
     }
 
-    private String formatMsToTime(long j) {
-        if (j < 0) {
-            j = 0;
+    private String formatMsToTime(long durationMs) {
+        if (durationMs < 0) {
+            durationMs = 0;
         }
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(j);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(durationMs);
         return String.format(Locale.ENGLISH, "%d:%02d", Long.valueOf(minutes), Long.valueOf(TimeUnit.MILLISECONDS.toSeconds(j) - TimeUnit.MINUTES.toSeconds(minutes)));
     }
 }

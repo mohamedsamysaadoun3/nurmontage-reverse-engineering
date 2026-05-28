@@ -595,12 +595,12 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
         }
     }
 
-    private String formatPriceWithSymbol(long j, String textValue) {
+    private String formatPriceWithSymbol(long durationMs, String textValue) {
         NumberFormat currencyInstance = NumberFormat.getCurrencyInstance(Locale.US);
         currencyInstance.setCurrency(Currency.getInstance(textValue));
         currencyInstance.setMaximumFractionDigits(2);
         currencyInstance.setMinimumFractionDigits(2);
-        return currencyInstance.format(j / 1000000.0d);
+        return currencyInstance.format(durationMs / 1000000.0d);
     }
 
     private void updateUILast(ProductDetails productDetails) {
@@ -812,11 +812,11 @@ public class ProVersionActivity extends Base implements PurchasesUpdatedListener
             ProVersionActivity.this.recyclerView.setItemAnimator(null);
             ProVersionActivity.this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: hazem.nurmontage.videoquran.ProVersionActivity.16.1
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrollStateChanged(RecyclerView recyclerView, int value) {
-                    super.onScrollStateChanged(recyclerView, value);
-                    if (value == 1) {
+                public void onScrollStateChanged(RecyclerView recyclerView, int resourceId) {
+                    super.onScrollStateChanged(recyclerView, resourceId);
+                    if (resourceId == 1) {
                         ProVersionActivity.this.isUserScrolling = true;
-                    } else if (value == 0) {
+                    } else if (resourceId == 0) {
                         ProVersionActivity.this.isUserScrolling = false;
                         ProVersionActivity.this.startAutoScroll();
                     }

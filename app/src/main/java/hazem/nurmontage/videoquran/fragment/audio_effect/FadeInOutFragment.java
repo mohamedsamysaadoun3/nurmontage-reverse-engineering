@@ -84,8 +84,8 @@ public class FadeInOutFragment extends Fragment {
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int value, boolean isFlag) {
-                FadeInOutFragment.this.hint_fade_in.setText(String.valueOf(value));
+            public void onProgressChanged(SeekBar seekBar, int resourceId, boolean isFlag) {
+                FadeInOutFragment.this.hint_fade_in.setText(String.valueOf(resourceId));
             }
         });
         this.fadeOutSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.FadeInOutFragment.2
@@ -98,8 +98,8 @@ public class FadeInOutFragment extends Fragment {
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int value, boolean isFlag) {
-                FadeInOutFragment.this.hint_fade_out.setText(String.valueOf(value));
+            public void onProgressChanged(SeekBar seekBar, int resourceId, boolean isFlag) {
+                FadeInOutFragment.this.hint_fade_out.setText(String.valueOf(resourceId));
             }
         });
         root.findViewById(C2014R.id.btn_done).setOnClickListener(new View.OnClickListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.FadeInOutFragment$$ExternalSyntheticLambda0
@@ -165,7 +165,7 @@ public class FadeInOutFragment extends Fragment {
         }
     }
 
-    private void applyFade(boolean isFlag, boolean z2) {
+    private void applyFade(boolean isFlag, boolean isPremium) {
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
         if (this.entityAudio.getFade_in() == this.fadeInSeekBar.getProgress() && this.entityAudio.getFade_out() == this.fadeOutSeekBar.getProgress()) {
             if (isFlag) {
@@ -210,7 +210,7 @@ public class FadeInOutFragment extends Fragment {
             if (isFlag) {
                 iEditMediaCallback.updateEntity(EffectAudioType.FADE, this.entityAudio);
                 this.iEditMediaCallback.onCmdAll(effectAudio);
-            } else if (z2) {
+            } else if (isPremium) {
                 iEditMediaCallback.onCmdPlay(join);
             } else {
                 iEditMediaCallback.onCmd(join);

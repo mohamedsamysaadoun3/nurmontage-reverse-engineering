@@ -201,8 +201,8 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
         updatePrice(this.view_price_1000$.getText().toString(), C2014R.id.view_1000, this.price_select);
     }
 
-    private void updatePrice(String priceStr, int i, int value2) {
-        if (i == value2) {
+    private void updatePrice(String priceStr, int i, int resourceId) {
+        if (i == resourceId) {
             return;
         }
         ButtonCustumFont buttonCustumFont = this.btn_launch;
@@ -210,7 +210,7 @@ public class SupportBillingActivity extends Base implements PurchasesUpdatedList
             buttonCustumFont.setText(String.format(this.mResources.getString(C2014R.string.btn_launch_billing), priceStr));
         }
         findViewById(i).setBackgroundResource(C2014R.drawable.item_billing_select);
-        findViewById(value2).setBackgroundResource(C2014R.drawable.item_billing);
+        findViewById(resourceId).setBackgroundResource(C2014R.drawable.item_billing);
         this.price_select = i;
     }
 

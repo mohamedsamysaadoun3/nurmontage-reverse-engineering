@@ -101,8 +101,8 @@ public class WorkUserActivity extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.adabter.WorkUserAdabter.IWorkUserCallback
-        public void toMenu(Template template, View view, int value) {
-            WorkUserActivity.this.showPopup(view, template, value);
+        public void toMenu(Template template, View view, int resourceId) {
+            WorkUserActivity.this.showPopup(view, template, resourceId);
         }
     };
 
@@ -160,7 +160,7 @@ public class WorkUserActivity extends Base {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void showPopup(View view, final Template template, final int value) {
+    public void showPopup(View view, final Template template, final int height) {
         if (template == null) {
             return;
         }
@@ -194,7 +194,7 @@ public class WorkUserActivity extends Base {
             public void onClick(View view2) {
                 try {
                     WorkUserActivity workUserActivity = WorkUserActivity.this;
-                    int i2 = value;
+                    int i2 = height;
                     Template template2 = template;
                     workUserActivity.dialog(i2, template2, Uri.parse(template2.getUri_video()));
                 } catch (Exception e) {
@@ -207,10 +207,10 @@ public class WorkUserActivity extends Base {
             public void onClick(View view2) {
                 try {
                     Template duplicate = template.duplicate();
-                    String str = duplicate.getIdTemplate() + "_copy";
-                    duplicate.setIdTemplate(str);
-                    LocalPersistence.duplicateTemplate(WorkUserActivity.this, duplicate, str);
-                    WorkUserActivity.this.workUserAdabter.add(value + 1, duplicate);
+                    String templateName = duplicate.getIdTemplate() + "_copy";
+                    duplicate.setIdTemplate(templateName);
+                    LocalPersistence.duplicateTemplate(WorkUserActivity.this, duplicate, templateName);
+                    WorkUserActivity.this.workUserAdabter.add(height + 1, duplicate);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -334,7 +334,7 @@ public class WorkUserActivity extends Base {
         cancelDialog();
     }
 
-    public void dialog(final int value, final Template template, final Uri uri) {
+    public void dialog(final int colorValue, final Template template, final Uri uri) {
         Dialog dialog = new Dialog(this);
         this.dialog = dialog;
         dialog.setCancelable(true);
@@ -361,7 +361,7 @@ public class WorkUserActivity extends Base {
                     } else if (template.getUri_video() != null) {
                         LocalPersistence.deleteTemplate(WorkUserActivity.this, template.getUri_video());
                     }
-                    WorkUserActivity.this.workUserAdabter.remove(value);
+                    WorkUserActivity.this.workUserAdabter.remove(colorValue);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

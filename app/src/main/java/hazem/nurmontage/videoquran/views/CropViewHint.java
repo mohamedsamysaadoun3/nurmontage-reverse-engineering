@@ -121,18 +121,18 @@ public class CropViewHint extends View {
         return null;
     }
 
-    private void drawArrowHead(Canvas canvas, float f, float f2, float f3, float floatValue4) {
-        double atan2 = Math.atan2(f2 - floatValue4, f - f3);
+    private void drawArrowHead(Canvas canvas, float f, float fontSize, float fontSize6, float floatValue4) {
+        double atan2 = Math.atan2(fontSize - floatValue4, f - fontSize6);
         double d = f;
         double d2 = atan2 - 0.5235987755982988d;
         float cos = (float) (d - (this.arrowHeadSize * Math.cos(d2)));
-        double d3 = f2;
+        double d3 = fontSize;
         float sin = (float) (d3 - (this.arrowHeadSize * Math.sin(d2)));
         double d4 = atan2 + 0.5235987755982988d;
         float cos2 = (float) (d - (this.arrowHeadSize * Math.cos(d4)));
         float sin2 = (float) (d3 - (this.arrowHeadSize * Math.sin(d4)));
         Path path = new Path();
-        path.moveTo(f, f2);
+        path.moveTo(f, fontSize);
         path.lineTo(cos, sin);
         path.lineTo(cos2, sin2);
         path.close();
@@ -140,16 +140,16 @@ public class CropViewHint extends View {
     }
 
     @Override // android.view.View
-    protected void onMeasure(int i, int value2) {
-        super.onMeasure(i, value2);
+    protected void onMeasure(int i, int count) {
+        super.onMeasure(i, count);
         int size = View.MeasureSpec.getSize(i);
         setMeasuredDimension(size, size);
         float f = size;
         this.linePaint.setStrokeWidth(0.0085f * f);
         this.textPaint.setTextSize(f * 0.045f);
         Paint paint = this.textPaint;
-        String str = this.mTittle;
-        paint.getTextBounds(str, 0, str.length(), this.mTextRect);
+        String extension = this.mTittle;
+        paint.getTextBounds(extension, 0, extension.length(), this.mTextRect);
         this.x_text = (size - this.mTextRect.width()) * 0.5f;
         float height = this.mTextRect.height() * 1.2f;
         this.y_text = height;

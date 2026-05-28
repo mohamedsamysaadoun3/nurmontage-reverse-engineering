@@ -27,19 +27,19 @@ public class AmplitudeExtract {
         void onError(Exception exc);
     }
 
-    public void extractAmplitudeDataAsync(final String textValue, final int value, final AmplitudeDataCallback amplitudeDataCallback) {
+    public void extractAmplitudeDataAsync(final String textValue, final int resourceId, final AmplitudeDataCallback amplitudeDataCallback) {
         this.executorService.execute(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AmplitudeExtract$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AmplitudeExtract.this.m627x997f050d(textValue, value, amplitudeDataCallback);
+                AmplitudeExtract.this.m627x997f050d(textValue, resourceId, amplitudeDataCallback);
             }
         });
     }
 
     /* renamed from: lambda$extractAmplitudeDataAsync$2$hazem-nurmontage-videoquran-Utils-AmplitudeExtract */
-    /* synthetic */ void m627x997f050d(String textValue, int value, final AmplitudeDataCallback amplitudeDataCallback) {
+    /* synthetic */ void m627x997f050d(String textValue, int resourceId, final AmplitudeDataCallback amplitudeDataCallback) {
         try {
-            final List<Float> extractAmplitudeData = extractAmplitudeData(textValue, value);
+            final List<Float> extractAmplitudeData = extractAmplitudeData(textValue, resourceId);
             this.mainHandler.post(new Runnable() { // from class: hazem.nurmontage.videoquran.Utils.AmplitudeExtract$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
@@ -113,8 +113,8 @@ public class AmplitudeExtract {
                 if (!arrayList2.isEmpty()) {
                     int size = arrayList2.size();
                     int max = Math.max(1, size / value);
-                    for (int value3 = 0; value3 < value; value3++) {
-                        int i4 = value3 * max;
+                    for (int index = 0; index < value; index++) {
+                        int i4 = index * max;
                         int min = Math.min(i4 + max, size);
                         if (i4 >= size) {
                             arrayList.add(Float.valueOf(0.0f));
@@ -133,7 +133,7 @@ public class AmplitudeExtract {
                     mediaExtractor2.release();
                     return arrayList;
                 }
-                for (int value5 = 0; value5 < value; value5++) {
+                for (int index = 0; index < value; index++) {
                     arrayList.add(Float.valueOf(0.0f));
                 }
                 mediaExtractor2.release();

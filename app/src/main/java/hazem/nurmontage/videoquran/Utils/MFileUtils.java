@@ -18,12 +18,12 @@ public class MFileUtils {
         public String name;
         public String timedDate;
 
-        public FileInfo(String filePath, long j) {
+        public FileInfo(String filePath, long durationMs) {
             this.name = filePath;
-            this.lastModified = j;
-            this.formattedDate = MFileUtils.formatDateShort(j);
-            if (j > 0) {
-                this.timedDate = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(j));
+            this.lastModified = durationMs;
+            this.formattedDate = MFileUtils.formatDateShort(durationMs);
+            if (durationMs > 0) {
+                this.timedDate = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(durationMs));
             }
         }
     }
@@ -47,16 +47,16 @@ public class MFileUtils {
         Code decompiled incorrectly, please refer to instructions dump.
     */
     public static FileInfo getFileInfo(Context context, String filePath) {
-        String str2;
+        String filePath2;
         Cursor query;
-        long j;
+        long durationMs;
         File file;
         Cursor cursor = null;
         r2 = null;
         r2 = null;
         r2 = null;
         Cursor cursor2 = null;
-        String str3 = null;
+        String filePath2 = null;
         if (filePath == null) {
             return null;
         }
@@ -67,30 +67,30 @@ public class MFileUtils {
                     query = context.getContentResolver().query(parse, new String[]{"_display_name", "date_modified"}, null, null, null);
                 } catch (Exception e) {
                     e = e;
-                    str2 = null;
+                    filePath2 = null;
                 }
                 if (query != null) {
                     try {
                     } catch (Exception e2) {
                         e = e2;
-                        String str4 = str3;
+                        String filePath4 = filePath2;
                         cursor2 = query;
-                        str2 = str4;
+                        filePath2 = filePath4;
                         e.printStackTrace();
                         if (cursor2 != null) {
                             cursor2.close();
                         }
-                        str3 = str2;
-                        j = 0;
-                        if (str3 != null) {
+                        filePath2 = filePath2;
+                        durationMs = 0;
+                        if (filePath2 != null) {
                         }
                         if (!"file".equalsIgnoreCase(parse.getScheme())) {
                         }
                         if (file.exists()) {
                         }
-                        if (str3 == null) {
+                        if (filePath2 == null) {
                         }
-                        return new FileInfo(str3, j);
+                        return new FileInfo(filePath2, durationMs);
                     } catch (Throwable th) {
                         th = th;
                         cursor = query;
@@ -102,52 +102,52 @@ public class MFileUtils {
                     if (query.moveToFirst()) {
                         int columnIndex = query.getColumnIndex("_display_name");
                         int columnIndex2 = query.getColumnIndex("date_modified");
-                        str3 = columnIndex != -1 ? query.getString(columnIndex) : null;
+                        filePath2 = columnIndex != -1 ? query.getString(columnIndex) : null;
                         if (columnIndex2 != -1) {
-                            long j2 = query.getLong(columnIndex2);
-                            if (j2 > 0) {
-                                j = j2 * 1000;
+                            long durationMs9 = query.getLong(columnIndex2);
+                            if (durationMs9 > 0) {
+                                durationMs = durationMs9 * 1000;
                                 if (query != null) {
                                     query.close();
                                 }
-                                if (str3 != null || j == 0) {
+                                if (filePath2 != null || durationMs == 0) {
                                     if (!"file".equalsIgnoreCase(parse.getScheme())) {
                                         file = new File(parse.getPath());
                                     } else {
                                         file = new File(filePath);
                                     }
                                     if (file.exists()) {
-                                        if (str3 == null) {
-                                            str3 = file.getName();
+                                        if (filePath2 == null) {
+                                            filePath2 = file.getName();
                                         }
-                                        if (j == 0) {
-                                            j = file.lastModified();
+                                        if (durationMs == 0) {
+                                            durationMs = file.lastModified();
                                         }
                                     }
                                 }
-                                if (str3 == null) {
-                                    str3 = parse.getLastPathSegment();
+                                if (filePath2 == null) {
+                                    filePath2 = parse.getLastPathSegment();
                                 }
-                                return new FileInfo(str3, j);
+                                return new FileInfo(filePath2, durationMs);
                             }
                         }
                     }
                 }
-                j = 0;
+                durationMs = 0;
                 if (query != null) {
                 }
-                if (str3 != null) {
+                if (filePath2 != null) {
                 }
                 if (!"file".equalsIgnoreCase(parse.getScheme())) {
                 }
                 if (file.exists()) {
                 }
-                if (str3 == null) {
+                if (filePath2 == null) {
                 }
-                return new FileInfo(str3, j);
+                return new FileInfo(filePath2, durationMs);
             }
-            j = 0;
-            if (str3 != null) {
+            durationMs = 0;
+            if (filePath2 != null) {
             }
             if (!"file".equalsIgnoreCase(parse.getScheme())) {
             }
@@ -155,7 +155,7 @@ public class MFileUtils {
             }
             if (str3 == null) {
             }
-            return new FileInfo(str3, j);
+            return new FileInfo(str3, durationMs);
         } catch (Throwable th2) {
             th = th2;
         }

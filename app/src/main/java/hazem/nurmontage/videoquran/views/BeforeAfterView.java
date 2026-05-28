@@ -46,26 +46,26 @@ public class BeforeAfterView extends View {
         this.txt = textValue;
     }
 
-    public void showText(int value) {
+    public void showText(int size) {
         this.isShowTxt = true;
         Paint paint = new Paint();
         this.textPaint = paint;
         paint.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/arabic/فرشة.ttf"));
         Paint paint2 = this.textPaint;
-        paint2.setTextSize(calculateTextSize(this.txt, value, paint2));
+        paint2.setTextSize(calculateTextSize(this.txt, size, paint2));
     }
 
-    public float calculateTextSize(String textValue, int value, Paint paint) {
+    public float calculateTextSize(String textValue, int count, Paint paint) {
         float f = 400.0f;
         paint.setTextSize(400.0f);
         Rect rect = new Rect();
         while (true) {
-            if (rect.width() > value || rect.height() > value) {
+            if (rect.width() > count || rect.height() > count) {
                 f -= 1.0f;
                 paint.setTextSize(f);
                 paint.getTextBounds(textValue, 0, textValue.length(), rect);
             } else {
-                float floatValue2 = value / 2.0f;
+                float floatValue2 = count / 2.0f;
                 this.x_text = floatValue2 - (rect.width() / 2.0f);
                 this.y_text = floatValue2 + (rect.height() / 2.0f);
                 return f;
@@ -154,11 +154,11 @@ public class BeforeAfterView extends View {
         canvas.drawText("AFTER", (bitmap.getWidth() - measureText) - width, height, paint);
     }
 
-    private void initHintAnimation(int value) {
+    private void initHintAnimation(int count) {
         ValueAnimator valueAnimator = this.hintAnimator;
         if (valueAnimator == null || !valueAnimator.isRunning()) {
             float f = this.dividerX;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(f, (value * 0.065f) + f);
+            ValueAnimator ofFloat = ValueAnimator.ofFloat(f, (count * 0.065f) + f);
             this.hintAnimator = ofFloat;
             ofFloat.setDuration(700L);
             this.hintAnimator.setRepeatMode(2);
@@ -174,9 +174,9 @@ public class BeforeAfterView extends View {
     }
 
     @Override // android.view.View
-    protected void onMeasure(int value, int value2) {
-        super.onMeasure(value, value2);
-        int size = View.MeasureSpec.getSize(value);
+    protected void onMeasure(int width, int width14) {
+        super.onMeasure(width, width14);
+        int size = View.MeasureSpec.getSize(width);
         setMeasuredDimension(size, size);
         float f = size;
         this.dividerX = f / 2.0f;
@@ -207,8 +207,8 @@ public class BeforeAfterView extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int value2, int value3, int size4) {
-        super.onSizeChanged(value, value2, value3, size4);
+    protected void onSizeChanged(int size, int size17, int size17, int size4) {
+        super.onSizeChanged(size, size17, size17, size4);
     }
 
     @Override // android.view.View
@@ -264,18 +264,18 @@ public class BeforeAfterView extends View {
     }
 
     private void drawArrows(Canvas canvas, float f, float floatValue2) {
-        float f3 = this.circleRadius / 3.0f;
+        float value = this.circleRadius / 3.0f;
         Path path = new Path();
         path.moveTo(f - (this.circleRadius / 2.0f), floatValue2);
-        float f4 = floatValue2 - f3;
-        path.lineTo((f - (this.circleRadius / 2.0f)) + f3, f4);
-        float f5 = floatValue2 + f3;
-        path.lineTo((f - (this.circleRadius / 2.0f)) + f3, f5);
+        float value24 = floatValue2 - value;
+        path.lineTo((f - (this.circleRadius / 2.0f)) + value, value24);
+        float value24 = floatValue2 + value;
+        path.lineTo((f - (this.circleRadius / 2.0f)) + value, value24);
         path.close();
         Path path2 = new Path();
         path2.moveTo((this.circleRadius / 2.0f) + f, floatValue2);
-        path2.lineTo(((this.circleRadius / 2.0f) + f) - f3, f4);
-        path2.lineTo((f + (this.circleRadius / 2.0f)) - f3, f5);
+        path2.lineTo(((this.circleRadius / 2.0f) + f) - value, value24);
+        path2.lineTo((f + (this.circleRadius / 2.0f)) - value, value24);
         path2.close();
         Paint paint = new Paint(1);
         paint.setColor(-1);

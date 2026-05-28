@@ -17,10 +17,10 @@ public class MRectF implements Serializable {
     /* renamed from: t */
     private float f436t;
 
-    public MRectF(float floatValue, float f2, float f3, float floatValue4) {
+    public MRectF(float floatValue, float value, float value0, float floatValue4) {
         this.f434l = floatValue;
-        this.f436t = f2;
-        this.f435r = f3;
+        this.f436t = value;
+        this.f435r = value0;
         this.f433b = floatValue4;
     }
 

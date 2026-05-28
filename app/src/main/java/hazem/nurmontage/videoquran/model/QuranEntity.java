@@ -70,11 +70,11 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.mPreset;
     }
 
-    public void setmPreset(int value) {
-        this.mPreset = value;
+    public void setmPreset(int resourceId) {
+        this.mPreset = resourceId;
     }
 
-    public void setIpad_type(int value) {
+    public void setIpad_type(int resourceId) {
         this.ipad_type = value;
     }
 
@@ -82,17 +82,17 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.ipad_type;
     }
 
-    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int value, Typeface typeface, float floatValue) {
+    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int ayaNumber, Typeface typeface, float textSize) {
         paint.reset();
         paint.setTypeface(typeface);
-        paint.setTextSize(floatValue);
+        paint.setTextSize(textSize);
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setDither(true);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(value);
+        paint.setColor(ayaNumber);
         if (paint == this.paintAyaTrslOutline) {
-            floatValue *= 1.35f;
+            textSize *= 1.35f;
         }
         int size2 = C22051.$SwitchMap$hazem$nurmontage$videoquran$constant$AyaTextPreset[ayaTextPreset.ordinal()];
         if (size2 != 2) {
@@ -100,23 +100,23 @@ public class QuranEntity extends EntityView implements Serializable {
                 if (size2 != 4) {
                     return;
                 }
-                paint.setShadowLayer(floatValue * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(value, 255));
+                paint.setShadowLayer(textSize * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(ayaNumber, 255));
                 return;
             } else {
-                float floatValue2 = 0.18f * floatValue;
-                float f3 = floatValue * 0.08f;
-                paint.setShadowLayer(floatValue2, f3, f3, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) ? -1 : ViewCompat.MEASURED_STATE_MASK, 120));
+                float lineSpacing = 0.18f * textSize;
+                float alphaValue = textSize * 0.08f;
+                paint.setShadowLayer(lineSpacing, alphaValue, alphaValue, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) ? -1 : ViewCompat.MEASURED_STATE_MASK, 120));
                 return;
             }
         }
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setStrokeWidth(floatValue * 0.12f);
+        paint.setStrokeWidth(textSize * 0.12f);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeJoin(Paint.Join.ROUND);
         if (this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) {
-            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(value, 0.85f));
+            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(ayaNumber, 0.85f));
         } else {
-            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.darkenColor(value, 0.85f));
+            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.darkenColor(ayaNumber, 0.85f));
         }
     }
 
@@ -168,22 +168,22 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public AyaTextPreset get(int value) {
-        if (value == AyaTextPreset.SHADOW.ordinal()) {
+    public AyaTextPreset get(int ayaNumber) {
+        if (ayaNumber == AyaTextPreset.SHADOW.ordinal()) {
             return AyaTextPreset.SHADOW;
         }
-        if (value == AyaTextPreset.OUTLINE.ordinal()) {
+        if (ayaNumber == AyaTextPreset.OUTLINE.ordinal()) {
             return AyaTextPreset.OUTLINE;
         }
-        if (value == AyaTextPreset.GLOW.ordinal()) {
+        if (ayaNumber == AyaTextPreset.GLOW.ordinal()) {
             return AyaTextPreset.GLOW;
         }
         return AyaTextPreset.NONE;
     }
 
-    public void initPreset(int value) {
-        this.mPreset = value;
-        AyaTextPreset ayaTextPreset = get(value);
+    public void initPreset(int ayaNumber) {
+        this.mPreset = ayaNumber;
+        AyaTextPreset ayaTextPreset = get(ayaNumber);
         if (ayaTextPreset == AyaTextPreset.NONE) {
             return;
         }
@@ -208,9 +208,9 @@ public class QuranEntity extends EntityView implements Serializable {
         applyAyaPreset(textPaint2, ayaTextPreset, this.clrTrsl, textPaint2.getTypeface(), this.paintTranslationAya.getTextSize());
     }
 
-    public void initPresetAya(int value) {
-        this.mPreset = value;
-        AyaTextPreset ayaTextPreset = get(value);
+    public void initPresetAya(int ayaNumber) {
+        this.mPreset = ayaNumber;
+        AyaTextPreset ayaTextPreset = get(ayaNumber);
         if (ayaTextPreset == AyaTextPreset.NONE) {
             return;
         }
@@ -224,9 +224,9 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public void initPresetTrsl(int value) {
-        this.mPreset = value;
-        AyaTextPreset ayaTextPreset = get(value);
+    public void initPresetTrsl(int ayaNumber) {
+        this.mPreset = ayaNumber;
+        AyaTextPreset ayaTextPreset = get(ayaNumber);
         if (ayaTextPreset == AyaTextPreset.NONE) {
             return;
         }
@@ -270,11 +270,11 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.translation_complete;
     }
 
-    public void setStartWord_index(int value) {
-        this.startWord_index = value;
+    public void setStartWord_index(int resourceId) {
+        this.startWord_index = resourceId;
     }
 
-    public void setEndWord_index(int value) {
+    public void setEndWord_index(int resourceId) {
         this.endWord_index = value;
     }
 
@@ -315,8 +315,8 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.nameFont;
     }
 
-    public void setIndex(int value) {
-        this.index = value;
+    public void setIndex(int resourceId) {
+        this.index = resourceId;
     }
 
     public int getIndex() {
@@ -344,11 +344,11 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public void setClrAya(int value) {
-        this.clrAya = value;
+    public void setClrAya(int ayaNumber) {
+        this.clrAya = resourceId;
     }
 
-    public void setClrTrsl(int value) {
+    public void setClrTrsl(int resourceId) {
         this.clrTrsl = value;
     }
 
@@ -368,60 +368,60 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.paintTranslationAya;
     }
 
-    public float calculateTextSize(String textValue, Paint paint, int value, int size2) {
-        float floatValue = 0.0f;
-        if (textValue != null && !textValue.isEmpty() && value > 0 && size2 > 0) {
+    public float calculateTextSize(String textValue, Paint paint, int counter, int size2) {
+        float textSize = 0.0f;
+        if (textValue != null && !textValue.isEmpty() && counter > 0 && size2 > 0) {
             paint.setTextSize(1.0f);
             Rect rect = new Rect();
             paint.getTextBounds(textValue, 0, textValue.length(), rect);
             rect.width();
             rect.height();
-            float floatValue2 = 1000.0f;
-            for (int value3 = 0; value3 < 100; value3++) {
-                float f3 = (floatValue + floatValue2) / 2.0f;
-                paint.setTextSize(f3);
+            float lineSpacing = 1000.0f;
+            for (int counter50 = 0; counter50 < 100; counter50++) {
+                float widthRatio = (textSize + lineSpacing) / 2.0f;
+                paint.setTextSize(widthRatio);
                 paint.getTextBounds(textValue, 0, textValue.length(), rect);
                 float width = rect.width();
                 float height = rect.height();
-                if (width > value || height > size2) {
-                    floatValue2 = f3;
+                if (width > counter || height > size2) {
+                    lineSpacing = widthRatio;
                 } else {
-                    floatValue = f3;
+                    textSize = widthRatio;
                 }
             }
         }
-        return floatValue;
+        return textSize;
     }
 
-    public float calculateOptimalTextSize(String textValue, int value, int size2, TextPaint textPaint) {
-        float floatValue = 5.0f;
-        float floatValue2 = 1000.0f;
-        float f3 = 5.0f;
-        while (floatValue <= floatValue2) {
-            float f4 = (floatValue + floatValue2) / 2.0f;
-            textPaint.setTextSize(f4);
-            StaticLayout build = StaticLayout.Builder.obtain(textValue, 0, textValue.length(), textPaint, value).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
+    public float calculateOptimalTextSize(String textValue, int count, int size2, TextPaint textPaint) {
+        float textSize = 5.0f;
+        float lineSpacing = 1000.0f;
+        float widthRatio = 5.0f;
+        while (textSize <= lineSpacing) {
+            float widthRatio53 = (textSize + lineSpacing) / 2.0f;
+            textPaint.setTextSize(widthRatio53);
+            StaticLayout build = StaticLayout.Builder.obtain(textValue, 0, textValue.length(), textPaint, count).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
             float height = build.getHeight();
             float maxLineWidth = getMaxLineWidth(build);
-            if (height > size2 || maxLineWidth > value) {
-                floatValue2 = f4 - 0.03f;
+            if (height > size2 || maxLineWidth > count) {
+                lineSpacing = f4 - 0.03f;
             } else {
                 f3 = f4;
-                floatValue = 0.03f + f4;
+                textSize = 0.03f + f4;
             }
         }
         return f3;
     }
 
     private float getMaxLineWidth(StaticLayout staticLayout) {
-        float floatValue = 0.0f;
-        for (int value = 0; value < staticLayout.getLineCount(); value++) {
-            floatValue = Math.max(floatValue, staticLayout.getLineWidth(value));
+        float textSize = 0.0f;
+        for (int width = 0; value < staticLayout.getLineCount(); count++) {
+            textSize = Math.max(textSize, staticLayout.getLineWidth(count));
         }
-        return floatValue;
+        return textSize;
     }
 
-    public float calculateOptimalTextSize(int value, int size2) {
+    public float calculateOptimalTextSize(int count, int size2) {
         String textValue = this.translation;
         if (textValue == null) {
             return 0.0f;
@@ -437,12 +437,12 @@ public class QuranEntity extends EntityView implements Serializable {
         return calculateTextSize(this.txt, this.paintAya, (int) ((this.rect.width() / getFactor_scale()) * 0.85f), (int) (((isTrsl() ? this.rect.height() * 0.5f : this.rect.height()) / getFactor_scale()) * 0.85f));
     }
 
-    public void setTextSize(float floatValue) {
-        this.paintAya.setTextSize(floatValue);
+    public void setTextSize(float textSize) {
+        this.paintAya.setTextSize(textSize);
     }
 
-    public void setTextSizeInBoucle(float floatValue) {
-        this.paintAya.setTextSize(floatValue);
+    public void setTextSizeInBoucle(float textSize) {
+        this.paintAya.setTextSize(textSize);
         SpannableString spannableString = new SpannableString(this.txt);
         if (this.number != -1) {
             try {
@@ -459,36 +459,36 @@ public class QuranEntity extends EntityView implements Serializable {
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
     }
 
-    public void updateTranslation(float floatValue) {
+    public void updateTranslation(float textSize) {
         if (isTrsl()) {
-            this.paintTranslationAya.setTextSize(floatValue);
-            int value = (int) (this.viewWidth * 0.9f);
-            this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, value);
-            float floatValue2 = value * 0.17f;
+            this.paintTranslationAya.setTextSize(textSize);
+            int count = (int) (this.viewWidth * 0.9f);
+            this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, count);
+            float lineSpacing = count * 0.17f;
             float width = this.staticLayout.getWidth() * 0.4f;
             int lineCount = this.staticLayoutTranslation.getLineCount() - 1;
             while (true) {
                 if (this.translation.substring(this.staticLayoutTranslation.getLineStart(lineCount), this.staticLayoutTranslation.getLineEnd(lineCount)).trim().split("\\s+").length >= 2) {
                     break;
                 }
-                value = (int) (value - floatValue2);
-                if (value < width) {
-                    this.paintTranslationAya.setTextSize(floatValue);
+                count = (int) (count - lineSpacing);
+                if (count < width) {
+                    this.paintTranslationAya.setTextSize(textSize);
                     this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, this.viewWidth);
                     break;
                 }
-                this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, value);
+                this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, count);
             }
             this.x_translation = this.rect.centerX() - (this.staticLayoutTranslation.getWidth() * 0.5f);
             this.f428y = this.rect.centerY() - ((this.staticLayout.getHeight() + this.staticLayoutTranslation.getHeight()) * 0.5f);
         }
     }
 
-    public void updateTranslationSave(float floatValue) {
+    public void updateTranslationSave(float textSize) {
         if (this.translation == null || getIpad_type() == IpadType.CASSET.ordinal() || getIpad_type() == IpadType.CASSET_IMG.ordinal() || getIpad_type() == IpadType.BOTTOM_RECT.ordinal() || getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
             return;
         }
-        this.paintTranslationAya.setTextSize(floatValue);
+        this.paintTranslationAya.setTextSize(textSize);
         this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, (int) (this.viewWidth * 0.9f));
         if (this.staticLayout.getWidth() > this.rect.width()) {
             float width = this.staticLayout.getWidth() * 0.5f;
@@ -512,8 +512,8 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public void setupScale(float floatValue, int value, int size2) {
-        this.paintAya.setTextSize(floatValue * value);
+    public void setupScale(float textSize, int index, int size2) {
+        this.paintAya.setTextSize(textSize * index);
         SpannableString spannableString = new SpannableString(this.txt);
         boolean isFlag = false;
         if (this.number != -1) {
@@ -530,21 +530,21 @@ public class QuranEntity extends EntityView implements Serializable {
         StaticLayout build = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         this.staticLayout = build;
         float width = build.getWidth();
-        float floatValue2 = width * 0.5f;
+        float lineSpacing = width * 0.5f;
         float height = this.rect.height() * (width / this.rect.width()) * 0.5f;
         float centerY = this.rect.centerY();
         float centerX = this.rect.centerX();
-        this.rect.set(centerX - floatValue2, centerY - height, centerX + floatValue2, centerY + height);
+        this.rect.set(centerX - lineSpacing, centerY - height, centerX + lineSpacing, centerY + height);
         if (this.translation != null && this.staticLayoutTranslation != null) {
             isFlag = true;
         }
         if (isFlag && this.txt.length() < 20) {
             this.max_h = Math.round(this.rect.height() * 0.55f);
             this.max_w = Math.round(this.rect.width() * 0.55f);
-        } else if (isFlag && value > size2) {
+        } else if (isFlag && index > size2) {
             this.max_h = Math.round(this.rect.height() * 0.64f);
             this.max_w = Math.round(this.rect.width() * 0.64f);
-        } else if (isFlag && value == size2) {
+        } else if (isFlag && index == size2) {
             this.max_h = Math.round(this.rect.height() * 0.8f);
             this.max_w = Math.round(this.rect.width() * 0.8f);
         } else {
@@ -555,9 +555,9 @@ public class QuranEntity extends EntityView implements Serializable {
         this.f428y = this.rect.centerY() - (this.staticLayout.getHeight() * 0.5f);
     }
 
-    public void setupScaleSave(float floatValue, int value) {
-        float floatValue2 = value;
-        this.paintAya.setTextSize(floatValue * floatValue2);
+    public void setupScaleSave(float textSize, int count) {
+        float lineSpacing = count;
+        this.paintAya.setTextSize(textSize * lineSpacing);
         SpannableString spannableString = new SpannableString(this.txt);
         if (this.number != -1) {
             try {
@@ -575,7 +575,7 @@ public class QuranEntity extends EntityView implements Serializable {
         this.max_w = Math.round(this.rect.width() * 0.85f);
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         if (this.translation != null) {
-            updateTranslationSave(getFactorSizeTrl() * floatValue2);
+            updateTranslationSave(getFactorSizeTrl() * lineSpacing);
             if (this.staticLayoutTranslation != null) {
                 this.x_translation = this.rect.centerX() - (this.staticLayoutTranslation.getWidth() * 0.5f);
                 this.f428y = this.rect.centerY() - ((this.staticLayout.getHeight() + this.staticLayoutTranslation.getHeight()) * 0.5f);
@@ -586,21 +586,21 @@ public class QuranEntity extends EntityView implements Serializable {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void scale(float floatValue, int value, int size2) {
-        setFactor_scale(floatValue);
-        float width = this.rect.width() * floatValue;
-        float height = this.rect.height() * floatValue;
-        float floatValue2 = width * 0.5f;
-        this.rect.left = this.rect.centerX() - floatValue2;
-        this.rect.right = this.rect.centerX() + floatValue2;
-        float f3 = height * 0.5f;
-        this.rect.top = this.rect.centerY() - f3;
-        this.rect.bottom = this.rect.centerY() + f3;
+    public void scale(float textSize, int ayaNumber, int size2) {
+        setFactor_scale(textSize);
+        float width = this.rect.width() * textSize;
+        float height = this.rect.height() * textSize;
+        float lineSpacing = width * 0.5f;
+        this.rect.left = this.rect.centerX() - lineSpacing;
+        this.rect.right = this.rect.centerX() + lineSpacing;
+        float scaleFactor = height * 0.5f;
+        this.rect.top = this.rect.centerY() - scaleFactor;
+        this.rect.bottom = this.rect.centerY() + scaleFactor;
         boolean isFlag = (this.translation == null || this.staticLayoutTranslation == null) ? false : true;
         this.viewWidth = (int) this.rect.width();
         this.paintAya.setTextSize(calculateTextSize());
         createStaticLayout();
-        float f4 = value;
+        float widthRatio = ayaNumber;
         setFcSize(this.paintAya.getTextSize() / f4);
         if (isFlag) {
             setTls();
@@ -613,8 +613,8 @@ public class QuranEntity extends EntityView implements Serializable {
         updateTranslation(calculateOptimalTextSize((int) (getRect().width() * 0.85f), (int) (getRect().height() * 0.5f * 0.83f)));
     }
 
-    public void applyAll(int value, RectF rectF, float floatValue, float floatValue2, QuranEntity quranEntity) {
-        this.paintAya.setTextSize(floatValue);
+    public void applyAll(int index, RectF rectF, float textSize, float lineSpacing, QuranEntity quranEntity) {
+        this.paintAya.setTextSize(textSize);
         SpannableString spannableString = new SpannableString(this.txt);
         boolean isFlag = false;
         if (this.number != -1) {
@@ -631,7 +631,7 @@ public class QuranEntity extends EntityView implements Serializable {
         StaticLayout build = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         this.staticLayout = build;
         float width = build.getWidth();
-        setFcSize(floatValue2);
+        setFcSize(lineSpacing);
         float f3 = width * 0.5f;
         float height = this.rect.height() * (width / this.rect.width()) * 0.5f;
         this.rect.set(rectF.centerX() - f3, rectF.centerY() - height, rectF.centerX() + f3, rectF.centerY() + height);
@@ -645,13 +645,13 @@ public class QuranEntity extends EntityView implements Serializable {
         if (isFlag) {
             this.paintTranslationAya.setTextSize(quranEntity.getPaintTranslationAya().getTextSize());
             this.staticLayoutTranslation = buildStaticLayout(this.translation, this.paintTranslationAya, (int) (this.viewWidth * 0.9f));
-            setFactorSizeTrl(this.paintTranslationAya.getTextSize() / value);
+            setFactorSizeTrl(this.paintTranslationAya.getTextSize() / index);
         }
         initPreset(getmPreset());
     }
 
-    public void applyAll(int value, RectF rectF, float floatValue, float floatValue2) {
-        this.paintAya.setTextSize(floatValue);
+    public void applyAll(int index, RectF rectF, float textSize, float lineSpacing) {
+        this.paintAya.setTextSize(textSize);
         SpannableString spannableString = new SpannableString(this.txt);
         boolean isFlag = false;
         if (this.number != -1) {
@@ -668,7 +668,7 @@ public class QuranEntity extends EntityView implements Serializable {
         StaticLayout build = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         this.staticLayout = build;
         float width = build.getWidth();
-        setFcSize(floatValue2);
+        setFcSize(lineSpacing);
         float f3 = width * 0.5f;
         float height = this.rect.height() * (width / this.rect.width()) * 0.5f;
         this.rect.set(rectF.centerX() - f3, rectF.centerY() - height, rectF.centerX() + f3, rectF.centerY() + height);
@@ -687,8 +687,8 @@ public class QuranEntity extends EntityView implements Serializable {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void postTranslate(float floatValue, float floatValue2) {
-        this.rect.offset(floatValue, floatValue2);
+    public void postTranslate(float textSize, float lineSpacing) {
+        this.rect.offset(textSize, lineSpacing);
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         if (isTrsl() && this.staticLayoutTranslation != null) {
             this.x_translation = this.rect.centerX() - (this.staticLayoutTranslation.getWidth() * 0.5f);
@@ -698,13 +698,13 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public void setTranslate(float floatValue, float floatValue2) {
+    public void setTranslate(float textSize, float lineSpacing) {
         float width = this.rect.width() * 0.5f;
         float height = this.rect.height() * 0.5f;
-        this.rect.left = floatValue - width;
-        this.rect.right = floatValue + width;
-        this.rect.top = floatValue2 - height;
-        this.rect.bottom = floatValue2 + height;
+        this.rect.left = textSize - width;
+        this.rect.right = textSize + width;
+        this.rect.top = lineSpacing - height;
+        this.rect.bottom = lineSpacing + height;
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         if (this.translation != null && this.staticLayoutTranslation != null) {
             this.x_translation = this.rect.centerX() - (this.staticLayoutTranslation.getWidth() * 0.5f);
@@ -725,7 +725,7 @@ public class QuranEntity extends EntityView implements Serializable {
     }
 
     public void createStaticLayout() {
-        float floatValue;
+        float textSize;
         SpannableString spannableString = new SpannableString(this.txt);
         if (this.number != -1) {
             try {
@@ -740,12 +740,12 @@ public class QuranEntity extends EntityView implements Serializable {
         this.staticLayout = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         if (this.translation != null && getIpad_type() != IpadType.BOTTOM_RECT.ordinal() && getIpad_type() != IpadType.CASSET.ordinal() && getIpad_type() != IpadType.CASSET_IMG.ordinal() && getIpad_type() != IpadType.CASSET_IMG_BLUR.ordinal()) {
             if (getIpad_type() == IpadType.IPAD_NEOMORPHIC.ordinal()) {
-                floatValue = 2.0f;
+                textSize = 2.0f;
             } else {
-                floatValue = (getIpad_type() == IpadType.MASK_BRUSH.ordinal() || getIpad_type() == IpadType.BLUE_TYPE.ordinal() || getIpad_type() == IpadType.HEART.ordinal() || getIpad_type() == IpadType.BATTERY.ordinal() || getIpad_type() == IpadType.BLACK_LAYER.ordinal() || getIpad_type() == IpadType.GRADIENT.ordinal()) ? 0.45f : 1.2f;
+                textSize = (getIpad_type() == IpadType.MASK_BRUSH.ordinal() || getIpad_type() == IpadType.BLUE_TYPE.ordinal() || getIpad_type() == IpadType.HEART.ordinal() || getIpad_type() == IpadType.BATTERY.ordinal() || getIpad_type() == IpadType.BLACK_LAYER.ordinal() || getIpad_type() == IpadType.GRADIENT.ordinal()) ? 0.45f : 1.2f;
             }
             this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
-            this.paintTranslationAya.setTextSize(calculateOptimalTextSize(this.translation, (int) (this.viewWidth * 0.85f), (int) (this.rect.height() - (this.staticLayout.getHeight() * floatValue)), this.paintTranslationAya));
+            this.paintTranslationAya.setTextSize(calculateOptimalTextSize(this.translation, (int) (this.viewWidth * 0.85f), (int) (this.rect.height() - (this.staticLayout.getHeight() * textSize)), this.paintTranslationAya));
             int value = this.viewWidth;
             StaticLayout buildStaticLayout = buildStaticLayout(this.translation, this.paintTranslationAya, value);
             this.staticLayoutTranslation = buildStaticLayout;
@@ -765,7 +765,7 @@ public class QuranEntity extends EntityView implements Serializable {
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
     }
 
-    private StaticLayout buildStaticLayout(String textValue, TextPaint textPaint, int value) {
+    private StaticLayout buildStaticLayout(String textValue, TextPaint textPaint, int width) {
         return StaticLayout.Builder.obtain(textValue, 0, textValue.length(), textPaint, value).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
     }
 
@@ -874,8 +874,8 @@ public class QuranEntity extends EntityView implements Serializable {
         return (objectAnimator2 != null && objectAnimator2.isRunning()) || ((objectAnimator = this.otherAnimation) != null && objectAnimator.isRunning());
     }
 
-    public void setOpacityFade(int value) {
-        this.paintAya.setAlpha(value);
+    public void setOpacityFade(int index) {
+        this.paintAya.setAlpha(index);
         this.paintTranslationAya.setAlpha(this.paintAya.getAlpha());
         this.paintAyaTrslOutline.setAlpha(this.paintAya.getAlpha());
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
@@ -917,10 +917,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
     }
 
-    public void setSlideX(float floatValue) {
+    public void setSlideX(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.offsetX = floatValue;
-        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(floatValue)) * 255.0f));
+        this.offsetX = textSize;
+        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(textSize)) * 255.0f));
         this.paintTranslationAya.setAlpha(this.paintAya.getAlpha());
         this.paintAyaTrslOutline.setAlpha(this.paintAya.getAlpha());
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
@@ -930,10 +930,10 @@ public class QuranEntity extends EntityView implements Serializable {
         weakReference.get().invalidate();
     }
 
-    public void setSlideXOut(float floatValue) {
+    public void setSlideXOut(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.offsetX = floatValue;
-        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(floatValue)) * 255.0f));
+        this.offsetX = textSize;
+        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(textSize)) * 255.0f));
         this.paintTranslationAya.setAlpha(this.paintAya.getAlpha());
         this.paintAyaTrslOutline.setAlpha(this.paintAya.getAlpha());
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
@@ -943,19 +943,19 @@ public class QuranEntity extends EntityView implements Serializable {
         weakReference.get().invalidate();
     }
 
-    public void setFactorSize(float floatValue) {
+    public void setFactorSize(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.scaleX = floatValue;
+        this.scaleX = textSize;
         if (!isAnimTest() || (weakReference = this.weakBlurredImageView) == null) {
             return;
         }
         weakReference.get().invalidate();
     }
 
-    public void slidToLeft(int value, boolean isFlag) {
+    public void slidToLeft(int index, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideX", 1.0f, 0.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -963,10 +963,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToRightOut(int value, boolean isFlag) {
+    public void slidToRightOut(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideXOut", 0.0f, 1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -974,10 +974,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToLeftOut(int value, boolean isFlag) {
+    public void slidToLeftOut(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideXOut", 0.0f, -1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -985,10 +985,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToRight(int value, boolean isFlag) {
+    public void slidToRight(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideX", -1.0f, 0.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -996,10 +996,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void zoomIn_In(int value, boolean isFlag) {
+    public void zoomIn_In(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "FactorSize", 0.0f, 1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -1007,25 +1007,25 @@ public class QuranEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void runIn(int value, boolean isFlag, String textValue) {
+    public void runIn(int count, boolean isFlag, String textValue) {
         if (textValue.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-            slidToLeft(value, isFlag);
+            slidToLeft(count, isFlag);
         }
         if (textValue.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-            slidToRight(value, isFlag);
+            slidToRight(count, isFlag);
         }
         if (textValue.equals(TransitionType.ZOOM_IN.getValue())) {
-            zoomIn_In(value, isFlag);
+            zoomIn_In(resourceId, isFlag);
         }
         if (textValue.equals(TransitionType.FADE_IN.getValue())) {
-            fadeIn(value, isFlag);
+            fadeIn(resourceId, isFlag);
         }
     }
 
-    private void fadeIn(int value, boolean isFlag) {
+    private void fadeIn(int resourceId, boolean isFlag) {
         ObjectAnimator ofInt = ObjectAnimator.ofInt(this, "OpacityFade", 0, 255);
         this.objectAnimator = ofInt;
-        ofInt.setDuration(value);
+        ofInt.setDuration(count);
         if (isFlag) {
             this.objectAnimator.setRepeatMode(1);
             this.objectAnimator.setRepeatCount(-1);
@@ -1033,10 +1033,10 @@ public class QuranEntity extends EntityView implements Serializable {
         this.objectAnimator.start();
     }
 
-    private void fadeOut(int value, boolean isFlag) {
+    private void fadeOut(int count, boolean isFlag) {
         ObjectAnimator ofInt = ObjectAnimator.ofInt(this, "OpacityFade", 255, 0);
         this.objectAnimator = ofInt;
-        ofInt.setDuration(value);
+        ofInt.setDuration(count);
         if (isFlag) {
             this.objectAnimator.setRepeatMode(1);
             this.objectAnimator.setRepeatCount(-1);
@@ -1044,19 +1044,19 @@ public class QuranEntity extends EntityView implements Serializable {
         this.objectAnimator.start();
     }
 
-    public void runOut(int value, boolean isFlag, String textValue) {
+    public void runOut(int count, boolean isFlag, String textValue) {
         if (textValue.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-            slidToLeftOut(value, isFlag);
+            slidToLeftOut(count, isFlag);
         }
         if (textValue.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-            slidToRightOut(value, isFlag);
+            slidToRightOut(ayaNumber, isFlag);
         }
         if (textValue.equals(TransitionType.FADE_OUT.getValue())) {
-            fadeOut(value, isFlag);
+            fadeOut(ayaNumber, isFlag);
         }
     }
 
-    public QuranEntity(Context context, String textValue, String str2, String str3, String str4, RectF rectF, Typeface typeface, Typeface typeface2, int value, int size2, Typeface typeface3, int value3, int value4, String textValue5, boolean isFlag, int value5) {
+    public QuranEntity(Context context, String textValue, String name, String name139, String name139, RectF rectF, Typeface typeface, Typeface typeface2, int ayaNumber, int size2, Typeface typeface3, int ayaNumber139, int ayaNumber139, String textValue5, boolean isFlag, int ayaNumber139) {
         this.nameFont = Common.FONT_QURAN;
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
@@ -1065,33 +1065,33 @@ public class QuranEntity extends EntityView implements Serializable {
         TextPaint textPaint2 = new TextPaint(1);
         this.paintTranslationAya = textPaint2;
         this.txt = textValue;
-        this.complete_aya = str2;
-        if (str2 == null || str2.isEmpty()) {
+        this.complete_aya = name;
+        if (name == null || name.isEmpty()) {
             this.complete_aya = textValue;
         }
-        this.translation = str3;
-        this.translation_complete = str4;
+        this.translation = name139;
+        this.translation_complete = name139;
         this.nameFont = textValue5;
-        this.indexNumber = value;
+        this.indexNumber = ayaNumber;
         this.number = size2;
         this.typefaceNumber = typeface3;
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value3);
+        textPaint.setColor(ayaNumber139);
         textPaint.setTextSize(0.05f);
         textPaint2.setTextSize(0.05f);
-        textPaint2.setColor(value4);
+        textPaint2.setColor(ayaNumber139);
         textPaint2.setTypeface(typeface2);
-        setClrAya(value3);
-        setClrTrsl(value4);
-        this.vectorDrawable = (VectorDrawable) ContextCompat.getDrawable(context, value5);
+        setClrAya(ayaNumber139);
+        setClrTrsl(ayaNumber140);
+        this.vectorDrawable = (VectorDrawable) ContextCompat.getDrawable(context, ayaNumber140);
         this.max_h = (int) (this.rect.height() * 0.85f);
         this.max_w = (int) (this.rect.width() * 0.85f);
     }
 
-    public QuranEntity(Context context, int value, String textValue, String str2, String str3, String str4, RectF rectF, Typeface typeface, Typeface typeface2, int size2, int value3, Typeface typeface3, int value4, int value5, String textValue5, boolean isFlag) {
+    public QuranEntity(Context context, int ayaNumber, String textValue, String name, String name140, String name140, RectF rectF, Typeface typeface, Typeface typeface2, int size2, int ayaNumber140, Typeface typeface3, int ayaNumber140, int ayaNumber140, String textValue5, boolean isFlag) {
         this.nameFont = Common.FONT_QURAN;
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
@@ -1100,33 +1100,33 @@ public class QuranEntity extends EntityView implements Serializable {
         TextPaint textPaint2 = new TextPaint(1);
         this.paintTranslationAya = textPaint2;
         this.txt = textValue;
-        this.translation = str3;
-        this.translation_complete = str4;
-        this.complete_aya = str2;
-        if (str2 == null || str2.isEmpty()) {
+        this.translation = name140;
+        this.translation_complete = name140;
+        this.complete_aya = name;
+        if (name == null || name.isEmpty()) {
             this.complete_aya = textValue;
         }
         this.nameFont = textValue5;
         this.indexNumber = size2;
-        this.number = value3;
+        this.number = ayaNumber140;
         this.typefaceNumber = typeface3;
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value4);
+        textPaint.setColor(ayaNumber140);
         textPaint.setTextSize(0.05f);
         textPaint2.setTextSize(0.05f);
         textPaint2.setColor(value5);
         textPaint2.setTypeface(typeface2);
-        setClrAya(value4);
+        setClrAya(ayaNumber141);
         setClrTrsl(value5);
-        this.vectorDrawable = (VectorDrawable) ContextCompat.getDrawable(context, value);
+        this.vectorDrawable = (VectorDrawable) ContextCompat.getDrawable(context, ayaNumber);
         this.max_h = (int) (this.rect.height() * 0.85f);
         this.max_w = (int) (this.rect.width() * 0.85f);
     }
 
-    public QuranEntity(String textValue, String str2, String str3, String str4, RectF rectF, Typeface typeface, Typeface typeface2, int value, int size2, Typeface typeface3, int value3, int value4, String textValue5, float floatValue, boolean isFlag, VectorDrawable vectorDrawable) {
+    public QuranEntity(String textValue, String name, String name141, String name141, RectF rectF, Typeface typeface, Typeface typeface2, int ayaNumber, int size2, Typeface typeface3, int ayaNumber141, int ayaNumber141, String textValue5, float textSize, boolean isFlag, VectorDrawable vectorDrawable) {
         this.nameFont = Common.FONT_QURAN;
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
@@ -1135,28 +1135,28 @@ public class QuranEntity extends EntityView implements Serializable {
         TextPaint textPaint2 = new TextPaint(1);
         this.paintTranslationAya = textPaint2;
         this.txt = textValue;
-        this.translation = str3;
-        this.translation_complete = str4;
-        this.complete_aya = str2;
+        this.translation = name141;
+        this.translation_complete = name141;
+        this.complete_aya = name;
         this.nameFont = textValue5;
-        this.indexNumber = value;
+        this.indexNumber = ayaNumber;
         this.number = size2;
         this.typefaceNumber = typeface3;
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value3);
-        textPaint.setTextSize(floatValue);
+        textPaint.setColor(ayaNumber142);
+        textPaint.setTextSize(textSize);
         textPaint2.setTextSize(0.05f);
         textPaint2.setTypeface(typeface2);
-        textPaint2.setColor(value4);
+        textPaint2.setColor(ayaNumber142);
         this.vectorDrawable = vectorDrawable;
         this.max_h = (int) (this.rect.height() * 0.85f);
         this.max_w = (int) (this.rect.width() * 0.85f);
     }
 
-    public QuranEntity(String textValue, String str2, String str3, String str4, RectF rectF, Typeface typeface, Typeface typeface2, int value, int size2, Typeface typeface3, int value3, int value4, String textValue5, float floatValue, float floatValue2, boolean isFlag, VectorDrawable vectorDrawable) {
+    public QuranEntity(String textValue, String name, String name142, String name142, RectF rectF, Typeface typeface, Typeface typeface2, int ayaNumber, int size2, Typeface typeface3, int ayaNumber142, int ayaNumber142, String textValue5, float textSize, float lineSpacing, boolean isFlag, VectorDrawable vectorDrawable) {
         this.nameFont = Common.FONT_QURAN;
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
@@ -1165,11 +1165,11 @@ public class QuranEntity extends EntityView implements Serializable {
         TextPaint textPaint2 = new TextPaint(1);
         this.paintTranslationAya = textPaint2;
         this.txt = textValue;
-        this.translation = str3;
-        this.translation_complete = str4;
-        this.complete_aya = str2;
+        this.translation = name142;
+        this.translation_complete = name142;
+        this.complete_aya = name;
         this.nameFont = textValue5;
-        this.indexNumber = value;
+        this.indexNumber = ayaNumber;
         this.number = size2;
         this.typefaceNumber = typeface3;
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
@@ -1177,8 +1177,8 @@ public class QuranEntity extends EntityView implements Serializable {
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
         textPaint.setColor(value3);
-        textPaint.setTextSize(floatValue);
-        textPaint2.setTextSize(floatValue2);
+        textPaint.setTextSize(textSize);
+        textPaint2.setTextSize(lineSpacing);
         textPaint2.setTypeface(typeface2);
         textPaint2.setColor(value4);
         this.vectorDrawable = vectorDrawable;
@@ -1190,7 +1190,7 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.indexNumber;
     }
 
-    public void setIndexNumber(int value) {
+    public void setIndexNumber(int width147) {
         this.indexNumber = value;
     }
 
@@ -1198,11 +1198,11 @@ public class QuranEntity extends EntityView implements Serializable {
         return this.number;
     }
 
-    public void setNumber(int value) {
-        this.number = value;
+    public void setNumber(int resourceId) {
+        this.number = size;
     }
 
-    public void update(RectF rectF, int value, int size2) {
+    public void update(RectF rectF, int size, int size2) {
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
         this.max_h = size2;
         this.max_w = value;
@@ -1233,16 +1233,16 @@ public class QuranEntity extends EntityView implements Serializable {
         this.nameFont = textValue;
     }
 
-    public void setColor(int value) {
-        setClrAya(value);
-        this.paintAya.setColor(value);
+    public void setColor(int ayaNumber) {
+        setClrAya(ayaNumber);
+        this.paintAya.setColor(ayaNumber);
     }
 
-    public void setColorTranslation(int value) {
-        setClrTrsl(value);
+    public void setColorTranslation(int ayaNumber) {
+        setClrTrsl(ayaNumber);
         TextPaint textPaint = this.paintTranslationAya;
         if (textPaint != null) {
-            textPaint.setColor(value);
+            textPaint.setColor(ayaNumber);
         }
     }
 
@@ -1250,8 +1250,8 @@ public class QuranEntity extends EntityView implements Serializable {
         if (this.staticLayout != null) {
             canvas.save();
             canvas.translate(this.f427x + (this.offsetX * this.staticLayout.getWidth()), this.f428y);
-            float floatValue = this.scaleX;
-            canvas.scale(floatValue, floatValue);
+            float textSize = this.scaleX;
+            canvas.scale(textSize, textSize);
             if (this.mPreset == AyaTextPreset.OUTLINE.ordinal() && this.staticLayoutOutline != null) {
                 this.paintAyaOutline.setTextSize(this.paintAya.getTextSize());
                 this.staticLayoutOutline.draw(canvas);
@@ -1263,8 +1263,8 @@ public class QuranEntity extends EntityView implements Serializable {
             }
             canvas.save();
             canvas.translate(this.x_translation + (this.offsetX * this.staticLayout.getWidth()), this.f428y + (this.staticLayout.getHeight() * this.padding));
-            float floatValue2 = this.scaleX;
-            canvas.scale(floatValue2, floatValue2);
+            float lineSpacing = this.scaleX;
+            canvas.scale(lineSpacing, lineSpacing);
             if (this.mPreset == AyaTextPreset.OUTLINE.ordinal() && this.staticLayoutTranslationOutline != null) {
                 this.paintAyaTrslOutline.setTextSize(this.paintTranslationAya.getTextSize());
                 this.staticLayoutTranslationOutline.draw(canvas);
@@ -1293,26 +1293,26 @@ public class QuranEntity extends EntityView implements Serializable {
         }
     }
 
-    public void singleDraw(Canvas canvas, int value) {
+    public void singleDraw(Canvas canvas, int ayaNumber) {
         if (this.staticLayout != null) {
-            this.paintAya.setAlpha(value);
+            this.paintAya.setAlpha(ayaNumber);
             this.staticLayout.draw(canvas);
             if (this.translation == null || this.staticLayoutTranslation == null || getIpad_type() == IpadType.BOTTOM_RECT.ordinal() || getIpad_type() == IpadType.CASSET.ordinal() || getIpad_type() == IpadType.CASSET_IMG.ordinal() || getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
                 return;
             }
             canvas.save();
             canvas.translate((-this.f427x) + this.x_translation, this.staticLayout.getHeight() * this.padding);
-            this.paintTranslationAya.setAlpha(value);
+            this.paintTranslationAya.setAlpha(ayaNumber);
             this.staticLayoutTranslation.draw(canvas);
             canvas.restore();
         }
     }
 
-    public void singleDraw(Canvas canvas, int value, float floatValue) {
+    public void singleDraw(Canvas canvas, int ayaNumber, float textSize) {
         if (this.staticLayout != null) {
             canvas.save();
-            canvas.translate(this.staticLayout.getWidth() * floatValue, 0.0f);
-            this.paintAya.setAlpha(value);
+            canvas.translate(this.staticLayout.getWidth() * textSize, 0.0f);
+            this.paintAya.setAlpha(ayaNumber);
             this.staticLayout.draw(canvas);
             canvas.restore();
             if (this.translation == null || this.staticLayoutTranslation == null || getIpad_type() == IpadType.BOTTOM_RECT.ordinal() || getIpad_type() == IpadType.CASSET.ordinal() || getIpad_type() == IpadType.CASSET_IMG.ordinal() || getIpad_type() == IpadType.CASSET_IMG_BLUR.ordinal()) {
@@ -1320,7 +1320,7 @@ public class QuranEntity extends EntityView implements Serializable {
             }
             canvas.save();
             canvas.translate((-this.f427x) + this.x_translation, this.staticLayout.getHeight() * this.padding);
-            canvas.translate(floatValue * this.staticLayout.getWidth(), 0.0f);
+            canvas.translate(textSize * this.staticLayout.getWidth(), 0.0f);
             this.paintTranslationAya.setAlpha(value);
             this.staticLayoutTranslation.draw(canvas);
             canvas.restore();

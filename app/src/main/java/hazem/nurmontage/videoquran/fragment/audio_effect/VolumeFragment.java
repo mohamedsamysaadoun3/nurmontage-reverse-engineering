@@ -64,9 +64,9 @@ public class VolumeFragment extends Fragment {
         seekBar.setProgress(volume);
         this.volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.VolumeFragment.1
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+            public void onProgressChanged(SeekBar seekBar2, int resourceId, boolean isFlag) {
                 if (isFlag) {
-                    VolumeFragment.this.tvProgress.setText(String.valueOf(value));
+                    VolumeFragment.this.tvProgress.setText(String.valueOf(resourceId));
                 }
             }
 

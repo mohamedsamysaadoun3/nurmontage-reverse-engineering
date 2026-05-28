@@ -19,13 +19,13 @@ public class PCMWaveformExtractor {
                 fileInputStream.close();
                 return fArr;
             }
-            for (int value3 = 0; value3 < read; value3 += 2) {
-                float f2 = i2 / length;
-                if (f2 >= f) {
+            for (int index = 0; index < read; index += 2) {
+                float value = i2 / length;
+                if (value >= f) {
                     break;
                 }
-                int i4 = (int) f2;
-                fArr[i4] = Math.max(fArr[i4], Math.abs((int) ((short) ((bArr[value3 + 1] << 8) | (bArr[value3] & 255)))) / 32767.0f);
+                int i4 = (int) value;
+                fArr[i4] = Math.max(fArr[i4], Math.abs((int) ((short) ((bArr[index + 1] << 8) | (bArr[index] & 255)))) / 32767.0f);
                 i2++;
             }
         }

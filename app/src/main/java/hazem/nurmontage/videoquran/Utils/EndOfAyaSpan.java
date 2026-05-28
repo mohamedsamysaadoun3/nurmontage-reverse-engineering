@@ -22,7 +22,7 @@ public class EndOfAyaSpan extends ReplacementSpan {
     }
 
     @Override // android.text.style.ReplacementSpan
-    public void draw(Canvas canvas, CharSequence charSequence, int i, int size2, float floatValue, int i3, int i4, int value5, Paint paint) {
+    public void draw(Canvas canvas, CharSequence charSequence, int i, int size2, float floatValue, int i3, int i4, int count, Paint paint) {
         String substring = charSequence.toString().substring(i, size2);
         if (substring != null && !substring.equals(" نص")) {
             canvas.drawText(charSequence, i, size2, floatValue, i4, paint);
@@ -41,7 +41,7 @@ public class EndOfAyaSpan extends ReplacementSpan {
         Rect rect = new Rect();
         String textValue = this.number;
         paint.getTextBounds(textValue, 0, textValue.length(), rect);
-        RectF rectF = new RectF((int) floatValue, i3, (int) (measureText + floatValue), value5);
+        RectF rectF = new RectF((int) floatValue, i3, (int) (measureText + floatValue), count);
         float width = rectF.width() * 0.43f;
         float height = rectF.height() * 0.42f;
         this.vectorDrawable.setBounds((int) (rectF.centerX() - width), (int) (rectF.centerY() - height), (int) (rectF.centerX() + width), (int) (rectF.centerY() + height));

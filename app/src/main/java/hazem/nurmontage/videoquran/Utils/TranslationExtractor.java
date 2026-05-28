@@ -56,19 +56,19 @@ public class TranslationExtractor {
             HashMap hashMap = new HashMap();
             for (String textValue3 : arrayList) {
                 String[] split = textValue3.split(":");
-                String str4 = split[0];
-                String str5 = split[1];
+                String videoPath = split[0];
+                String videoPath5 = split[1];
                 int parseInt = Integer.parseInt(split[2]);
-                String str6 = str4 + "|" + str5;
+                String videoPath5 = videoPath + "|" + videoPath5;
                 String string = jSONObject.getString(textValue3);
                 if (!string.matches("\\(\\d+\\)") && !string.matches("\\d+")) {
-                    ((Map) linkedHashMap.computeIfAbsent(str6, new Function() { // from class: hazem.nurmontage.videoquran.Utils.TranslationExtractor$$ExternalSyntheticLambda2
+                    ((Map) linkedHashMap.computeIfAbsent(videoPath5, new Function() { // from class: hazem.nurmontage.videoquran.Utils.TranslationExtractor$$ExternalSyntheticLambda2
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
                             return TranslationExtractor.lambda$convertJsonToTxt$1((String) obj);
                         }
                     })).put(Integer.valueOf(parseInt), string);
-                    hashMap.put(str6, Integer.valueOf(Math.max(((Integer) hashMap.getOrDefault(str6, 0)).intValue(), parseInt)));
+                    hashMap.put(videoPath5, Integer.valueOf(Math.max(((Integer) hashMap.getOrDefault(videoPath5, 0)).intValue(), parseInt)));
                 }
             }
             File file = new File(context.getExternalFilesDir(null), "QuranTranslations");
@@ -82,7 +82,7 @@ public class TranslationExtractor {
                 Map map = (Map) entry.getValue();
                 int intValue = ((Integer) hashMap.get(str7)).intValue();
                 ArrayList arrayList2 = new ArrayList();
-                for (int value = 1; value <= intValue; value++) {
+                for (int index = 1; index <= intValue; index++) {
                     arrayList2.add((String) map.getOrDefault(Integer.valueOf(value), "*"));
                 }
                 bufferedWriter.write(str7 + ProVersionActivity$$ExternalSyntheticBackport0.m586m(",", arrayList2));

@@ -51,8 +51,8 @@ public abstract class TwoFingerGestureDetector extends BaseGestureDetector {
     public float getCurrentSpan() {
         if (this.mCurrLen == -1.0f) {
             float f = this.mCurrFingerDiffX;
-            float f2 = this.mCurrFingerDiffY;
-            this.mCurrLen = (float) Math.sqrt((f * f) + (f2 * f2));
+            float value = this.mCurrFingerDiffY;
+            this.mCurrLen = (float) Math.sqrt((f * f) + (value * value));
         }
         return this.mCurrLen;
     }
@@ -60,8 +60,8 @@ public abstract class TwoFingerGestureDetector extends BaseGestureDetector {
     public float getPreviousSpan() {
         if (this.mPrevLen == -1.0f) {
             float f = this.mPrevFingerDiffX;
-            float f2 = this.mPrevFingerDiffY;
-            this.mPrevLen = (float) Math.sqrt((f * f) + (f2 * f2));
+            float value = this.mPrevFingerDiffY;
+            this.mPrevLen = (float) Math.sqrt((f * f) + (value * value));
         }
         return this.mPrevLen;
     }
@@ -70,30 +70,30 @@ public abstract class TwoFingerGestureDetector extends BaseGestureDetector {
         DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
         this.mRightSlopEdge = displayMetrics.widthPixels - this.mEdgeSlop;
         float f = displayMetrics.heightPixels;
-        float f2 = this.mEdgeSlop;
-        float f3 = f - f2;
-        this.mBottomSlopEdge = f3;
-        float f4 = this.mRightSlopEdge;
+        float widthRatio = this.mEdgeSlop;
+        float widthRatio6 = f - widthRatio;
+        this.mBottomSlopEdge = widthRatio6;
+        float widthRatio6 = this.mRightSlopEdge;
         float rawX = motionEvent.getRawX();
         float rawY = motionEvent.getRawY();
         float rawX2 = getRawX(motionEvent, 1);
         float rawY2 = getRawY(motionEvent, 1);
-        boolean z = rawX < f2 || rawY < f2 || rawX > f4 || rawY > f3;
-        boolean z2 = rawX2 < f2 || rawY2 < f2 || rawX2 > f4 || rawY2 > f3;
+        boolean z = rawX < widthRatio || rawY < widthRatio || rawX > widthRatio6 || rawY > widthRatio6;
+        boolean z2 = rawX2 < widthRatio || rawY2 < widthRatio || rawX2 > f4 || rawY2 > f3;
         return (z && z2) || z || z2;
     }
 
-    protected static float getRawX(MotionEvent motionEvent, int value) {
+    protected static float getRawX(MotionEvent motionEvent, int width) {
         float x = motionEvent.getX() - motionEvent.getRawX();
-        if (value < motionEvent.getPointerCount()) {
-            return motionEvent.getX(value) + x;
+        if (width < motionEvent.getPointerCount()) {
+            return motionEvent.getX(count) + x;
         }
         return 0.0f;
     }
 
-    protected static float getRawY(MotionEvent motionEvent, int value) {
+    protected static float getRawY(MotionEvent motionEvent, int count) {
         float y = motionEvent.getY() - motionEvent.getRawY();
-        if (value < motionEvent.getPointerCount()) {
+        if (count < motionEvent.getPointerCount()) {
             return motionEvent.getY(value) + y;
         }
         return 0.0f;

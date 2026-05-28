@@ -40,8 +40,8 @@ public class ShoveGestureDetector extends TwoFingerGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.TwoFingerGestureDetector, hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleStartProgressEvent(int value, MotionEvent motionEvent) {
-        if (value == 2) {
+    protected void handleStartProgressEvent(int resourceId, MotionEvent motionEvent) {
+        if (resourceId == 2) {
             if (this.mSloppyGesture) {
                 boolean isSloppyGesture = isSloppyGesture(motionEvent);
                 this.mSloppyGesture = isSloppyGesture;
@@ -53,7 +53,7 @@ public class ShoveGestureDetector extends TwoFingerGestureDetector {
             }
             return;
         }
-        if (value != 5) {
+        if (resourceId != 5) {
             return;
         }
         resetState();
@@ -69,8 +69,8 @@ public class ShoveGestureDetector extends TwoFingerGestureDetector {
     }
 
     @Override // hazem.nurmontage.videoquran.multitouch.TwoFingerGestureDetector, hazem.nurmontage.videoquran.multitouch.BaseGestureDetector
-    protected void handleInProgressEvent(int value, MotionEvent motionEvent) {
-        if (value == 2) {
+    protected void handleInProgressEvent(int resourceId, MotionEvent motionEvent) {
+        if (resourceId == 2) {
             updateStateByEvent(motionEvent);
             if (this.mCurrPressure / this.mPrevPressure <= 0.67f || Math.abs(getShovePixelsDelta()) <= 0.5f || !this.mListener.onShove(this)) {
                 return;
@@ -79,13 +79,13 @@ public class ShoveGestureDetector extends TwoFingerGestureDetector {
             this.mPrevEvent = MotionEvent.obtain(motionEvent);
             return;
         }
-        if (value == 3) {
+        if (resourceId == 3) {
             if (!this.mSloppyGesture) {
                 this.mListener.onShoveEnd(this);
             }
             resetState();
         } else {
-            if (value != 6) {
+            if (resourceId != 6) {
                 return;
             }
             updateStateByEvent(motionEvent);

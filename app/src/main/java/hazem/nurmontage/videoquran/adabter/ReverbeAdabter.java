@@ -22,9 +22,9 @@ public class ReverbeAdabter extends RecyclerView.Adapter<ViewHolder> {
         void pause();
     }
 
-    public ReverbeAdabter(List<Reverbe> list, IReverbPresetCallback iReverbPresetCallback, int value) {
+    public ReverbeAdabter(List<Reverbe> list, IReverbPresetCallback iReverbPresetCallback, int index) {
         this.list = list;
-        this.select = value;
+        this.select = index;
         this.iReverbCallback = iReverbPresetCallback;
     }
 
@@ -42,9 +42,9 @@ public class ReverbeAdabter extends RecyclerView.Adapter<ViewHolder> {
                     if (ReverbeAdabter.this.iReverbCallback != null) {
                         ReverbeAdabter.this.iReverbCallback.pause();
                         if (ReverbeAdabter.this.select == ViewHolder.this.getAdapterPosition()) {
-                            int value = ReverbeAdabter.this.select;
+                            int index = ReverbeAdabter.this.select;
                             ReverbeAdabter.this.select = -1;
-                            ReverbeAdabter.this.notifyItemChanged(value);
+                            ReverbeAdabter.this.notifyItemChanged(index);
                             ReverbeAdabter.this.notifyItemChanged(ViewHolder.this.getAdapterPosition());
                             return;
                         }
@@ -60,14 +60,14 @@ public class ReverbeAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_reverbe, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        viewHolder.text.setText(this.list.get(value).getName());
-        if (this.select == value) {
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        viewHolder.text.setText(this.list.get(index).getName());
+        if (this.select == index) {
             viewHolder.itemView.setBackgroundResource(C2014R.drawable.item_reverb_select);
             viewHolder.iv_btn_play.setImageResource(C2014R.drawable.pause_24px);
         } else {

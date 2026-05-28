@@ -56,9 +56,9 @@ public class PitchFragment extends Fragment {
         this.volumeSeekBar.setProgress(20);
         this.volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.PitchFragment.1
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+            public void onProgressChanged(SeekBar seekBar2, int resourceId, boolean isFlag) {
                 if (isFlag) {
-                    PitchFragment.this.tvProgress.setText(String.valueOf(value));
+                    PitchFragment.this.tvProgress.setText(String.valueOf(resourceId));
                 }
             }
 

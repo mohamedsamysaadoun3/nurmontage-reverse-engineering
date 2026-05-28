@@ -128,14 +128,14 @@ public class SeettingActivity extends Base implements PurchasesUpdatedListener {
         });
         TextCustumFont textCustumFont = (TextCustumFont) findViewById(C2014R.id.tv_version);
         try {
-            String str = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            if (str != null) {
-                str = str.replace("-nurmontage4kb", "").replace("-nurmontage16kb", "");
+            String videoPath = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            if (videoPath != null) {
+                videoPath = videoPath.replace("-nurmontage4kb", "").replace("-nurmontage16kb", "");
             }
             if (LocaleHelper.getLanguage(this).equals("ar")) {
-                textCustumFont.setText("إصدار : " + str);
+                textCustumFont.setText("إصدار : " + videoPath);
             } else {
-                textCustumFont.setText("Version : " + str);
+                textCustumFont.setText("Version : " + videoPath);
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -296,16 +296,16 @@ public class SeettingActivity extends Base implements PurchasesUpdatedListener {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void shareApp() {
-        String str;
+        String url;
         if (LocaleHelper.getLanguage(this).equals("ar")) {
-            str = "أنشئ ريلز قرآنية جميلة بسهولة 🎧✨\nجرّب NurMontage:\nhttps://play.google.com/store/apps/details?id=hazem.nurmontage.videoquran";
+            url = "أنشئ ريلز قرآنية جميلة بسهولة 🎧✨\nجرّب NurMontage:\nhttps://play.google.com/store/apps/details?id=hazem.nurmontage.videoquran";
         } else {
-            str = "Create beautiful Quran Reels easily 🎧✨\nTry NurMontage:\nhttps://play.google.com/store/apps/details?id=hazem.nurmontage.videoquran";
+            url = "Create beautiful Quran Reels easily 🎧✨\nTry NurMontage:\nhttps://play.google.com/store/apps/details?id=hazem.nurmontage.videoquran";
         }
         Intent intent = new Intent("android.intent.action.SEND");
         intent.setType("text/plain");
         intent.putExtra("android.intent.extra.SUBJECT", "Check out this app!");
-        intent.putExtra("android.intent.extra.TEXT", str);
+        intent.putExtra("android.intent.extra.TEXT", url);
         startActivity(Intent.createChooser(intent, "Share via"));
     }
 

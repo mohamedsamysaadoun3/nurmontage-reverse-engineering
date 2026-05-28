@@ -24,28 +24,28 @@ public class ImageLoader {
         private final int targetWidth;
 
         @Override // com.bumptech.glide.load.Transformation
-        public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int i, int value2) {
+        public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int i, int index) {
             return null;
         }
 
-        public StoryCropTransformation(int i, int value2) {
+        public StoryCropTransformation(int i, int width) {
             this.targetWidth = i;
-            this.targetHeight = value2;
+            this.targetHeight = width;
         }
 
-        public Resource<Bitmap> transform(BitmapPool bitmapPool, Resource<Bitmap> resource, int i, int value2) {
+        public Resource<Bitmap> transform(BitmapPool bitmapPool, Resource<Bitmap> resource, int i, int index) {
             Bitmap bitmap = resource.get();
             int width = bitmap.getWidth();
             int height = bitmap.getHeight();
             float f = width;
-            float f2 = height;
-            float f3 = f / f2;
-            float f4 = this.targetWidth / this.targetHeight;
-            if (f3 > f4) {
-                int i3 = (int) (f2 * f4);
+            float widthRatio = height;
+            float widthRatio2 = f / widthRatio;
+            float widthRatio2 = this.targetWidth / this.targetHeight;
+            if (widthRatio2 > widthRatio2) {
+                int i3 = (int) (widthRatio * widthRatio2);
                 bitmap = Bitmap.createBitmap(bitmap, (width - i3) / 2, 0, i3, height);
-            } else if (f3 < f4) {
-                int i4 = (int) (f / f4);
+            } else if (widthRatio2 < widthRatio2) {
+                int i4 = (int) (f / widthRatio2);
                 bitmap = Bitmap.createBitmap(bitmap, 0, (height - i4) / 2, width, i4);
             }
             return BitmapResource.obtain(bitmap, bitmapPool);

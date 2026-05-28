@@ -19,8 +19,8 @@ public class NurMontageFont extends AppCompatTextView {
         init(context);
     }
 
-    public NurMontageFont(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public NurMontageFont(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

@@ -267,9 +267,9 @@ public class ChangeBgFragment extends Fragment {
         if (this.selectedBg == null) {
             return 0;
         }
-        for (int value = 0; value < list.size(); value++) {
-            if (this.selectedBg.equals(list.get(value).getName_drawable())) {
-                return value;
+        for (int index = 0; index < list.size(); index++) {
+            if (this.selectedBg.equals(list.get(index).getName_drawable())) {
+                return index;
             }
         }
         return 0;

@@ -118,7 +118,7 @@ public class EditMediaFragment extends Fragment {
             final ImageView imageView2 = (ImageView) root.findViewById(C2014R.id.btn_show_right);
             horizontalScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.EditMediaFragment.2
                 @Override // android.view.View.OnScrollChangeListener
-                public void onScrollChange(View view, int i, int i2, int i3, int value4) {
+                public void onScrollChange(View view, int i, int i2, int i3, int width) {
                     try {
                         if (i > EditMediaFragment.this.btn_cut.getWidth() * 0.3f) {
                             imageView2.setVisibility(8);

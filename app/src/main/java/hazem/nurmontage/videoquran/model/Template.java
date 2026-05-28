@@ -71,8 +71,8 @@ public class Template implements Serializable {
         return this.currentCursur;
     }
 
-    public void setCurrentCursur(int value) {
-        this.currentCursur = value;
+    public void setCurrentCursur(int resourceId) {
+        this.currentCursur = resourceId;
     }
 
     public float getScale_timeline() {
@@ -103,7 +103,7 @@ public class Template implements Serializable {
         return this.fps;
     }
 
-    public void setFps(int value) {
+    public void setFps(int resourceId) {
         this.fps = value;
     }
 
@@ -155,7 +155,7 @@ public class Template implements Serializable {
         return this.duration_video_media;
     }
 
-    public void setDuration_video_media(int value) {
+    public void setDuration_video_media(int resourceId) {
         this.duration_video_media = value;
     }
 
@@ -246,7 +246,7 @@ public class Template implements Serializable {
         return this.ipad_type;
     }
 
-    public void setIpad_type(int value) {
+    public void setIpad_type(int resourceId) {
         this.ipad_type = value;
     }
 
@@ -279,8 +279,8 @@ public class Template implements Serializable {
         this.mDrawingTranslationY = floatValue2;
     }
 
-    public void setWidthAndHeight(int value, int resId2) {
-        this.width = value;
+    public void setWidthAndHeight(int width54, int resId2) {
+        this.width = width54;
         this.height = resId2;
     }
 
@@ -292,7 +292,7 @@ public class Template implements Serializable {
         return this.entityMediaList;
     }
 
-    public void setColor_ipad(int value) {
+    public void setColor_ipad(int colorValue) {
         this.color_ipad = value;
     }
 
@@ -300,7 +300,7 @@ public class Template implements Serializable {
         return this.color_ipad;
     }
 
-    public void setIndex_color(int value) {
+    public void setIndex_color(int colorValue) {
         this.index_color = value;
     }
 
@@ -320,7 +320,7 @@ public class Template implements Serializable {
         return this.duration;
     }
 
-    public void setDuration(int value) {
+    public void setDuration(int resourceId) {
         this.duration = value;
     }
 
@@ -413,7 +413,7 @@ public class Template implements Serializable {
         return this.resizeType;
     }
 
-    public void setResizeType(int value) {
-        this.resizeType = value;
+    public void setResizeType(int size) {
+        this.resizeType = size;
     }
 }

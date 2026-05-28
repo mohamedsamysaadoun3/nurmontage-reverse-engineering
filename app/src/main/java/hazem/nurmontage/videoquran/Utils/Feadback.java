@@ -11,24 +11,24 @@ import java.util.Locale;
 
 /* loaded from: classes2.dex */
 public class Feadback {
-    public static void reportBug(Context context, String str, String textValue2) {
-        long j;
-        String str3;
+    public static void reportBug(Context context, String formatString, String textValue2) {
+        long durationMs;
+        String formatString0;
         try {
-            j = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).firstInstallTime;
+            durationMs = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).firstInstallTime;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            j = 0;
+            durationMs = 0;
         }
-        String format = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.US).format(new Date(j));
-        String timeDifference = getTimeDifference(new Date(j));
+        String format = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss", Locale.US).format(new Date(durationMs));
+        String timeDifference = getTimeDifference(new Date(durationMs));
         try {
-            str3 = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+            formatString0 = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e2) {
             e2.printStackTrace();
-            str3 = "";
+            formatString0 = "";
         }
-        String str4 = textValue2 + "\n\n\n\"cmd = " + str + "\n\nFirst Install Time : " + format + "\nTime ago :" + timeDifference + "\nApp Name: " + context.getString(C2014R.string.app_name) + "\nApp Version: " + str3 + (BillingPreferences.isSubscribed(context) ? "*" : "") + "\nDevice Platform: Android(" + Build.MODEL + ")\nDevice OS: " + Build.VERSION.RELEASE;
+        String str4 = textValue2 + "\n\n\n\"cmd = " + formatString + "\n\nFirst Install Time : " + format + "\nTime ago :" + timeDifference + "\nApp Name: " + context.getString(C2014R.string.app_name) + "\nApp Version: " + formatString0 + (BillingPreferences.isSubscribed(context) ? "*" : "") + "\nDevice Platform: Android(" + Build.MODEL + ")\nDevice OS: " + Build.VERSION.RELEASE;
         if (BillingPreferences.isSubscribed(context)) {
             str4 = str4 + ".";
         }
@@ -79,11 +79,11 @@ public class Feadback {
         int i3 = duration - (i2 * 3600);
         int i4 = i3 / 60;
         int i5 = i3 - (i4 * 60);
-        String str = i2 > 0 ? i2 + " hour " : "";
+        String textValue = i2 > 0 ? i2 + " hour " : "";
         if (i4 > 0) {
-            str = str + i4 + " min ";
+            textValue = textValue + i4 + " min ";
         }
-        return i5 > 0 ? str + i5 + " sec" : str;
+        return i5 > 0 ? textValue + i5 + " sec" : str;
     }
 
     protected static String getTimeDifference(Date date) {

@@ -38,9 +38,9 @@ public class TextEditActivity extends Base {
 
     public static int findFirstDigitIndex(String textValue) {
         if (textValue != null && !textValue.isEmpty()) {
-            for (int value = 0; value < textValue.length(); value++) {
-                if (Character.isDigit(textValue.charAt(value))) {
-                    return value;
+            for (int counter = 0; counter < textValue.length(); counter++) {
+                if (Character.isDigit(textValue.charAt(counter))) {
+                    return counter;
                 }
             }
         }
@@ -125,19 +125,19 @@ public class TextEditActivity extends Base {
         StringBuilder sb = new StringBuilder();
         List<WordModel> list = this.wordAyaAdabter.getList();
         this.startIndex = -1;
-        int value = 0;
-        for (int value2 = 0; value2 < list.size(); value2++) {
-            WordModel wordModel = list.get(value2);
+        int index = 0;
+        for (int index12 = 0; index12 < list.size(); index12++) {
+            WordModel wordModel = list.get(index12);
             if (wordModel.isSelected()) {
                 if (this.startIndex == -1) {
-                    this.startIndex = value2;
+                    this.startIndex = index12;
                 }
-                value++;
+                index++;
                 sb.append(wordModel.getW()).append(" ");
             }
         }
         int i3 = this.startIndex;
-        this.endIndex = value + 1 + i3;
+        this.endIndex = index + 1 + i3;
         if (i3 != -1) {
             this.startIndex = WordProcessor.mapIndexAfterGroupReverse(i3, 4, list.size());
             this.endIndex = WordProcessor.mapIndexAfterGroupReverse(this.endIndex, 4, list.size());
@@ -152,21 +152,21 @@ public class TextEditActivity extends Base {
         if (this.startIndex == this.endIndex) {
             String[] split2 = textValue.split("\\s+");
             int indexOf = textValue2.indexOf(textValue);
-            boolean z = indexOf == 0;
-            int value = 0;
-            int value2 = 0;
+            boolean isPremium = indexOf == 0;
+            int index = 0;
+            int index15 = 0;
             for (String textValue3 : split) {
-                if (!z) {
-                    if (value == indexOf) {
-                        z = true;
+                if (!isPremium) {
+                    if (index == indexOf) {
+                        isPremium = true;
                     }
-                    value += textValue3.length() + 1;
+                    index += textValue3.length() + 1;
                 }
-                if (z && value2 < split2.length) {
-                    boolean equals = textValue3.equals(split2[value2]);
+                if (isPremium && index15 < split2.length) {
+                    boolean equals = textValue3.equals(split2[index15]);
                     arrayList.add(new WordModel(textValue3, equals));
                     if (equals) {
-                        value2++;
+                        index15++;
                     }
                 } else {
                     arrayList.add(new WordModel(textValue3, false));

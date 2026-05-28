@@ -38,10 +38,10 @@ public class ProgressViewFragment extends Fragment {
         instance = null;
     }
 
-    public void update(int i, int value2) {
+    public void update(int i, int resourceId) {
         TextCustumFont textCustumFont = this.tv_progress;
         if (textCustumFont != null) {
-            textCustumFont.setText(i + "/" + value2);
+            textCustumFont.setText(i + "/" + resourceId);
         }
     }
 }

@@ -42,12 +42,12 @@ public class SquareImageView extends AppCompatImageView {
         return this.anInt;
     }
 
-    public void setNumber(int value) {
-        if (value == 0) {
+    public void setNumber(int width) {
+        if (width == 0) {
             return;
         }
-        this.anInt = value;
-        this.number = "" + value;
+        this.anInt = width;
+        this.number = "" + width;
         this.f442cx = (getWidth() * 0.5f) - (this.textPaint.measureText(this.number) * 0.5f);
     }
 
@@ -71,8 +71,8 @@ public class SquareImageView extends AppCompatImageView {
         init();
     }
 
-    public SquareImageView(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public SquareImageView(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         this.paint = new Paint(1);
         this.paintRect = new Paint(1);
         this.textPaint = new TextPaint(1);
@@ -85,17 +85,17 @@ public class SquareImageView extends AppCompatImageView {
     }
 
     @Override // android.widget.ImageView, android.view.View
-    protected void onMeasure(int value, int value2) {
-        super.onMeasure(value, value2);
+    protected void onMeasure(int width, int width8) {
+        super.onMeasure(width, width8);
         int measuredWidth = getMeasuredWidth();
         setMeasuredDimension(measuredWidth, measuredWidth);
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int value2, int i3, int size4) {
-        super.onSizeChanged(value, value2, i3, size4);
+    protected void onSizeChanged(int width9, int width9, int i3, int size4) {
+        super.onSizeChanged(width9, width9, i3, size4);
         this.paintRect.setColor(-1056964608);
-        float f = value;
+        float f = width9;
         this.paint.setStrokeWidth(0.02f * f);
         if (!this.isSelect) {
             this.paint.setColor(-8355712);
@@ -105,10 +105,10 @@ public class SquareImageView extends AppCompatImageView {
             this.paint.setStyle(Paint.Style.FILL);
         }
         this.textPaint.setTextSize(0.25f * f);
-        float f2 = 0.1f * f;
-        this.f444r = f2;
-        this.f445x = f - (1.2f * f2);
-        this.f446y = f2 + this.paint.getStrokeWidth();
+        float xPosition = 0.1f * f;
+        this.f444r = xPosition;
+        this.f445x = f - (1.2f * xPosition);
+        this.f446y = xPosition + this.paint.getStrokeWidth();
         if (this.number != null) {
             this.f442cx = (getWidth() * 0.5f) - (this.textPaint.measureText(this.number) * 0.5f);
         }
@@ -134,9 +134,9 @@ public class SquareImageView extends AppCompatImageView {
         if (drawable != null) {
             drawable.draw(canvas);
         }
-        String str = this.number;
-        if (str != null) {
-            canvas.drawText(str, this.f442cx, this.f443cy, this.textPaint);
+        String extension = this.number;
+        if (extension != null) {
+            canvas.drawText(extension, this.f442cx, this.f443cy, this.textPaint);
         }
     }
 

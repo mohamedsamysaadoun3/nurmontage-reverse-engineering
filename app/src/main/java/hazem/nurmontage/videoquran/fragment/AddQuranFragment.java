@@ -82,14 +82,14 @@ public class AddQuranFragment extends Fragment {
         }
 
         @Override // android.widget.AdapterView.OnItemSelectedListener
-        public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
+        public void onItemSelected(AdapterView<?> adapterView, View view, int resourceId, long durationMs) {
             if (AddQuranFragment.this.isFromSearch) {
                 AddQuranFragment.this.spinnerTo.setSelection(AddQuranFragment.this.quranPreference.getTo());
                 AddQuranFragment.this.isFromSearch = false;
             } else {
                 if (!AddQuranFragment.this.isFromSelect) {
-                    if (AddQuranFragment.this.spinnerTo.getSelectedItemPosition() != value) {
-                        AddQuranFragment.this.spinnerTo.setSelection(value);
+                    if (AddQuranFragment.this.spinnerTo.getSelectedItemPosition() != resourceId) {
+                        AddQuranFragment.this.spinnerTo.setSelection(resourceId);
                         return;
                     }
                     return;
@@ -104,18 +104,18 @@ public class AddQuranFragment extends Fragment {
         }
 
         @Override // android.widget.AdapterView.OnItemSelectedListener
-        public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
-            int value2;
-            if (value == AddQuranFragment.this.current_pos) {
+        public void onItemSelected(AdapterView<?> adapterView, View view, int index, long durationMs) {
+            int index6;
+            if (index == AddQuranFragment.this.current_pos) {
                 return;
             }
             if (AddQuranFragment.this.isInit) {
-                value2 = AddQuranFragment.this.arrayCount[AddQuranFragment.this.quranPreference.getSurah()];
+                index6 = AddQuranFragment.this.arrayCount[AddQuranFragment.this.quranPreference.getSurah()];
             } else {
-                value2 = AddQuranFragment.this.arrayCount[value];
+                index6 = AddQuranFragment.this.arrayCount[index];
             }
             ArrayList arrayList = new ArrayList();
-            for (int value3 = 1; value3 <= value2; value3++) {
+            for (int index = 1; index <= index6; index++) {
                 arrayList.add(String.valueOf(value3));
             }
             AddQuranFragment.this.adapterFromAyah.clear();
@@ -273,7 +273,7 @@ public class AddQuranFragment extends Fragment {
                 }
 
                 @Override // android.widget.AdapterView.OnItemSelectedListener
-                public void onItemSelected(AdapterView<?> adapterView, View view, int value, long j) {
+                public void onItemSelected(AdapterView<?> adapterView, View view, int resourceId, long durationMs) {
                     if (AddQuranFragment.this.isFromSelectReciters) {
                         AddQuranFragment.this.goneReaderNameUpload();
                     }
@@ -405,10 +405,10 @@ public class AddQuranFragment extends Fragment {
             int surah = this.quranPreference.getSurah();
             this.current_pos = surah;
             this.spinnerSurah.setSelection(surah, false);
-            int value = this.arrayCount[this.quranPreference.getSurah()];
+            int index = this.arrayCount[this.quranPreference.getSurah()];
             ArrayList arrayList = new ArrayList();
-            for (int value2 = 1; value2 <= value; value2++) {
-                arrayList.add(String.valueOf(value2));
+            for (int index43 = 1; index43 <= index; index43++) {
+                arrayList.add(String.valueOf(index43));
             }
             this.adapterFromAyah.clear();
             this.adapterFromAyah.addAll(arrayList);
@@ -437,13 +437,13 @@ public class AddQuranFragment extends Fragment {
         this.tv_reader_name.setText(textValue);
     }
 
-    public void splitAya(String textValue, String name2, int value) {
-        int value2;
-        int value3;
-        int value4;
+    public void splitAya(String textValue, String name2, int count) {
+        int count47;
+        int count47;
+        int count47;
         StringBuilder sb;
         String textValue3;
-        String str4;
+        String textValue47;
         StringBuilder sb2;
         int i5;
         int i6;
@@ -452,10 +452,10 @@ public class AddQuranFragment extends Fragment {
         String trim = textValue.trim();
         String[] split = trim.replaceAll("\\s*([\\u06D6-\\u06ED])", "$1").trim().split("\\s+");
         String[] split2 = name2 != null ? name2.split(",") : null;
-        String str6 = " ";
-        String str7 = " نص";
+        String textValue47 = " ";
+        String textValue47 = " نص";
         if (split.length <= 4) {
-            this.iAddQuran.onAdd(textValue + " نص", trim, name2 != null ? name2.replace(",", " ") : null, name2, textValue.length(), value, this.icon, 0, split.length);
+            this.iAddQuran.onAdd(textValue + " نص", trim, name2 != null ? name2.replace(",", " ") : null, name2, textValue.length(), count, this.icon, 0, split.length);
             return;
         }
         StringBuilder sb3 = new StringBuilder();
@@ -466,9 +466,9 @@ public class AddQuranFragment extends Fragment {
         int i11 = 0;
         int i12 = 0;
         while (i11 < split.length) {
-            String str8 = split[i11];
-            sb3.append(str8).append(str6);
-            if (str8.length() > i8) {
+            String textValue = split[i11];
+            sb3.append(textValue).append(textValue47);
+            if (textValue.length() > i8) {
                 i9++;
             }
             int i13 = i10 + 1;
@@ -476,24 +476,24 @@ public class AddQuranFragment extends Fragment {
                 int i14 = (i12 + i9) - (i13 - i9);
                 if (i11 == length) {
                     String trim2 = sb3.toString().trim();
-                    value2 = i11;
+                    count47 = i11;
                     int i15 = i12;
                     i5 = 0;
-                    value3 = length;
-                    value4 = 1;
+                    count47 = length;
+                    count47 = 1;
                     sb2 = sb3;
-                    textValue3 = str7;
-                    str4 = str6;
-                    this.iAddQuran.onAdd(trim2 + str7, trim, split2 != null ? getWords(split2, i12, i14) : null, name2, trim2.length(), value, this.icon, i15, i14);
+                    textValue3 = textValue47;
+                    textValue47 = textValue47;
+                    this.iAddQuran.onAdd(trim2 + textValue47, trim, split2 != null ? getWords(split2, i12, i14) : null, name2, trim2.length(), count, this.icon, i15, i14);
                     i7 = i15;
                 } else {
-                    value2 = i11;
+                    count47 = i11;
                     int i16 = i12;
-                    value3 = length;
-                    value4 = i8;
+                    count47 = length;
+                    count47 = i8;
                     sb2 = sb3;
-                    textValue3 = str7;
-                    str4 = str6;
+                    textValue3 = textValue47;
+                    textValue47 = textValue47;
                     i5 = 0;
                     IAddQuran iAddQuran = this.iAddQuran;
                     String trim3 = sb2.toString().trim();
@@ -513,59 +513,59 @@ public class AddQuranFragment extends Fragment {
                 i9 = i5;
                 i10 = i9;
             } else {
-                value2 = i11;
-                value3 = length;
-                value4 = i8;
+                count47 = i11;
+                count47 = length;
+                count47 = i8;
                 sb = sb3;
-                textValue3 = str7;
-                str4 = str6;
+                textValue3 = textValue47;
+                textValue47 = textValue47;
                 i10 = i13;
             }
             sb3 = sb;
-            i11 = value2 + 1;
-            i8 = value4;
-            str6 = str4;
-            length = value3;
-            str7 = textValue3;
+            i11 = count47 + 1;
+            i8 = count47;
+            textValue47 = textValue47;
+            length = count47;
+            textValue47 = textValue3;
         }
         int i17 = i12;
         StringBuilder sb4 = sb3;
-        String str9 = str7;
+        String str9 = textValue47;
         if (sb4.length() > 0) {
             String trim4 = sb4.toString().trim();
-            this.iAddQuran.onAdd(trim4 + str9, trim, split2 != null ? getWords(split2, (split2.length - i9) - (i10 - i9), split2.length) : null, name2, trim4.length(), value, this.icon, i17, i17 + i10);
+            this.iAddQuran.onAdd(trim4 + str9, trim, split2 != null ? getWords(split2, (split2.length - i9) - (i10 - i9), split2.length) : null, name2, trim4.length(), count, this.icon, i17, i17 + i10);
         }
     }
 
-    public String getWords(String[] strArr, int value, int value2) {
+    public String getWords(String[] strArr, int count, int count53) {
         if (strArr == null || strArr.length == 0) {
             return "";
         }
-        if (value < 0) {
-            value = 0;
+        if (count < 0) {
+            count = 0;
         }
-        if (value2 > strArr.length) {
-            value2 = strArr.length;
+        if (count53 > strArr.length) {
+            count53 = strArr.length;
         }
-        if (value >= value2) {
+        if (count >= count53) {
             return "";
         }
-        return ProVersionActivity$$ExternalSyntheticBackport0.m587m(" ", (CharSequence[]) Arrays.copyOfRange(strArr, value, value2));
+        return ProVersionActivity$$ExternalSyntheticBackport0.m587m(" ", (CharSequence[]) Arrays.copyOfRange(strArr, surahNumber, surahNumber58));
     }
 
-    public void addAyaEntityRecursive(int value, int value2, int value3) {
+    public void addAyaEntityRecursive(int surahNumber, int surahNumber58, int surahNumber58) {
         try {
-            String ayahText = this.quranReader.getAyahText(value3, value);
-            String translationAyahText = this.spinnerTranslation.getSelectedItemPosition() > 0 ? this.quranReader.getTranslationAyahText(this.translation_name[this.spinnerTranslation.getSelectedItemPosition() - 1], value3, value) : null;
-            splitAya(ayahText, null, value);
+            String ayahText = this.quranReader.getAyahText(surahNumber58, surahNumber);
+            String translationAyahText = this.spinnerTranslation.getSelectedItemPosition() > 0 ? this.quranReader.getTranslationAyahText(this.translation_name[this.spinnerTranslation.getSelectedItemPosition() - 1], surahNumber58, surahNumber) : null;
+            splitAya(ayahText, null, surahNumber);
             if (translationAyahText != null) {
-                this.iAddQuran.onAddTranslation(translationAyahText, value, this.spinnerTranslation.getSelectedItemPosition() == 1);
+                this.iAddQuran.onAddTranslation(translationAyahText, surahNumber, this.spinnerTranslation.getSelectedItemPosition() == 1);
             }
             if (this.iAddQuran != null) {
                 if (this.spinnerReciters.isEnabled()) {
-                    this.recitersModels.add(new RecitersModel(this.arrayIdentifier[this.spinnerReciters.getSelectedItemPosition()], value3, value));
+                    this.recitersModels.add(new RecitersModel(this.arrayIdentifier[this.spinnerReciters.getSelectedItemPosition()], surahNumber58, surahNumber));
                 }
-                if (value >= value2) {
+                if (surahNumber >= surahNumber58) {
                     if (this.uri_recitation != null) {
                         this.iAddQuran.onDone(this.surah_hint + this.arraySurah[this.spinnerSurah.getSelectedItemPosition()], this.spinnerSurah.getSelectedItemPosition() + 1, this.reader_name, this.uri_recitation, this.path_video_copy);
                         return;
@@ -575,7 +575,7 @@ public class AddQuranFragment extends Fragment {
                     }
                 }
             }
-            addAyaEntityRecursive(value + 1, value2, value3);
+            addAyaEntityRecursive(surahNumber + 1, value2, value3);
         } catch (Exception e) {
             e.printStackTrace();
         }

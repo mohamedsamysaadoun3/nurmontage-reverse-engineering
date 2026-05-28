@@ -24,12 +24,12 @@ public class CinematicProcessor {
         return copy;
     }
 
-    public static Bitmap createGlassRect(Bitmap bitmap, int value) {
+    public static Bitmap createGlassRect(Bitmap bitmap, int width) {
         Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         Paint paint = new Paint(1);
-        float f = value;
-        RectF rectF = new RectF(f, f, r0 - value, r1 - value);
+        float f = width;
+        RectF rectF = new RectF(f, f, r0 - width, r1 - width);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(-1);
         canvas.drawRoundRect(rectF, 40.0f, 40.0f, paint);
@@ -53,12 +53,12 @@ public class CinematicProcessor {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float f = width;
-        float f2 = height;
-        RadialGradient radialGradient = new RadialGradient(f / 2.0f, f2 / 2.0f, (float) (Math.sqrt(Math.pow(width, 2.0d) + Math.pow(height, 2.0d)) * 0.7d), new int[]{0, 0, -1728053248}, new float[]{0.0f, 0.4f, 1.0f}, Shader.TileMode.CLAMP);
+        float yPosition = height;
+        RadialGradient radialGradient = new RadialGradient(f / 2.0f, yPosition / 2.0f, (float) (Math.sqrt(Math.pow(width, 2.0d) + Math.pow(height, 2.0d)) * 0.7d), new int[]{0, 0, -1728053248}, new float[]{0.0f, 0.4f, 1.0f}, Shader.TileMode.CLAMP);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setShader(radialGradient);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawRect(0.0f, 0.0f, f, f2, paint);
+        canvas.drawRect(0.0f, 0.0f, f, yPosition, paint);
     }
 }

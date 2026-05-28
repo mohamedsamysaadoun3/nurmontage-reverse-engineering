@@ -26,16 +26,16 @@ public class GradientFragment extends Fragment {
     private Gradient gradient;
     private GradientAdabter.IColor iColor = new GradientAdabter.IColor() { // from class: hazem.nurmontage.videoquran.fragment.GradientFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.GradientAdabter.IColor
-        public void onGradient(Gradient gradient, int value) {
+        public void onGradient(Gradient gradient, int resourceId) {
             if (GradientFragment.this.gradient == null) {
                 GradientFragment.this.binding.getRoot().findViewById(C2014R.id.layout_edit_gradient).setVisibility(0);
             }
             GradientFragment.this.gradient = gradient;
             GradientFragment.this.gradient.setAngle(GradientFragment.this.seekBar_angle.getProgress());
-            GradientFragment.this.index = value;
+            GradientFragment.this.index = resourceId;
             GradientFragment.this.scrollToSelectedPosition();
             if (GradientFragment.this.iIpadEditCallback != null) {
-                GradientFragment.this.iIpadEditCallback.onClick(gradient, value);
+                GradientFragment.this.iIpadEditCallback.onClick(gradient, resourceId);
             }
         }
     };
@@ -45,14 +45,14 @@ public class GradientFragment extends Fragment {
     private SeekBar seekBar_angle;
     private TextCustumFont tv_angle;
 
-    public static GradientFragment getInstance(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int value) {
+    public static GradientFragment getInstance(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int index) {
         if (instance == null) {
-            instance = new GradientFragment(iIpadEditCallback, value);
+            instance = new GradientFragment(iIpadEditCallback, index);
         }
         return instance;
     }
 
-    public GradientFragment(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int value) {
+    public GradientFragment(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int index5) {
         this.iIpadEditCallback = iIpadEditCallback;
         this.index = value;
     }
@@ -86,12 +86,12 @@ public class GradientFragment extends Fragment {
             }
 
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int value, boolean isFlag) {
+            public void onProgressChanged(SeekBar seekBar, int resourceId, boolean isFlag) {
                 if (GradientFragment.this.gradient == null || GradientFragment.this.iIpadEditCallback == null) {
                     return;
                 }
-                GradientFragment.this.gradient.setAngle(value);
-                GradientFragment.this.tv_angle.setText(String.valueOf(value));
+                GradientFragment.this.gradient.setAngle(resourceId);
+                GradientFragment.this.tv_angle.setText(String.valueOf(resourceId));
                 GradientFragment.this.iIpadEditCallback.onClick(GradientFragment.this.gradient, GradientFragment.this.index);
             }
         });

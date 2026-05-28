@@ -33,13 +33,13 @@ public class FeaturesAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_feature, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        viewHolder.text.setText(this.list.get(value).getName());
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        viewHolder.text.setText(this.list.get(index).getName());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

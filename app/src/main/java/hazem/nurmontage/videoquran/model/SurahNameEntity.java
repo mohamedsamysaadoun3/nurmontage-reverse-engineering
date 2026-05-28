@@ -58,17 +58,17 @@ public class SurahNameEntity extends EntityView implements Serializable {
     public void endAnimator() {
     }
 
-    public void setIpad_type(int value) {
-        this.ipad_type = value;
+    public void setIpad_type(int resourceId) {
+        this.ipad_type = resourceId;
     }
 
     public int getClrBg() {
         return this.clrBg;
     }
 
-    public void setClrBg(int value) {
-        this.clrBg = value;
-        this.paintBg.setColor(value);
+    public void setClrBg(int colorValue) {
+        this.clrBg = colorValue;
+        this.paintBg.setColor(colorValue);
         this.paintBg.setAlpha(Angle.LEFT);
     }
 
@@ -98,7 +98,7 @@ public class SurahNameEntity extends EntityView implements Serializable {
         return this.mPreset;
     }
 
-    public void setClrS_name(int value) {
+    public void setClrS_name(int resourceId) {
         this.clrS_name = value;
     }
 
@@ -110,27 +110,27 @@ public class SurahNameEntity extends EntityView implements Serializable {
         return this.name;
     }
 
-    public void setColor(int value) {
-        setClrS_name(value);
-        this.paintAya.setColor(value);
-        this.paintAyaStyle.setColor(value);
+    public void setColor(int ayaNumber) {
+        setClrS_name(ayaNumber);
+        this.paintAya.setColor(ayaNumber);
+        this.paintAyaStyle.setColor(surahNumber);
     }
 
-    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int value, Typeface typeface, float floatValue) {
+    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int surahNumber, Typeface typeface, float nameSize) {
         paint.reset();
         paint.setTypeface(typeface);
-        paint.setTextSize(floatValue);
+        paint.setTextSize(nameSize);
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setDither(true);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(value);
+        paint.setColor(surahNumber);
         if (this.style == SurahNameStyle.ZAGHRAFAT.ordinal()) {
             if (this.paintAyaStyleOutline == paint) {
-                floatValue *= 0.5f;
+                nameSize *= 0.5f;
             }
             if (this.paintAyaOutline == paint) {
-                floatValue *= 1.3f;
+                nameSize *= 1.3f;
             }
         }
         int value2 = C22061.$SwitchMap$hazem$nurmontage$videoquran$constant$AyaTextPreset[ayaTextPreset.ordinal()];
@@ -139,21 +139,21 @@ public class SurahNameEntity extends EntityView implements Serializable {
                 if (value2 != 4) {
                     return;
                 }
-                paint.setShadowLayer(floatValue * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(value, 255));
+                paint.setShadowLayer(nameSize * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(surahNumber, 255));
                 return;
             } else {
-                float floatValue2 = 0.18f * floatValue;
-                float f3 = floatValue * 0.08f;
-                paint.setShadowLayer(floatValue2, f3, f3, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal() || isHaveBg()) ? -1 : ViewCompat.MEASURED_STATE_MASK, Angle.LEFT));
+                float positionRatio = 0.18f * nameSize;
+                float alphaValue = nameSize * 0.08f;
+                paint.setShadowLayer(positionRatio, alphaValue, alphaValue, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal() || isHaveBg()) ? -1 : ViewCompat.MEASURED_STATE_MASK, Angle.LEFT));
                 return;
             }
         }
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setStrokeWidth(floatValue * 0.12f);
+        paint.setStrokeWidth(nameSize * 0.12f);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeJoin(Paint.Join.ROUND);
         if (this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal() || isHaveBg()) {
-            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(value, 0.85f));
+            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(surahNumber, 0.85f));
         } else {
             paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.darkenColor(value, 0.85f));
         }
@@ -211,21 +211,21 @@ public class SurahNameEntity extends EntityView implements Serializable {
         }
     }
 
-    public AyaTextPreset get(int value) {
-        if (value == AyaTextPreset.SHADOW.ordinal()) {
+    public AyaTextPreset get(int ayaNumber) {
+        if (ayaNumber == AyaTextPreset.SHADOW.ordinal()) {
             return AyaTextPreset.SHADOW;
         }
-        if (value == AyaTextPreset.OUTLINE.ordinal()) {
+        if (ayaNumber == AyaTextPreset.OUTLINE.ordinal()) {
             return AyaTextPreset.OUTLINE;
         }
-        if (value == AyaTextPreset.GLOW.ordinal()) {
+        if (ayaNumber == AyaTextPreset.GLOW.ordinal()) {
             return AyaTextPreset.GLOW;
         }
         return AyaTextPreset.NONE;
     }
 
-    public void initPreset(int value) {
-        setPreset(get(value));
+    public void initPreset(int resourceId) {
+        setPreset(get(resourceId));
     }
 
     public String getReader() {
@@ -233,24 +233,24 @@ public class SurahNameEntity extends EntityView implements Serializable {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void scale(float floatValue, int value, int value2) {
-        setFactor_scale(floatValue);
-        float width = this.rect.width() * floatValue;
-        float height = this.rect.height() * floatValue;
-        float floatValue2 = width * 0.5f;
-        this.rect.left = this.rect.centerX() - floatValue2;
-        this.rect.right = this.rect.centerX() + floatValue2;
-        float f3 = height * 0.5f;
-        this.rect.top = this.rect.centerY() - f3;
-        this.rect.bottom = this.rect.centerY() + f3;
+    public void scale(float nameSize, int width27, int width27) {
+        setFactor_scale(nameSize);
+        float width = this.rect.width() * nameSize;
+        float height = this.rect.height() * nameSize;
+        float positionRatio = width * 0.5f;
+        this.rect.left = this.rect.centerX() - positionRatio;
+        this.rect.right = this.rect.centerX() + positionRatio;
+        float scaleFactor = height * 0.5f;
+        this.rect.top = this.rect.centerY() - scaleFactor;
+        this.rect.bottom = this.rect.centerY() + scaleFactor;
         this.viewWidth = (int) this.rect.width();
         createStaticLayout();
         this.f437x = this.rect.left;
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void postTranslate(float floatValue, float floatValue2) {
-        this.rect.offset(floatValue, floatValue2);
+    public void postTranslate(float nameSize, float positionRatio) {
+        this.rect.offset(nameSize, positionRatio);
         this.f437x = this.rect.left;
         if (this.style == SurahNameStyle.ZAGHRAFAT.ordinal() && this.staticLayoutStyle != null) {
             this.f438y = this.rect.centerY() - ((this.staticLayoutStyle.getHeight() + this.staticLayout.getHeight()) * 0.5f);
@@ -259,29 +259,29 @@ public class SurahNameEntity extends EntityView implements Serializable {
         }
     }
 
-    public float calculateTextSize(String textValue, Paint paint, int value, int value2) {
-        float floatValue = 0.0f;
-        if (textValue != null && !textValue.isEmpty() && value > 0 && value2 > 0) {
+    public float calculateTextSize(String textValue, Paint paint, int counter, int counter29) {
+        float nameSize = 0.0f;
+        if (textValue != null && !textValue.isEmpty() && counter > 0 && counter29 > 0) {
             paint.setTextSize(1.0f);
             Rect rect = new Rect();
             paint.getTextBounds(textValue, 0, textValue.length(), rect);
             rect.width();
             rect.height();
-            float floatValue2 = 1000.0f;
-            for (int value3 = 0; value3 < 100; value3++) {
-                float f3 = (floatValue + floatValue2) / 2.0f;
-                paint.setTextSize(f3);
+            float positionRatio = 1000.0f;
+            for (int counter30 = 0; counter30 < 100; counter30++) {
+                float widthRatio = (nameSize + positionRatio) / 2.0f;
+                paint.setTextSize(widthRatio);
                 paint.getTextBounds(textValue, 0, textValue.length(), rect);
                 float width = rect.width();
                 float height = rect.height();
-                if (width > value || height > value2) {
-                    floatValue2 = f3;
+                if (width > counter || height > counter29) {
+                    positionRatio = widthRatio;
                 } else {
-                    floatValue = f3;
+                    nameSize = widthRatio;
                 }
             }
         }
-        return floatValue;
+        return nameSize;
     }
 
     private void createStaticLayout() {
@@ -292,7 +292,7 @@ public class SurahNameEntity extends EntityView implements Serializable {
         } else {
             textValue = this.name;
             if (this.reader.length() > 3) {
-                textValue = textValue + "\n" + this.reader;
+                textValue = textValue + "\surahNumber" + this.reader;
             }
         }
         SpannableString spannableString = new SpannableString(textValue);
@@ -330,7 +330,7 @@ public class SurahNameEntity extends EntityView implements Serializable {
         }
         String name2 = this.name;
         if (this.reader.length() > 3) {
-            name2 = name2 + "\n" + this.reader;
+            name2 = name2 + "\surahNumber" + this.reader;
         }
         return StaticLayout.Builder.obtain(name2, 0, name2.length(), this.paintAyaOutline, this.viewWidth).setAlignment(this.alignment).setLineSpacing(0.0f, 1.0f).setTextDirection(TextDirectionHeuristics.LTR).setIncludePad(false).build();
     }
@@ -341,10 +341,10 @@ public class SurahNameEntity extends EntityView implements Serializable {
     }
 
     public void setupSurahFont() {
-        int value = this.index_surah;
-        if (value < 10) {
+        int surahNumber = this.index_surah;
+        if (surahNumber < 10) {
             this.name_style = "00" + this.index_surah + "sura";
-        } else if (value < 100) {
+        } else if (surahNumber < 100) {
             this.name_style = "0" + this.index_surah + "sura";
         } else {
             this.name_style = this.index_surah + "sura";
@@ -355,12 +355,12 @@ public class SurahNameEntity extends EntityView implements Serializable {
         return this.index_surah;
     }
 
-    public void setIndex_surah(int value) {
-        this.index_surah = value;
+    public void setIndex_surah(int surahNumber) {
+        this.index_surah = surahNumber;
         setupSurahFont();
     }
 
-    public SurahNameEntity(Layout.Alignment alignment, String textValue, String name2, RectF rectF, Typeface typeface, int value, float floatValue, String name3, int value2, Typeface typeface2, int value3, int i4, int i5, boolean isFlag, int value6) {
+    public SurahNameEntity(Layout.Alignment alignment, String textValue, String name2, RectF rectF, Typeface typeface, int surahNumber, float nameSize, String name3, int surahNumber40, Typeface typeface2, int surahNumber40, int i4, int i5, boolean isFlag, int surahNumber40) {
         this.name = "";
         this.reader = "";
         this.nameFont = "خط الإبل.otf";
@@ -372,17 +372,17 @@ public class SurahNameEntity extends EntityView implements Serializable {
         this.paintAyaStyle = textPaint3;
         this.paintAyaStyleOutline = new TextPaint(1);
         this.paintAyaOutline = new TextPaint(1);
-        setFactor_scale(floatValue);
-        this.clrBg = value6;
+        setFactor_scale(nameSize);
+        this.clrBg = surahNumber40;
         this.isHaveBg = isFlag;
         setIpad_type(i5);
-        this.style = value3;
+        this.style = surahNumber40;
         this.index_surah = i4;
         setupSurahFont();
         this.typefaceStyle = typeface2;
         textPaint3.setTypeface(typeface2);
         this.name = textValue;
-        this.mPreset = value2;
+        this.mPreset = surahNumber40;
         this.reader = name2;
         this.f437x = rectF.left;
         this.f438y = rectF.top;
@@ -390,11 +390,11 @@ public class SurahNameEntity extends EntityView implements Serializable {
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value);
+        textPaint.setColor(surahNumber);
         textPaint3.setColor(textPaint.getColor());
-        textPaint2.setColor(value6);
+        textPaint2.setColor(surahNumber40);
         textPaint2.setAlpha(Angle.LEFT);
-        setClrS_name(value);
+        setClrS_name(surahNumber);
         textPaint.setTextSize(0.05f);
         this.nameFont = name3;
         this.alignment = alignment;
@@ -413,7 +413,7 @@ public class SurahNameEntity extends EntityView implements Serializable {
         createStaticLayout();
     }
 
-    public void setStyle(Context context, int value, String textValue, boolean isFlag) {
+    public void setStyle(Context context, int surahNumber, String textValue, boolean isFlag) {
         if (this.typefaceStyle == null) {
             this.typefaceStyle = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/surah_name.otf");
         }

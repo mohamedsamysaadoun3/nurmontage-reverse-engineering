@@ -19,8 +19,8 @@ public class ButtonCustumFont extends AppCompatButton {
         init(context);
     }
 
-    public ButtonCustumFont(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public ButtonCustumFont(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

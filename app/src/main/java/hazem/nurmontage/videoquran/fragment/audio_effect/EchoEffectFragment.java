@@ -69,8 +69,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
-                    EchoEffectFragment.this.tv_hint_delay.setText(String.valueOf(value));
+                public void onProgressChanged(SeekBar seekBar2, int resourceId, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_delay.setText(String.valueOf(resourceId));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -90,8 +90,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar3, int value, boolean isFlag) {
-                    EchoEffectFragment.this.tv_hint_repeat.setText(String.valueOf(value + 1));
+                public void onProgressChanged(SeekBar seekBar3, int resourceId, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_repeat.setText(String.valueOf(resourceId + 1));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -111,8 +111,8 @@ public class EchoEffectFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar4, int value, boolean isFlag) {
-                    EchoEffectFragment.this.tv_hint_volume.setText(String.valueOf(value));
+                public void onProgressChanged(SeekBar seekBar4, int resourceId, boolean isFlag) {
+                    EchoEffectFragment.this.tv_hint_volume.setText(String.valueOf(resourceId));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -170,11 +170,11 @@ public class EchoEffectFragment extends Fragment {
         this.isPlay = false;
     }
 
-    private void applyEchoEffect(boolean isFlag, boolean z2) {
+    private void applyEchoEffect(boolean isFlag, boolean isPremium) {
         float speed;
         EchoEffectFragment echoEffectFragment;
         int progress = this.delaySeekBar.getProgress();
-        int value = 1;
+        int index = 1;
         int progress2 = this.repeatSeekBar.getProgress() + 1;
         int progress3 = this.volumeSeekBar.getProgress();
         EffectAudio effectAudio = this.entityAudio.getEffectAudio();
@@ -215,16 +215,16 @@ public class EchoEffectFragment extends Fragment {
             float max = Math.max(0.01f, 1.0f - f2);
             StringBuilder sb = new StringBuilder();
             StringBuilder sb2 = new StringBuilder();
-            while (value <= progress2) {
+            while (index <= progress2) {
                 int i2 = progress;
-                float max2 = Math.max(0.01f, (float) (max * Math.pow(0.8d, value - 1)));
-                sb.append(progress * value);
+                float max2 = Math.max(0.01f, (float) (max * Math.pow(0.8d, index - 1)));
+                sb.append(progress * index);
                 sb2.append(String.format(Locale.US, "%.2f", Float.valueOf(max2)));
-                if (value < progress2) {
+                if (index < progress2) {
                     sb.append("|");
                     sb2.append("|");
                 }
-                value++;
+                index++;
                 progress = i2;
                 f3 = 0.01f;
             }
@@ -249,7 +249,7 @@ public class EchoEffectFragment extends Fragment {
                 return;
             }
             String join = TextUtils.join(",", arrayList);
-            if (z2) {
+            if (isPremium) {
                 echoEffectFragment.iEchoCallback.onCmdPlay(join);
             } else {
                 echoEffectFragment.iEchoCallback.onCmd(join);

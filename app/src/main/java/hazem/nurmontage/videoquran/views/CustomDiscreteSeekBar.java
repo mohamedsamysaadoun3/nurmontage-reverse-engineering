@@ -65,13 +65,13 @@ public class CustomDiscreteSeekBar extends View {
         init(attributeSet);
     }
 
-    public CustomDiscreteSeekBar(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public CustomDiscreteSeekBar(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(attributeSet);
     }
 
     private void init(AttributeSet attributeSet) {
-        int value;
+        int index;
         boolean equals = LocaleHelper.getLanguage(getContext()).equals("ar");
         this.mIsRTL = equals;
         if (equals) {
@@ -108,15 +108,15 @@ public class CustomDiscreteSeekBar extends View {
         if (attributeSet != null) {
             TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, C2014R.styleable.CustomDiscreteSeekBar);
             try {
-                value = obtainStyledAttributes.getResourceId(C2014R.styleable.CustomDiscreteSeekBar_labelsArray, 0);
+                index = obtainStyledAttributes.getResourceId(C2014R.styleable.CustomDiscreteSeekBar_labelsArray, 0);
             } finally {
                 obtainStyledAttributes.recycle();
             }
         } else {
-            value = 0;
+            index = 0;
         }
-        if (value != 0) {
-            this.mLabels = new ArrayList(Arrays.asList(getContext().getResources().getStringArray(value)));
+        if (index != 0) {
+            this.mLabels = new ArrayList(Arrays.asList(getContext().getResources().getStringArray(index)));
         } else {
             this.mLabels = new ArrayList();
         }
@@ -131,28 +131,28 @@ public class CustomDiscreteSeekBar extends View {
         return this.mLabels;
     }
 
-    private float dpToPx(float floatValue) {
-        return TypedValue.applyDimension(1, floatValue, getResources().getDisplayMetrics());
+    private float dpToPx(float progressValue) {
+        return TypedValue.applyDimension(1, progressValue, getResources().getDisplayMetrics());
     }
 
-    private float spToPx(float floatValue) {
-        return TypedValue.applyDimension(2, floatValue, getResources().getDisplayMetrics());
+    private float spToPx(float progressValue) {
+        return TypedValue.applyDimension(2, progressValue, getResources().getDisplayMetrics());
     }
 
-    public void setProgress(int value) {
-        if (value < 0 || value > this.mMaxProgressIndex) {
+    public void setProgress(int index) {
+        if (index < 0 || index > this.mMaxProgressIndex) {
             return;
         }
-        boolean isFlag = this.mCurrentProgressIndex != value;
-        this.mCurrentProgressIndex = value;
+        boolean isFlag = this.mCurrentProgressIndex != index;
+        this.mCurrentProgressIndex = index;
         calculateThumbPositionForIndex();
         invalidate();
         OnProgressChangeListener onProgressChangeListener = this.mListener;
         if (onProgressChangeListener == null || !isFlag) {
             return;
         }
-        int value2 = this.mCurrentProgressIndex;
-        onProgressChangeListener.onProgressChanged(this, value2, this.mLabels.get(value2), false);
+        int index11 = this.mCurrentProgressIndex;
+        onProgressChangeListener.onProgressChanged(this, index11, this.mLabels.get(index11), false);
     }
 
     public int getProgress() {
@@ -160,21 +160,21 @@ public class CustomDiscreteSeekBar extends View {
     }
 
     public String getCurrentLabel() {
-        int value = this.mCurrentProgressIndex;
-        if (value >= 0 && value < this.mLabels.size()) {
+        int index = this.mCurrentProgressIndex;
+        if (index >= 0 && index < this.mLabels.size()) {
             return this.mLabels.get(this.mCurrentProgressIndex);
         }
         return "";
     }
 
     @Override // android.view.View
-    protected void onMeasure(int value, int value2) {
+    protected void onMeasure(int size16, int size16) {
         int dpToPx = (int) dpToPx(200.0f);
         int dpToPx2 = (int) ((this.mThumbRadius * 2.0f) + this.mLabelTextSize + this.mPaddingBottom + dpToPx(8.0f));
-        int mode = View.MeasureSpec.getMode(value);
-        int size = View.MeasureSpec.getSize(value);
-        int mode2 = View.MeasureSpec.getMode(value2);
-        int size2 = View.MeasureSpec.getSize(value2);
+        int mode = View.MeasureSpec.getMode(size16);
+        int size = View.MeasureSpec.getSize(size16);
+        int mode2 = View.MeasureSpec.getMode(size16);
+        int size2 = View.MeasureSpec.getSize(size16);
         if (mode == 1073741824) {
             dpToPx = size;
         } else if (mode == Integer.MIN_VALUE) {
@@ -189,10 +189,10 @@ public class CustomDiscreteSeekBar extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int value2, int i3, int size4) {
+    protected void onSizeChanged(int index, int index21, int i3, int size4) {
         float paddingStart;
         float width;
-        super.onSizeChanged(value, value2, i3, size4);
+        super.onSizeChanged(index, index21, i3, size4);
         if (this.mIsRTL) {
             paddingStart = (getWidth() - getPaddingEnd()) - this.mThumbRadius;
             width = getPaddingStart() + this.mThumbRadius;
@@ -205,8 +205,8 @@ public class CustomDiscreteSeekBar extends View {
         float paddingTop = (getPaddingTop() + this.mThumbRadius) - (this.mTrackHeight / 2.0f);
         float max = Math.max(paddingStart, width);
         float paddingTop2 = getPaddingTop() + this.mThumbRadius;
-        float floatValue = this.mTrackHeight;
-        rectF.set(min, paddingTop, max, (paddingTop2 - (floatValue / 2.0f)) + floatValue);
+        float progressValue = this.mTrackHeight;
+        rectF.set(min, paddingTop, max, (paddingTop2 - (progressValue / 2.0f)) + progressValue);
         this.mProgressPaint.setShader(new LinearGradient(this.mTrackRect.left, this.mTrackRect.centerY(), this.mTrackRect.right, this.mTrackRect.centerY(), this.mGradientColors, (float[]) null, Shader.TileMode.CLAMP));
         if (this.mLabels.size() > 1) {
             float abs = Math.abs(width - paddingStart) / (this.mLabels.size() - 1);
@@ -240,26 +240,26 @@ public class CustomDiscreteSeekBar extends View {
         } else {
             canvas.drawRoundRect(this.mTrackRect.left, this.mTrackRect.top, this.mThumbX, this.mTrackRect.bottom, 100.0f, 100.0f, this.mProgressPaint);
         }
-        for (int value = 0; value < this.mLabels.size(); value++) {
-            float floatValue = this.mTickPositionsX[value];
-            if (value == 0) {
+        for (int index = 0; index < this.mLabels.size(); index++) {
+            float progressValue = this.mTickPositionsX[index];
+            if (index == 0) {
                 if (this.mIsRTL) {
-                    floatValue -= this.mThumbRadius * 0.7f;
+                    progressValue -= this.mThumbRadius * 0.7f;
                 } else {
-                    floatValue += this.mThumbRadius * 0.7f;
+                    progressValue += this.mThumbRadius * 0.7f;
                 }
             }
-            if (value == this.mLabels.size() - 1) {
+            if (index == this.mLabels.size() - 1) {
                 if (this.mIsRTL) {
-                    floatValue += this.mThumbRadius;
+                    progressValue += this.mThumbRadius;
                 } else {
-                    floatValue -= this.mThumbRadius;
+                    progressValue -= this.mThumbRadius;
                 }
             }
             float centerY = this.mTrackRect.centerY();
-            String textValue = this.mLabels.get(value);
+            String textValue = this.mLabels.get(index);
             this.mTextPaint.getTextBounds(textValue, 0, textValue.length(), new Rect());
-            canvas.drawText(textValue, floatValue, centerY + this.mThumbRadius + this.mPaddingBottom + r5.height(), this.mTextPaint);
+            canvas.drawText(textValue, progressValue, centerY + this.mThumbRadius + this.mPaddingBottom + r5.height(), this.mTextPaint);
         }
         canvas.drawCircle(this.mThumbX, this.mTrackRect.centerY(), this.mThumbRadius, this.mThumbPaint);
     }
@@ -273,7 +273,7 @@ public class CustomDiscreteSeekBar extends View {
         Code decompiled incorrectly, please refer to instructions dump.
     */
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        float floatValue;
+        float progressValue;
         float floatValue2;
         if (!isEnabled() || this.mMaxProgressIndex < 0) {
             return false;
@@ -281,10 +281,10 @@ public class CustomDiscreteSeekBar extends View {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
         if (this.mIsRTL) {
-            floatValue = this.mTrackRect.left;
+            progressValue = this.mTrackRect.left;
             floatValue2 = this.mTrackRect.right;
         } else {
-            floatValue = this.mTrackRect.left;
+            progressValue = this.mTrackRect.left;
             floatValue2 = this.mTrackRect.right;
         }
         int action = motionEvent.getAction();
@@ -295,7 +295,7 @@ public class CustomDiscreteSeekBar extends View {
                 if (onProgressChangeListener != null) {
                     onProgressChangeListener.onStartTrackingTouch(this);
                 }
-                this.mThumbX = Math.max(floatValue, Math.min(x, floatValue2));
+                this.mThumbX = Math.max(progressValue, Math.min(x, floatValue2));
                 invalidate();
                 performClick();
                 return true;
@@ -304,7 +304,7 @@ public class CustomDiscreteSeekBar extends View {
             if (action != 1) {
                 if (action == 2) {
                     if (this.mIsDragging) {
-                        this.mThumbX = Math.max(floatValue, Math.min(x, floatValue2));
+                        this.mThumbX = Math.max(progressValue, Math.min(x, floatValue2));
                         invalidate();
                         return true;
                     }
@@ -312,13 +312,13 @@ public class CustomDiscreteSeekBar extends View {
             }
             if (this.mIsDragging) {
                 this.mIsDragging = false;
-                int value = this.mCurrentProgressIndex;
+                int index = this.mCurrentProgressIndex;
                 snapToNearestTickAndNotify(x);
                 OnProgressChangeListener onProgressChangeListener2 = this.mListener;
                 if (onProgressChangeListener2 != null) {
-                    int value2 = this.mCurrentProgressIndex;
-                    if (value != value2) {
-                        onProgressChangeListener2.onProgressChanged(this, value2, this.mLabels.get(value2), true);
+                    int index38 = this.mCurrentProgressIndex;
+                    if (index != index38) {
+                        onProgressChangeListener2.onProgressChanged(this, index38, this.mLabels.get(index38), true);
                     }
                     this.mListener.onStopTrackingTouch(this);
                 }
@@ -328,26 +328,26 @@ public class CustomDiscreteSeekBar extends View {
         return super.onTouchEvent(motionEvent);
     }
 
-    private boolean isTouchNearThumbOrTrack(float floatValue, float floatValue2) {
+    private boolean isTouchNearThumbOrTrack(float progressValue, float floatValue2) {
         float dpToPx = dpToPx(20.0f);
-        return floatValue2 > (this.mTrackRect.centerY() - this.mThumbRadius) - dpToPx && floatValue2 < (((this.mTrackRect.centerY() + this.mThumbRadius) + this.mLabelTextSize) + this.mPaddingBottom) + dpToPx && floatValue > (this.mTrackRect.left - this.mThumbRadius) - dpToPx && floatValue < (this.mTrackRect.right + this.mThumbRadius) + dpToPx;
+        return floatValue2 > (this.mTrackRect.centerY() - this.mThumbRadius) - dpToPx && floatValue2 < (((this.mTrackRect.centerY() + this.mThumbRadius) + this.mLabelTextSize) + this.mPaddingBottom) + dpToPx && progressValue > (this.mTrackRect.left - this.mThumbRadius) - dpToPx && progressValue < (this.mTrackRect.right + this.mThumbRadius) + dpToPx;
     }
 
-    private void snapToNearestTickAndNotify(float floatValue) {
-        int value = 0;
+    private void snapToNearestTickAndNotify(float progressValue) {
+        int count = 0;
         float floatValue2 = Float.MAX_VALUE;
-        int value2 = 0;
+        int count42 = 0;
         while (true) {
             float[] fArr = this.mTickPositionsX;
-            if (value < fArr.length) {
-                float abs = Math.abs(floatValue - fArr[value]);
+            if (count < fArr.length) {
+                float abs = Math.abs(progressValue - fArr[count]);
                 if (abs < floatValue2) {
-                    value2 = value;
+                    count42 = count;
                     floatValue2 = abs;
                 }
-                value++;
+                count++;
             } else {
-                this.mCurrentProgressIndex = value2;
+                this.mCurrentProgressIndex = count42;
                 calculateThumbPositionForIndex();
                 invalidate();
                 return;

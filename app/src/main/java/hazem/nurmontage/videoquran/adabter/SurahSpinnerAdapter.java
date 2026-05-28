@@ -23,28 +23,28 @@ public class SurahSpinnerAdapter extends ArrayAdapter<String> {
     }
 
     @Override // android.widget.ArrayAdapter, android.widget.Adapter
-    public View getView(int value, View view, ViewGroup viewGroup) {
-        return getCustomView(value, view, viewGroup, C2014R.layout.row_spinner_aya);
+    public View getView(int ayaNumber, View view, ViewGroup viewGroup) {
+        return getCustomView(ayaNumber, view, viewGroup, C2014R.layout.row_spinner_aya);
     }
 
     @Override // android.widget.ArrayAdapter, android.widget.BaseAdapter, android.widget.SpinnerAdapter
-    public View getDropDownView(int value, View view, ViewGroup viewGroup) {
-        return getCustomView(value, view, viewGroup, C2014R.layout.row_spinner_aya);
+    public View getDropDownView(int ayaNumber, View view, ViewGroup viewGroup) {
+        return getCustomView(ayaNumber, view, viewGroup, C2014R.layout.row_spinner_aya);
     }
 
-    private View getCustomView(int value, View view, ViewGroup viewGroup, int value2) {
-        String str;
+    private View getCustomView(int surahNumber, View view, ViewGroup viewGroup, int surahNumber3) {
+        String surahName;
         if (view == null) {
-            view = LayoutInflater.from(this.context).inflate(value2, viewGroup, false);
+            view = LayoutInflater.from(this.context).inflate(surahNumber3, viewGroup, false);
         }
-        Log.e("getCustomView", "" + value);
+        Log.e("getCustomView", "" + surahNumber);
         TextView textView = (TextView) view.findViewById(C2014R.id.spinner_text);
         if (this.isArabic) {
-            str = this.surahNames[value].split(" - ")[0];
+            surahName = this.surahNames[surahNumber].split(" - ")[0];
         } else {
-            str = this.surahNames[value].split(" - ")[1];
+            surahName = this.surahNames[surahNumber].split(" - ")[1];
         }
-        textView.setText(str);
+        textView.setText(surahName);
         return view;
     }
 }

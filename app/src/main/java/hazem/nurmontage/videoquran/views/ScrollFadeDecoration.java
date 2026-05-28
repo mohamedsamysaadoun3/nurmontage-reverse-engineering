@@ -29,9 +29,9 @@ public class ScrollFadeDecoration extends RecyclerView.ItemDecoration {
             }
             if (findLastCompletelyVisibleItemPosition < itemCount - 1) {
                 float f = width - 50;
-                float f2 = width;
-                this.paint.setShader(new LinearGradient(f, 0.0f, f2, 0.0f, 0, -2013265920, Shader.TileMode.CLAMP));
-                canvas.drawRect(f, 0.0f, f2, height, this.paint);
+                float yPosition = width;
+                this.paint.setShader(new LinearGradient(f, 0.0f, yPosition, 0.0f, 0, -2013265920, Shader.TileMode.CLAMP));
+                canvas.drawRect(f, 0.0f, yPosition, height, this.paint);
             }
             this.paint.setShader(null);
         }

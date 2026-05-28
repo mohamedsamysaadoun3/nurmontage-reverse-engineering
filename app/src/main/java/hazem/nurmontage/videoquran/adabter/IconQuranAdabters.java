@@ -19,11 +19,11 @@ public class IconQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
         void onIcon(String textValue);
     }
 
-    public IconQuranAdabters(IIconQuranCallback iIconQuranCallback, List<String> list, int value) {
+    public IconQuranAdabters(IIconQuranCallback iIconQuranCallback, List<String> list, int count) {
         this.iconQuranCallback = iIconQuranCallback;
         this.list = list;
-        this.select = value;
-        if (value >= list.size()) {
+        this.select = count;
+        if (count >= list.size()) {
             this.select = 0;
         }
     }
@@ -37,23 +37,23 @@ public class IconQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public void unselect() {
-        int value = this.select;
-        if (value == -1) {
+        int resourceId = this.select;
+        if (resourceId == -1) {
             return;
         }
         this.select = -1;
-        notifyItemChanged(value);
+        notifyItemChanged(resourceId);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_anim, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        viewHolder.animationItem.setImageResource(DrawableHelper.getIDDrawableIconByName(this.list.get(value)));
-        if (value == this.select) {
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        viewHolder.animationItem.setImageResource(DrawableHelper.getIDDrawableIconByName(this.list.get(index)));
+        if (index == this.select) {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_item_menu_select);
         } else {
             viewHolder.animationItem.setBackgroundResource(C2014R.drawable.circle_effect);
@@ -83,9 +83,9 @@ public class IconQuranAdabters extends RecyclerView.Adapter<ViewHolder> {
                     if (IconQuranAdabters.this.iconQuranCallback == null || IconQuranAdabters.this.select == ViewHolder.this.getAdapterPosition()) {
                         return;
                     }
-                    int value = IconQuranAdabters.this.select;
+                    int index = IconQuranAdabters.this.select;
                     IconQuranAdabters.this.select = ViewHolder.this.getAdapterPosition();
-                    IconQuranAdabters.this.notifyItemChanged(value);
+                    IconQuranAdabters.this.notifyItemChanged(index);
                     IconQuranAdabters.this.notifyItemChanged(IconQuranAdabters.this.select);
                     IconQuranAdabters.this.iconQuranCallback.onIcon((String) IconQuranAdabters.this.list.get(ViewHolder.this.getAdapterPosition()));
                 }

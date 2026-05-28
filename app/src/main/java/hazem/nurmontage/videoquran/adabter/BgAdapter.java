@@ -28,16 +28,16 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     private final int size;
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public /* bridge */ /* synthetic */ void onBindViewHolder(ViewHolder viewHolder, int value, List list) {
-        onBindViewHolder2(viewHolder, value, (List<Object>) list);
+    public /* bridge */ /* synthetic */ void onBindViewHolder(ViewHolder viewHolder, int resourceId, List list) {
+        onBindViewHolder2(viewHolder, resourceId, (List<Object>) list);
     }
 
-    public BgAdapter(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int value, int value2) {
+    public BgAdapter(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int size1, int size1) {
         this.APP_VERSION = textValue;
         this.iBgCallback = iChangeBgCallback;
         this.images = list;
-        this.size = value;
-        this.selected = value2;
+        this.size = size1;
+        this.selected = size1;
         setHasStableIds(true);
     }
 
@@ -78,10 +78,10 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
                 }
                 return;
             }
-            int value = BgAdapter.this.selected;
+            int index = BgAdapter.this.selected;
             BgAdapter.this.selected = adapterPosition;
-            if (value != -1) {
-                BgAdapter.this.notifyItemChanged(value, "alpha");
+            if (index != -1) {
+                BgAdapter.this.notifyItemChanged(index, "alpha");
             }
             BgAdapter bgAdapter = BgAdapter.this;
             bgAdapter.notifyItemChanged(bgAdapter.selected, "alpha");
@@ -92,25 +92,25 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     /* renamed from: onBindViewHolder, reason: avoid collision after fix types in other method */
-    public void onBindViewHolder2(ViewHolder viewHolder, int value, List<Object> list) {
+    public void onBindViewHolder2(ViewHolder viewHolder, int index, List<Object> list) {
         if (!list.isEmpty()) {
-            applyState(viewHolder, value);
+            applyState(viewHolder, index);
             return;
         }
-        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(Integer.valueOf(this.images.get(value).getId()));
-        int value2 = this.size;
-        load.override(value2, value2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(10, 8))).into(viewHolder.imageView);
-        applyState(viewHolder, value);
+        RequestBuilder<Drawable> load = Glide.with(viewHolder.imageView).load(Integer.valueOf(this.images.get(index).getId()));
+        int index13 = this.size;
+        load.override(index13, index13).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(10, 8))).into(viewHolder.imageView);
+        applyState(viewHolder, index);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        applyState(viewHolder, value);
+    public void onBindViewHolder(ViewHolder viewHolder, int resourceId) {
+        applyState(viewHolder, resourceId);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -123,14 +123,14 @@ public class BgAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public long getItemId(int value) {
+    public long getItemId(int index) {
         return this.images.get(value).getId();
     }
 
-    private void applyState(ViewHolder viewHolder, int value) {
-        boolean z = value == this.selected;
-        float f = z ? 1.0f : 0.65f;
-        if (z) {
+    private void applyState(ViewHolder viewHolder, int colorValue) {
+        boolean isSelected = colorValue == this.selected;
+        float f = isSelected ? 1.0f : 0.65f;
+        if (isSelected) {
             viewHolder.itemView.setBackgroundResource(C2014R.drawable.ipad_selected);
         } else {
             viewHolder.itemView.setBackgroundColor(0);

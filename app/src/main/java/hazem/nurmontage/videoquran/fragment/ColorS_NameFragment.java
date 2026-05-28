@@ -28,12 +28,12 @@ public class ColorS_NameFragment extends Fragment {
     private SurahNameEntity entity_select;
     private ColorAdabter.IColor iColor = new ColorAdabter.IColor() { // from class: hazem.nurmontage.videoquran.fragment.ColorS_NameFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.ColorAdabter.IColor
-        public void onColor(int value, int color2) {
+        public void onColor(int colorValue, int color2) {
             if (ColorS_NameFragment.this.iEditSName == null || ColorS_NameFragment.this.entity_select == null) {
                 return;
             }
             ColorS_NameFragment.this.scrollToSelectedPosition();
-            ColorS_NameFragment.this.entity_select.setColor(value);
+            ColorS_NameFragment.this.entity_select.setColor(colorValue);
             ColorS_NameFragment.this.iEditSName.update();
         }
     };
@@ -90,19 +90,19 @@ public class ColorS_NameFragment extends Fragment {
     }
 
     /* renamed from: lambda$setupPresetButtons$0$hazem-nurmontage-videoquran-fragment-ColorS_NameFragment */
-    /* synthetic */ void m642x3e82bbb3(TextView[] textViewArr, int value, AyaTextPreset[] ayaTextPresetArr, View view) {
-        selectPreset(textViewArr, value);
-        this.entity_select.setPreset(ayaTextPresetArr[value]);
+    /* synthetic */ void m642x3e82bbb3(TextView[] textViewArr, int ayaNumber, AyaTextPreset[] ayaTextPresetArr, View view) {
+        selectPreset(textViewArr, ayaNumber);
+        this.entity_select.setPreset(ayaTextPresetArr[ayaNumber]);
         EditS_NameFragment.IEditS_Name iEditS_Name = this.iEditSName;
         if (iEditS_Name != null) {
             iEditS_Name.update();
         }
     }
 
-    private void selectPreset(TextView[] textViewArr, int value) {
+    private void selectPreset(TextView[] textViewArr, int count) {
         int color2 = 0;
         while (color2 < textViewArr.length) {
-            textViewArr[color2].setSelected(color2 == value);
+            textViewArr[color2].setSelected(color2 == count);
             color2++;
         }
     }
@@ -143,10 +143,10 @@ public class ColorS_NameFragment extends Fragment {
         }
     }
 
-    public void scrollToSelectedPosition(int value) {
+    public void scrollToSelectedPosition(int width) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
         if (linearLayoutManager != null) {
-            linearLayoutManager.scrollToPositionWithOffset(value, this.recyclerView.getWidth() / 2);
+            linearLayoutManager.scrollToPositionWithOffset(width, this.recyclerView.getWidth() / 2);
         }
     }
 

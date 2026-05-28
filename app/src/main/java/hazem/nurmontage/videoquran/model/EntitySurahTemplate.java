@@ -26,11 +26,11 @@ public class EntitySurahTemplate implements Serializable {
         return this.rectF;
     }
 
-    public void setStyle(int value) {
-        this.style = value;
+    public void setStyle(int resourceId) {
+        this.style = resourceId;
     }
 
-    public void setIndex_surah(int value) {
+    public void setIndex_surah(int surahNumber) {
         this.index_surah = value;
     }
 
@@ -42,11 +42,11 @@ public class EntitySurahTemplate implements Serializable {
         return this.style;
     }
 
-    public void setPreset(int value) {
-        this.preset = value;
+    public void setPreset(int resourceId) {
+        this.preset = resourceId;
     }
 
-    public void setClr(int value) {
+    public void setClr(int resourceId) {
         this.clr = value;
     }
 
@@ -78,7 +78,7 @@ public class EntitySurahTemplate implements Serializable {
         return this.clrBg;
     }
 
-    public void setClrBg(int value) {
+    public void setClrBg(int resourceId) {
         this.clrBg = value;
     }
 
@@ -90,15 +90,15 @@ public class EntitySurahTemplate implements Serializable {
         this.isHaveBg = isFlag;
     }
 
-    public EntitySurahTemplate(String name, String str2, float scale, float floatValue2, MRectF mRectF, float floatValue3, String surahName3, int value, int i2, int i3, int i4, boolean isFlag, int value5) {
+    public EntitySurahTemplate(String name, String surahName, float scale, float floatValue2, MRectF mRectF, float floatValue3, String surahName3, int surahNumber, int i2, int i3, int i4, boolean isFlag, int surahNumber18) {
         this.name = name;
-        this.clrBg = value5;
+        this.clrBg = surahNumber18;
         this.isHaveBg = isFlag;
         this.style = i3;
         this.index_surah = i4;
-        this.clr = value;
+        this.clr = surahNumber;
         this.preset = i2;
-        this.reader = str2;
+        this.reader = surahName;
         this.left = scale;
         this.top = floatValue2;
         setRectF(mRectF);

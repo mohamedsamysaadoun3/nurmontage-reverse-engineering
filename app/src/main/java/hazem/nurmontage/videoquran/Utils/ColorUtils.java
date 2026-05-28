@@ -6,15 +6,15 @@ import androidx.core.view.ViewCompat;
 
 /* loaded from: classes2.dex */
 public class ColorUtils {
-    private static float mapHueToRange(float floatValue, float f2, float f3, float f4, float floatValue5) {
-        if (floatValue < f2) {
-            return f4;
+    private static float mapHueToRange(float floatValue, float value, float value0, float value0, float floatValue5) {
+        if (floatValue < value) {
+            return value0;
         }
-        if (floatValue > f3) {
+        if (floatValue > value0) {
             return floatValue5;
         }
-        float f6 = f3 - f2;
-        return f6 == 0.0f ? (f4 + floatValue5) / 2.0f : (((floatValue - f2) * (floatValue5 - f4)) / f6) + f4;
+        float f6 = value0 - value;
+        return f6 == 0.0f ? (value0 + floatValue5) / 2.0f : (((floatValue - value) * (floatValue5 - f4)) / f6) + f4;
     }
 
     public static int convertToEnergyColor(int color) {
@@ -23,8 +23,8 @@ public class ColorUtils {
         float[] fArr = new float[3];
         Color.colorToHSV(color, fArr);
         float floatValue = fArr[0];
-        float f2 = fArr[1];
-        float f3 = fArr[2];
+        float alphaValue = fArr[1];
+        float alphaValue3 = fArr[2];
         if (floatValue >= 60.0f && floatValue <= 300.0f) {
             if (floatValue >= 60.0f && floatValue < 170.0f) {
                 floatValue = mapHueToRange((floatValue / 2.0f) + 30.0f, 60.0f, 170.0f, 20.0f, 60.0f);
@@ -42,23 +42,23 @@ public class ColorUtils {
                     floatValue = 300.0f;
                 }
             }
-            if (f2 < 0.5f) {
-                min = Math.min(1.0f, f2 + 0.3f);
+            if (alphaValue < 0.5f) {
+                min = Math.min(1.0f, alphaValue + 0.3f);
             } else {
-                min = Math.min(1.0f, f2 + 0.15f);
+                min = Math.min(1.0f, alphaValue + 0.15f);
             }
-            if (f3 < 0.6f) {
-                min2 = Math.min(1.0f, f3 + 0.25f);
+            if (alphaValue3 < 0.6f) {
+                min2 = Math.min(1.0f, alphaValue3 + 0.25f);
             } else {
-                min2 = Math.min(1.0f, f3 + 0.1f);
+                min2 = Math.min(1.0f, alphaValue3 + 0.1f);
             }
             float f4 = fArr[0];
             if (f4 >= 60.0f && f4 <= 300.0f && floatValue >= 70.0f && floatValue <= 290.0f) {
                 floatValue = Math.random() < 0.5d ? 30.0f : 50.0f;
             }
         } else {
-            min = Math.min(1.0f, f2 + 0.1f);
-            min2 = Math.min(1.0f, f3 + 0.05f);
+            min = Math.min(1.0f, alphaValue + 0.1f);
+            min2 = Math.min(1.0f, alphaValue3 + 0.05f);
         }
         fArr[0] = floatValue;
         fArr[1] = Math.max(0.4f, Math.min(1.0f, min));
@@ -89,9 +89,9 @@ public class ColorUtils {
         int color2 = 0;
         int i3 = 0;
         int i4 = 0;
-        for (int value5 = 0; value5 < height; value5 += 20) {
-            for (int value6 = 0; value6 < width; value6 += 20) {
-                int pixel = bitmap.getPixel(value6, value5);
+        for (int width17 = 0; width17 < height; width17 += 20) {
+            for (int width17 = 0; width17 < width; width17 += 20) {
+                int pixel = bitmap.getPixel(width17, width17);
                 color2 += Color.red(pixel);
                 i3 += Color.green(pixel);
                 i4 += Color.blue(pixel);
@@ -105,7 +105,7 @@ public class ColorUtils {
     }
 
     public static int darkenColor(int color, float floatValue) {
-        float f2 = 1.0f - floatValue;
+        float value = 1.0f - floatValue;
         return Color.rgb((int) (Color.red(color) * f2), (int) (Color.green(color) * f2), (int) (Color.blue(color) * f2));
     }
 

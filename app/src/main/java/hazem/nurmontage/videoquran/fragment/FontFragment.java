@@ -76,13 +76,13 @@ public class FontFragment extends Fragment {
             linearSnapHelper.attachToRecyclerView(this.recyclerView);
             this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: hazem.nurmontage.videoquran.fragment.FontFragment.1
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrollStateChanged(RecyclerView recyclerView, int value) {
-                    super.onScrollStateChanged(recyclerView, value);
+                public void onScrollStateChanged(RecyclerView recyclerView, int resourceId) {
+                    super.onScrollStateChanged(recyclerView, resourceId);
                 }
 
                 @Override // androidx.recyclerview.widget.RecyclerView.OnScrollListener
-                public void onScrolled(RecyclerView recyclerView, int value, int value2) {
-                    super.onScrolled(recyclerView, value, value2);
+                public void onScrolled(RecyclerView recyclerView, int resourceId, int resourceId7) {
+                    super.onScrolled(recyclerView, resourceId, resourceId7);
                     if (FontFragment.this.isInit) {
                         FontFragment.this.isInit = false;
                         return;

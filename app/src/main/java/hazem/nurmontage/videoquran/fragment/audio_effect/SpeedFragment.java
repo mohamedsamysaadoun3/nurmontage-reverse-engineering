@@ -64,9 +64,9 @@ public class SpeedFragment extends Fragment {
             this.tvProgress.setText(String.format(Locale.US, "%.2fx", Float.valueOf(((speed / 375.0f) * 3.75f) + 0.25f)));
             this.volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.audio_effect.SpeedFragment.1
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
+                public void onProgressChanged(SeekBar seekBar2, int resourceId, boolean isFlag) {
                     if (isFlag) {
-                        SpeedFragment.this.tvProgress.setText(String.format(Locale.US, "%.2fx", Float.valueOf(((value / 375.0f) * 3.75f) + 0.25f)));
+                        SpeedFragment.this.tvProgress.setText(String.format(Locale.US, "%.2fx", Float.valueOf(((resourceId / 375.0f) * 3.75f) + 0.25f)));
                     }
                 }
 

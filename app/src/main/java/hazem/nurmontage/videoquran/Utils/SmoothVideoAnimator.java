@@ -50,15 +50,15 @@ public class SmoothVideoAnimator implements Choreographer.FrameCallback {
     }
 
     @Override // android.view.Choreographer.FrameCallback
-    public void doFrame(long j) {
+    public void doFrame(long durationMs) {
         if (!this.mIsPlaying || this.maxFrameIndex == 0) {
             return;
         }
         if (this.lastFrameTimeNanos == 0) {
-            this.lastFrameTimeNanos = j;
+            this.lastFrameTimeNanos = durationMs;
         }
-        if (j - this.lastFrameTimeNanos >= this.frameIntervalNanos) {
-            this.lastFrameTimeNanos = j;
+        if (durationMs - this.lastFrameTimeNanos >= this.frameIntervalNanos) {
+            this.lastFrameTimeNanos = durationMs;
             this.listener.onFrameUpdate(new File(this.mTemplate.getFolder_template() + "/VideoFrame", buildFrameFilePath(this.currentFrameIndex)).getAbsolutePath());
             int resId = this.currentFrameIndex;
             this.currentFrameIndex = resId + 1;

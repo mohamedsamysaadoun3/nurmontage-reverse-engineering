@@ -19,8 +19,8 @@ public class TextCustumFont extends AppCompatTextView {
         init(context);
     }
 
-    public TextCustumFont(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public TextCustumFont(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

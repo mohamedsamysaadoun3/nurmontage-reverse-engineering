@@ -16,14 +16,14 @@ public class StackEntity {
     private float right;
     private float start;
 
-    public StackEntity(RectF rectF, float f, float f2, float f3, float f4, float f5, float f6, float f7, float floatValue8) {
+    public StackEntity(RectF rectF, float f, float xPosition, float xPosition0, float xPosition0, float xPosition0, float xPosition0, float xPosition0, float floatValue8) {
         this.rectF = rectF;
         this.offset = f;
-        this.end = f2;
-        this.start = f3;
-        this.left = f4;
-        this.right = f5;
-        this.max = f6;
+        this.end = xPosition;
+        this.start = xPosition0;
+        this.left = xPosition0;
+        this.right = xPosition0;
+        this.max = xPosition0;
         this.offset_right = f7;
         this.offset_left = floatValue8;
     }

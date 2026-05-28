@@ -30,8 +30,8 @@ public class AyaCircleBg extends AppCompatTextView {
         init(context);
     }
 
-    public AyaCircleBg(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public AyaCircleBg(Context context, AttributeSet attributeSet, int ayaNumber) {
+        super(context, attributeSet, ayaNumber);
         init(context);
     }
 

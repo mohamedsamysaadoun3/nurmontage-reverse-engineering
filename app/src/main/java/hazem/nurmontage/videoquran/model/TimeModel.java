@@ -15,10 +15,10 @@ public class TimeModel implements Serializable {
     private int widthShape;
     private int width_bitmap_progress;
 
-    public TimeModel(int dimension, int i2, float floatValue, String textValue, float f2, float floatValue3, int duration3) {
+    public TimeModel(int dimension, int i2, float floatValue, String textValue, float progressValue, float floatValue3, int duration3) {
         this.size = floatValue;
         this.color = textValue;
-        this.posY = f2;
+        this.posY = progressValue;
         this.posXRight = floatValue3;
         this.progress_offset = duration3;
         this.width_bitmap_progress = dimension;

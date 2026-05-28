@@ -19,8 +19,8 @@ public class RadioBtnCustumFont extends AppCompatRadioButton {
         init(context);
     }
 
-    public RadioBtnCustumFont(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public RadioBtnCustumFont(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

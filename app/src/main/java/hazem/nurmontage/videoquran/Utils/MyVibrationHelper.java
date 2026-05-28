@@ -17,12 +17,12 @@ public class MyVibrationHelper {
         vibrate(30L);
     }
 
-    public void vibrate(long j) {
+    public void vibrate(long durationMs) {
         if (this.vibrator != null) {
             if (Build.VERSION.SDK_INT >= 26) {
-                this.vibrator.vibrate(VibrationEffect.createOneShot(j, -1));
+                this.vibrator.vibrate(VibrationEffect.createOneShot(durationMs, -1));
             } else {
-                this.vibrator.vibrate(j);
+                this.vibrator.vibrate(durationMs);
             }
         }
     }

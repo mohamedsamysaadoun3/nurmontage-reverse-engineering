@@ -22,17 +22,17 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
         void onGradient(Gradient gradient, int value);
     }
 
-    public GradientAdabter(IColor iColor, List<Gradient> list, boolean isFlag, int value) {
+    public GradientAdabter(IColor iColor, List<Gradient> list, boolean isFlag, int colorValue) {
         this.colors = list;
         this.iColorCallback = iColor;
         this.isSubscribe = isFlag;
-        this.pos_select = value;
+        this.pos_select = colorValue;
     }
 
     public Gradient getSelect() {
-        int value = this.pos_select;
-        if (value >= 0) {
-            return this.colors.get(value);
+        int index = this.pos_select;
+        if (index >= 0) {
+            return this.colors.get(index);
         }
         return null;
     }
@@ -54,9 +54,9 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
         view.setBackground(gradientDrawable2);
     }
 
-    public void setGradientBackground(View view, int value) {
+    public void setGradientBackground(View view, int colorValue) {
         GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(value);
+        gradientDrawable.setColor(colorValue);
         gradientDrawable.setShape(0);
         gradientDrawable.setCornerRadius(100.0f);
         view.setBackground(gradientDrawable);
@@ -77,9 +77,9 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
                 public void onClick(View view2) {
                     if (GradientAdabter.this.iColorCallback != null) {
                         if ((GradientAdabter.this.isSubscribe || ViewHolder.this.getAdapterPosition() <= 1) && GradientAdabter.this.pos_select != ViewHolder.this.getAdapterPosition()) {
-                            int value = GradientAdabter.this.pos_select;
+                            int index = GradientAdabter.this.pos_select;
                             GradientAdabter.this.pos_select = ViewHolder.this.getAdapterPosition();
-                            GradientAdabter.this.notifyItemChanged(value);
+                            GradientAdabter.this.notifyItemChanged(index);
                             GradientAdabter.this.notifyItemChanged(GradientAdabter.this.pos_select);
                             GradientAdabter.this.iColorCallback.onGradient((Gradient) GradientAdabter.this.colors.get(ViewHolder.this.getAdapterPosition()), ViewHolder.this.getAdapterPosition());
                         }
@@ -90,14 +90,14 @@ public class GradientAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int colorValue) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_color, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors.get(value), value == this.pos_select);
-        if (!this.isSubscribe && value > 1) {
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        setGradientBackground(viewHolder.imageView, viewHolder.itemView, this.colors.get(index), index == this.pos_select);
+        if (!this.isSubscribe && index > 1) {
             viewHolder.imageLayer.setVisibility(0);
         } else {
             viewHolder.imageLayer.setVisibility(8);

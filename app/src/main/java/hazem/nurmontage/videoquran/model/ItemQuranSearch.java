@@ -13,8 +13,8 @@ public class ItemQuranSearch implements Serializable {
     /* renamed from: to */
     private final int f432to;
 
-    public ItemQuranSearch(String str, String textValue2, int i, int i2, int i3, int value4) {
-        this.aya = str;
+    public ItemQuranSearch(String surahName0, String textValue2, int i, int i2, int i3, int surahNumber) {
+        this.aya = surahName0;
         this.surahName = textValue2;
         this.f432to = i;
         this.surahIndex = i2;

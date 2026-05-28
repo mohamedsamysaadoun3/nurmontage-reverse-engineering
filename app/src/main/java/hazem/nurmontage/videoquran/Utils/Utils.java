@@ -30,13 +30,13 @@ public class Utils {
             return 0;
         }
         int min = Math.min(count, textValue.length());
-        int value2 = 0;
-        for (int value3 = 0; value3 < min; value3++) {
-            if (textValue.charAt(value3) == ' ') {
-                value2++;
+        int counter = 0;
+        for (int counter2 = 0; counter2 < min; counter2++) {
+            if (textValue.charAt(counter2) == ' ') {
+                counter++;
             }
         }
-        return value2;
+        return counter;
     }
 
     public static int countSpace(String textValue) {
@@ -44,34 +44,34 @@ public class Utils {
             return 0;
         }
         int count = 0;
-        for (int value2 = 0; value2 < textValue.length(); value2++) {
-            if (textValue.charAt(value2) == ' ') {
+        for (int counter = 0; counter < textValue.length(); counter++) {
+            if (textValue.charAt(counter) == ' ') {
                 count++;
             }
         }
         return count;
     }
 
-    public static int countIndex(int count, int value2, String textValue) {
-        int value3 = 0;
+    public static int countIndex(int count, int counter, String textValue) {
+        int counter7 = 0;
         if (textValue == null || count < 0) {
             if (textValue == null) {
                 return 0;
             }
             return textValue.length();
         }
-        int value4 = 0;
-        for (int value5 = count; value5 < textValue.length() && value4 <= value2; value5++) {
-            if (textValue.charAt(value5) == ' ') {
-                value4++;
+        int counter7 = 0;
+        for (int counter7 = count; counter7 < textValue.length() && counter7 <= counter; counter7++) {
+            if (textValue.charAt(counter7) == ' ') {
+                counter7++;
             }
-            if (value4 > value2) {
+            if (counter7 > counter) {
                 break;
             }
         }
-        while (count < textValue.length() && value3 <= value2) {
+        while (count < textValue.length() && counter7 <= counter) {
             if (textValue.charAt(count) == ' ') {
-                value3++;
+                counter7++;
             }
             count++;
         }
@@ -79,22 +79,22 @@ public class Utils {
     }
 
     public static int countIndex(int count, String textValue) {
-        int value2 = 0;
-        int value3 = 0;
-        for (int value4 = 0; value4 < textValue.length() && value3 < count; value4++) {
-            if (textValue.charAt(value4) == ' ') {
-                value3++;
+        int counter = 0;
+        int counter11 = 0;
+        for (int counter11 = 0; counter11 < textValue.length() && counter11 < count; counter11++) {
+            if (textValue.charAt(counter11) == ' ') {
+                counter11++;
             }
-            if (value3 > count) {
+            if (counter11 > count) {
                 break;
             }
         }
-        int value5 = 0;
-        while (value2 < textValue.length() && value5 < count) {
-            if (textValue.charAt(value2) == ' ') {
-                value5++;
+        int counter11 = 0;
+        while (counter < textValue.length() && counter11 < count) {
+            if (textValue.charAt(counter) == ' ') {
+                counter11++;
             }
-            value2++;
+            counter++;
         }
         return value2;
     }
@@ -108,12 +108,12 @@ public class Utils {
     }
 
     public static Pair<Integer, Integer> getDimension(ResizeType resizeType, int count) {
-        int value;
+        int count15;
         if (resizeType.ordinal() == ResizeType.SOCIAL_STORY.ordinal()) {
             count = (int) (count * ResizeType.VERTICAL.getValue());
-            value = count;
+            count15 = count;
         } else {
-            value = resizeType.ordinal() == ResizeType.YOUTUBE_THUMBNAIL.ordinal() ? (int) (count * ResizeType.YOUTUBE_THUMBNAIL.getValue()) : count;
+            count15 = resizeType.ordinal() == ResizeType.YOUTUBE_THUMBNAIL.ordinal() ? (int) (count * ResizeType.YOUTUBE_THUMBNAIL.getValue()) : count;
         }
         return new Pair<>(Integer.valueOf(count), Integer.valueOf(value));
     }
@@ -131,8 +131,8 @@ public class Utils {
     }
 
     public static int indexOf(int[] iArr, int count) {
-        for (int value2 = 0; value2 < iArr.length; value2++) {
-            if (iArr[value2] == count) {
+        for (int counter = 0; counter < iArr.length; counter++) {
+            if (iArr[counter] == count) {
                 return value2;
             }
         }

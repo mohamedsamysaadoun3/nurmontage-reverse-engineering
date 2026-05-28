@@ -32,10 +32,10 @@ public class GallerySelctedAdabters extends RecyclerView.Adapter<MyViewHolder> {
         void inselectVideo(int value);
     }
 
-    public GallerySelctedAdabters(Resources resources, IGallerySelected iGallerySelected, int value) {
-        this.size = value;
+    public GallerySelctedAdabters(Resources resources, IGallerySelected iGallerySelected, int colorValue) {
+        this.size = colorValue;
         this.iGallerySelected = iGallerySelected;
-        Bitmap createBitmap = Bitmap.createBitmap(value, value, Bitmap.Config.RGB_565);
+        Bitmap createBitmap = Bitmap.createBitmap(colorValue, colorValue, Bitmap.Config.RGB_565);
         createBitmap.eraseColor(ViewCompat.MEASURED_STATE_MASK);
         this.bitmapPlaceHolder = new BitmapDrawable(resources, createBitmap);
     }
@@ -68,25 +68,25 @@ public class GallerySelctedAdabters extends RecyclerView.Adapter<MyViewHolder> {
         }
     }
 
-    public void deletedItem(int value) {
-        this.gallerySelecteds.remove(value);
+    public void deletedItem(int resourceId) {
+        this.gallerySelecteds.remove(resourceId);
         notifyItemRemoved(value);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int resourceId) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_gallery_select, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int value) {
+    public void onBindViewHolder(MyViewHolder myViewHolder, int index) {
         String path;
-        if (this.gallerySelecteds.get(value).getVideoItem() != null) {
-            path = this.gallerySelecteds.get(value).getVideoItem().getPath();
+        if (this.gallerySelecteds.get(index).getVideoItem() != null) {
+            path = this.gallerySelecteds.get(index).getVideoItem().getPath();
             myViewHolder.tv_time.setVisibility(0);
-            myViewHolder.tv_time.setText(this.gallerySelecteds.get(value).getVideoItem().getTime());
+            myViewHolder.tv_time.setText(this.gallerySelecteds.get(index).getVideoItem().getTime());
         } else {
-            path = this.gallerySelecteds.get(value).getPhotoItem().getPath();
+            path = this.gallerySelecteds.get(index).getPhotoItem().getPath();
             myViewHolder.tv_time.setVisibility(8);
         }
         RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(path);

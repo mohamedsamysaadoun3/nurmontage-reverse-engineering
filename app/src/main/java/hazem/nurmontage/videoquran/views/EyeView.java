@@ -49,29 +49,29 @@ public class EyeView extends View {
         this.eyeProgress = 0.0f;
     }
 
-    public EyeView(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public EyeView(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         this.paint = new Paint(1);
         this.eyeRect = new RectF();
         this.eyeProgress = 0.0f;
     }
 
-    private Path createEyePath(float floatValue, float f2, float f3, float floatValue4) {
+    private Path createEyePath(float floatValue, float value, float value3, float floatValue4) {
         Path path = new Path();
-        float f5 = f3 / 2.0f;
+        float f5 = value3 / 2.0f;
         float f6 = floatValue - f5;
-        path.moveTo(f6, f2);
+        path.moveTo(f6, value);
         float f7 = floatValue4 / 2.0f;
-        path.quadTo(floatValue, f2 - f7, f5 + floatValue, f2);
-        path.quadTo(floatValue, f7 + f2, f6, f2);
+        path.quadTo(floatValue, value - f7, f5 + floatValue, value);
+        path.quadTo(floatValue, f7 + value, f6, value);
         path.close();
         return path;
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int i2, int value3, int size4) {
-        super.onSizeChanged(value, i2, value3, size4);
-        Bitmap createBitmap = Bitmap.createBitmap(value, i2, Bitmap.Config.ARGB_8888);
+    protected void onSizeChanged(int size, int i2, int size4, int size4) {
+        super.onSizeChanged(size, i2, size4, size4);
+        Bitmap createBitmap = Bitmap.createBitmap(size, i2, Bitmap.Config.ARGB_8888);
         this.eye = createBitmap;
         createBitmap.eraseColor(-16711936);
     }
@@ -94,50 +94,50 @@ public class EyeView extends View {
     @Override // android.view.View
     protected void onDraw(Canvas canvas) {
         float floatValue;
-        float f2;
-        boolean z;
+        float progressValue;
+        boolean isPremium;
         super.onDraw(canvas);
         Bitmap bitmap = this.background;
         if (bitmap == null) {
             return;
         }
         Paint paint = new Paint(1);
-        float f3 = 2.0f;
+        float progressValue8 = 2.0f;
         float height = getHeight() / 2.0f;
         float width = getWidth() / 2.0f;
         float width2 = getWidth() * 0.6f;
         float height2 = getHeight() * 0.6f * this.eyeProgress;
-        boolean z2 = false;
+        boolean isPremium8 = false;
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
         Path createEyePath = createEyePath(width, height, width2, height2);
-        int value = 0;
-        while (value <= 60) {
-            float width3 = (getWidth() * value) / 60;
-            float floatValue4 = width2 / f3;
-            float f5 = width3 - width;
-            if (Math.abs(f5) > floatValue4) {
+        int width10 = 0;
+        while (width10 <= 60) {
+            float width3 = (getWidth() * width10) / 60;
+            float floatValue4 = width2 / progressValue8;
+            float progressValue10 = width3 - width;
+            if (Math.abs(progressValue10) > floatValue4) {
                 floatValue = height;
-                f2 = width;
-                z = z2;
+                progressValue = width;
+                isPremium = isPremium8;
             } else {
-                float f6 = (height2 / f3) * (1.0f - ((f5 * f5) / (floatValue4 * floatValue4)));
-                float f7 = height + f6;
-                int i2 = value + 1;
+                float progressValue10 = (height2 / progressValue8) * (1.0f - ((progressValue10 * progressValue10) / (floatValue4 * floatValue4)));
+                float f7 = height + progressValue10;
+                int i2 = width10 + 1;
                 floatValue = height;
-                Rect rect = new Rect((bitmap.getWidth() * value) / 60, 0, (bitmap.getWidth() * i2) / 60, bitmap.getHeight() / 2);
-                f2 = width;
-                Rect rect2 = new Rect((bitmap.getWidth() * value) / 60, bitmap.getHeight() / 2, (i2 * bitmap.getWidth()) / 60, bitmap.getHeight());
-                z = false;
-                RectF rectF = new RectF(width3, 0.0f, (getWidth() / 60) + width3, height - f6);
+                Rect rect = new Rect((bitmap.getWidth() * width10) / 60, 0, (bitmap.getWidth() * i2) / 60, bitmap.getHeight() / 2);
+                progressValue = width;
+                Rect rect2 = new Rect((bitmap.getWidth() * width10) / 60, bitmap.getHeight() / 2, (i2 * bitmap.getWidth()) / 60, bitmap.getHeight());
+                isPremium = false;
+                RectF rectF = new RectF(width3, 0.0f, (getWidth() / 60) + width3, height - progressValue10);
                 RectF rectF2 = new RectF(width3, f7, (getWidth() / 60) + width3, getHeight());
                 canvas.drawBitmap(bitmap, rect, rectF, paint);
                 canvas.drawBitmap(bitmap, rect2, rectF2, paint);
             }
             value++;
-            z2 = z;
-            width = f2;
+            isPremium8 = isPremium;
+            width = progressValue;
             height = floatValue;
-            f3 = 2.0f;
+            progressValue8 = 2.0f;
         }
         int saveLayer = canvas.saveLayer(0.0f, 0.0f, getWidth(), getHeight(), null);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));

@@ -21,10 +21,10 @@ public class ColorsFragment extends Fragment {
     private FragmentColorsBinding binding;
     private ColorAdabter.IColor iColor = new ColorAdabter.IColor() { // from class: hazem.nurmontage.videoquran.fragment.ColorsFragment.1
         @Override // hazem.nurmontage.videoquran.adabter.ColorAdabter.IColor
-        public void onColor(int value, int color2) {
+        public void onColor(int colorValue, int color2) {
             ColorsFragment.this.scrollToSelectedPosition();
             if (ColorsFragment.this.iIpadEditCallback != null) {
-                ColorsFragment.this.iIpadEditCallback.onClick(value, color2);
+                ColorsFragment.this.iIpadEditCallback.onClick(colorValue, color2);
             }
         }
     };
@@ -32,14 +32,14 @@ public class ColorsFragment extends Fragment {
     private int index;
     private RecyclerView recyclerView;
 
-    public static ColorsFragment getInstance(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int value) {
+    public static ColorsFragment getInstance(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int colorValue) {
         if (instance == null) {
-            instance = new ColorsFragment(iIpadEditCallback, value);
+            instance = new ColorsFragment(iIpadEditCallback, colorValue);
         }
         return instance;
     }
 
-    public ColorsFragment(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int value) {
+    public ColorsFragment(EditIpadFragment.IIpadEditCallback iIpadEditCallback, int colorValue) {
         this.iIpadEditCallback = iIpadEditCallback;
         this.index = value;
     }

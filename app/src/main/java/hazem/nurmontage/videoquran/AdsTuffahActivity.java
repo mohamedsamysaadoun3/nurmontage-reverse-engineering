@@ -183,12 +183,12 @@ public class AdsTuffahActivity extends Base {
         }
     }
 
-    private void setupMediaPlayer(int value) {
+    private void setupMediaPlayer(int resourceId) {
         MediaPlayer mediaPlayer = this.mediaPlayer;
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
-        MediaPlayer create = MediaPlayer.create(this, value);
+        MediaPlayer create = MediaPlayer.create(this, resourceId);
         this.mediaPlayer = create;
         create.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // from class: hazem.nurmontage.videoquran.AdsTuffahActivity$$ExternalSyntheticLambda5
             @Override // android.media.MediaPlayer.OnCompletionListener
@@ -207,22 +207,22 @@ public class AdsTuffahActivity extends Base {
         this.handler.removeCallbacks(this.updateProgressTask);
     }
 
-    private void switchAudio(int value, ImageButton imageButton, WaveformView waveformView) {
+    private void switchAudio(int resourceId, ImageButton imageButton, WaveformView waveformView) {
         this.btnPlayPauseAfter.setImageResource(C2014R.drawable.play_btn);
         this.btnPlayPause.setImageResource(C2014R.drawable.play_btn);
         this.currentWave = waveformView;
         this.currentBtn = imageButton;
-        if (this.currentResId == value) {
+        if (this.currentResId == resourceId) {
             togglePlayback();
             return;
         }
-        this.currentResId = value;
+        this.currentResId = resourceId;
         this.handler.removeCallbacks(this.updateProgressTask);
         MediaPlayer mediaPlayer = this.mediaPlayer;
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             this.mediaPlayer.stop();
         }
-        setupMediaPlayer(value);
+        setupMediaPlayer(resourceId);
         this.isPlaying = false;
         this.currentWave.setProgress(0.0f);
         this.currentBtn.setImageResource(C2014R.drawable.play_btn);

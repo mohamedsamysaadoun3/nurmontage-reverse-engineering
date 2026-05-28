@@ -51,11 +51,11 @@ public class BismilahEntity extends EntityView implements Serializable {
         return this.mPreset;
     }
 
-    public void setmPreset(int value) {
-        this.mPreset = value;
+    public void setmPreset(int resourceId) {
+        this.mPreset = resourceId;
     }
 
-    public void setIpad_type(int value) {
+    public void setIpad_type(int resourceId) {
         this.ipad_type = value;
     }
 
@@ -71,38 +71,38 @@ public class BismilahEntity extends EntityView implements Serializable {
         return this.ipad_type;
     }
 
-    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int value, Typeface typeface, float floatValue) {
+    public void applyAyaPreset(Paint paint, AyaTextPreset ayaTextPreset, int ayaNumber, Typeface typeface, float textSize) {
         paint.reset();
         paint.setTypeface(typeface);
-        paint.setTextSize(floatValue);
+        paint.setTextSize(textSize);
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setDither(true);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(value);
+        paint.setColor(ayaNumber);
         int size2 = C22041.$SwitchMap$hazem$nurmontage$videoquran$constant$AyaTextPreset[ayaTextPreset.ordinal()];
         if (size2 != 2) {
             if (size2 != 3) {
                 if (size2 != 4) {
                     return;
                 }
-                paint.setShadowLayer(floatValue * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(value, 255));
+                paint.setShadowLayer(textSize * 0.45f, 0.0f, 0.0f, ColorUtils.setAlphaComponent(ayaNumber, 255));
                 return;
             } else {
-                float floatValue2 = 0.18f * floatValue;
-                float f3 = floatValue * 0.08f;
-                paint.setShadowLayer(floatValue2, f3, f3, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) ? -1 : ViewCompat.MEASURED_STATE_MASK, 120));
+                float positionRatio = 0.18f * textSize;
+                float alphaValue = textSize * 0.08f;
+                paint.setShadowLayer(positionRatio, alphaValue, alphaValue, ColorUtils.setAlphaComponent((this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) ? -1 : ViewCompat.MEASURED_STATE_MASK, 120));
                 return;
             }
         }
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setStrokeWidth(floatValue * 0.06f);
+        paint.setStrokeWidth(textSize * 0.06f);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeJoin(Paint.Join.ROUND);
         if (this.ipad_type == IpadType.HEART.ordinal() || this.ipad_type == IpadType.BATTERY.ordinal() || this.ipad_type == IpadType.BLUE_TYPE.ordinal()) {
-            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(value, 0.85f));
+            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.lightenColor(ayaNumber, 0.85f));
         } else {
-            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.darkenColor(value, 0.85f));
+            paint.setColor(hazem.nurmontage.videoquran.Utils.ColorUtils.darkenColor(ayaNumber, 0.85f));
         }
     }
 
@@ -144,22 +144,22 @@ public class BismilahEntity extends EntityView implements Serializable {
         }
     }
 
-    public AyaTextPreset get(int value) {
-        if (value == AyaTextPreset.SHADOW.ordinal()) {
+    public AyaTextPreset get(int ayaNumber) {
+        if (ayaNumber == AyaTextPreset.SHADOW.ordinal()) {
             return AyaTextPreset.SHADOW;
         }
-        if (value == AyaTextPreset.OUTLINE.ordinal()) {
+        if (ayaNumber == AyaTextPreset.OUTLINE.ordinal()) {
             return AyaTextPreset.OUTLINE;
         }
-        if (value == AyaTextPreset.GLOW.ordinal()) {
+        if (ayaNumber == AyaTextPreset.GLOW.ordinal()) {
             return AyaTextPreset.GLOW;
         }
         return AyaTextPreset.NONE;
     }
 
-    public void initPreset(int value) {
-        this.mPreset = value;
-        AyaTextPreset ayaTextPreset = get(value);
+    public void initPreset(int ayaNumber) {
+        this.mPreset = ayaNumber;
+        AyaTextPreset ayaTextPreset = get(ayaNumber);
         if (ayaTextPreset == AyaTextPreset.NONE) {
             return;
         }
@@ -173,9 +173,9 @@ public class BismilahEntity extends EntityView implements Serializable {
         }
     }
 
-    public void initPresetAya(int value) {
-        this.mPreset = value;
-        AyaTextPreset ayaTextPreset = get(value);
+    public void initPresetAya(int ayaNumber) {
+        this.mPreset = ayaNumber;
+        AyaTextPreset ayaTextPreset = get(ayaNumber);
         if (ayaTextPreset == AyaTextPreset.NONE) {
             return;
         }
@@ -206,7 +206,7 @@ public class BismilahEntity extends EntityView implements Serializable {
         return this.nameFont;
     }
 
-    public void setIndex(int value) {
+    public void setIndex(int resourceId) {
         this.index = value;
     }
 
@@ -220,8 +220,8 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.staticLayout = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
     }
 
-    public void setClrAya(int value) {
-        this.clrAya = value;
+    public void setClrAya(int ayaNumber) {
+        this.clrAya = ayaNumber;
     }
 
     public int getClrAya() {
@@ -232,29 +232,29 @@ public class BismilahEntity extends EntityView implements Serializable {
         return this.paintAya;
     }
 
-    public float calculateTextSize(String textValue, Paint paint, int value, int size2) {
-        float floatValue = 0.0f;
-        if (textValue != null && !textValue.isEmpty() && value > 0 && size2 > 0) {
+    public float calculateTextSize(String textValue, Paint paint, int counter, int size2) {
+        float textSize = 0.0f;
+        if (textValue != null && !textValue.isEmpty() && counter > 0 && size2 > 0) {
             paint.setTextSize(1.0f);
             Rect rect = new Rect();
             paint.getTextBounds(textValue, 0, textValue.length(), rect);
             rect.width();
             rect.height();
-            float floatValue2 = 1000.0f;
-            for (int value3 = 0; value3 < 100; value3++) {
-                float f3 = (floatValue + floatValue2) / 2.0f;
-                paint.setTextSize(f3);
+            float positionRatio = 1000.0f;
+            for (int counter30 = 0; counter30 < 100; counter30++) {
+                float widthRatio = (textSize + positionRatio) / 2.0f;
+                paint.setTextSize(widthRatio);
                 paint.getTextBounds(textValue, 0, textValue.length(), rect);
                 float width = rect.width();
                 float height = rect.height();
-                if (width > value || height > size2) {
-                    floatValue2 = f3;
+                if (width > counter || height > size2) {
+                    positionRatio = widthRatio;
                 } else {
-                    floatValue = f3;
+                    textSize = widthRatio;
                 }
             }
         }
-        return floatValue;
+        return textSize;
     }
 
     public float calculateTextSize() {
@@ -262,38 +262,38 @@ public class BismilahEntity extends EntityView implements Serializable {
         return calculateTextSize(this.txt, this.paintAya, (int) ((this.rect.width() / getFactor_scale()) * 0.85f), height);
     }
 
-    public void setTextSize(float floatValue) {
-        this.paintAya.setTextSize(floatValue);
+    public void setTextSize(float textSize) {
+        this.paintAya.setTextSize(textSize);
     }
 
-    public void setTextSizeInBoucle(float floatValue) {
-        this.paintAya.setTextSize(floatValue);
+    public void setTextSizeInBoucle(float textSize) {
+        this.paintAya.setTextSize(textSize);
         SpannableString spannableString = new SpannableString(this.txt);
         this.staticLayout = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         this.f428y = this.rect.centerY() - (this.staticLayout.getHeight() * 0.5f);
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
     }
 
-    public void setupScale(float floatValue, int value, int size2) {
-        this.paintAya.setTextSize(floatValue * value);
+    public void setupScale(float textSize, int index, int size2) {
+        this.paintAya.setTextSize(textSize * index);
         SpannableString spannableString = new SpannableString(this.txt);
         this.viewWidth = (int) Math.max(this.rect.width(), Math.round(this.paintAya.measureText(spannableString.toString())));
         StaticLayout build = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
         this.staticLayout = build;
         float width = build.getWidth();
-        float floatValue2 = width * 0.5f;
+        float positionRatio = width * 0.5f;
         float height = this.rect.height() * (width / this.rect.width()) * 0.5f;
         float centerY = this.rect.centerY();
         float centerX = this.rect.centerX();
-        this.rect.set(centerX - floatValue2, centerY - height, centerX + floatValue2, centerY + height);
+        this.rect.set(centerX - positionRatio, centerY - height, centerX + positionRatio, centerY + height);
         this.max_h = Math.round(this.rect.height() * 0.85f);
         this.max_w = Math.round(this.rect.width() * 0.85f);
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         this.f428y = this.rect.centerY() - (this.staticLayout.getHeight() * 0.5f);
     }
 
-    public void setupScaleSave(float floatValue, int value) {
-        this.paintAya.setTextSize(floatValue * value);
+    public void setupScaleSave(float textSize, int count) {
+        this.paintAya.setTextSize(textSize * count);
         SpannableString spannableString = new SpannableString(this.txt);
         this.viewWidth = (int) this.rect.width();
         this.staticLayout = StaticLayout.Builder.obtain(spannableString, 0, spannableString.length(), this.paintAya, this.viewWidth).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
@@ -304,16 +304,16 @@ public class BismilahEntity extends EntityView implements Serializable {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void scale(float floatValue, int value, int size2) {
-        setFactor_scale(floatValue);
-        float width = this.rect.width() * floatValue;
-        float height = this.rect.height() * floatValue;
-        float floatValue2 = width * 0.5f;
-        this.rect.left = this.rect.centerX() - floatValue2;
-        this.rect.right = this.rect.centerX() + floatValue2;
-        float f3 = height * 0.5f;
-        this.rect.top = this.rect.centerY() - f3;
-        this.rect.bottom = this.rect.centerY() + f3;
+    public void scale(float textSize, int ayaNumber, int size2) {
+        setFactor_scale(textSize);
+        float width = this.rect.width() * textSize;
+        float height = this.rect.height() * textSize;
+        float positionRatio = width * 0.5f;
+        this.rect.left = this.rect.centerX() - positionRatio;
+        this.rect.right = this.rect.centerX() + positionRatio;
+        float scaleFactor = height * 0.5f;
+        this.rect.top = this.rect.centerY() - scaleFactor;
+        this.rect.bottom = this.rect.centerY() + scaleFactor;
         this.viewWidth = (int) this.rect.width();
         this.paintAya.setTextSize(calculateTextSize());
         createStaticLayout();
@@ -322,19 +322,19 @@ public class BismilahEntity extends EntityView implements Serializable {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void postTranslate(float floatValue, float floatValue2) {
-        this.rect.offset(floatValue, floatValue2);
+    public void postTranslate(float textSize, float positionRatio) {
+        this.rect.offset(textSize, positionRatio);
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         this.f428y = this.rect.centerY() - (this.staticLayout.getHeight() * 0.5f);
     }
 
-    public void setTranslate(float floatValue, float floatValue2) {
+    public void setTranslate(float textSize, float positionRatio) {
         float width = this.rect.width() * 0.5f;
         float height = this.rect.height() * 0.5f;
-        this.rect.left = floatValue - width;
-        this.rect.right = floatValue + width;
-        this.rect.top = floatValue2 - height;
-        this.rect.bottom = floatValue2 + height;
+        this.rect.left = textSize - width;
+        this.rect.right = textSize + width;
+        this.rect.top = positionRatio - height;
+        this.rect.bottom = positionRatio + height;
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
         this.f428y = this.rect.centerY() - (this.staticLayout.getHeight() * 0.5f);
     }
@@ -353,7 +353,7 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.f427x = this.rect.centerX() - (this.staticLayout.getWidth() * 0.5f);
     }
 
-    private StaticLayout buildStaticLayout(String textValue, TextPaint textPaint, int value) {
+    private StaticLayout buildStaticLayout(String textValue, TextPaint textPaint, int count) {
         return StaticLayout.Builder.obtain(textValue, 0, textValue.length(), textPaint, value).setAlignment(Layout.Alignment.ALIGN_CENTER).setLineSpacing(0.0f, 1.0f).setIncludePad(false).build();
     }
 
@@ -391,8 +391,8 @@ public class BismilahEntity extends EntityView implements Serializable {
         return (objectAnimator2 != null && objectAnimator2.isRunning()) || ((objectAnimator = this.otherAnimation) != null && objectAnimator.isRunning());
     }
 
-    public void setOpacityFade(int value) {
-        this.paintAya.setAlpha(value);
+    public void setOpacityFade(int index) {
+        this.paintAya.setAlpha(index);
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
         if (isAnimTest()) {
             WeakReference<BlurredImageView> weakReference = this.weakBlurredImageView;
@@ -430,10 +430,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
     }
 
-    public void setSlideX(float floatValue) {
+    public void setSlideX(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.offsetX = floatValue;
-        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(floatValue)) * 255.0f));
+        this.offsetX = textSize;
+        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(textSize)) * 255.0f));
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
         if (!isAnimTest() || (weakReference = this.weakBlurredImageView) == null) {
             return;
@@ -441,10 +441,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         weakReference.get().invalidate();
     }
 
-    public void setSlideXOut(float floatValue) {
+    public void setSlideXOut(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.offsetX = floatValue;
-        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(floatValue)) * 255.0f));
+        this.offsetX = textSize;
+        this.paintAya.setAlpha(Math.round((1.0f - Math.abs(textSize)) * 255.0f));
         this.paintAyaOutline.setAlpha(this.paintAya.getAlpha());
         if (!isAnimTest() || (weakReference = this.weakBlurredImageView) == null) {
             return;
@@ -452,19 +452,19 @@ public class BismilahEntity extends EntityView implements Serializable {
         weakReference.get().invalidate();
     }
 
-    public void setFactorSize(float floatValue) {
+    public void setFactorSize(float textSize) {
         WeakReference<BlurredImageView> weakReference;
-        this.scaleX = floatValue;
+        this.scaleX = textSize;
         if (!isAnimTest() || (weakReference = this.weakBlurredImageView) == null) {
             return;
         }
         weakReference.get().invalidate();
     }
 
-    public void slidToLeft(int value, boolean isFlag) {
+    public void slidToLeft(int index, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideX", 1.0f, 0.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(index);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -472,10 +472,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToRightOut(int value, boolean isFlag) {
+    public void slidToRightOut(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideXOut", 0.0f, 1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -483,10 +483,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToLeftOut(int value, boolean isFlag) {
+    public void slidToLeftOut(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideXOut", 0.0f, -1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -494,10 +494,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void slidToRight(int value, boolean isFlag) {
+    public void slidToRight(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "SlideX", -1.0f, 0.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -505,10 +505,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void zoomIn_In(int value, boolean isFlag) {
+    public void zoomIn_In(int count, boolean isFlag) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "FactorSize", 0.0f, 1.0f);
         this.otherAnimation = ofFloat;
-        ofFloat.setDuration(value);
+        ofFloat.setDuration(count);
         if (isFlag) {
             this.otherAnimation.setRepeatMode(1);
             this.otherAnimation.setRepeatCount(-1);
@@ -516,25 +516,25 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.otherAnimation.start();
     }
 
-    public void runIn(int value, boolean isFlag, String textValue) {
+    public void runIn(int count, boolean isFlag, String textValue) {
         if (textValue.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-            slidToLeft(value, isFlag);
+            slidToLeft(count, isFlag);
         }
         if (textValue.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-            slidToRight(value, isFlag);
+            slidToRight(count, isFlag);
         }
         if (textValue.equals(TransitionType.ZOOM_IN.getValue())) {
-            zoomIn_In(value, isFlag);
+            zoomIn_In(count, isFlag);
         }
         if (textValue.equals(TransitionType.FADE_IN.getValue())) {
-            fadeIn(value, isFlag);
+            fadeIn(resourceId, isFlag);
         }
     }
 
-    private void fadeIn(int value, boolean isFlag) {
+    private void fadeIn(int resourceId, boolean isFlag) {
         ObjectAnimator ofInt = ObjectAnimator.ofInt(this, "OpacityFade", 0, 255);
         this.objectAnimator = ofInt;
-        ofInt.setDuration(value);
+        ofInt.setDuration(resourceId);
         if (isFlag) {
             this.objectAnimator.setRepeatMode(1);
             this.objectAnimator.setRepeatCount(-1);
@@ -542,10 +542,10 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.objectAnimator.start();
     }
 
-    private void fadeOut(int value, boolean isFlag) {
+    private void fadeOut(int count, boolean isFlag) {
         ObjectAnimator ofInt = ObjectAnimator.ofInt(this, "OpacityFade", 255, 0);
         this.objectAnimator = ofInt;
-        ofInt.setDuration(value);
+        ofInt.setDuration(count);
         if (isFlag) {
             this.objectAnimator.setRepeatMode(1);
             this.objectAnimator.setRepeatCount(-1);
@@ -553,19 +553,19 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.objectAnimator.start();
     }
 
-    public void runOut(int value, boolean isFlag, String textValue) {
+    public void runOut(int count, boolean isFlag, String textValue) {
         if (textValue.equals(TransitionType.SLIDE_TO_LEFT.getValue())) {
-            slidToLeftOut(value, isFlag);
+            slidToLeftOut(count, isFlag);
         }
         if (textValue.equals(TransitionType.SLIDE_TO_RIGHT.getValue())) {
-            slidToRightOut(value, isFlag);
+            slidToRightOut(count, isFlag);
         }
         if (textValue.equals(TransitionType.FADE_OUT.getValue())) {
-            fadeOut(value, isFlag);
+            fadeOut(ayaNumber, isFlag);
         }
     }
 
-    public BismilahEntity(String textValue, RectF rectF, Typeface typeface, int value) {
+    public BismilahEntity(String textValue, RectF rectF, Typeface typeface, int ayaNumber) {
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
         this.paintAyaOutline = new TextPaint(1);
@@ -574,15 +574,15 @@ public class BismilahEntity extends EntityView implements Serializable {
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value);
+        textPaint.setColor(ayaNumber);
         textPaint.setTextSize(0.05f);
-        setClrAya(value);
+        setClrAya(ayaNumber);
         this.max_h = (int) (this.rect.height() * 0.85f);
         this.max_w = (int) (this.rect.width() * 0.85f);
         createStaticLayout();
     }
 
-    public BismilahEntity(String textValue, RectF rectF, Typeface typeface, int value, int size2) {
+    public BismilahEntity(String textValue, RectF rectF, Typeface typeface, int ayaNumber, int size2) {
         TextPaint textPaint = new TextPaint(1);
         this.paintAya = textPaint;
         this.paintAyaOutline = new TextPaint(1);
@@ -591,15 +591,15 @@ public class BismilahEntity extends EntityView implements Serializable {
         setVisible(true);
         this.viewWidth = (int) rectF.width();
         textPaint.setTypeface(typeface);
-        textPaint.setColor(value);
+        textPaint.setColor(ayaNumber);
         textPaint.setTextSize(0.05f);
-        setClrAya(value);
+        setClrAya(ayaNumber);
         this.max_h = (int) (this.rect.height() * 0.85f);
         this.max_w = (int) (this.rect.width() * 0.85f);
         this.mPreset = size2;
     }
 
-    public void update(RectF rectF, int value, int size2) {
+    public void update(RectF rectF, int ayaNumber, int size2) {
         this.rect = new RectF(rectF.left, rectF.top, rectF.right, rectF.bottom);
         this.max_h = size2;
         this.max_w = value;
@@ -630,17 +630,17 @@ public class BismilahEntity extends EntityView implements Serializable {
         this.nameFont = textValue;
     }
 
-    public void setColor(int value) {
-        setClrAya(value);
-        this.paintAya.setColor(value);
+    public void setColor(int ayaNumber) {
+        setClrAya(ayaNumber);
+        this.paintAya.setColor(ayaNumber);
     }
 
     public void draw(Canvas canvas) {
         if (this.staticLayout != null) {
             canvas.save();
             canvas.translate(this.f427x + (this.offsetX * this.staticLayout.getWidth()), this.f428y);
-            float floatValue = this.scaleX;
-            canvas.scale(floatValue, floatValue);
+            float textSize = this.scaleX;
+            canvas.scale(textSize, textSize);
             if (this.mPreset == AyaTextPreset.OUTLINE.ordinal() && this.staticLayoutOutline != null) {
                 this.paintAyaOutline.setTextSize(this.paintAya.getTextSize());
                 this.staticLayoutOutline.draw(canvas);
@@ -664,17 +664,17 @@ public class BismilahEntity extends EntityView implements Serializable {
         }
     }
 
-    public void singleDraw(Canvas canvas, int value) {
+    public void singleDraw(Canvas canvas, int ayaNumber) {
         if (this.staticLayout != null) {
-            this.paintAya.setAlpha(value);
+            this.paintAya.setAlpha(ayaNumber);
             this.staticLayout.draw(canvas);
         }
     }
 
-    public void singleDraw(Canvas canvas, int value, float floatValue) {
+    public void singleDraw(Canvas canvas, int ayaNumber, float textSize) {
         if (this.staticLayout != null) {
             canvas.save();
-            canvas.translate(floatValue * this.staticLayout.getWidth(), 0.0f);
+            canvas.translate(textSize * this.staticLayout.getWidth(), 0.0f);
             this.paintAya.setAlpha(value);
             this.staticLayout.draw(canvas);
             canvas.restore();

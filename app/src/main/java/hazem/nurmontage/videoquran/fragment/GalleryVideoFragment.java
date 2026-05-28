@@ -79,8 +79,8 @@ public class GalleryVideoFragment extends Fragment {
         return null;
     }
 
-    public void inselect(int value) {
-        this.adabters.inselectItem(value);
+    public void inselect(int resourceId) {
+        this.adabters.inselectItem(resourceId);
     }
 
     private void loadVideos(View view) {

@@ -93,8 +93,8 @@ public class EntityTranslationTemplate implements Serializable {
         return this.preset;
     }
 
-    public void setPreset(int value) {
-        this.preset = value;
+    public void setPreset(int resourceId) {
+        this.preset = resourceId;
     }
 
     public boolean isHaveBg() {
@@ -105,7 +105,7 @@ public class EntityTranslationTemplate implements Serializable {
         this.isHaveBg = isFlag;
     }
 
-    public void setClr_bg(int value) {
+    public void setClr_bg(int resourceId) {
         this.clr_bg = value;
     }
 
@@ -137,18 +137,18 @@ public class EntityTranslationTemplate implements Serializable {
         return this.file_out;
     }
 
-    public EntityTranslationTemplate(Transition transition, float dimension, float f2, float f3, float f4, float f5, float floatValue6, String filePath, String textValue2, int value, int i2, int value3) {
+    public EntityTranslationTemplate(Transition transition, float dimension, float xPosition, float xPosition26, float xPosition26, float xPosition26, float floatValue6, String filePath, String textValue2, int ayaNumber, int i2, int ayaNumber26) {
         this.aya = filePath;
-        this.preset = value3;
+        this.preset = ayaNumber26;
         this.transition = transition;
         this.start = dimension;
         this.color = i2;
-        this.end = f2;
+        this.end = xPosition;
         this.name_font = textValue2;
-        this.number = value;
+        this.number = ayaNumber;
         this.right = floatValue6;
-        this.left = f5;
-        this.btm_x = f3;
+        this.left = xPosition26;
+        this.btm_x = xPosition26;
         this.btm_y = f4;
     }
 
@@ -172,7 +172,7 @@ public class EntityTranslationTemplate implements Serializable {
         return this.number;
     }
 
-    public void setNumber(int value) {
+    public void setNumber(int resourceId) {
         this.number = value;
     }
 

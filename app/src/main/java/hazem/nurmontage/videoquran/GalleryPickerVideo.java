@@ -65,7 +65,7 @@ public class GalleryPickerVideo extends Base {
     };
     private IPicker iPicker = new IPicker() { // from class: hazem.nurmontage.videoquran.GalleryPickerVideo.2
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(PhotoItem photoItem, int value) {
+        public void onAdd(PhotoItem photoItem, int resourceId) {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
@@ -77,7 +77,7 @@ public class GalleryPickerVideo extends Base {
         }
 
         @Override // hazem.nurmontage.videoquran.GalleryPickerVideo.IPicker
-        public void onAdd(VideoItem videoItem, int value) {
+        public void onAdd(VideoItem videoItem, int resourceId) {
             GalleryPickerVideo.this.videoItem = videoItem;
         }
     };
@@ -209,8 +209,8 @@ public class GalleryPickerVideo extends Base {
         }
     }
 
-    public String formatDuration(int value) {
-        int i2 = value / 1000;
+    public String formatDuration(int index) {
+        int i2 = index / 1000;
         return String.format(Locale.ENGLISH, "%02d:%02d", Integer.valueOf((i2 / 60) % 60), Integer.valueOf(i2 % 60));
     }
 
@@ -239,18 +239,18 @@ public class GalleryPickerVideo extends Base {
                 HashSet hashSet;
                 String textValue;
                 String textValue2;
-                String str3;
+                String filePath;
                 HashSet hashSet2;
-                String str4;
-                String str5;
-                int value;
+                String filePath26;
+                String filePath26;
+                int index;
                 HashSet hashSet3;
-                String str6;
-                String str7;
+                String filePath26;
+                String filePath26;
                 boolean isFlag;
                 int i2;
-                boolean z2 = false;
-                String str8 = "_id";
+                boolean isEnabled = false;
+                String filePath27 = "_id";
                 String str9 = "duration";
                 String str10 = "_data";
                 String str11 = null;
@@ -263,21 +263,21 @@ public class GalleryPickerVideo extends Base {
                 while (true) {
                     if (!query.moveToNext()) {
                         hashSet = hashSet4;
-                        textValue = str8;
+                        textValue = filePath27;
                         textValue2 = str9;
-                        str3 = str10;
+                        filePath = str10;
                         break;
                     }
                     int i5 = query.getInt(query.getColumnIndexOrThrow(str9));
                     if (i5 != 0) {
                         query.getString(query.getColumnIndexOrThrow(str10));
-                        textValue = str8;
+                        textValue = filePath27;
                         textValue2 = str9;
-                        String uri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow(str8))).toString();
+                        String uri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow(filePath27))).toString();
                         String parent = new File(uri).getParent();
                         if (hashSet4.contains(parent)) {
                             hashSet = hashSet4;
-                            str3 = str10;
+                            filePath = str10;
                         } else {
                             hashSet4.add(parent);
                             File file = new File(parent);
@@ -289,7 +289,7 @@ public class GalleryPickerVideo extends Base {
                                 int i7 = 0;
                                 while (i6 < length) {
                                     int i8 = length;
-                                    String str12 = str10;
+                                    String filePath30 = str10;
                                     if (GalleryPickerVideo.this.isVideoFile(listFiles[i6])) {
                                         i7++;
                                         if (str11 == null) {
@@ -298,13 +298,13 @@ public class GalleryPickerVideo extends Base {
                                     }
                                     i6++;
                                     length = i8;
-                                    str10 = str12;
+                                    str10 = filePath30;
                                 }
-                                str3 = str10;
+                                filePath = str10;
                                 i2 = i7;
                             } else {
                                 hashSet = hashSet4;
-                                str3 = str10;
+                                filePath = str10;
                                 i2 = 0;
                             }
                             if (i2 > 0) {
@@ -319,20 +319,20 @@ public class GalleryPickerVideo extends Base {
                         }
                         hashSet3 = hashSet;
                         isFlag = false;
-                        str6 = textValue;
-                        str7 = textValue2;
+                        filePath26 = textValue;
+                        filePath26 = textValue2;
                     } else {
                         hashSet3 = hashSet4;
-                        str6 = str8;
-                        str7 = str9;
-                        str3 = str10;
-                        isFlag = z2;
+                        filePath26 = filePath27;
+                        filePath26 = str9;
+                        filePath = str10;
+                        isFlag = isEnabled;
                     }
-                    z2 = isFlag;
+                    isEnabled = isFlag;
                     hashSet4 = hashSet3;
-                    str9 = str7;
-                    str8 = str6;
-                    str10 = str3;
+                    str9 = filePath26;
+                    filePath27 = filePath26;
+                    str10 = filePath;
                 }
                 GalleryPickerVideo.this.runOnUiThread(new Runnable() { // from class: hazem.nurmontage.videoquran.GalleryPickerVideo.7.1
                     @Override // java.lang.Runnable
@@ -353,27 +353,27 @@ public class GalleryPickerVideo extends Base {
                     String str14 = textValue2;
                     int i9 = query.getInt(query.getColumnIndexOrThrow(str14));
                     if (i9 != 0) {
-                        String str15 = str3;
-                        String parent2 = new File(query.getString(query.getColumnIndexOrThrow(str15))).getParent();
-                        String str16 = textValue;
-                        String uri2 = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow(str16))).toString();
+                        String filePath36 = filePath;
+                        String parent2 = new File(query.getString(query.getColumnIndexOrThrow(filePath36))).getParent();
+                        String filePath36 = textValue;
+                        String uri2 = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, query.getLong(query.getColumnIndexOrThrow(filePath36))).toString();
                         hashSet2 = hashSet;
                         if (hashSet2.contains(parent2)) {
-                            str5 = str14;
-                            str3 = str15;
-                            str4 = str16;
+                            filePath26 = str14;
+                            filePath = filePath36;
+                            filePath26 = filePath36;
                         } else {
                             hashSet2.add(parent2);
                             File file2 = new File(parent2);
                             File[] listFiles2 = file2.listFiles();
                             if (listFiles2 != null) {
                                 int length2 = listFiles2.length;
-                                str5 = str14;
+                                filePath26 = str14;
                                 int i10 = 0;
                                 int i11 = 0;
                                 while (i10 < length2) {
-                                    String str17 = str15;
-                                    String str18 = str16;
+                                    String filePath = filePath36;
+                                    String filePath38 = filePath36;
                                     if (GalleryPickerVideo.this.isVideoFile(listFiles2[i10])) {
                                         i11++;
                                         if (str13 == null) {
@@ -381,31 +381,31 @@ public class GalleryPickerVideo extends Base {
                                         }
                                     }
                                     i10++;
-                                    str16 = str18;
-                                    str15 = str17;
+                                    filePath36 = str18;
+                                    filePath36 = str17;
                                 }
-                                str3 = str15;
-                                str4 = str16;
-                                value = i11;
+                                filePath = filePath36;
+                                filePath26 = filePath36;
+                                index = i11;
                             } else {
-                                str5 = str14;
-                                str3 = str15;
-                                str4 = str16;
-                                value = 0;
+                                filePath26 = str14;
+                                filePath = filePath36;
+                                filePath26 = filePath36;
+                                index = 0;
                             }
-                            if (value > 0) {
-                                i3 += value;
-                                arrayList.add(new ExploreItem(file2, parent2, "" + value, file2.getName(), uri2));
+                            if (index > 0) {
+                                i3 += index;
+                                arrayList.add(new ExploreItem(file2, parent2, "" + index, file2.getName(), uri2));
                             }
                         }
                         arrayList2.add(new VideoItem(parent2, uri2, GalleryPickerVideo.this.formatDuration(i9), false));
                     } else {
                         hashSet2 = hashSet;
-                        str4 = textValue;
-                        str5 = str14;
+                        filePath26 = textValue;
+                        filePath26 = str14;
                     }
-                    textValue2 = str5;
-                    textValue = str4;
+                    textValue2 = filePath26;
+                    textValue = filePath26;
                     hashSet = hashSet2;
                 }
                 query.close();

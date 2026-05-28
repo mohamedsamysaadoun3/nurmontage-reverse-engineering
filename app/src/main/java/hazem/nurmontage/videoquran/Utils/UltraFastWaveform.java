@@ -20,8 +20,8 @@ public class UltraFastWaveform {
             int i3 = value2 + 1;
             int min = Math.min((int) (i3 * d), length);
             float f = 0.0f;
-            for (int value4 = (int) (value2 * d); value4 < min; value4++) {
-                f = Math.max(f, Math.abs((int) r11[value4]) / 32767.0f);
+            for (int counter = (int) (value2 * d); counter < min; counter++) {
+                f = Math.max(f, Math.abs((int) r11[counter]) / 32767.0f);
             }
             fArr[value2] = f;
             value2 = i3;

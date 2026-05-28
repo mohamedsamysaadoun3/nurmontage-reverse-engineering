@@ -35,8 +35,8 @@ public class CassetteView extends View {
         init();
     }
 
-    public CassetteView(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public CassetteView(Context context, AttributeSet attributeSet, int resourceId) {
+        super(context, attributeSet, resourceId);
         this.labelText = "Titanium – David Guetta Ft. Sia";
         init();
     }
@@ -80,55 +80,55 @@ public class CassetteView extends View {
         canvas.drawColor(Color.parseColor("#87CEEB"));
         Path path = new Path();
         float f = height;
-        float f2 = 0.7f * f;
-        path.moveTo(0.0f, f2);
-        float f3 = width;
-        path.lineTo(f3, f2);
-        path.lineTo(f3, f);
+        float widthRatio = 0.7f * f;
+        path.moveTo(0.0f, widthRatio);
+        float widthRatio4 = width;
+        path.lineTo(widthRatio4, widthRatio);
+        path.lineTo(widthRatio4, f);
         path.lineTo(0.0f, f);
         path.close();
         canvas.drawPath(path, this.paintFloor);
-        RectF rectF = new RectF(0.12f * f3, 0.32f * f, 0.92f * f3, 0.72f * f);
-        float floatValue4 = f3 * 0.1f;
+        RectF rectF = new RectF(0.12f * widthRatio4, 0.32f * f, 0.92f * widthRatio4, 0.72f * f);
+        float floatValue4 = widthRatio4 * 0.1f;
         float f5 = f * 0.3f;
-        float f6 = 0.9f * f3;
-        RectF rectF2 = new RectF(floatValue4, f5, f6, f2);
+        float f6 = 0.9f * widthRatio4;
+        RectF rectF2 = new RectF(floatValue4, f5, f6, widthRatio);
         canvas.drawRoundRect(rectF, 20.0f, 20.0f, this.paintShadow);
         canvas.drawRoundRect(rectF2, 20.0f, 20.0f, this.paintBody);
         Path path2 = new Path();
         path2.moveTo(floatValue4, f5);
         path2.lineTo(f6, f5);
-        float f7 = f3 * 0.85f;
+        float f7 = widthRatio4 * 0.85f;
         float f8 = f * 0.35f;
         path2.lineTo(f7, f8);
-        float f9 = 0.15f * f3;
+        float f9 = 0.15f * widthRatio4;
         path2.lineTo(f9, f8);
         path2.close();
         canvas.drawPath(path2, this.paintAccent);
         Path path3 = new Path();
-        path3.moveTo(floatValue4, f2);
-        path3.lineTo(f6, f2);
+        path3.moveTo(floatValue4, widthRatio);
+        path3.lineTo(f6, widthRatio);
         float f10 = f * 0.65f;
         path3.lineTo(f7, f10);
         path3.lineTo(f9, f10);
         path3.close();
         canvas.drawPath(path3, this.paintAccent);
-        float f11 = 0.2f * f3;
-        float f12 = 0.8f * f3;
+        float f11 = 0.2f * widthRatio4;
+        float f12 = 0.8f * widthRatio4;
         canvas.drawRect(new RectF(f11, 0.36f * f, f12, 0.44f * f), this.paintLabel);
-        canvas.drawText(this.labelText, (f3 - this.paintText.measureText(this.labelText)) / 2.0f, 0.415f * f, this.paintText);
+        canvas.drawText(this.labelText, (widthRatio4 - this.paintText.measureText(this.labelText)) / 2.0f, 0.415f * f, this.paintText);
         canvas.drawRect(new RectF(f11, 0.48f * f, f12, 0.62f * f), this.paintLabel);
         float f13 = f * 0.1f;
         float f14 = f13 * 0.3f;
         float f15 = f13 * 0.45f;
         float f16 = f * 0.55f;
-        float f17 = 0.35f * f3;
-        float f18 = f3 * 0.65f;
+        float f17 = 0.35f * widthRatio4;
+        float f18 = widthRatio4 * 0.65f;
         canvas.drawCircle(f17, f16, f13, this.paintReel);
         drawInnerGear(canvas, f17, f16, f14, f15, 8, this.paintHole);
         canvas.drawCircle(f18, f16, f13, this.paintReel);
         drawInnerGear(canvas, f18, f16, f14, f15, 8, this.paintHole);
-        float f19 = f3 * 0.015f;
+        float f19 = widthRatio4 * 0.015f;
         float f20 = 0.34f * f;
         canvas.drawCircle(f9, f20, f19, this.paintScrew);
         canvas.drawCircle(f7, f20, f19, this.paintScrew);
@@ -137,24 +137,24 @@ public class CassetteView extends View {
         canvas.drawCircle(f7, f21, f19, this.paintScrew);
     }
 
-    private void drawInnerGear(Canvas canvas, float f, float f2, float f3, float floatValue4, int value, Paint paint) {
+    private void drawInnerGear(Canvas canvas, float f, float value, float value, float floatValue4, int counter, Paint paint) {
         float f5;
         float f6;
         Path path = new Path();
-        int i2 = value * 2;
+        int i2 = counter * 2;
         double d = 6.283185307179586d / i2;
-        for (int value3 = 0; value3 < i2; value3++) {
-            double d2 = value3 * d;
-            if (value3 % 2 == 0) {
+        for (int counter6 = 0; counter6 < i2; counter6++) {
+            double d2 = counter6 * d;
+            if (counter6 % 2 == 0) {
                 f5 = f;
-                f6 = f3;
+                f6 = value;
             } else {
                 f5 = f;
                 f6 = floatValue4;
             }
             double d3 = f6;
             float cos = (float) (f5 + (Math.cos(d2) * d3));
-            float sin = (float) (f2 + (d3 * Math.sin(d2)));
+            float sin = (float) (value + (d3 * Math.sin(d2)));
             if (value3 == 0) {
                 path.moveTo(cos, sin);
             } else {

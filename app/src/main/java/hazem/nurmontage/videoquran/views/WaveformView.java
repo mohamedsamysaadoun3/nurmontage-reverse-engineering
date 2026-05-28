@@ -70,17 +70,17 @@ public class WaveformView extends View {
                 return;
             }
             float floatValue = (r4[i] / 100.0f) * height;
-            float f2 = i;
-            float f3 = f2 * (length + length);
-            float f4 = (height - floatValue) / 2.0f;
-            float length2 = f2 / r4.length;
-            float f5 = this.progress;
-            if (f5 > 0.0f && length2 < f5) {
+            float progressValue = i;
+            float progressValue7 = progressValue * (length + length);
+            float progressValue7 = (height - floatValue) / 2.0f;
+            float length2 = progressValue / r4.length;
+            float progressValue8 = this.progress;
+            if (progressValue8 > 0.0f && length2 < progressValue8) {
                 this.paint.setColor(-1);
             } else {
                 this.paint.setColor(-12303292);
             }
-            canvas.drawRoundRect(f3, f4, f3 + length, f4 + floatValue, 5.0f, 5.0f, this.paint);
+            canvas.drawRoundRect(progressValue7, progressValue7, progressValue7 + length, progressValue7 + floatValue, 5.0f, 5.0f, this.paint);
             i++;
         }
     }

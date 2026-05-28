@@ -29,15 +29,15 @@ public class ColorAyaFragment extends Fragment {
     private QuranEntity entity_select;
     private ColorAdabter.IColor iColor = new ColorAdabter.IColor() { // from class: hazem.nurmontage.videoquran.fragment.ColorAyaFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.ColorAdabter.IColor
-        public void onColor(int value, int color2) {
+        public void onColor(int ayaNumber, int color2) {
             if (ColorAyaFragment.this.iEditEntityCallback == null) {
                 return;
             }
             ColorAyaFragment.this.scrollToSelectedPosition();
             if (ColorAyaFragment.this.tabLayout == null || ColorAyaFragment.this.tabLayout.getSelectedTabPosition() == 0) {
-                ColorAyaFragment.this.iEditEntityCallback.updateAya(value);
+                ColorAyaFragment.this.iEditEntityCallback.updateAya(ayaNumber);
             } else {
-                ColorAyaFragment.this.iEditEntityCallback.updateTrsl(value);
+                ColorAyaFragment.this.iEditEntityCallback.updateTrsl(ayaNumber);
             }
         }
     };
@@ -95,18 +95,18 @@ public class ColorAyaFragment extends Fragment {
     }
 
     /* renamed from: lambda$setupPresetButtons$0$hazem-nurmontage-videoquran-fragment-ColorAyaFragment */
-    /* synthetic */ void m640x321106cd(TextView[] textViewArr, int value, AyaTextPreset[] ayaTextPresetArr, View view) {
-        selectPreset(textViewArr, value);
+    /* synthetic */ void m640x321106cd(TextView[] textViewArr, int ayaNumber, AyaTextPreset[] ayaTextPresetArr, View view) {
+        selectPreset(textViewArr, ayaNumber);
         EditEntityFragment.IEditEntityCallback iEditEntityCallback = this.iEditEntityCallback;
         if (iEditEntityCallback != null) {
-            iEditEntityCallback.updatePreset(ayaTextPresetArr[value]);
+            iEditEntityCallback.updatePreset(ayaTextPresetArr[ayaNumber]);
         }
     }
 
-    private void selectPreset(TextView[] textViewArr, int value) {
+    private void selectPreset(TextView[] textViewArr, int count) {
         int color2 = 0;
         while (color2 < textViewArr.length) {
-            textViewArr[color2].setSelected(color2 == value);
+            textViewArr[color2].setSelected(color2 == count);
             color2++;
         }
     }
@@ -140,10 +140,10 @@ public class ColorAyaFragment extends Fragment {
         return root;
     }
 
-    public void scrollToSelectedPosition(int value) {
+    public void scrollToSelectedPosition(int width) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
         if (linearLayoutManager != null) {
-            linearLayoutManager.scrollToPositionWithOffset(value, this.recyclerView.getWidth() / 2);
+            linearLayoutManager.scrollToPositionWithOffset(width, this.recyclerView.getWidth() / 2);
         }
     }
 

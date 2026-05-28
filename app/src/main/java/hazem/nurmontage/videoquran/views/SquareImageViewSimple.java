@@ -14,13 +14,13 @@ public class SquareImageViewSimple extends AppCompatImageView {
         super(context, attributeSet);
     }
 
-    public SquareImageViewSimple(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public SquareImageViewSimple(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
     }
 
     @Override // android.widget.ImageView, android.view.View
-    protected void onMeasure(int value, int value2) {
-        super.onMeasure(value, value2);
+    protected void onMeasure(int width, int width3) {
+        super.onMeasure(width, width3);
         int measuredWidth = getMeasuredWidth();
         setMeasuredDimension(measuredWidth, measuredWidth);
     }

@@ -17,8 +17,8 @@ public class ItemDimension {
     /* renamed from: w */
     private final int f431w;
 
-    public ItemDimension(String str, int i, ResizeType resizeType, int i2, int size3, String textValue2) {
-        this.name = str;
+    public ItemDimension(String name0, int i, ResizeType resizeType, int i2, int size3, String textValue2) {
+        this.name = name0;
         this.image = i;
         this.resizeType = resizeType;
         this.f431w = i2;

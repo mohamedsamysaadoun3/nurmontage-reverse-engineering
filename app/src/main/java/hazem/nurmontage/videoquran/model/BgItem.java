@@ -13,8 +13,8 @@ public class BgItem {
     /* renamed from: y */
     private float f416y;
 
-    public BgItem(int value, float f, float floatValue2, String textValue) {
-        this.f414id = value;
+    public BgItem(int resourceId, float f, float floatValue2, String textValue) {
+        this.f414id = resourceId;
         this.f415x = f;
         this.f416y = floatValue2;
         this.name_drawable = textValue;

@@ -10,10 +10,10 @@ public class ExploreItem {
     private String path;
     private String size;
 
-    public ExploreItem(File file, String str, String str2, String str3, String textValue4) {
-        this.path = str;
-        this.size = str2;
-        this.name = str3;
+    public ExploreItem(File file, String filePath, String filePath0, String filePath0, String textValue4) {
+        this.path = filePath;
+        this.size = filePath0;
+        this.name = filePath0;
         this.firstFilePath = textValue4;
         this.folder = file;
     }

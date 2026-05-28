@@ -27,25 +27,25 @@ public class ExploreAdabters extends RecyclerView.Adapter<MyViewHolder> {
         void folder(File file, String textValue, String textValue2);
     }
 
-    public ExploreAdabters(List<ExploreItem> list, int value, IExplore iExplore, String textValue) {
+    public ExploreAdabters(List<ExploreItem> list, int size0, IExplore iExplore, String textValue) {
         this.exploreItems = list;
-        this.size = value;
+        this.size = size0;
         this.iExplore = iExplore;
         this.folder_select = textValue;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_explore, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(MyViewHolder myViewHolder, int value) {
-        RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(this.exploreItems.get(value).getFirstFilePath());
+    public void onBindViewHolder(MyViewHolder myViewHolder, int index) {
+        RequestBuilder<Drawable> load = Glide.with(myViewHolder.itemView).load(this.exploreItems.get(index).getFirstFilePath());
         int i2 = this.size;
         load.override(i2, i2).centerCrop().placeholder(C2014R.drawable.image_24px).into(myViewHolder.imageView);
-        myViewHolder.tv_name.setText(this.exploreItems.get(value).getName());
-        myViewHolder.tv_size.setText(this.exploreItems.get(value).getSize());
+        myViewHolder.tv_name.setText(this.exploreItems.get(index).getName());
+        myViewHolder.tv_size.setText(this.exploreItems.get(index).getSize());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

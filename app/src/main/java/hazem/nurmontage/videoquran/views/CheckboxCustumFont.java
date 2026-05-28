@@ -19,8 +19,8 @@ public class CheckboxCustumFont extends AppCompatCheckBox {
         init(context);
     }
 
-    public CheckboxCustumFont(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public CheckboxCustumFont(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

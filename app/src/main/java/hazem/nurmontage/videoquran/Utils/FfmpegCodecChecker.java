@@ -51,31 +51,31 @@ public class FfmpegCodecChecker {
         if (output == null) {
             return codecInfo;
         }
-        boolean z = false;
-        boolean z2 = false;
-        boolean z3 = false;
+        boolean isChecked = false;
+        boolean isChecked4 = false;
+        boolean isChecked4 = false;
         for (String textValue : output.split("\n")) {
             String lowerCase = textValue.trim().toLowerCase();
-            if (!z && lowerCase.contains("libx264")) {
-                z = true;
+            if (!isChecked && lowerCase.contains("libx264")) {
+                isChecked = true;
             }
-            if (!z2 && lowerCase.contains("libfdk_aac")) {
-                z2 = true;
+            if (!isChecked4 && lowerCase.contains("libfdk_aac")) {
+                isChecked4 = true;
             }
-            if (!z3 && lowerCase.contains("aac")) {
-                z3 = true;
+            if (!isChecked4 && lowerCase.contains("aac")) {
+                isChecked4 = true;
             }
         }
-        if (z) {
+        if (isChecked) {
             codecInfo.videoCodec = "libx264";
             codecInfo.isVideoHwAccelerated = false;
         } else {
             codecInfo.videoCodec = null;
             codecInfo.isVideoHwAccelerated = false;
         }
-        if (z2) {
+        if (isChecked4) {
             codecInfo.audioCodec = "libfdk_aac";
-        } else if (z3) {
+        } else if (isChecked4) {
             codecInfo.audioCodec = "aac";
         } else {
             codecInfo.audioCodec = null;

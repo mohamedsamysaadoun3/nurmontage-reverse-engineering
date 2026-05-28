@@ -54,8 +54,8 @@ public class EditTrslTxtActivity extends Base {
     final int[] BG_COLORS = {-8388608, -1, ViewCompat.MEASURED_STATE_MASK, -2838729, -16777088, -16694239, -13220529, -9404272};
     private final ColorBgAdabter.IColor iColor = new ColorBgAdabter.IColor() { // from class: hazem.nurmontage.videoquran.EditTrslTxtActivity.6
         @Override // hazem.nurmontage.videoquran.adabter.ColorBgAdabter.IColor
-        public void onColor(int value, int color2) {
-            EditTrslTxtActivity.this.clrBg = value;
+        public void onColor(int colorValue, int color2) {
+            EditTrslTxtActivity.this.clrBg = colorValue;
             EditTrslTxtActivity.this.scrollToSelectedPosition();
         }
     };
@@ -182,9 +182,9 @@ public class EditTrslTxtActivity extends Base {
         if (textValue == null) {
             return -1;
         }
-        for (int value = 0; value < stringArray.length; value++) {
-            if (textValue.contains(stringArray[value])) {
-                return value + 1;
+        for (int counter = 0; counter < stringArray.length; counter++) {
+            if (textValue.contains(stringArray[counter])) {
+                return counter + 1;
             }
         }
         return -1;

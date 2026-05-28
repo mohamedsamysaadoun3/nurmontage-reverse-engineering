@@ -58,8 +58,8 @@ public class UltraFastWaveformOptimized {
                     outputBuffer.position(0);
                     int i4 = bufferInfo.size / 2;
                     float f = i4 / value;
-                    for (int value5 = 0; value5 < i4; value5 += 2) {
-                        short s = outputBuffer.getShort(value5);
+                    for (int size5 = 0; size5 < i4; size5 += 2) {
+                        short s = outputBuffer.getShort(size5);
                         int i6 = (int) (i3 / f);
                         if (i6 >= value) {
                             break;

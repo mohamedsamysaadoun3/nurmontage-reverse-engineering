@@ -53,13 +53,13 @@ public class WordAyaAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int ayaNumber) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_word_aya, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        WordModel wordModel = this.list.get(value);
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        WordModel wordModel = this.list.get(index);
         viewHolder.text.setText(wordModel.getW());
         if (wordModel.isSelected()) {
             viewHolder.text.setBackgroundResource(C2014R.drawable.round_btn_quran_select);

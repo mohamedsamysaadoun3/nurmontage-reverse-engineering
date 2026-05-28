@@ -26,8 +26,8 @@ public class EyeOpenView extends View {
     private float radiusYFull;
     private float wrapOffset;
 
-    private float map(float f, float f2, float f3, float f4, float floatValue5) {
-        return f4 + (((f - f2) / (f3 - f2)) * (floatValue5 - f4));
+    private float map(float f, float value, float value0, float value0, float floatValue5) {
+        return value0 + (((f - value) / (value0 - value)) * (floatValue5 - f4));
     }
 
     public EyeOpenView(Context context) {
@@ -61,9 +61,9 @@ public class EyeOpenView extends View {
         invalidate();
     }
 
-    public void startEyeOpenAnimation(long j) {
+    public void startEyeOpenAnimation(long durationMs) {
         ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, this.radiusYFull);
-        ofFloat.setDuration(j);
+        ofFloat.setDuration(durationMs);
         ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: hazem.nurmontage.videoquran.views.EyeOpenView$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -84,10 +84,10 @@ public class EyeOpenView extends View {
     protected void onSizeChanged(int i, int i2, int i3, int size4) {
         float f = i;
         this.centerX = f / 2.0f;
-        float f2 = i2;
-        this.centerY = f2 / 2.0f;
+        float fontSize = i2;
+        this.centerY = fontSize / 2.0f;
         this.radiusX = f * 0.4f;
-        this.radiusYFull = f2 * 0.2f;
+        this.radiusYFull = fontSize * 0.2f;
         super.onSizeChanged(i, i2, i3, size4);
     }
 
@@ -102,10 +102,10 @@ public class EyeOpenView extends View {
         this.eyePath.reset();
         RectF rectF = this.eyeRect;
         float f = this.centerX;
-        float f2 = this.radiusX;
-        float f3 = this.centerY;
-        float f4 = this.currentRY;
-        rectF.set(f - f2, f3 - f4, f + f2, f3 + f4);
+        float scaleFactor = this.radiusX;
+        float scaleFactor9 = this.centerY;
+        float scaleFactor9 = this.currentRY;
+        rectF.set(f - scaleFactor, scaleFactor9 - scaleFactor9, f + scaleFactor, scaleFactor9 + scaleFactor9);
         this.eyePath.addOval(this.eyeRect, Path.Direction.CW);
         canvas.saveLayer(null, null, 31);
         canvas.drawPath(this.eyePath, this.clearPaint);

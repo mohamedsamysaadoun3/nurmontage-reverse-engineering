@@ -80,8 +80,8 @@ public class EntityBismilahTemplate implements Serializable {
         return this.preset;
     }
 
-    public void setPreset(int value) {
-        this.preset = value;
+    public void setPreset(int resourceId) {
+        this.preset = resourceId;
     }
 
     public void setFile(String filePath) {
@@ -108,16 +108,16 @@ public class EntityBismilahTemplate implements Serializable {
         return this.file_out;
     }
 
-    public EntityBismilahTemplate(Transition transition, float dimension, float f2, float f3, float f4, float f5, float floatValue6, String filePath, int value, int value2) {
+    public EntityBismilahTemplate(Transition transition, float dimension, float xPosition, float xPosition20, float xPosition20, float xPosition20, float floatValue6, String filePath, int ayaNumber, int ayaNumber20) {
         this.aya = filePath;
-        this.preset = value2;
+        this.preset = ayaNumber20;
         this.transition = transition;
         this.start = dimension;
-        this.color = value;
-        this.end = f2;
+        this.color = ayaNumber;
+        this.end = xPosition;
         this.right = floatValue6;
-        this.left = f5;
-        this.btm_x = f3;
+        this.left = xPosition20;
+        this.btm_x = xPosition20;
         this.btm_y = f4;
     }
 

@@ -32,8 +32,8 @@ public class JavaBM {
     }
 
     public int match(String textValue) {
-        int value = 0;
-        while (value <= textValue.length() - this.mPattern.length()) {
+        int count = 0;
+        while (count <= textValue.length() - this.mPattern.length()) {
             int length = this.mPattern.length() - 1;
             char c = 1570;
             while (true) {
@@ -41,7 +41,7 @@ public class JavaBM {
                     break;
                 }
                 char charAt = this.mPattern.charAt(length);
-                char charAt2 = textValue.charAt(value + length);
+                char charAt2 = textValue.charAt(count + length);
                 if (charAt != charAt2) {
                     c = charAt2;
                     break;
@@ -53,26 +53,26 @@ public class JavaBM {
                 c = 1611;
             }
             if (length < 0) {
-                return value;
+                return count;
             }
-            value += Math.max(length - this.skipTable[c - 1570], 1);
+            count += Math.max(length - this.skipTable[c - 1570], 1);
         }
         return -1;
     }
 
     private void setSkipTable(String textValue, int[] iArr) {
         Arrays.fill(iArr, -1);
-        for (int value = 0; value < textValue.length(); value++) {
-            if (textValue.charAt(value) < 1570 || textValue.charAt(value) > 1610) {
-                iArr[41] = value;
+        for (int counter = 0; counter < textValue.length(); counter++) {
+            if (textValue.charAt(counter) < 1570 || textValue.charAt(counter) > 1610) {
+                iArr[41] = counter;
             } else {
-                iArr[textValue.charAt(value) - 1570] = value;
+                iArr[textValue.charAt(counter) - 1570] = counter;
             }
         }
     }
 
     public static List<Integer> match(String textValue, String textValue2) {
-        int value;
+        int index;
         ArrayList arrayList = new ArrayList();
         int length = textValue2.length();
         int length2 = textValue.length();
@@ -91,15 +91,15 @@ public class JavaBM {
                     if (charAt != charAt2) {
                         Integer num = preprocessForBadCharacterShift.get(Character.valueOf(charAt));
                         if (num == null) {
-                            value = i4 + 1;
+                            index = i4 + 1;
                         } else {
                             int intValue = i4 - (num.intValue() + i3);
                             if (intValue <= 0) {
                                 intValue = 1;
                             }
-                            value = intValue + i3;
+                            index = intValue + i3;
                         }
-                        i3 = value;
+                        i3 = index;
                     } else {
                         if (i2 == 0) {
                             arrayList.add(Integer.valueOf(i3));

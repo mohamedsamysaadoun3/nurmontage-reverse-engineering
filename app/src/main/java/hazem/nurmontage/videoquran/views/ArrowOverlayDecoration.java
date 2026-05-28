@@ -13,9 +13,9 @@ public class ArrowOverlayDecoration extends RecyclerView.ItemDecoration {
     private final Drawable arrowDrawable;
     private final int arrowSize;
 
-    public ArrowOverlayDecoration(Context context, int i, int value2) {
+    public ArrowOverlayDecoration(Context context, int i, int size) {
         this.arrowDrawable = AppCompatResources.getDrawable(context, i);
-        this.arrowSize = (int) TypedValue.applyDimension(1, value2, context.getResources().getDisplayMetrics());
+        this.arrowSize = (int) TypedValue.applyDimension(1, size, context.getResources().getDisplayMetrics());
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -29,8 +29,8 @@ public class ArrowOverlayDecoration extends RecyclerView.ItemDecoration {
             int height = recyclerView.getHeight() / 2;
             if (findLastCompletelyVisibleItemPosition < itemCount - 1) {
                 int i = this.arrowSize;
-                int value2 = height - (i / 2);
-                this.arrowDrawable.setBounds(0, value2, i, value2 + i);
+                int count = height - (i / 2);
+                this.arrowDrawable.setBounds(0, count, i, count + i);
                 this.arrowDrawable.setAutoMirrored(false);
                 this.arrowDrawable.draw(canvas);
             }

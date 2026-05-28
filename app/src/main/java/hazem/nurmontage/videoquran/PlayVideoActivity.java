@@ -39,12 +39,12 @@ public class PlayVideoActivity extends Base {
         int width = this.parentLayout.getWidth();
         int height = this.parentLayout.getHeight();
         float f = videoWidth / videoHeight;
-        float f2 = width;
-        float f3 = height;
-        if (f > f2 / f3) {
-            height = (int) (f2 / f);
+        float widthRatio = width;
+        float widthRatio2 = height;
+        if (f > widthRatio / widthRatio2) {
+            height = (int) (widthRatio / f);
         } else {
-            width = (int) (f3 * f);
+            width = (int) (widthRatio2 * f);
         }
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
         layoutParams.addRule(13);

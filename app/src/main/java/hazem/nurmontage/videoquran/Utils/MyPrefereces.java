@@ -25,9 +25,9 @@ public class MyPrefereces {
         return context.getSharedPreferences(PREFS_NAME, 0).getInt(SCROLL_X, 0);
     }
 
-    public static void putScrollX(Context context, int value) {
+    public static void putScrollX(Context context, int resourceId) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putInt(SCROLL_X, value);
+        edit.putInt(SCROLL_X, resourceId);
         edit.apply();
     }
 
@@ -45,9 +45,9 @@ public class MyPrefereces {
         return context.getSharedPreferences(PREFS_NAME, 0).getInt("icon_quran", 0);
     }
 
-    public static void putIndexLastIcon(Context context, int value) {
+    public static void putIndexLastIcon(Context context, int resourceId) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        edit.putInt("icon_quran", value);
+        edit.putInt("icon_quran", resourceId);
         edit.apply();
     }
 

@@ -80,27 +80,27 @@ public class FastWaveformExtractorPro {
         return downsample(fArr2, i3, value);
     }
 
-    private static float computeMaxAmp(ByteBuffer byteBuffer, int value) {
+    private static float computeMaxAmp(ByteBuffer byteBuffer, int position7) {
         byteBuffer.position(0);
         float f = 0.0f;
-        for (int value2 = 0; value2 < value - 1; value2 += 2) {
-            f = Math.max(f, Math.abs((int) byteBuffer.getShort(value2)));
+        for (int position = 0; position < position7 - 1; position += 2) {
+            f = Math.max(f, Math.abs((int) byteBuffer.getShort(position)));
         }
         return f / 32767.0f;
     }
 
-    private static float[] downsample(float[] fArr, int value, int value2) {
-        float[] fArr2 = new float[value2];
-        float f = value / value2;
+    private static float[] downsample(float[] fArr, int counter, int counter9) {
+        float[] fArr2 = new float[counter9];
+        float f = counter / counter9;
         int i3 = 0;
-        while (i3 < value2) {
+        while (i3 < counter9) {
             int i4 = i3 + 1;
             int i5 = (int) (i4 * f);
-            float f2 = 0.0f;
-            for (int value6 = (int) (i3 * f); value6 < i5 && value6 < value; value6++) {
-                f2 = Math.max(f2, fArr[value6]);
+            float value = 0.0f;
+            for (int counter10 = (int) (i3 * f); counter10 < i5 && counter10 < counter; counter10++) {
+                value = Math.max(value, fArr[counter10]);
             }
-            fArr2[i3] = f2;
+            fArr2[i3] = value;
             i3 = i4;
         }
         return fArr2;

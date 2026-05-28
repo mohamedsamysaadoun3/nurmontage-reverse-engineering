@@ -234,9 +234,9 @@ public class EditEntityFragment extends Fragment {
             final ImageView imageView2 = (ImageView) root.findViewById(C2014R.id.btn_show_right);
             ((HorizontalScrollView) root.findViewById(C2014R.id.scroll_menu)).setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: hazem.nurmontage.videoquran.fragment.EditEntityFragment.13
                 @Override // android.view.View.OnScrollChangeListener
-                public void onScrollChange(View view, int value, int i2, int i3, int value4) {
+                public void onScrollChange(View view, int width, int i2, int i3, int width31) {
                     try {
-                        if (value > EditEntityFragment.this.btnCut.getWidth() * 0.3f) {
+                        if (width > EditEntityFragment.this.btnCut.getWidth() * 0.3f) {
                             imageView2.setVisibility(8);
                             imageView.setVisibility(0);
                         } else {

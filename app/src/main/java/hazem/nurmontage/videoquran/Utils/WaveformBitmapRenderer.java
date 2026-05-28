@@ -17,13 +17,13 @@ public class WaveformBitmapRenderer {
     public void drawOverlay(Canvas canvas, RectF rectF, float f, float floatValue2, Paint paint) {
     }
 
-    public WaveformBitmapRenderer(float[] fArr, int color, int i2, int value3) {
+    public WaveformBitmapRenderer(float[] fArr, int color, int i2, int width) {
         this.amps = fArr;
         this.bitmapWidth = color;
         this.bitmapHeight = i2;
         Paint paint = new Paint(1);
         this.paint = paint;
-        paint.setColor(value3);
+        paint.setColor(width);
         this.paint.setAlpha(100);
         generateBitmap();
     }
@@ -40,22 +40,22 @@ public class WaveformBitmapRenderer {
         for (float floatValue3 : this.amps) {
             floatValue2 = Math.max(floatValue2, floatValue3);
         }
-        float f4 = floatValue2 < 0.01f ? 0.01f : floatValue2;
+        float speedFactor = floatValue2 < 0.01f ? 0.01f : floatValue2;
         int color = 0;
         while (true) {
             int i2 = this.bitmapWidth;
             if (color >= i2) {
                 return;
             }
-            float f5 = color;
+            float speedFactor5 = color;
             float[] fArr2 = this.amps;
-            int length = (int) ((f5 / i2) * fArr2.length);
+            int length = (int) ((speedFactor5 / i2) * fArr2.length);
             if (length >= fArr2.length) {
                 length = fArr2.length - 1;
             }
-            float f6 = (fArr2[length] / f4) * f;
-            int value3 = this.bitmapHeight;
-            canvas.drawLine(f5, value3, f5, value3 - f6, this.paint);
+            float speedFactor5 = (fArr2[length] / speedFactor) * f;
+            int count = this.bitmapHeight;
+            canvas.drawLine(speedFactor5, count, speedFactor5, value3 - f6, this.paint);
             color++;
         }
     }

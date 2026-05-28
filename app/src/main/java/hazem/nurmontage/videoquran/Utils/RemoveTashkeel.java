@@ -13,8 +13,8 @@ public class RemoveTashkeel {
 
     static {
         char[] cArr = {1611, 1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1648, 1600};
-        for (int value = 0; value < 13; value++) {
-            TASHKEEL_SET.add(Character.valueOf(cArr[value]));
+        for (int counter = 0; counter < 13; counter++) {
+            TASHKEEL_SET.add(Character.valueOf(cArr[counter]));
         }
         arabicV_original = Arrays.asList("ؘ", "ؙ", "ؚ", "ؐ", "ؐؑ", "ؒ", "ؓ", "ؔ", "ؕ", "ؖ", "ؗ", "ؗ", "ﹰﹰ", "ﹲ", "ﹴ", "ﹸ", "ﹼ", "ﹾ", "ٍ", "ً", "ُ", "ِ", "َ", "ّ", "ٓ", "ٔ", "ْ", "ِ", "َّ", "َ", "َْ", "َ", "ً", "ٌ", "َ", "ُ", "ٍ", "َ", "ْ", "ِ", "ُ", "ّ", "ً");
     }
@@ -28,8 +28,8 @@ public class RemoveTashkeel {
             return null;
         }
         StringBuilder sb = new StringBuilder(textValue.length());
-        for (int value = 0; value < textValue.length(); value++) {
-            char charAt = textValue.charAt(value);
+        for (int counter = 0; counter < textValue.length(); counter++) {
+            char charAt = textValue.charAt(counter);
             if (!isTashkeel(charAt)) {
                 sb.append(charAt);
             }
@@ -41,13 +41,13 @@ public class RemoveTashkeel {
         if (textValue == null) {
             return 0;
         }
-        int value = 0;
-        for (int value2 = 0; value2 < textValue.length(); value2++) {
-            if (isTashkeel(textValue.charAt(value2))) {
-                value++;
+        int counter = 0;
+        for (int counter4 = 0; counter4 < textValue.length(); counter4++) {
+            if (isTashkeel(textValue.charAt(counter4))) {
+                counter++;
             }
         }
-        return value;
+        return counter;
     }
 
     public static String removeTashkeelAndPoint(String textValue) {
@@ -55,8 +55,8 @@ public class RemoveTashkeel {
             return null;
         }
         StringBuilder sb = new StringBuilder(textValue.length());
-        for (int value = 0; value < textValue.length(); value++) {
-            char charAt = textValue.charAt(value);
+        for (int counter = 0; counter < textValue.length(); counter++) {
+            char charAt = textValue.charAt(counter);
             if (!isTashkeel(charAt) && charAt != '.') {
                 sb.append(charAt);
             }
@@ -69,8 +69,8 @@ public class RemoveTashkeel {
             return null;
         }
         StringBuilder sb = new StringBuilder(textValue.length());
-        for (int value = 0; value < textValue.length(); value++) {
-            char charAt = textValue.charAt(value);
+        for (int counter = 0; counter < textValue.length(); counter++) {
+            char charAt = textValue.charAt(counter);
             if (isTashkeel(charAt)) {
                 sb.append(charAt);
             } else {

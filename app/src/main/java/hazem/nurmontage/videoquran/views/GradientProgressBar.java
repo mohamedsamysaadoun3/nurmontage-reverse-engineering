@@ -43,8 +43,8 @@ public class GradientProgressBar extends View {
         init();
     }
 
-    public GradientProgressBar(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public GradientProgressBar(Context context, AttributeSet attributeSet, int trackIndex) {
+        super(context, attributeSet, trackIndex);
         this.progress = 0;
         this.maxProgress = 100;
         this.trackColor = -1;
@@ -68,8 +68,8 @@ public class GradientProgressBar extends View {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int value, int i2, int i3, int size4) {
-        super.onSizeChanged(value, i2, i3, size4);
+    protected void onSizeChanged(int size, int i2, int i3, int size4) {
+        super.onSizeChanged(size, i2, i3, size4);
         createProgressShader();
     }
 
@@ -82,15 +82,15 @@ public class GradientProgressBar extends View {
         this.progressPaint.setShader(linearGradient);
     }
 
-    public void setProgress(int value) {
-        if (value < 0) {
+    public void setProgress(int resourceId) {
+        if (resourceId < 0) {
             this.progress = 0;
         } else {
             int i2 = this.maxProgress;
-            if (value > i2) {
+            if (resourceId > i2) {
                 this.progress = i2;
             } else {
-                this.progress = value;
+                this.progress = resourceId;
             }
         }
         invalidate();
@@ -100,13 +100,13 @@ public class GradientProgressBar extends View {
         return this.progress;
     }
 
-    public void setMax(int value) {
-        this.maxProgress = value;
+    public void setMax(int resourceId) {
+        this.maxProgress = resourceId;
         invalidate();
     }
 
-    public void setTrackColor(int value) {
-        this.trackColor = value;
+    public void setTrackColor(int trackIndex) {
+        this.trackColor = trackIndex;
         this.trackPaint.setColor(value);
         invalidate();
     }
@@ -140,7 +140,7 @@ public class GradientProgressBar extends View {
         canvas.drawRoundRect(rectF, floatValue, floatValue, this.trackPaint);
         this.progressRect.set(0.0f, 0.0f, width * (this.progress / this.maxProgress), height);
         RectF rectF2 = this.progressRect;
-        float f2 = this.cornerRadius;
-        canvas.drawRoundRect(rectF2, f2, f2, this.progressPaint);
+        float progressValue = this.cornerRadius;
+        canvas.drawRoundRect(rectF2, progressValue, progressValue, this.progressPaint);
     }
 }

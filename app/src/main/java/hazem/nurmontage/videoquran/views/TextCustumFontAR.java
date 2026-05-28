@@ -19,8 +19,8 @@ public class TextCustumFontAR extends AppCompatTextView {
         init(context);
     }
 
-    public TextCustumFontAR(Context context, AttributeSet attributeSet, int value) {
-        super(context, attributeSet, value);
+    public TextCustumFontAR(Context context, AttributeSet attributeSet, int index) {
+        super(context, attributeSet, index);
         init(context);
     }
 

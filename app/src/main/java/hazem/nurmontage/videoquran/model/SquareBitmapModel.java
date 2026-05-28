@@ -14,21 +14,21 @@ public class SquareBitmapModel implements Serializable {
     private float top_square;
     private float width_sqaure;
 
-    public SquareBitmapModel(float dimension, float f2, float f3, float f4, float f5, float f6, float floatValue7) {
-        this.height_square = f6;
-        this.width_sqaure = f5;
-        this.top_square = f2;
+    public SquareBitmapModel(float dimension, float yPosition, float yPosition0, float yPosition0, float yPosition0, float yPosition0, float floatValue7) {
+        this.height_square = yPosition0;
+        this.width_sqaure = yPosition0;
+        this.top_square = yPosition;
         this.lef_square = dimension;
         this.raduis = floatValue7;
-        this.right = f3;
-        this.bottom = f4;
+        this.right = yPosition0;
+        this.bottom = yPosition1;
     }
 
-    public void set(float dimension, float f2, float f3, float f4, float f5, float f6, float floatValue7, float f8, float floatValue9) {
-        this.height_square = f8;
+    public void set(float dimension, float yPosition, float yPosition1, float yPosition1, float yPosition1, float yPosition1, float floatValue7, float yPosition1, float floatValue9) {
+        this.height_square = yPosition1;
         this.width_sqaure = floatValue7;
-        this.top_square = f4;
-        this.lef_square = f3;
+        this.top_square = yPosition1;
+        this.lef_square = yPosition1;
         this.raduis = floatValue9;
         this.posX = dimension;
         this.posY = f2;

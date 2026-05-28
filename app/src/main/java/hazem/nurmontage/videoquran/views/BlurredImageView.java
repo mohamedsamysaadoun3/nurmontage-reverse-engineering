@@ -238,8 +238,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
     }
 
     @Override // android.view.View
-    protected void onSizeChanged(int size, int value2, int size3, int size4) {
-        super.onSizeChanged(size, value2, size3, size4);
+    protected void onSizeChanged(int size, int size18, int size3, int size4) {
+        super.onSizeChanged(size, size18, size3, size4);
         if (this.selectTool == null) {
             this.selectTool = new EntitySelectTool(size, getContext());
         }
@@ -289,12 +289,12 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         return this.mCanvas_width;
     }
 
-    public void initCanvasDimension(int size, int value2, int size3) {
+    public void initCanvasDimension(int size, int width, int size3) {
         if (size3 == ResizeType.SOCIAL_STORY.ordinal()) {
-            this.mCanvas_height = value2;
-            this.mCanvas_width = AspectRatioCalculator.calculateWidth(value2);
+            this.mCanvas_height = width;
+            this.mCanvas_width = AspectRatioCalculator.calculateWidth(width);
         } else if (size3 == ResizeType.SQUARE.ordinal()) {
-            int min = Math.min(size, value2);
+            int min = Math.min(size, width);
             this.mCanvas_width = min;
             this.mCanvas_height = min;
         } else {
@@ -323,14 +323,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.btmY = ((height - bitmap.getHeight()) / 2.0f) - this.mDrawingTranslationY;
     }
 
-    public void updatePosCanvas(int size, int value2, Bitmap bitmap) {
+    public void updatePosCanvas(int size, int width, Bitmap bitmap) {
         if (bitmap == null) {
             return;
         }
         this.mDrawingTranslationX = (size - this.mCanvas_width) / 2.0f;
-        this.mDrawingTranslationY = (value2 - this.mCanvas_height) / 2.0f;
+        this.mDrawingTranslationY = (width - this.mCanvas_height) / 2.0f;
         this.btmX = ((size - bitmap.getWidth()) / 2.0f) - this.mDrawingTranslationX;
-        this.btmY = ((value2 - bitmap.getHeight()) / 2.0f) - this.mDrawingTranslationY;
+        this.btmY = ((width - bitmap.getHeight()) / 2.0f) - this.mDrawingTranslationY;
     }
 
     public float getProgress() {
@@ -569,7 +569,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         invalidate();
     }
 
-    public void applyAll(float floatValue, RectF rectF, int size, int value2) {
+    public void applyAll(float blurRadius, RectF rectF, int size, int ayaNumber) {
         EntityView entityView = this.entity_select;
         if (entityView == null) {
             return;
@@ -883,13 +883,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.bitmapSquare = bitmap;
     }
 
-    public void setBitmap(Bitmap bitmap, Bitmap bitmap2, int size, int value2, int size3, Rect rect) {
+    public void setBitmap(Bitmap bitmap, Bitmap bitmap2, int size, int width105, int size3, Rect rect) {
         this.bitmapBlured = bitmap;
         if (bitmap2 != null) {
             this.bitmapSquare = bitmap2;
         }
         this.rectSquare = rect;
-        this.mIpadType = value2;
+        this.mIpadType = width105;
         if (size != -1) {
             setColorIpad(size);
         } else if (bitmap2 != null) {
@@ -906,13 +906,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         createRect();
     }
 
-    public void updateBitmap(Bitmap bitmap, Bitmap bitmap2, int size, int value2, int size3, Rect rect) {
+    public void updateBitmap(Bitmap bitmap, Bitmap bitmap2, int size, int width109, int size3, Rect rect) {
         this.bitmapBlured = bitmap;
         if (bitmap2 != null) {
             this.bitmapSquare = bitmap2;
         }
         this.rectSquare = rect;
-        this.mIpadType = value2;
+        this.mIpadType = width109;
         if (size != -1) {
             setColorIpad(size);
         } else if (bitmap2 != null) {
@@ -928,7 +928,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    public void setBitmap(Bitmap bitmap, Bitmap bitmap2, Gradient gradient, int size, int value2, Rect rect) {
+    public void setBitmap(Bitmap bitmap, Bitmap bitmap2, Gradient gradient, int size, int width113, Rect rect) {
         this.bitmapBlured = bitmap;
         if (bitmap2 != null) {
             this.bitmapSquare = bitmap2;
@@ -936,7 +936,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.rectSquare = rect;
         this.mIpadType = size;
         setColorIpad(gradient);
-        this.mResizetype = value2;
+        this.mResizetype = width113;
         if (this.mIpadType == IpadType.BOTTOM_RECT.ordinal()) {
             this.paintText.setTextSize(Math.min(this.ipad_rect.width(), this.ipad_rect.height()) * 0.07f);
         } else if (this.mIpadType == IpadType.BORDER.ordinal()) {
@@ -947,7 +947,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         createRect();
     }
 
-    public void updateBitmap(Bitmap bitmap, Bitmap bitmap2, Gradient gradient, int size, int value2, Rect rect) {
+    public void updateBitmap(Bitmap bitmap, Bitmap bitmap2, Gradient gradient, int size, int width115, Rect rect) {
         this.bitmapBlured = bitmap;
         if (bitmap2 != null) {
             this.bitmapSquare = bitmap2;
@@ -955,7 +955,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.rectSquare = rect;
         this.mIpadType = size;
         setColorIpad(gradient);
-        this.mResizetype = value2;
+        this.mResizetype = width115;
         if (this.mIpadType == IpadType.BOTTOM_RECT.ordinal()) {
             this.paintText.setTextSize(Math.min(this.ipad_rect.width(), this.ipad_rect.height()) * 0.07f);
         } else if (this.mIpadType == IpadType.BORDER.ordinal()) {
@@ -965,17 +965,17 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    public void updateIpad(Bitmap bitmap, int size, int value2) {
-        this.mResizetype = value2;
+    public void updateIpad(Bitmap bitmap, int size, int width117) {
+        this.mResizetype = width117;
         this.bitmapNotBlur = bitmap;
         this.mIpadType = size;
         if (size == IpadType.IPAD_CLASSIC.ordinal()) {
             if (this.mResizetype == ResizeType.SOCIAL_STORY.ordinal()) {
                 float height = bitmap.getHeight() * 0.7601563f;
                 float height2 = this.btmY + ((bitmap.getHeight() - height) * 0.5f);
-                float floatValue = height * 0.56f;
-                float width = this.btmX + ((bitmap.getWidth() - floatValue) * 0.5f);
-                this.ipad_rect = new RectF(width, height2, floatValue + width, height + height2);
+                float blurRadius = height * 0.56f;
+                float width = this.btmX + ((bitmap.getWidth() - blurRadius) * 0.5f);
+                this.ipad_rect = new RectF(width, height2, blurRadius + width, height + height2);
             }
             if (this.mResizetype == ResizeType.SQUARE.ordinal()) {
                 float height3 = bitmap.getHeight() * 0.7601563f;
@@ -1114,9 +1114,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             if (this.mResizetype == ResizeType.SOCIAL_STORY.ordinal()) {
                 float height = this.bitmapBlured.getHeight() * 0.7601563f;
                 float height2 = (this.btmY + (this.bitmapBlured.getHeight() * 0.5f)) - (height * 0.5f);
-                float floatValue = height * 0.56f;
-                float width = this.btmX + ((this.bitmapBlured.getWidth() * 0.5f) - (floatValue * 0.5f));
-                this.ipad_rect = new RectF(width, height2, floatValue + width, height + height2);
+                float blurRadius = height * 0.56f;
+                float width = this.btmX + ((this.bitmapBlured.getWidth() * 0.5f) - (blurRadius * 0.5f));
+                this.ipad_rect = new RectF(width, height2, blurRadius + width, height + height2);
             }
             if (this.mResizetype == ResizeType.SQUARE.ordinal()) {
                 float height3 = this.bitmapBlured.getHeight() * 0.7601563f;
@@ -1274,16 +1274,16 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         updatePosSurahName();
         if (this.mIpadType == IpadType.IPAD_CLASSIC.ordinal()) {
             float height = this.ipad_rect.height() - this.bitmapSquare.getHeight();
-            float floatValue = height * 0.03f;
+            float blurRadius = height * 0.03f;
             float centerX = this.ipad_rect.centerX() - (this.bitmapSquare.getWidth() * 0.5f);
-            float height2 = this.ipad_rect.top + floatValue + this.bitmapSquare.getHeight();
+            float height2 = this.ipad_rect.top + blurRadius + this.bitmapSquare.getHeight();
             this.rectFSurahName = new RectF();
             float width = this.bitmapSquare.getWidth() + centerX;
-            float floatValue2 = height2 + (floatValue * 1.5f);
-            float floatValue3 = ((height * 0.2f) - floatValue) + floatValue2;
+            float floatValue2 = height2 + (blurRadius * 1.5f);
+            float floatValue3 = ((height * 0.2f) - blurRadius) + floatValue2;
             this.rectFSurahName.set(width - (this.ipad_rect.width() * 0.4f), floatValue2, width, floatValue3);
             this.rectFAya = new RectF();
-            float floatValue4 = ((height * 0.35f) - floatValue) + floatValue3;
+            float floatValue4 = ((height * 0.35f) - blurRadius) + floatValue3;
             this.rectFAya.set(centerX, floatValue3, this.bitmapSquare.getWidth() + centerX, floatValue4);
             this.rectFProgress = new RectF();
             float f5 = (height * 0.15f) + floatValue4;
@@ -1691,16 +1691,16 @@ public class BlurredImageView extends View implements View.OnTouchListener {
     public void createRectWithoutSurahName() {
         if (this.mIpadType == IpadType.IPAD_CLASSIC.ordinal()) {
             float height = this.ipad_rect.height() - this.bitmapSquare.getHeight();
-            float floatValue = height * 0.03f;
+            float blurRadius = height * 0.03f;
             float centerX = this.ipad_rect.centerX() - (this.bitmapSquare.getWidth() * 0.5f);
-            float height2 = this.ipad_rect.top + floatValue + this.bitmapSquare.getHeight();
+            float height2 = this.ipad_rect.top + blurRadius + this.bitmapSquare.getHeight();
             this.rectFSurahName = new RectF();
             float width = this.bitmapSquare.getWidth() + centerX;
-            float floatValue2 = height2 + (floatValue * 1.5f);
-            float floatValue3 = ((height * 0.2f) - floatValue) + floatValue2;
+            float floatValue2 = height2 + (blurRadius * 1.5f);
+            float floatValue3 = ((height * 0.2f) - blurRadius) + floatValue2;
             this.rectFSurahName.set(width - (this.ipad_rect.width() * 0.4f), floatValue2, width, floatValue3);
             this.rectFAya = new RectF();
-            float floatValue4 = ((height * 0.35f) - floatValue) + floatValue3;
+            float floatValue4 = ((height * 0.35f) - blurRadius) + floatValue3;
             this.rectFAya.set(centerX, floatValue3, this.bitmapSquare.getWidth() + centerX, floatValue4);
             this.rectFProgress = new RectF();
             float f5 = (height * 0.15f) + floatValue4;
@@ -2128,9 +2128,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.isAnimWatermk = false;
     }
 
-    public void animWatermark(float floatValue, float floatValue2, float floatValue3) {
+    public void animWatermark(float blurRadius, float floatValue2, float floatValue3) {
         this.isAnimWatermk = true;
-        this.wmAlpha = floatValue;
+        this.wmAlpha = blurRadius;
         this.wmScale = floatValue2;
         this.wmTranslateY = floatValue3;
         invalidate();
@@ -2141,7 +2141,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             return;
         }
         float width = r0.getWidth() * 0.057f;
-        float floatValue = 0.27f * width;
+        float blurRadius = 0.27f * width;
         this.paintWattermark.setTextSize(width);
         this.paintWattermark.setAntiAlias(true);
         this.paintWattermark.setColor(-1);
@@ -2150,7 +2150,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.paintWattermark.getTextBounds("NurMontage", 0, "NurMontage".length(), rect);
         float width2 = rect.width();
         float height = rect.height();
-        float floatValue2 = 3.5f * floatValue;
+        float floatValue2 = 3.5f * blurRadius;
         float width3 = (this.bitmapBlured.getWidth() - width2) - floatValue2;
         float height2 = canvas.getHeight() - floatValue2;
         canvas.drawText("NurMontage", width3, height2, this.paintWattermark);
@@ -2158,7 +2158,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (isFlag || this.isAnimWatermk) {
             return;
         }
-        this.mRectWattermark = new RectF(width3 - floatValue, (height2 - height) - floatValue, width3 + width2 + floatValue, height2 + floatValue);
+        this.mRectWattermark = new RectF(width3 - blurRadius, (height2 - height) - blurRadius, width3 + width2 + blurRadius, height2 + blurRadius);
         float floatValue3 = height * 0.9f * 0.5f;
         RectF rectF = new RectF(this.mRectWattermark.right - floatValue3, this.mRectWattermark.top - floatValue3, this.mRectWattermark.right + floatValue3, this.mRectWattermark.top + floatValue3);
         Drawable drawable = ContextCompat.getDrawable(getContext(), C2014R.drawable.ic_remove_wattermark);
@@ -2170,9 +2170,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.mRectWattermark.union(rectF);
     }
 
-    public float calculateTextSize(String textValue, Paint paint, int size, int value2) {
-        float floatValue = 0.0f;
-        if (textValue != null && !textValue.isEmpty() && size > 0 && value2 > 0) {
+    public float calculateTextSize(String textValue, Paint paint, int size, int counter) {
+        float blurRadius = 0.0f;
+        if (textValue != null && !textValue.isEmpty() && size > 0 && counter > 0) {
             paint.setTextSize(1.0f);
             Rect rect = new Rect();
             paint.getTextBounds(textValue, 0, textValue.length(), rect);
@@ -2180,19 +2180,19 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             rect.height();
             float floatValue2 = 1000.0f;
             for (int size3 = 0; size3 < 100; size3++) {
-                float floatValue3 = (floatValue + floatValue2) / 2.0f;
+                float floatValue3 = (blurRadius + floatValue2) / 2.0f;
                 paint.setTextSize(floatValue3);
                 paint.getTextBounds(textValue, 0, textValue.length(), rect);
                 float width = rect.width();
                 float height = rect.height();
-                if (width > size || height > value2) {
+                if (width > size || height > counter) {
                     floatValue2 = floatValue3;
                 } else {
-                    floatValue = floatValue3;
+                    blurRadius = floatValue3;
                 }
             }
         }
-        return floatValue;
+        return blurRadius;
     }
 
     /* JADX WARN: Removed duplicated region for block: B:38:0x0130 A[Catch: all -> 0x01a6, Exception -> 0x01a8, TryCatch #1 {Exception -> 0x01a8, blocks: (B:3:0x0003, B:14:0x0015, B:16:0x0030, B:18:0x0036, B:20:0x0040, B:22:0x004a, B:24:0x0054, B:27:0x0060, B:29:0x006a, B:31:0x006e, B:33:0x0072, B:35:0x0078, B:36:0x012c, B:38:0x0130, B:39:0x0138, B:41:0x0148, B:43:0x014c, B:45:0x0152, B:47:0x0158, B:49:0x015c, B:51:0x0162, B:53:0x016e, B:55:0x0176, B:57:0x0182, B:58:0x0135, B:59:0x0085, B:61:0x008f, B:63:0x0093, B:64:0x00a0, B:66:0x00aa, B:68:0x00b0, B:69:0x00c3, B:70:0x00c9, B:72:0x00d3, B:74:0x00dd, B:76:0x00e7, B:78:0x00f1, B:80:0x00fb, B:81:0x0107, B:82:0x0113, B:84:0x0117, B:86:0x011b, B:88:0x0121, B:89:0x0189, B:91:0x018f, B:93:0x0195, B:94:0x0198), top: B:2:0x0003, outer: #0 }] */
@@ -2305,22 +2305,22 @@ public class BlurredImageView extends View implements View.OnTouchListener {
     }
 
     private void drawProgress(Canvas canvas) {
-        float floatValue = this.rectFProgress.left + ((this.rectFProgress.right - this.rectFProgress.left) * this.progress);
+        float blurRadius = this.rectFProgress.left + ((this.rectFProgress.right - this.rectFProgress.left) * this.progress);
         this.linePaint.setColor(this.color_line_bg);
         canvas.drawLine(this.rectFProgress.left, this.rectFProgress.centerY(), this.rectFProgress.right, this.rectFProgress.centerY(), this.linePaint);
         this.linePaint.setColor(this.paintLecture.getColor());
-        canvas.drawLine(this.rectFProgress.left, this.rectFProgress.centerY(), floatValue, this.rectFProgress.centerY(), this.linePaint);
-        canvas.drawCircle(floatValue, this.rectFProgress.centerY(), this.radius_cursur, this.linePaint);
+        canvas.drawLine(this.rectFProgress.left, this.rectFProgress.centerY(), blurRadius, this.rectFProgress.centerY(), this.linePaint);
+        canvas.drawCircle(blurRadius, this.rectFProgress.centerY(), this.radius_cursur, this.linePaint);
         this.paintText.getTextBounds("0:60", 0, 4, new Rect());
         canvas.drawText(this.currentTime, this.rectFProgress.left, this.rectFProgress.bottom, this.paintText);
         canvas.drawText(this.remainingTime, this.rectFProgress.right - r0.width(), this.rectFProgress.bottom, this.paintText);
     }
 
-    public float AccelerateDecelerateInterpolator(float floatValue) {
-        return ((float) (Math.cos((floatValue + 1.0f) * 3.141592653589793d) / 2.0d)) + 0.5f;
+    public float AccelerateDecelerateInterpolator(float blurRadius) {
+        return ((float) (Math.cos((blurRadius + 1.0f) * 3.141592653589793d) / 2.0d)) + 0.5f;
     }
 
-    private void saveProgressBitmap(File file, float floatValue) {
+    private void saveProgressBitmap(File file, float blurRadius) {
         Bitmap createBitmap = Bitmap.createBitmap((int) this.rectFProgress.width(), (int) this.rectFProgress.height(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         float height = canvas.getHeight() * 0.5f;
@@ -2344,14 +2344,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         canvas.drawLine(0.0f, height, canvas.getWidth(), height, this.linePaint);
         this.linePaint.setColor(this.paintLecture.getColor());
         this.linePaint.setAntiAlias(true);
-        canvas.drawCircle(floatValue, height, floatValue, this.linePaint);
+        canvas.drawCircle(blurRadius, height, blurRadius, this.linePaint);
         saveBitmap(createBitmap, file, Common.LINE_PROGESS);
     }
 
-    private void saveProgressCassetBitmap(File file, int size, int value2, Drawable drawable) {
-        Bitmap createBitmap = Bitmap.createBitmap(size, value2, Bitmap.Config.ARGB_8888);
+    private void saveProgressCassetBitmap(File file, int size, int size145, Drawable drawable) {
+        Bitmap createBitmap = Bitmap.createBitmap(size, size145, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
-        drawable.setBounds(0, 0, size, value2);
+        drawable.setBounds(0, 0, size, size145);
         drawable.draw(canvas);
         saveBitmap(createBitmap, file, Common.LINE_BG);
     }
@@ -2365,15 +2365,15 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.txt_y = canvas.getHeight() * 0.76f;
         float height = canvas.getHeight() * 0.5f;
         float height2 = this.rectFProgress.height() * 0.18f;
-        float floatValue = 0.5f * height2;
-        this.linePaint.setStrokeWidth(floatValue);
+        float blurRadius = 0.5f * height2;
+        this.linePaint.setStrokeWidth(blurRadius);
         this.linePaint.setColor(this.paintLecture.getColor());
         float height3 = canvas.getHeight();
         float width = canvas.getWidth() * 0.024f;
         canvas.save();
         canvas.clipRect(width, 0.0f, canvas.getWidth(), canvas.getHeight());
-        float floatValue2 = height - floatValue;
-        float floatValue3 = height + floatValue;
+        float floatValue2 = height - blurRadius;
+        float floatValue3 = height + blurRadius;
         canvas.drawRoundRect(0.0f, floatValue2, canvas.getWidth(), floatValue3, height3, height3, this.linePaint);
         canvas.restore();
         saveBitmap(createBitmap, file, Common.LINE_BG);
@@ -2417,14 +2417,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         float centerX = this.rectFProgress.centerX();
         float height2 = canvas.getHeight() * 0.5f;
         float min = Math.min(width, height) / 2.0f;
-        float floatValue = height2 + (0.6f * min);
-        path.moveTo(centerX, floatValue);
+        float blurRadius = height2 + (0.6f * min);
+        path.moveTo(centerX, blurRadius);
         float floatValue2 = min * 1.2f;
         float floatValue3 = height2 + (0.1f * min);
         float floatValue4 = min * 0.8f;
         float f5 = height2 - (0.9f * min);
         path.cubicTo(centerX + floatValue2, floatValue3, centerX + floatValue4, f5, centerX, height2 - (0.4f * min));
-        path.cubicTo(centerX - floatValue4, f5, centerX - floatValue2, floatValue3, centerX, floatValue);
+        path.cubicTo(centerX - floatValue4, f5, centerX - floatValue2, floatValue3, centerX, blurRadius);
         path.close();
         RectF rectF = new RectF();
         path.computeBounds(rectF, true);
@@ -2464,13 +2464,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         float centerX = this.rectFProgress.centerX();
         float height2 = canvas.getHeight() * 0.5f;
         float min = Math.min(width, height);
-        float floatValue = 0.8f * min;
+        float blurRadius = 0.8f * min;
         float floatValue2 = 0.45f * min;
-        float floatValue3 = floatValue / 2.0f;
+        float floatValue3 = blurRadius / 2.0f;
         float floatValue4 = centerX - floatValue3;
         float f5 = floatValue2 / 2.0f;
         float f6 = floatValue3 + centerX;
-        float f7 = (0.07f * floatValue) + f6;
+        float f7 = (0.07f * blurRadius) + f6;
         float f8 = 0.25f * floatValue2;
         Path path = new Path();
         RectF rectF = new RectF(floatValue4, height2 - f5, f6, f5 + height2);
@@ -2478,7 +2478,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         path.addRoundRect(rectF, f9, f9, Path.Direction.CW);
         path.addRect(new RectF(f6, height2 - f8, f7, f8 + height2), Path.Direction.CW);
         Path path2 = new Path();
-        float f10 = floatValue * 0.3f;
+        float f10 = blurRadius * 0.3f;
         float f11 = 0.3f * f10;
         float f12 = floatValue2 * 0.5f * 0.5f;
         path2.moveTo(centerX - f11, height2 - f12);
@@ -2589,8 +2589,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    public void setProgress(float floatValue) {
-        this.progress = floatValue;
+    public void setProgress(float blurRadius) {
+        this.progress = blurRadius;
         postInvalidate();
     }
 
@@ -2601,8 +2601,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 quranEntity.draw(canvas);
             }
         }
-        for (int value2 = 0; value2 < this.translationEntities.size(); value2++) {
-            TranslationQuranEntity translationQuranEntity = this.translationEntities.get(value2);
+        for (int index = 0; index < this.translationEntities.size(); index++) {
+            TranslationQuranEntity translationQuranEntity = this.translationEntities.get(index);
             if (translationQuranEntity.isVisible() && translationQuranEntity.getEntityTrslTimeline().visible()) {
                 translationQuranEntity.draw(canvas);
             }
@@ -2621,27 +2621,27 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         return this.rectFProgress;
     }
 
-    private void slideInToLeft(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / value2);
+    private void slideInToLeft(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / counter);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, Math.round(255.0f * AccelerateDecelerateInterpolator), 1.0f - AccelerateDecelerateInterpolator);
             saveBitmap(bitmap, file, "quran_in_" + size + "_" + size3 + ".png");
         }
     }
 
-    private void slideInToRight(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / value2);
+    private void slideInToRight(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / counter);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, Math.round(255.0f * AccelerateDecelerateInterpolator), (-1.0f) + AccelerateDecelerateInterpolator);
             saveBitmap(bitmap, file, "quran_in_" + size + "_" + size3 + ".png");
         }
     }
 
-    private void slideOutToRight(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / value2);
+    private void slideOutToRight(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / counter);
             int round = Math.round((1.0f - AccelerateDecelerateInterpolator) * 255.0f);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, round, AccelerateDecelerateInterpolator);
@@ -2649,37 +2649,37 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    private void slideOutToLeft(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / value2);
+    private void slideOutToLeft(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            float AccelerateDecelerateInterpolator = AccelerateDecelerateInterpolator(size3 / counter);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, Math.round((1.0f - AccelerateDecelerateInterpolator) * 255.0f), AccelerateDecelerateInterpolator * (-1.0f));
             saveBitmap(bitmap, file, "quran_out_" + size + "_" + size3 + ".png");
         }
     }
 
-    private void fadeIn(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            int round = Math.round(AccelerateDecelerateInterpolator(size3 / value2) * 255.0f);
+    private void fadeIn(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            int round = Math.round(AccelerateDecelerateInterpolator(size3 / counter) * 255.0f);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, round);
             saveBitmap(bitmap, file, "quran_in_" + size + "_" + size3 + ".png");
         }
     }
 
-    private void fadeOut(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int value2) {
-        for (int size3 = 1; size3 < value2; size3++) {
-            int round = Math.round(AccelerateDecelerateInterpolator(1.0f - (size3 / value2)) * 255.0f);
+    private void fadeOut(Canvas canvas, Bitmap bitmap, QuranEntity quranEntity, File file, int size, int counter) {
+        for (int size3 = 1; size3 < counter; size3++) {
+            int round = Math.round(AccelerateDecelerateInterpolator(1.0f - (size3 / counter)) * 255.0f);
             bitmap.eraseColor(0);
             quranEntity.singleDraw(canvas, round);
             saveBitmap(bitmap, file, "quran_out_" + size + "_" + size3 + ".png");
         }
     }
 
-    private void drawEntityBitmap(File file, int size, int value2) {
-        updateSizeAyaSave(size, value2);
-        updateSizeTrslSave(size, value2);
-        updateBismilahEntity(size, value2);
+    private void drawEntityBitmap(File file, int size, int index) {
+        updateSizeAyaSave(size, index);
+        updateSizeTrslSave(size, index);
+        updateBismilahEntity(size, index);
         int size3 = 0;
         for (int size4 = 0; size4 < this.quranEntities.size(); size4++) {
             QuranEntity quranEntity = this.quranEntities.get(size4);
@@ -2687,9 +2687,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 quranEntity.getPaintAya().setAlpha(255);
                 quranEntity.getPaintTranslationAya().setAlpha(255);
                 Transition transition = quranEntity.getEntityQuran().getTransition();
-                float floatValue = value2;
+                float blurRadius = index;
                 float floatValue2 = size;
-                Bitmap createBitmap = Bitmap.createBitmap((int) ((quranEntity.getCopyRect().right * floatValue2) - (quranEntity.getCopyRect().left * floatValue2)), (int) ((quranEntity.getCopyRect().bottom * floatValue) - (quranEntity.getCopyRect().top * floatValue)), Bitmap.Config.ARGB_8888);
+                Bitmap createBitmap = Bitmap.createBitmap((int) ((quranEntity.getCopyRect().right * floatValue2) - (quranEntity.getCopyRect().left * floatValue2)), (int) ((quranEntity.getCopyRect().bottom * blurRadius) - (quranEntity.getCopyRect().top * blurRadius)), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(createBitmap);
                 quranEntity.setupCanvasDraw(canvas);
                 quranEntity.singleDraw(canvas);
@@ -2708,7 +2708,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             if (translationQuranEntity.getEntityTrslTimeline().visible()) {
                 translationQuranEntity.getPaintAya().setAlpha(255);
                 Transition transition2 = translationQuranEntity.getEntityTrslTimeline().getTransition();
-                float floatValue3 = value2;
+                float floatValue3 = index;
                 Bitmap createBitmap2 = Bitmap.createBitmap(size, (int) ((translationQuranEntity.getCopyRect().bottom * floatValue3) - (translationQuranEntity.getCopyRect().top * floatValue3)), Bitmap.Config.ARGB_8888);
                 Canvas canvas2 = new Canvas(createBitmap2);
                 translationQuranEntity.setupCanvasDraw(canvas2);
@@ -2726,7 +2726,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (bismilahEntity != null && bismilahEntity.getBismilahTimeline().visible()) {
             this.bismilahEntity.getPaintAya().setAlpha(255);
             Transition transition3 = this.bismilahEntity.getBismilahTimeline().getTransition();
-            float floatValue4 = value2;
+            float floatValue4 = index;
             float f5 = size;
             Bitmap createBitmap3 = Bitmap.createBitmap((int) ((this.bismilahEntity.getCopyRect().right * f5) - (this.bismilahEntity.getCopyRect().left * f5)), (int) ((this.bismilahEntity.getCopyRect().bottom * floatValue4) - (this.bismilahEntity.getCopyRect().top * floatValue4)), Bitmap.Config.ARGB_8888);
             Canvas canvas3 = new Canvas(createBitmap3);
@@ -2744,7 +2744,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
         this.mIsti3adhaEntity.getPaintAya().setAlpha(255);
         Transition transition4 = this.mIsti3adhaEntity.getBismilahTimeline().getTransition();
-        float f6 = value2;
+        float f6 = index;
         float f7 = size;
         Bitmap createBitmap4 = Bitmap.createBitmap((int) ((this.mIsti3adhaEntity.getCopyRect().right * f7) - (this.mIsti3adhaEntity.getCopyRect().left * f7)), (int) ((this.mIsti3adhaEntity.getCopyRect().bottom * f6) - (this.mIsti3adhaEntity.getCopyRect().top * f6)), Bitmap.Config.ARGB_8888);
         Canvas canvas4 = new Canvas(createBitmap4);
@@ -2761,14 +2761,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         return this.rectFSurahName;
     }
 
-    public void drawRectWithShadow(Canvas canvas, RectF rectF, int size, int value2, int size3, int size4, boolean isFlag) {
-        int value5;
+    public void drawRectWithShadow(Canvas canvas, RectF rectF, int size, int surahNumber, int size3, int size4, boolean isFlag) {
+        int surahNumber177;
         if (isGlass()) {
             float min = Math.min(rectF.width(), rectF.height()) * 0.14f;
             Paint paint = new Paint();
             paint.setAntiAlias(true);
             paint.setColor(size);
-            paint.setMaskFilter(new BlurMaskFilter(value2, BlurMaskFilter.Blur.OUTER));
+            paint.setMaskFilter(new BlurMaskFilter(surahNumber, BlurMaskFilter.Blur.OUTER));
             paint.setAlpha(80);
             Path path = new Path();
             Path.Direction direction = Path.Direction.CW;
@@ -2781,13 +2781,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             canvas.drawPath(path, paint);
             Gradient gradient = this.color_gradient;
             if (gradient != null) {
-                value5 = gradient.getColor();
-                int argb = Color.argb(70, Color.red(value5), Color.green(value5), Color.blue(value5));
+                surahNumber177 = gradient.getColor();
+                int argb = Color.argb(70, Color.red(surahNumber177), Color.green(surahNumber177), Color.blue(surahNumber177));
                 this.paintIpad.setShader(CreateGradient.createLinearGradientWithAngle(this.ipad_rect, this.color_gradient.getAngle(), new int[]{this.color_gradient.getColor(), this.color_gradient.getSecond(), this.color_gradient.getThree()}, new float[]{0.0f, 0.7f, 1.0f}));
                 this.paintIpad.setColor(argb);
             } else {
-                value5 = this.color_ipad;
-                this.paintIpad.setColor(Color.argb(60, Color.red(value5), Color.green(this.color_ipad), Color.blue(this.color_ipad)));
+                surahNumber177 = this.color_ipad;
+                this.paintIpad.setColor(Color.argb(60, Color.red(surahNumber177), Color.green(this.color_ipad), Color.blue(this.color_ipad)));
             }
             this.paintIpad.setStyle(Paint.Style.FILL);
             Paint paint2 = this.paintIpad;
@@ -2798,7 +2798,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             }
             this.paintIpad.setStyle(Paint.Style.STROKE);
             this.paintIpad.setStrokeWidth(rectF.height() * 0.003f);
-            this.paintIpad.setColor(Color.argb(120, Math.min(255, Color.red(value5) + 40), Math.min(255, Color.green(value5) + 40), Math.min(255, Color.blue(value5) + 40)));
+            this.paintIpad.setColor(Color.argb(120, Math.min(255, Color.red(surahNumber177) + 40), Math.min(255, Color.green(surahNumber177) + 40), Math.min(255, Color.blue(surahNumber177) + 40)));
             Paint paint3 = this.paintIpad;
             if (isFlag) {
                 canvas.drawRoundRect(rectF, min, min, paint3);
@@ -2821,7 +2821,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         Paint paint5 = new Paint();
         paint5.setAntiAlias(true);
         paint5.setColor(size);
-        paint5.setMaskFilter(new BlurMaskFilter(value2, BlurMaskFilter.Blur.OUTER));
+        paint5.setMaskFilter(new BlurMaskFilter(surahNumber, BlurMaskFilter.Blur.OUTER));
         paint5.setAlpha(80);
         if (isFlag) {
             float min2 = Math.min(rectF.width(), rectF.height()) * 0.14f;
@@ -2941,7 +2941,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    private void drawNeumorphicRect(Canvas canvas, float floatValue, boolean isFlag) {
+    private void drawNeumorphicRect(Canvas canvas, float blurRadius, boolean isFlag) {
         int size;
         int lightenColor;
         int darkenColor;
@@ -2978,9 +2978,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.darkShadowPaint.setStyle(Paint.Style.FILL);
         this.darkShadowPaint.setShadowLayer(5.0f, 5.0f, 5.0f, darkenColor);
         this.backgroundPaint.setShader(new LinearGradient(this.ipad_rect.left, this.ipad_rect.top, this.ipad_rect.right, this.ipad_rect.bottom, Color.argb(255, (int) (Color.red(size) * 1.1f), (int) (Color.green(size) * 1.1f), (int) (Color.blue(size) * 1.1f)), Color.argb(255, (int) (Color.red(size) * 0.9f), (int) (Color.green(size) * 0.9f), (int) (Color.blue(size) * 0.9f)), Shader.TileMode.CLAMP));
-        canvas.drawRoundRect(this.ipad_rect, floatValue, floatValue, this.lightShadowPaint);
-        canvas.drawRoundRect(this.ipad_rect, floatValue, floatValue, this.darkShadowPaint);
-        canvas.drawRoundRect(this.ipad_rect, floatValue, floatValue, this.backgroundPaint);
+        canvas.drawRoundRect(this.ipad_rect, blurRadius, blurRadius, this.lightShadowPaint);
+        canvas.drawRoundRect(this.ipad_rect, blurRadius, blurRadius, this.darkShadowPaint);
+        canvas.drawRoundRect(this.ipad_rect, blurRadius, blurRadius, this.backgroundPaint);
         float centerX = this.ipad_rect.centerX();
         float width = this.ipad_rect.width() * 0.32f;
         float floatValue2 = this.ipad_rect.top + (1.35f * width);
@@ -2997,14 +2997,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
 
     private void drawCaset(Canvas canvas, boolean isFlag, File file) {
         Shader shader;
-        float floatValue;
+        float blurRadius;
         float floatValue2;
         int size = this.scheme.screen1;
-        int value2 = this.scheme.screen2;
+        int width192 = this.scheme.screen2;
         int size3 = this.scheme.body;
         int size4 = this.scheme.shadow;
-        int value5 = this.scheme.label;
-        int value6 = this.scheme.accent;
+        int width192 = this.scheme.label;
+        int width192 = this.scheme.accent;
         Shader shader2 = this.paintIpad.getShader();
         this.paintIpad.setShader(null);
         int width = this.bitmapBlured.getWidth();
@@ -3019,7 +3019,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         path.lineTo(0.0f, floatValue4);
         path.lineTo(0.0f, this.ipad_rect.bottom * 1.065f);
         path.close();
-        this.paintIpad.setColor(value2);
+        this.paintIpad.setColor(width192);
         canvas.drawPath(path, this.paintIpad);
         float height2 = this.ipad_rect.height() * 0.07f;
         RectF rectF = new RectF(this.ipad_rect.left - (this.ipad_rect.height() * 0.1f), this.ipad_rect.top, this.ipad_rect.right * 1.01f, this.ipad_rect.bottom);
@@ -3036,7 +3036,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         path2.lineTo(this.ipad_rect.centerX() + f5, this.ipad_rect.top + height3);
         path2.lineTo(this.ipad_rect.centerX() - f5, this.ipad_rect.top + height3);
         path2.close();
-        this.paintIpad.setColor(value6);
+        this.paintIpad.setColor(width192);
         canvas.drawPath(path2, this.paintIpad);
         Path path3 = new Path();
         path3.moveTo(this.ipad_rect.centerX() - width2, this.ipad_rect.bottom);
@@ -3049,7 +3049,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         float height4 = this.ipad_rect.height() * 0.2f;
         float f6 = this.ipad_rect.top + height4;
         RectF rectF2 = new RectF(this.ipad_rect.centerX() - width3, f6, this.ipad_rect.centerX() + width3, height4 + f6);
-        this.paintIpad.setColor(value5);
+        this.paintIpad.setColor(width192);
         canvas.drawRect(rectF2, this.paintIpad);
         RectF rectF3 = new RectF(this.ipad_rect.centerX() - width3, rectF2.bottom * 1.01f, this.ipad_rect.centerX() + width3, this.ipad_rect.bottom - (1.2f * height3));
         canvas.drawRect(rectF3, this.paintIpad);
@@ -3062,7 +3062,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         canvas.drawCircle(centerX, centerY, height5, this.paintIpad);
         canvas.drawCircle(centerX2, centerY, height5, this.paintIpad);
         Drawable drawable = ContextCompat.getDrawable(getContext(), C2014R.drawable.ic_circle_caset);
-        drawable.setTint(value2);
+        drawable.setTint(width192);
         int round = Math.round(centerX);
         int i7 = (int) centerY;
         int i8 = (int) (height5 * 0.75f);
@@ -3074,32 +3074,32 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 this.startTime = System.currentTimeMillis();
             }
             shader = shader2;
-            floatValue = height3;
+            blurRadius = height3;
             float currentTimeMillis = (float) (((System.currentTimeMillis() - this.startTime) / 1000.0f) * 90.0d);
             canvas.save();
-            float f8 = i7;
-            canvas.rotate(currentTimeMillis, round, f8);
+            float xPosition = i7;
+            canvas.rotate(currentTimeMillis, round, xPosition);
             drawable.setBounds(rect.left, rect.top, rect.right, rect.bottom);
             drawable.draw(canvas);
             canvas.restore();
             int i11 = (int) centerX2;
             canvas.save();
-            canvas.rotate(-currentTimeMillis, i11, f8);
+            canvas.rotate(-currentTimeMillis, i11, xPosition);
             drawable.setBounds(i11 - i8, i9, i11 + i8, i10);
             drawable.draw(canvas);
             canvas.restore();
             floatValue2 = 0.5f;
         } else {
             shader = shader2;
-            floatValue = height3;
+            blurRadius = height3;
             floatValue2 = 0.5f;
             this.rectFProgress.left = centerX - (rect.width() * 0.5f);
             this.rectFProgress.top = rect.top;
             this.rectFProgress.right = centerX2 - (rect.width() * 0.5f);
             saveProgressCassetBitmap(file, rect.width(), rect.height(), drawable);
         }
-        float f9 = floatValue * 0.25f;
-        float f10 = floatValue * floatValue2;
+        float f9 = blurRadius * 0.25f;
+        float f10 = blurRadius * floatValue2;
         int i12 = (int) (this.ipad_rect.top + f10);
         float f11 = this.ipad_rect.bottom - f10;
         float f12 = centerX * 1.02f;
@@ -3113,23 +3113,23 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.paintIpad.setShader(shader);
     }
 
-    private void drawCasetNoBg(Canvas canvas, boolean isFlag, File file, boolean z2) {
-        float floatValue;
-        if (z2) {
+    private void drawCasetNoBg(Canvas canvas, boolean isFlag, File file, boolean isPremium) {
+        float blurRadius;
+        if (isPremium) {
             canvas.drawBitmap(this.bitmapSquare, 0.0f, 0.0f, (Paint) null);
         }
         int size = this.scheme.screen2;
-        int value2 = this.scheme.body;
+        int width195 = this.scheme.body;
         int size3 = this.scheme.shadow;
         int size4 = this.scheme.label;
-        int value5 = this.scheme.accent;
+        int width195 = this.scheme.accent;
         Shader shader = this.paintIpad.getShader();
         this.paintIpad.setShader(null);
         float height = this.ipad_rect.height() * 0.07f;
         RectF rectF = new RectF(this.ipad_rect.left - (this.ipad_rect.height() * 0.1f), this.ipad_rect.top, this.ipad_rect.right * 1.01f, this.ipad_rect.bottom);
         this.paintIpad.setColor(size3);
         canvas.drawRoundRect(rectF, height, height, this.paintIpad);
-        this.paintIpad.setColor(value2);
+        this.paintIpad.setColor(width195);
         canvas.drawRoundRect(this.ipad_rect, height, height, this.paintIpad);
         Path path = new Path();
         float width = this.ipad_rect.width() * 0.24f;
@@ -3140,7 +3140,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         path.lineTo(this.ipad_rect.centerX() + floatValue2, this.ipad_rect.top + height2);
         path.lineTo(this.ipad_rect.centerX() - floatValue2, this.ipad_rect.top + height2);
         path.close();
-        this.paintIpad.setColor(value5);
+        this.paintIpad.setColor(width195);
         canvas.drawPath(path, this.paintIpad);
         Path path2 = new Path();
         path2.moveTo(this.ipad_rect.centerX() - width, this.ipad_rect.bottom);
@@ -3162,7 +3162,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         float floatValue4 = 2.0f * height4;
         float centerX = rectF3.centerX() - floatValue4;
         float centerX2 = rectF3.centerX() + floatValue4;
-        this.paintIpad.setColor(ColorUtils.darkenColor(value2, 0.8f));
+        this.paintIpad.setColor(ColorUtils.darkenColor(width195, 0.8f));
         canvas.drawCircle(centerX, centerY, height4, this.paintIpad);
         canvas.drawCircle(centerX2, centerY, height4, this.paintIpad);
         Drawable drawable = ContextCompat.getDrawable(getContext(), C2014R.drawable.ic_circle_caset);
@@ -3179,27 +3179,27 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             }
             float currentTimeMillis = (float) (((System.currentTimeMillis() - this.startTime) / 1000.0f) * 90.0d);
             canvas.save();
-            float f5 = value6;
-            canvas.rotate(currentTimeMillis, round, f5);
+            float xPosition = value6;
+            canvas.rotate(currentTimeMillis, round, xPosition);
             drawable.setBounds(rect.left, rect.top, rect.right, rect.bottom);
             drawable.draw(canvas);
             canvas.restore();
             int i10 = (int) centerX2;
             canvas.save();
-            canvas.rotate(-currentTimeMillis, i10, f5);
+            canvas.rotate(-currentTimeMillis, i10, xPosition);
             drawable.setBounds(i10 - i7, i8, i10 + i7, i9);
             drawable.draw(canvas);
             canvas.restore();
-            floatValue = 0.5f;
+            blurRadius = 0.5f;
         } else {
-            floatValue = 0.5f;
+            blurRadius = 0.5f;
             this.rectFProgress.left = centerX - (rect.width() * 0.5f);
             this.rectFProgress.top = rect.top;
             this.rectFProgress.right = centerX2 - (rect.width() * 0.5f);
             saveProgressCassetBitmap(file, rect.width(), rect.height(), drawable);
         }
         float f6 = 0.25f * height2;
-        float f7 = height2 * floatValue;
+        float f7 = height2 * blurRadius;
         int i11 = (int) (this.ipad_rect.top + f7);
         float f8 = this.ipad_rect.bottom - f7;
         float f9 = centerX * 1.02f;
@@ -3209,27 +3209,27 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         canvas.drawCircle(f9, f11, f6, this.paintIpad);
         canvas.drawCircle(f10, f11, f6, this.paintIpad);
         canvas.drawCircle(f9, f8, f6, this.paintIpad);
-        canvas.drawCircle(f10, f8, f6, this.paintIpad);
+        canvas.drawCircle(f10, f8, fontSize199, this.paintIpad);
         this.paintIpad.setShader(shader);
     }
 
-    private void drawInnerGear(Canvas canvas, float floatValue, float floatValue2, float floatValue3, float floatValue4, int size, Paint paint) {
-        float f5;
-        float f6;
+    private void drawInnerGear(Canvas canvas, float blurRadius, float floatValue2, float floatValue3, float floatValue4, int size, Paint paint) {
+        float fontSize;
+        float fontSize199;
         Path path = new Path();
-        int value2 = size * 2;
-        double d = 6.283185307179586d / value2;
-        for (int size3 = 0; size3 < value2; size3++) {
+        int counter = size * 2;
+        double d = 6.283185307179586d / counter;
+        for (int size3 = 0; size3 < counter; size3++) {
             double d2 = size3 * d;
             if (size3 % 2 == 0) {
-                f5 = floatValue;
-                f6 = floatValue3;
+                fontSize = blurRadius;
+                fontSize199 = floatValue3;
             } else {
-                f5 = floatValue;
-                f6 = floatValue4;
+                fontSize = blurRadius;
+                fontSize199 = floatValue4;
             }
-            double d3 = f6;
-            float cos = (float) (f5 + (Math.cos(d2) * d3));
+            double d3 = fontSize199;
+            float cos = (float) (fontSize + (Math.cos(d2) * d3));
             float sin = (float) (floatValue2 + (d3 * Math.sin(d2)));
             if (size3 == 0) {
                 path.moveTo(cos, sin);
@@ -3370,10 +3370,10 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    private void drawIpad(Canvas canvas, boolean isFlag, boolean z2) {
+    private void drawIpad(Canvas canvas, boolean isFlag, boolean isPremium) {
         if (this.mIpadType == IpadType.IPAD_CLASSIC.ordinal()) {
             canvas.drawRect(this.ipad_rect, this.paintIpad);
-            if (z2) {
+            if (isPremium) {
                 this.left_square = this.ipad_rect.centerX() - (this.bitmapSquare.getWidth() * 0.5f);
                 this.top_square = this.ipad_rect.top + (this.bitmapBlured.getHeight() * 0.02f);
             } else {
@@ -3385,7 +3385,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             }
         }
         if (this.mIpadType == IpadType.IPAD_NEOMORPHIC.ordinal()) {
-            drawNeumorphicRect(canvas, this.ipad_rect.width() * 0.12f, z2);
+            drawNeumorphicRect(canvas, this.ipad_rect.width() * 0.12f, isPremium);
             drawLectureNeumorphic(canvas);
             if (isFlag) {
                 drawProgressNeumorphic(canvas);
@@ -3400,7 +3400,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (this.mIpadType == IpadType.IPAD.ordinal() || this.mIpadType == IpadType.IPAD_UNBLUR.ordinal()) {
             int min = (int) (Math.min(this.ipad_rect.width(), this.ipad_rect.height()) * 0.03f);
             drawRectWithShadow(canvas, this.ipad_rect, ViewCompat.MEASURED_STATE_MASK, min <= 0 ? 1 : min, 0, 0, true);
-            if (z2) {
+            if (isPremium) {
                 this.left_square = this.ipad_rect.centerX() - (this.bitmapSquare.getWidth() * 0.5f);
                 this.top_square = this.ipad_rect.top + (this.bitmapBlured.getHeight() * 0.02f);
             } else {
@@ -3413,7 +3413,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
         if (this.mIpadType == IpadType.BOTTOM_RECT.ordinal()) {
             drawRectBottom(canvas, this.ipad_rect);
-            if (z2) {
+            if (isPremium) {
                 drawBitmapWithShadowTypeBottomSave(canvas);
             } else {
                 drawBitmapWithShadowTypeBottom(canvas);
@@ -3440,13 +3440,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             }
         }
         if (this.mIpadType == IpadType.BLACK_LAYER.ordinal()) {
-            drawBlackLayer(canvas, isFlag, z2);
+            drawBlackLayer(canvas, isFlag, isPremium);
         }
         if (this.mIpadType == IpadType.HEART.ordinal()) {
-            drawHeartType(canvas, isFlag, z2);
+            drawHeartType(canvas, isFlag, isPremium);
         }
         if (this.mIpadType == IpadType.BATTERY.ordinal()) {
-            drawBatteryType(canvas, isFlag, z2);
+            drawBatteryType(canvas, isFlag, isPremium);
         }
         if (this.mIpadType == IpadType.BLUE_TYPE.ordinal()) {
             drawBlueType(canvas, isFlag, isVideo());
@@ -3507,7 +3507,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         this.paintIpad.setShader(null);
     }
 
-    private void drawHeartType(Canvas canvas, boolean isFlag, boolean z2) {
+    private void drawHeartType(Canvas canvas, boolean isFlag, boolean isPremium) {
         if (isFlag) {
             float strokeWidth = this.linePaint.getStrokeWidth();
             Path path = new Path();
@@ -3516,14 +3516,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             float centerX = this.rectFProgress.centerX();
             float centerY = this.rectFProgress.centerY();
             float min = Math.min(width, height) / 2.0f;
-            float floatValue = (0.6f * min) + centerY;
-            path.moveTo(centerX, floatValue);
+            float blurRadius = (0.6f * min) + centerY;
+            path.moveTo(centerX, blurRadius);
             float floatValue2 = 1.2f * min;
             float floatValue3 = (0.1f * min) + centerY;
             float floatValue4 = min * 0.8f;
             float f5 = centerY - (0.9f * min);
             path.cubicTo(centerX + floatValue2, floatValue3, centerX + floatValue4, f5, centerX, centerY - (0.4f * min));
-            path.cubicTo(centerX - floatValue4, f5, centerX - floatValue2, floatValue3, centerX, floatValue);
+            path.cubicTo(centerX - floatValue4, f5, centerX - floatValue2, floatValue3, centerX, blurRadius);
             path.close();
             RectF rectF = new RectF();
             path.computeBounds(rectF, true);
@@ -3540,7 +3540,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    private void drawBatteryType(Canvas canvas, boolean isFlag, boolean z2) {
+    private void drawBatteryType(Canvas canvas, boolean isFlag, boolean isPremium) {
         if (isFlag) {
             float strokeWidth = this.linePaint.getStrokeWidth();
             float width = this.rectFProgress.width();
@@ -3548,15 +3548,15 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             float centerX = this.rectFProgress.centerX();
             float centerY = this.rectFProgress.centerY();
             float min = Math.min(width, height);
-            float floatValue = 0.8f * min;
+            float blurRadius = 0.8f * min;
             float floatValue2 = 0.45f * min;
-            float floatValue3 = floatValue / 2.0f;
+            float floatValue3 = blurRadius / 2.0f;
             float floatValue4 = centerX - floatValue3;
             float f5 = floatValue2 / 2.0f;
             float f6 = centerY - f5;
             float f7 = floatValue3 + centerX;
             float f8 = f5 + centerY;
-            float f9 = (0.07f * floatValue) + f7;
+            float f9 = (0.07f * blurRadius) + f7;
             float f10 = 0.25f * floatValue2;
             Path path = new Path();
             RectF rectF = new RectF(floatValue4, f6, f7, f8);
@@ -3564,7 +3564,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             path.addRoundRect(rectF, f11, f11, Path.Direction.CW);
             path.addRect(new RectF(f7, centerY - f10, f9, f10 + centerY), Path.Direction.CW);
             Path path2 = new Path();
-            float f12 = floatValue * 0.3f;
+            float f12 = blurRadius * 0.3f;
             float f13 = 0.3f * f12;
             float f14 = floatValue2 * 0.5f * 0.5f;
             path2.moveTo(centerX - f13, centerY - f14);
@@ -3592,17 +3592,17 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    private void drawBlueType(Canvas canvas, boolean isFlag, boolean z2) {
+    private void drawBlueType(Canvas canvas, boolean isFlag, boolean isPremium) {
         this.paintIpad.setColor(ViewCompat.MEASURED_STATE_MASK);
-        if (z2 && isFlag) {
+        if (isPremium && isFlag) {
             canvas.drawBitmap(this.bitmapSquare, 0.0f, 0.0f, this.grayscalePaint);
         }
         float min = Math.min(this.ipad_rect.width(), this.ipad_rect.height()) * 1.3f;
         this.paintIpad.setAlpha(PsExtractor.VIDEO_STREAM_MASK);
-        float floatValue = (-0.15f) * min;
-        this.paintIpad.setShader(new RadialGradient(this.ipad_rect.centerX(), floatValue, min, new int[]{ViewCompat.MEASURED_STATE_MASK, -872415232, Integer.MIN_VALUE, 0}, new float[]{0.2f, 0.5f, 0.7f, 1.0f}, Shader.TileMode.CLAMP));
+        float blurRadius = (-0.15f) * min;
+        this.paintIpad.setShader(new RadialGradient(this.ipad_rect.centerX(), blurRadius, min, new int[]{ViewCompat.MEASURED_STATE_MASK, -872415232, Integer.MIN_VALUE, 0}, new float[]{0.2f, 0.5f, 0.7f, 1.0f}, Shader.TileMode.CLAMP));
         if (isFlag) {
-            canvas.drawCircle(this.ipad_rect.centerX(), floatValue, min, this.paintIpad);
+            canvas.drawCircle(this.ipad_rect.centerX(), blurRadius, min, this.paintIpad);
             this.paintIpad.setShader(null);
             this.paintIpad.setAlpha(190);
             float strokeWidth = this.linePaint.getStrokeWidth();
@@ -3618,14 +3618,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             return;
         }
         canvas.drawBitmap(this.bitmapNotBlur, 0.0f, 0.0f, this.grayscalePaint);
-        canvas.drawCircle(this.ipad_rect.centerX(), floatValue, min, this.paintIpad);
+        canvas.drawCircle(this.ipad_rect.centerX(), blurRadius, min, this.paintIpad);
         this.paintIpad.setShader(null);
         this.paintIpad.setAlpha(190);
     }
 
-    private void drawBlackLayer(Canvas canvas, boolean isFlag, boolean z2) {
+    private void drawBlackLayer(Canvas canvas, boolean isFlag, boolean isEmpty) {
         this.paintIpad.setAlpha(204);
-        if (z2) {
+        if (isEmpty) {
             canvas.drawBitmap(this.bitmapSquare, 0.0f, 0.0f, (Paint) null);
         }
         canvas.drawRect(this.ipad_rect, this.paintIpad);
@@ -3666,17 +3666,17 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         return Layout.Alignment.ALIGN_OPPOSITE;
     }
 
-    public void setSurahNameEntity(String textValue, String textValue2, RectF rectF, float floatValue, String name3, int size, int value2, int size3, int size4, boolean isFlag, int value5) {
+    public void setSurahNameEntity(String textValue, String textValue2, RectF rectF, float blurRadius, String name3, int size, int surahNumber, int size3, int size4, boolean isFlag, int surahNumber242) {
         Layout.Alignment alignment;
-        int value6;
+        int surahNumber242;
         float width;
         float width2;
         float width3;
         float width4;
-        String str4 = textValue2 == null ? " " : textValue2;
+        String surahName = textValue2 == null ? " " : textValue2;
         if (this.mIpadType == IpadType.IPAD_NEOMORPHIC.ordinal() || this.mIpadType == IpadType.CASSET.ordinal() || this.mIpadType == IpadType.CASSET_IMG.ordinal() || this.mIpadType == IpadType.CASSET_IMG_BLUR.ordinal()) {
             alignment = Layout.Alignment.ALIGN_CENTER;
-        } else if (!Utils.isProbablyLArabic(str4)) {
+        } else if (!Utils.isProbablyLArabic(surahName)) {
             alignment = Layout.Alignment.ALIGN_NORMAL;
             if (size3 != SurahNameStyle.ZAGHRAFAT.ordinal()) {
                 if (this.mIpadType == IpadType.IPAD.ordinal() || this.mIpadType == IpadType.IPAD_UNBLUR.ordinal() || this.mIpadType == IpadType.IPAD_CLASSIC.ordinal()) {
@@ -3751,14 +3751,14 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 if (getmIpadType() == IpadType.CASSET.ordinal() || getmIpadType() == IpadType.CASSET_IMG.ordinal() || this.mIpadType == IpadType.CASSET_IMG_BLUR.ordinal()) {
                     color = ColorUtils.isColorDark(this.scheme.body) ? -1 : ViewCompat.MEASURED_STATE_MASK;
                 }
-                value6 = color;
+                surahNumber242 = color;
             } else {
-                value6 = size;
+                surahNumber242 = size;
             }
             if (rectF != null) {
                 this.rectFSurahName = rectF;
             }
-            SurahNameEntity surahNameEntity2 = new SurahNameEntity(alignment2, textValue, str4, this.rectFSurahName, loadFontFromAsset, value6, floatValue, name3, value2, loadFontFromAsset2, size3, size4, this.mIpadType, isFlag, value5);
+            SurahNameEntity surahNameEntity2 = new SurahNameEntity(alignment2, textValue, surahName, this.rectFSurahName, loadFontFromAsset, surahNumber242, blurRadius, name3, surahNumber, loadFontFromAsset2, size3, size4, this.mIpadType, isFlag, surahNumber242);
             this.surahNameEntity = surahNameEntity2;
             surahNameEntity2.setCanvasWH(getmCanvas_width(), getmCanvas_height());
             if (rectF != null) {
@@ -3838,7 +3838,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
     */
     public String setupBitmapDraw(Bitmap bitmap, Bitmap bitmap2, Template template) {
         int size;
-        int value2;
+        int surahNumber;
         int size3;
         TimeModel timeModel;
         this.frameInterval = 1000 / template.getFps();
@@ -3854,7 +3854,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         Bitmap bitmapDraw = getBitmapDraw(template.isVideoSquare(), file);
         FontUtils.copyFontToInternalStorage(getContext(), Common.FONT_NUMBER);
         float strokeWidth = this.linePaint.getStrokeWidth() * 4.2f;
-        float floatValue = 0.0f;
+        float blurRadius = 0.0f;
         if (template.getIpad_type() == IpadType.BLACK_LAYER.ordinal() || template.getIpad_type() == IpadType.BLUE_TYPE.ordinal() || template.getIpad_type() == IpadType.GRADIENT.ordinal() || template.getIpad_type() == IpadType.MASK_BRUSH.ordinal() || template.getIpad_type() == IpadType.HEART.ordinal() || this.mIpadType == IpadType.BATTERY.ordinal()) {
             strokeWidth = 0.0f;
         }
@@ -3866,23 +3866,23 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         } else {
             if (template.getIpad_type() == IpadType.HEART.ordinal()) {
                 Pair<Float, Integer> saveProgressBitmapTypeHeart = saveProgressBitmapTypeHeart(file, bitmapDraw);
-                floatValue = ((Float) saveProgressBitmapTypeHeart.first).floatValue();
+                blurRadius = ((Float) saveProgressBitmapTypeHeart.first).blurRadius();
                 size3 = ((Integer) saveProgressBitmapTypeHeart.second).intValue();
             } else {
                 if (this.mIpadType == IpadType.BATTERY.ordinal()) {
                     Pair<Float, Point> saveProgressBitmapTypeBattery = saveProgressBitmapTypeBattery(file, bitmapDraw);
-                    floatValue = ((Float) saveProgressBitmapTypeBattery.first).floatValue();
+                    blurRadius = ((Float) saveProgressBitmapTypeBattery.first).blurRadius();
                     size = ((Point) saveProgressBitmapTypeBattery.second).y;
-                    value2 = ((Point) saveProgressBitmapTypeBattery.second).x;
+                    surahNumber = ((Point) saveProgressBitmapTypeBattery.second).x;
                 } else if (this.mIpadType == IpadType.CASSET.ordinal() || this.mIpadType == IpadType.CASSET_IMG.ordinal() || this.mIpadType == IpadType.CASSET_IMG_BLUR.ordinal()) {
-                    floatValue = this.rectFProgress.left;
+                    blurRadius = this.rectFProgress.left;
                     size = (int) this.rectFProgress.top;
-                    value2 = (int) this.rectFProgress.right;
+                    surahNumber = (int) this.rectFProgress.right;
                 } else {
                     saveProgressBitmap(file, strokeWidth);
                 }
                 int value5 = size;
-                size4 = value2;
+                size4 = surahNumber;
                 size3 = value5;
             }
             drawEntityBitmap(file, bitmapDraw.getWidth(), bitmapDraw.getHeight());
@@ -3900,7 +3900,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             } else {
                 timeModel = new TimeModel((int) this.rectFProgress.width(), (int) (this.rectFProgress.height() * 1.5f), this.paintText.getTextSize() * 0.96f, this.paintText.getColor() != -1 ? "black" : "white", this.txt_y, this.newLeft_txt, round);
             }
-            timeModel.setStartShape(floatValue);
+            timeModel.setStartShape(blurRadius);
             timeModel.setWidthShape(size4);
             timeModel.setHeightShape(size3);
             template.setmTimeModel(timeModel);
@@ -3913,7 +3913,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         int round2 = Math.round(strokeWidth * 1.98f);
         if (timeModel == null) {
         }
-        timeModel.setStartShape(floatValue);
+        timeModel.setStartShape(blurRadius);
         timeModel.setWidthShape(size4);
         timeModel.setHeightShape(size3);
         template.setmTimeModel(timeModel);
@@ -3992,8 +3992,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             return 1;
         }
         int size = 0;
-        for (int value2 = 0; value2 < this.quranEntities.size(); value2++) {
-            if (this.quranEntities.get(value2).getEntityQuran().visible()) {
+        for (int index = 0; index < this.quranEntities.size(); index++) {
+            if (this.quranEntities.get(index).getEntityQuran().visible()) {
                 size++;
             }
             if (size > 1) {
@@ -4008,8 +4008,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             return 1;
         }
         int size = 0;
-        for (int value2 = 0; value2 < this.translationEntities.size(); value2++) {
-            if (this.translationEntities.get(value2).getEntityTrslTimeline().visible()) {
+        for (int index = 0; index < this.translationEntities.size(); index++) {
+            if (this.translationEntities.get(index).getEntityTrslTimeline().visible()) {
                 size++;
             }
             if (size > 1) {
@@ -4019,7 +4019,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         return size;
     }
 
-    public void updateSizeAyaSave(int size, int value2) {
+    public void updateSizeAyaSave(int size, int index) {
         List<QuranEntity> list = this.quranEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4029,9 +4029,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             if (quranEntity.getEntityQuran().visible()) {
                 quranEntity.setIpad_type(this.mIpadType);
                 quranEntity.setCopyRect();
-                float floatValue = size;
-                float floatValue2 = value2;
-                RectF rectF = new RectF(quranEntity.getCopyRect().left * floatValue, quranEntity.getCopyRect().top * floatValue2, quranEntity.getCopyRect().right * floatValue, quranEntity.getCopyRect().bottom * floatValue2);
+                float blurRadius = size;
+                float floatValue2 = index;
+                RectF rectF = new RectF(quranEntity.getCopyRect().left * blurRadius, quranEntity.getCopyRect().top * floatValue2, quranEntity.getCopyRect().right * blurRadius, quranEntity.getCopyRect().bottom * floatValue2);
                 quranEntity.update(rectF, (int) (rectF.width() * 0.85f), (int) (rectF.height() * 0.85f));
                 quranEntity.setupScaleSave(quranEntity.getFactorSize(), size);
                 quranEntity.initPreset(quranEntity.getmPreset());
@@ -4039,7 +4039,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
     }
 
-    public void updateSizeTrslSave(int size, int value2) {
+    public void updateSizeTrslSave(int size, int index) {
         List<TranslationQuranEntity> list = this.translationEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4049,9 +4049,9 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             if (translationQuranEntity.getEntityTrslTimeline().visible()) {
                 translationQuranEntity.setIpad_type(this.mIpadType);
                 translationQuranEntity.setCopyRect();
-                float floatValue = size;
-                float floatValue2 = value2;
-                RectF rectF = new RectF(translationQuranEntity.getCopyRect().left * floatValue, translationQuranEntity.getCopyRect().top * floatValue2, translationQuranEntity.getCopyRect().right * floatValue, translationQuranEntity.getCopyRect().bottom * floatValue2);
+                float blurRadius = size;
+                float floatValue2 = index;
+                RectF rectF = new RectF(translationQuranEntity.getCopyRect().left * blurRadius, translationQuranEntity.getCopyRect().top * floatValue2, translationQuranEntity.getCopyRect().right * blurRadius, translationQuranEntity.getCopyRect().bottom * floatValue2);
                 translationQuranEntity.update(rectF, (int) (rectF.width() * 0.85f), (int) (rectF.height() * 0.85f));
                 translationQuranEntity.setupScaleSave(translationQuranEntity.getFactorSize(), size);
                 translationQuranEntity.initPreset(translationQuranEntity.getmPreset());
@@ -4061,7 +4061,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
 
     public void updateSizeAya() {
         float calculateTextSize;
-        float floatValue;
+        float blurRadius;
         List<QuranEntity> list = this.quranEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4073,12 +4073,12 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (countEntityQuran() == 1) {
             if (lastAdd.getTxt().length() < 9) {
                 calculateTextSize = lastAdd.calculateTextSize();
-                floatValue = 0.7f;
+                blurRadius = 0.7f;
             } else {
                 calculateTextSize = lastAdd.calculateTextSize();
-                floatValue = 0.95f;
+                blurRadius = 0.95f;
             }
-            float floatValue2 = calculateTextSize * floatValue;
+            float floatValue2 = calculateTextSize * blurRadius;
             lastAdd.setTextSize(floatValue2);
             lastAdd.setFcSize(floatValue2 / getmCanvas_width());
             lastAdd.setupScale(lastAdd.getFactorSize(), getmCanvas_width(), getmCanvas_height());
@@ -4132,7 +4132,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
 
     public void updateSizeAyaTrsl() {
         float calculateTextSize;
-        float floatValue;
+        float blurRadius;
         List<TranslationQuranEntity> list = this.translationEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4141,12 +4141,12 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (countEntityTrsl() == 1) {
             if (lastAddTrsl.getTxt().length() < 9) {
                 calculateTextSize = lastAddTrsl.calculateTextSize();
-                floatValue = 0.7f;
+                blurRadius = 0.7f;
             } else {
                 calculateTextSize = lastAddTrsl.calculateTextSize();
-                floatValue = 0.95f;
+                blurRadius = 0.95f;
             }
-            float floatValue2 = calculateTextSize * floatValue;
+            float floatValue2 = calculateTextSize * blurRadius;
             lastAddTrsl.setTextSize(floatValue2);
             lastAddTrsl.setFcSize(floatValue2 / getmCanvas_width());
             lastAddTrsl.setupScale(lastAddTrsl.getFactorSize(), getmCanvas_width(), getmCanvas_height());
@@ -4179,7 +4179,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
 
     public void updateSizeAyaResize() {
         float calculateTextSize;
-        float floatValue;
+        float blurRadius;
         List<QuranEntity> list = this.quranEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4199,12 +4199,12 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (countEntityQuran() == 1) {
             if (lastAdd.getTxt().length() < 9) {
                 calculateTextSize = lastAdd.calculateTextSize();
-                floatValue = 0.7f;
+                blurRadius = 0.7f;
             } else {
                 calculateTextSize = lastAdd.calculateTextSize();
-                floatValue = 0.95f;
+                blurRadius = 0.95f;
             }
-            float floatValue2 = calculateTextSize * floatValue;
+            float floatValue2 = calculateTextSize * blurRadius;
             lastAdd.setTextSize(floatValue2);
             lastAdd.setFcSize(floatValue2 / getmCanvas_width());
             lastAdd.setupScale(lastAdd.getFactorSize(), getmCanvas_width(), getmCanvas_height());
@@ -4260,7 +4260,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
 
     public void updateSizeTrslAyaResize() {
         float calculateTextSize;
-        float floatValue;
+        float blurRadius;
         List<TranslationQuranEntity> list = this.translationEntities;
         if (list == null || list.isEmpty()) {
             return;
@@ -4277,12 +4277,12 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         if (countEntityTrsl() == 1) {
             if (lastAddTrsl.getTxt().length() < 9) {
                 calculateTextSize = lastAddTrsl.calculateTextSize();
-                floatValue = 0.7f;
+                blurRadius = 0.7f;
             } else {
                 calculateTextSize = lastAddTrsl.calculateTextSize();
-                floatValue = 0.95f;
+                blurRadius = 0.95f;
             }
-            float floatValue2 = calculateTextSize * floatValue;
+            float floatValue2 = calculateTextSize * blurRadius;
             lastAddTrsl.setTextSize(floatValue2);
             lastAddTrsl.setFcSize(floatValue2 / getmCanvas_width());
             lastAddTrsl.setupScale(lastAddTrsl.getFactorSize(), getmCanvas_width(), getmCanvas_height());
@@ -4422,13 +4422,13 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         bismilahEntity8.setFcSize(bismilahEntity8.getPaintAya().getTextSize() / getmCanvas_width());
     }
 
-    public void updateBismilahEntity(int size, int value2) {
+    public void updateBismilahEntity(int size, int ayaNumber) {
         BismilahEntity bismilahEntity = this.bismilahEntity;
         if (bismilahEntity != null && bismilahEntity.getBismilahTimeline().visible()) {
             this.bismilahEntity.setCopyRect();
-            float floatValue = size;
-            float floatValue2 = value2;
-            RectF rectF = new RectF(this.bismilahEntity.getCopyRect().left * floatValue, this.bismilahEntity.getCopyRect().top * floatValue2, this.bismilahEntity.getCopyRect().right * floatValue, this.bismilahEntity.getCopyRect().bottom * floatValue2);
+            float blurRadius = size;
+            float floatValue2 = ayaNumber;
+            RectF rectF = new RectF(this.bismilahEntity.getCopyRect().left * blurRadius, this.bismilahEntity.getCopyRect().top * floatValue2, this.bismilahEntity.getCopyRect().right * blurRadius, this.bismilahEntity.getCopyRect().bottom * floatValue2);
             this.bismilahEntity.update(rectF, (int) (rectF.width() * 0.85f), (int) (rectF.height() * 0.85f));
             BismilahEntity bismilahEntity2 = this.bismilahEntity;
             bismilahEntity2.setupScaleSave(bismilahEntity2.getFactorSize(), size);
@@ -4441,7 +4441,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         }
         this.mIsti3adhaEntity.setCopyRect();
         float floatValue3 = size;
-        float floatValue4 = value2;
+        float floatValue4 = ayaNumber;
         RectF rectF2 = new RectF(this.mIsti3adhaEntity.getCopyRect().left * floatValue3, this.mIsti3adhaEntity.getCopyRect().top * floatValue4, this.mIsti3adhaEntity.getCopyRect().right * floatValue3, this.mIsti3adhaEntity.getCopyRect().bottom * floatValue4);
         this.mIsti3adhaEntity.update(rectF2, (int) (rectF2.width() * 0.85f), (int) (rectF2.height() * 0.85f));
         BismilahEntity bismilahEntity5 = this.mIsti3adhaEntity;
@@ -4460,28 +4460,28 @@ public class BlurredImageView extends View implements View.OnTouchListener {
         updateBismilahEntity();
     }
 
-    private EntityView findEntityAtPoint(float floatValue, float floatValue2) {
+    private EntityView findEntityAtPoint(float blurRadius, float floatValue2) {
         SurahNameEntity surahNameEntity = this.surahNameEntity;
-        if (surahNameEntity != null && surahNameEntity.getRect().contains(floatValue, floatValue2)) {
+        if (surahNameEntity != null && surahNameEntity.getRect().contains(blurRadius, floatValue2)) {
             return this.surahNameEntity;
         }
         BismilahEntity bismilahEntity = this.mIsti3adhaEntity;
-        if (bismilahEntity != null && bismilahEntity.isVisible() && this.mIsti3adhaEntity.getBismilahTimeline().visible() && this.mIsti3adhaEntity.getRect().contains(floatValue, floatValue2)) {
+        if (bismilahEntity != null && bismilahEntity.isVisible() && this.mIsti3adhaEntity.getBismilahTimeline().visible() && this.mIsti3adhaEntity.getRect().contains(blurRadius, floatValue2)) {
             return this.mIsti3adhaEntity;
         }
         BismilahEntity bismilahEntity2 = this.bismilahEntity;
-        if (bismilahEntity2 != null && bismilahEntity2.isVisible() && this.bismilahEntity.getBismilahTimeline().visible() && this.bismilahEntity.getRect().contains(floatValue, floatValue2)) {
+        if (bismilahEntity2 != null && bismilahEntity2.isVisible() && this.bismilahEntity.getBismilahTimeline().visible() && this.bismilahEntity.getRect().contains(blurRadius, floatValue2)) {
             return this.bismilahEntity;
         }
         for (int size = this.quranEntities.size() - 1; size >= 0; size--) {
             QuranEntity quranEntity = this.quranEntities.get(size);
-            if (quranEntity.isVisible() && quranEntity.getEntityQuran().visible() && quranEntity.getRect().contains(floatValue, floatValue2)) {
+            if (quranEntity.isVisible() && quranEntity.getEntityQuran().visible() && quranEntity.getRect().contains(blurRadius, floatValue2)) {
                 return quranEntity;
             }
         }
         for (int size2 = this.translationEntities.size() - 1; size2 >= 0; size2--) {
             TranslationQuranEntity translationQuranEntity = this.translationEntities.get(size2);
-            if (translationQuranEntity.isVisible() && translationQuranEntity.getEntityTrslTimeline().visible() && translationQuranEntity.getRect().contains(floatValue, floatValue2)) {
+            if (translationQuranEntity.isVisible() && translationQuranEntity.getEntityTrslTimeline().visible() && translationQuranEntity.getRect().contains(blurRadius, floatValue2)) {
                 return translationQuranEntity;
             }
         }
@@ -4567,7 +4567,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             RectF rect = this.entity_select.getRect();
             float centerX = rect.centerX();
             float centerY = rect.centerY();
-            float floatValue = centerX + pointF.x;
+            float blurRadius = centerX + pointF.x;
             float floatValue2 = centerY + pointF.y;
             float floatValue3 = this.mCanvas_height / 2.0f;
             boolean isFlag = false;
@@ -4575,7 +4575,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             this.showCenterLineY = false;
             float floatValue4 = pointF.x;
             float f5 = pointF.y;
-            float f6 = floatValue - (this.mCanvas_width / 2.0f);
+            float f6 = blurRadius - (this.mCanvas_width / 2.0f);
             boolean z2 = true;
             if (Math.abs(f6) < SNAP_THRESHOLD) {
                 this.showCenterLineX = true;
@@ -4586,7 +4586,7 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 this.showCenterLineY = true;
                 f5 -= (0.2f * f7) * (1.0f - (Math.abs(f7) / SNAP_THRESHOLD));
             }
-            if (floatValue >= 0.0f && floatValue <= getWidth()) {
+            if (blurRadius >= 0.0f && blurRadius <= getWidth()) {
                 this.entity_select.postTranslate(floatValue4, 0.0f);
                 this.selectTool.setApply_Move(true);
                 isFlag = true;
@@ -4608,11 +4608,11 @@ public class BlurredImageView extends View implements View.OnTouchListener {
             Paint paint = new Paint(1);
             paint.setColor(Color.parseColor("#80FF4081"));
             paint.setStrokeWidth(5.0f);
-            float floatValue = this.mCanvas_width / 2.0f;
+            float blurRadius = this.mCanvas_width / 2.0f;
             int size = this.mCanvas_height;
             float floatValue2 = size / 2.0f;
             if (this.showCenterLineX) {
-                canvas.drawLine(floatValue, 0.0f, floatValue, size, paint);
+                canvas.drawLine(blurRadius, 0.0f, blurRadius, size, paint);
             }
             if (this.showCenterLineY) {
                 canvas.drawLine(0.0f, floatValue2, this.mCanvas_width, floatValue2, paint);
@@ -4621,8 +4621,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public float distanceToCenter(float floatValue, float floatValue2) {
-        return (float) Math.hypot(floatValue - this.entity_select.getRect().centerX(), floatValue2 - this.entity_select.getRect().centerY());
+    public float distanceToCenter(float blurRadius, float floatValue2) {
+        return (float) Math.hypot(blurRadius - this.entity_select.getRect().centerX(), floatValue2 - this.entity_select.getRect().centerY());
     }
 
     @Override // android.view.View.OnTouchListener
@@ -4644,8 +4644,8 @@ public class BlurredImageView extends View implements View.OnTouchListener {
                 if (this.prevDistance < 1.0f) {
                     this.prevDistance = 1.0f;
                 }
-                float floatValue = this.prevDistance;
-                float floatValue2 = (distanceToCenter - floatValue) / floatValue;
+                float blurRadius = this.prevDistance;
+                float floatValue2 = (distanceToCenter - blurRadius) / blurRadius;
                 if (floatValue2 > 0.5f) {
                     floatValue2 = 0.5f;
                 }

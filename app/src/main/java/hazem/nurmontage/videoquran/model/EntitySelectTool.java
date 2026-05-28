@@ -73,13 +73,13 @@ public class EntitySelectTool {
         this.isApply_all = isClicked;
     }
 
-    public EntitySelectTool(int value, Context context) {
+    public EntitySelectTool(int count, Context context) {
         Typeface loadFontFromAsset = UtilsFileLast.loadFontFromAsset(context, "fonts/arabic/خط الإبل.otf");
-        String str = LocaleHelper.getLanguage(context).equals("ar") ? "تطبيق على الكل" : "ApplyAll";
+        String value = LocaleHelper.getLanguage(context).equals("ar") ? "تطبيق على الكل" : "ApplyAll";
         Paint paint = new Paint(1);
         this.paint = paint;
         paint.setColor(-409555);
-        float f = value;
+        float f = count;
         paint.setStrokeWidth(0.005f * f);
         this.round = 0.02f * f;
         int i2 = (int) (f * 0.047f);
@@ -116,10 +116,10 @@ public class EntitySelectTool {
         float height2 = rectF2.height() * 0.6f;
         paint.setTextSize(100.0f);
         Rect rect = new Rect();
-        paint.getTextBounds(str, 0, str.length(), rect);
+        paint.getTextBounds(value, 0, value.length(), rect);
         paint.setTextSize(Math.min(width / rect.width(), height2 / rect.height()) * 100.0f);
-        paint.getTextBounds(str, 0, str.length(), rect);
-        canvas.drawText(str, rectF2.centerX() - (rect.width() * 0.5f), rectF2.centerY() - rect.exactCenterY(), paint);
+        paint.getTextBounds(value, 0, value.length(), rect);
+        canvas.drawText(value, rectF2.centerX() - (rect.width() * 0.5f), rectF2.centerY() - rect.exactCenterY(), paint);
         paint.setColor(-409555);
         paint.setStyle(Paint.Style.STROKE);
     }

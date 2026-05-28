@@ -52,19 +52,19 @@ public class EditIpadFragment extends Fragment {
         void onGlassType(boolean isFlag);
     }
 
-    public static EditIpadFragment getInstance(Resources resources, int value, IIpadEditCallback iIpadEditCallback, int value2, boolean isFlag, boolean z2) {
+    public static EditIpadFragment getInstance(Resources resources, int index, IIpadEditCallback iIpadEditCallback, int index0, boolean isFlag, boolean isEmpty) {
         if (instance == null) {
-            instance = new EditIpadFragment(resources, value, iIpadEditCallback, value2, isFlag, z2);
+            instance = new EditIpadFragment(resources, index, iIpadEditCallback, index0, isFlag, isEmpty);
         }
         return instance;
     }
 
-    public EditIpadFragment(Resources resources, int value, IIpadEditCallback iIpadEditCallback, int value2, boolean isFlag, boolean z2) {
+    public EditIpadFragment(Resources resources, int index, IIpadEditCallback iIpadEditCallback, int index2, boolean isFlag, boolean isSelected) {
         this.iIpadEditCallback = iIpadEditCallback;
-        this.ipadType = value;
-        this.isGlass = z2;
+        this.ipadType = index;
+        this.isGlass = isSelected;
         this.resources = resources;
-        this.index_select = value2;
+        this.index_select = index2;
         this.isGradient = isFlag;
     }
 
@@ -172,9 +172,9 @@ public class EditIpadFragment extends Fragment {
                 if (EditIpadFragment.this.mCurrentPosFragment != tab.getPosition()) {
                     EditIpadFragment.this.mCurrentPosFragment = tab.getPosition();
                     FragmentTransaction beginTransaction = EditIpadFragment.this.getChildFragmentManager().beginTransaction();
-                    int value = C2014R.id.container;
+                    int resourceId = C2014R.id.container;
                     EditIpadFragment editIpadFragment = EditIpadFragment.this;
-                    beginTransaction.replace(value, editIpadFragment.getFragment(editIpadFragment.mCurrentPosFragment)).addToBackStack(null).commit();
+                    beginTransaction.replace(resourceId, editIpadFragment.getFragment(editIpadFragment.mCurrentPosFragment)).addToBackStack(null).commit();
                 }
             }
         });
@@ -183,17 +183,17 @@ public class EditIpadFragment extends Fragment {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Fragment getFragment(int value) {
-        if (value == 1) {
+    public Fragment getFragment(int colorValue) {
+        if (colorValue == 1) {
             return GradientFragment.getInstance(this.iIpadEditCallback, this.index_select);
         }
         return ColorsFragment.getInstance(this.iIpadEditCallback, this.index_select);
     }
 
-    private int getPosSelect(int value, List<IpadItem> list) {
-        for (int value2 = 0; value2 < list.size(); value2++) {
-            if (list.get(value2).getIpadType().ordinal() == value) {
-                return value2;
+    private int getPosSelect(int index, List<IpadItem> list) {
+        for (int index19 = 0; index19 < list.size(); index19++) {
+            if (list.get(index19).getIpadType().ordinal() == index) {
+                return index19;
             }
         }
         return 0;

@@ -7,25 +7,25 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class WordProcessor {
-    public static int mapIndexAfterGroupReverse(int i, int value2, int position3) {
-        return ((i / value2) * value2) + ((Math.min(value2, position3 - r0) - 1) - (i % value2));
+    public static int mapIndexAfterGroupReverse(int i, int position, int position3) {
+        return ((i / position) * position) + ((Math.min(position, position3 - r0) - 1) - (i % position));
     }
 
     public List<WordModel> reverseInGroupsOfFour(List<WordModel> list) {
         ArrayList arrayList = new ArrayList();
         int i = 0;
         while (i < list.size()) {
-            int value2 = i + 4;
-            ArrayList arrayList2 = new ArrayList(list.subList(i, Math.min(value2, list.size())));
+            int index = i + 4;
+            ArrayList arrayList2 = new ArrayList(list.subList(i, Math.min(index, list.size())));
             Collections.reverse(arrayList2);
             arrayList.addAll(arrayList2);
-            i = value2;
+            i = index;
         }
         return arrayList;
     }
 
-    public List<WordModel> findAndSelectPhrase(String str, String textValue2) {
-        String[] split = str.trim().split("\\s+");
+    public List<WordModel> findAndSelectPhrase(String value, String textValue2) {
+        String[] split = value.trim().split("\\s+");
         String[] split2 = textValue2.trim().split("\\s+");
         ArrayList arrayList = new ArrayList();
         int i = 0;
@@ -34,8 +34,8 @@ public class WordProcessor {
                 i = -1;
                 break;
             }
-            for (int value2 = 0; value2 < split2.length; value2++) {
-                if (!split[i + value2].equals(split2[value2])) {
+            for (int counter = 0; counter < split2.length; counter++) {
+                if (!split[i + counter].equals(split2[counter])) {
                     break;
                 }
             }

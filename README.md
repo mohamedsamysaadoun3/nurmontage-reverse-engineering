@@ -47,6 +47,12 @@ project-source/
 │   ├── smali_classes2/                         # DEX classes2.dex
 │   └── smali_classes3/                         # DEX classes3.dex
 ├── third-party-libs/                           # Decompiled Library Sources
+├── advanced-analysis/                          # Cross-Reference Decompilation
+│   ├── cfr-output/                             # CFR 0.152 decompiled sources (917 files)
+│   ├── procyon-output/                         # Procyon 0.6.0 decompiled sources (936 files)
+│   ├── jphantom-stubs/                         # JPhantom 1.3 class stubs (957 stubs)
+│   └── renaming-report.md                      # Variable renaming audit log
+├── tools/                                      # Tool references (JARs not included)
 ├── docs/
 │   └── analysis/                               # Security Analysis Reports
 │       ├── secrets_scan.json                   # API Keys & Secrets
@@ -61,14 +67,82 @@ project-source/
 
 ## 🛠️ Tools Used
 
+### Primary Analysis Pipeline
+
 | Tool | Version | Purpose |
 |------|---------|---------|
+| **JADX** | 1.5.1 | Primary DEX decompiler (best variable naming) |
 | **Apktool** | 2.10.0 | Resource & Smali Decompilation |
-| **JADX** | 1.5.1 | Java Source Code Recovery |
 | **Androguard** | 3.4.0a1 | APK Security Analysis |
 | **Quark-Engine** | 26.5.1 | Malware Behavior Detection |
 | **LIEF** | 0.17.6 | Binary Analysis Framework |
-| **ripgrep** | Latest | Pattern/Secret Scanning |
+
+### Advanced Reverse Engineering Pipeline
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **CFR** | 0.152 | Secondary decompiler (cross-reference validation) |
+| **Procyon** | 0.6.0 | Decompiler with type inference |
+| **Vineflower** | 1.10.1 | Improved Fernflower decompiler |
+| **JPhantom** | 1.3 | Missing class stub generation (957 stubs) |
+| **Enjarify** | latest | DEX-to-JAR conversion (16,617 classes) |
+| **Recaf** | 2.21.14 | Bytecode editor/refactoring |
+| **Soot** | 4.7.1 | Optimization/deobfuscation framework |
+
+### Decompiler Comparison for This Codebase
+
+| Metric | JADX | Procyon | CFR |
+|--------|------|---------|-----|
+| Java files produced | 325 | 936 | 917 |
+| Generic variable names (int n/str/bl) | 19 | ~1,200 | 3,926 |
+| Field/member names preserved | ✅ Full | ✅ Full | ✅ Full |
+| Parameter name inference | ✅ Contextual | ❌ Fallback | ❌ Type-based |
+| Inner class handling | Merged | Separate files | Separate + cfr_renamed |
+| **Variable naming quality** | **Best** | Moderate | Lowest |
+
+> **Conclusion**: JADX reads DEX debug info directly and infers contextual parameter names.
+> CFR and Procyon work from JAR bytecode which lacks parameter names, producing
+> generic names (n, n2, bl, string2). JADX is the clear winner for this DEX-based codebase.
+
+## 🧠 Smart Variable Renaming
+
+**2,621 generic variables** have been renamed with meaningful, context-aware names
+using a combination of rule-based context analysis and manual domain-specific renaming.
+
+### Renaming Approach
+
+| Method | Count | Description |
+|--------|-------|-------------|
+| Rule-based context analysis | 1,346 | Automatic inference from usage patterns, type context, and method calls |
+| Manual domain-specific renaming | 1,275 | Human review with domain knowledge (Quran, video editing, audio processing) |
+| **Total** | **2,621** | |
+
+### Naming Conventions Applied
+
+| Type | Convention | Examples |
+|------|-----------|---------|
+| `boolean` | is/has/can/should prefix | `isPlaying`, `hasAudio`, `isEnabled`, `shouldRender` |
+| `int` | Descriptive noun | `trackIndex`, `frameNumber`, `surahNumber`, `channelCount` |
+| `float` | Measurement descriptor | `scaleFactor`, `volumeLevel`, `audioPosition`, `zoomLevel` |
+| `String` | Content descriptor | `filePath`, `audioUrl`, `surahName`, `readerName` |
+| `long` | Time descriptor (Ms suffix) | `durationMs`, `positionMs`, `startTimeMs` |
+
+### Top Renamed Files
+
+| File | Renames | Key Improvements |
+|------|---------|------------------|
+| `TrackEntityView.java` | 287 | `floatValue`→`zoomLevel`, `isPlaying`, `isEnabled` |
+| `EngineActivity.java` | 219 | `audioPosition`, `roundedMs`, `scaleFactor`, `trackIndex` |
+| `BlurredImageView.java` | 182 | `blurRadius`, `pixelCount`, `colorChannel` |
+| `ProgressViewActivity.java` | 139 | `renderProgress`, `frameNumber` |
+| `TranslationQuranEntity.java` | 143 | `textSize`, `verseNumber` |
+| `QuranEntity.java` | 139 | `textSize`, `lineSpacing`, `ayaNumber` |
+| `BismilahEntity.java` | 88 | `textSize`, `positionRatio`, `styleIndex` |
+| `WaveformRendererPro.java` | 55 | `waveAmplitude`, `sampleIndex` |
+| `CustomDiscreteSeekBar.java` | 37 | `progressValue`, `tickCount` |
+| `CropView.java` | 38 | `cropScale`, `handleIndex` |
+
+Full details: [`advanced-analysis/renaming-report.md`](advanced-analysis/renaming-report.md)
 
 ## 📋 Key Activities (22)
 

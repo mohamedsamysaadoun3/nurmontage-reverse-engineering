@@ -8,27 +8,27 @@ public class BitmapCropper {
         return cropToAspectRatio(bitmap, 16, 9);
     }
 
-    public static Bitmap cropTo16x9(Bitmap bitmap, int i, int value2) {
-        return cropToAspectRatioWithConstraint(bitmap, 16, 9, i, value2);
+    public static Bitmap cropTo16x9(Bitmap bitmap, int i, int index) {
+        return cropToAspectRatioWithConstraint(bitmap, 16, 9, i, index);
     }
 
     public static Bitmap cropTo9x16(Bitmap bitmap) {
         return cropToAspectRatio(bitmap, 9, 16);
     }
 
-    public static Bitmap cropTo9x16(Bitmap bitmap, int i, int value2) {
-        return cropToAspectRatioWithConstraint(bitmap, 9, 16, i, value2);
+    public static Bitmap cropTo9x16(Bitmap bitmap, int i, int index) {
+        return cropToAspectRatioWithConstraint(bitmap, 9, 16, i, index);
     }
 
     public static Bitmap cropTo1x1(Bitmap bitmap) {
         return cropToAspectRatio(bitmap, 1, 1);
     }
 
-    public static Bitmap cropTo1x1(Bitmap bitmap, int i, int value2) {
-        return cropToAspectRatioWithConstraint(bitmap, 1, 1, i, value2);
+    public static Bitmap cropTo1x1(Bitmap bitmap, int i, int index) {
+        return cropToAspectRatioWithConstraint(bitmap, 1, 1, i, index);
     }
 
-    private static Bitmap cropToAspectRatio(Bitmap bitmap, int i, int value2) {
+    private static Bitmap cropToAspectRatio(Bitmap bitmap, int i, int width6) {
         int i3;
         if (bitmap == null) {
             return null;
@@ -36,21 +36,21 @@ public class BitmapCropper {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float floatValue = width;
-        float f2 = height;
-        float f3 = floatValue / f2;
-        float f4 = i / value2;
-        int value4 = 0;
-        if (f3 > f4) {
-            int roundEven = roundEven(f2 * f4);
+        float widthRatio = height;
+        float widthRatio6 = floatValue / widthRatio;
+        float widthRatio6 = i / width6;
+        int width6 = 0;
+        if (widthRatio6 > widthRatio6) {
+            int roundEven = roundEven(widthRatio * widthRatio6);
             int i5 = (width - roundEven) / 2;
             width = roundEven;
             i3 = 0;
-            value4 = i5;
+            width6 = i5;
         } else {
-            if (f3 >= f4) {
+            if (widthRatio6 >= widthRatio6) {
                 return bitmap;
             }
-            int roundEven2 = roundEven(floatValue / f4);
+            int roundEven2 = roundEven(floatValue / widthRatio6);
             int i6 = (height - roundEven2) / 2;
             height = roundEven2;
             i3 = i6;
@@ -58,7 +58,7 @@ public class BitmapCropper {
         return Bitmap.createBitmap(bitmap, value4, i3, width, height);
     }
 
-    private static Bitmap cropToAspectRatioWithConstraint(Bitmap bitmap, int i, int value2, int i3, int value4) {
+    private static Bitmap cropToAspectRatioWithConstraint(Bitmap bitmap, int i, int width10, int i3, int width10) {
         int i5;
         int roundEven;
         if (bitmap == null) {
@@ -67,18 +67,18 @@ public class BitmapCropper {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         int min = Math.min(width, i3);
-        int min2 = Math.min(height, value4);
+        int min2 = Math.min(height, width10);
         int i6 = (width - min) / 2;
         int i7 = (height - min2) / 2;
-        float floatValue = i / value2;
-        float f2 = min;
-        float f3 = min2;
-        float f4 = f2 / f3;
-        if (f4 > floatValue) {
+        float floatValue = i / width10;
+        float widthRatio = min;
+        float widthRatio12 = min2;
+        float widthRatio10 = widthRatio / f3;
+        if (widthRatio10 > floatValue) {
             i5 = roundEven(f3 * floatValue);
         } else {
-            if (f4 < floatValue) {
-                roundEven = roundEven(f2 / floatValue);
+            if (widthRatio10 < floatValue) {
+                roundEven = roundEven(widthRatio / floatValue);
                 i5 = min;
                 int min3 = Math.min(i5, min) & (-2);
                 int min4 = Math.min(roundEven, min2) & (-2);

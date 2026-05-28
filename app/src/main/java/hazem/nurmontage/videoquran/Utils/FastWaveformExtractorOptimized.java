@@ -40,7 +40,7 @@ public class FastWaveformExtractorOptimized {
         long j4 = 0;
         while (i4 < value) {
             mediaExtractor.seekTo(j4, 2);
-            long j5 = j4 + j2;
+            long positionMs = j4 + j2;
             int dequeueInputBuffer = createDecoderByType.dequeueInputBuffer(j3);
             if (dequeueInputBuffer >= 0) {
                 int readSampleData = mediaExtractor.readSampleData(inputBuffers[dequeueInputBuffer], 0);
@@ -64,7 +64,7 @@ public class FastWaveformExtractorOptimized {
                 i4 = value2;
             }
             j3 = j;
-            j4 = j5;
+            j4 = positionMs;
         }
         createDecoderByType.stop();
         createDecoderByType.release();
@@ -72,11 +72,11 @@ public class FastWaveformExtractorOptimized {
         return fArr;
     }
 
-    private static float computeAmp(ByteBuffer byteBuffer, int value) {
+    private static float computeAmp(ByteBuffer byteBuffer, int position5) {
         byteBuffer.position(0);
         float f = 0.0f;
-        for (int value2 = 0; value2 < value - 1; value2 += 2) {
-            f = Math.max(f, Math.abs((int) byteBuffer.getShort(value2)) / 32767.0f);
+        for (int position = 0; position < position5 - 1; position += 2) {
+            f = Math.max(f, Math.abs((int) byteBuffer.getShort(position)) / 32767.0f);
         }
         return f;
     }

@@ -8,7 +8,7 @@ public class SmoothTimelineAnimator {
     private int currentTimeMs;
     private final Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() { // from class: hazem.nurmontage.videoquran.Utils.SmoothTimelineAnimator.1
         @Override // android.view.Choreographer.FrameCallback
-        public void doFrame(long j) {
+        public void doFrame(long startTimeMs0) {
             if (SmoothTimelineAnimator.this.isRunning) {
                 int uptimeMillis = (int) (SystemClock.uptimeMillis() - SmoothTimelineAnimator.this.startTimeMs);
                 SmoothTimelineAnimator smoothTimelineAnimator = SmoothTimelineAnimator.this;
@@ -44,8 +44,8 @@ public class SmoothTimelineAnimator {
         return this.currentTimeMs;
     }
 
-    public SmoothTimelineAnimator(int value, int duration2, AnimatorListener animatorListener) {
-        this.startCursorMs = value;
+    public SmoothTimelineAnimator(int index, int duration2, AnimatorListener animatorListener) {
+        this.startCursorMs = index;
         this.maxTimeMs = duration2;
         this.listener = animatorListener;
     }

@@ -6,14 +6,14 @@ public class GallerySelected {
     private PhotoItem photoItem;
     private VideoItem videoItem;
 
-    public GallerySelected(PhotoItem photoItem, int value) {
+    public GallerySelected(PhotoItem photoItem, int index0) {
         this.photoItem = photoItem;
-        this.index = value;
+        this.index = index0;
     }
 
-    public GallerySelected(VideoItem videoItem, int value) {
+    public GallerySelected(VideoItem videoItem, int resourceId) {
         this.videoItem = videoItem;
-        this.index = value;
+        this.index = resourceId;
     }
 
     public VideoItem getVideoItem() {

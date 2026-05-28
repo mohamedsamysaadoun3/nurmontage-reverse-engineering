@@ -28,12 +28,12 @@ public class ColorBismilahFragment extends Fragment {
     private BismilahEntity entity_select;
     private ColorAdabter.IColor iColor = new ColorAdabter.IColor() { // from class: hazem.nurmontage.videoquran.fragment.ColorBismilahFragment.2
         @Override // hazem.nurmontage.videoquran.adabter.ColorAdabter.IColor
-        public void onColor(int value, int color2) {
+        public void onColor(int ayaNumber, int color2) {
             if (ColorBismilahFragment.this.iEditSName == null || ColorBismilahFragment.this.entity_select == null) {
                 return;
             }
             ColorBismilahFragment.this.scrollToSelectedPosition();
-            ColorBismilahFragment.this.iEditSName.updateAya(value);
+            ColorBismilahFragment.this.iEditSName.updateAya(ayaNumber);
         }
     };
     private EditBismilahEntityFragment.IBismilahEntityCallback iEditSName;
@@ -89,18 +89,18 @@ public class ColorBismilahFragment extends Fragment {
     }
 
     /* renamed from: lambda$setupPresetButtons$0$hazem-nurmontage-videoquran-fragment-ColorBismilahFragment */
-    /* synthetic */ void m641x2d2a96a7(TextView[] textViewArr, int value, AyaTextPreset[] ayaTextPresetArr, View view) {
-        selectPreset(textViewArr, value);
+    /* synthetic */ void m641x2d2a96a7(TextView[] textViewArr, int ayaNumber, AyaTextPreset[] ayaTextPresetArr, View view) {
+        selectPreset(textViewArr, ayaNumber);
         EditBismilahEntityFragment.IBismilahEntityCallback iBismilahEntityCallback = this.iEditSName;
         if (iBismilahEntityCallback != null) {
-            iBismilahEntityCallback.updatePreset(ayaTextPresetArr[value]);
+            iBismilahEntityCallback.updatePreset(ayaTextPresetArr[ayaNumber]);
         }
     }
 
-    private void selectPreset(TextView[] textViewArr, int value) {
+    private void selectPreset(TextView[] textViewArr, int count) {
         int color2 = 0;
         while (color2 < textViewArr.length) {
-            textViewArr[color2].setSelected(color2 == value);
+            textViewArr[color2].setSelected(color2 == count);
             color2++;
         }
     }
@@ -141,10 +141,10 @@ public class ColorBismilahFragment extends Fragment {
         }
     }
 
-    public void scrollToSelectedPosition(int value) {
+    public void scrollToSelectedPosition(int width) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
         if (linearLayoutManager != null) {
-            linearLayoutManager.scrollToPositionWithOffset(value, this.recyclerView.getWidth() / 2);
+            linearLayoutManager.scrollToPositionWithOffset(width, this.recyclerView.getWidth() / 2);
         }
     }
 

@@ -32,33 +32,33 @@ public class WorkUserAdabter extends RecyclerView.Adapter<ViewHolder> {
         void toMenu(Template template, View view, int value);
     }
 
-    public WorkUserAdabter(String textValue, List<Template> list, IWorkUserCallback iWorkUserCallback, int value, int value2) {
+    public WorkUserAdabter(String textValue, List<Template> list, IWorkUserCallback iWorkUserCallback, int index, int index0) {
         this.images = list;
         this.iWorkUserCallback = iWorkUserCallback;
-        this.f390w = value;
-        this.f389h = value2;
+        this.f390w = index;
+        this.f389h = index0;
         this.APP_VERSION = textValue;
     }
 
-    public void remove(int value) {
+    public void remove(int count) {
         try {
-            if (value < this.images.size()) {
-                this.images.remove(value);
+            if (count < this.images.size()) {
+                this.images.remove(count);
             }
-            notifyItemRemoved(value);
+            notifyItemRemoved(count);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void add(int value, Template template) {
+    public void add(int count, Template template) {
         try {
-            if (value < this.images.size()) {
-                this.images.add(value, template);
+            if (count < this.images.size()) {
+                this.images.add(count, template);
             } else {
                 this.images.add(template);
             }
-            notifyItemInserted(value);
+            notifyItemInserted(count);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,13 +98,13 @@ public class WorkUserAdabter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_work_user, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        Template template = this.images.get(value);
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        Template template = this.images.get(index);
         if (template.getFileInfo() != null) {
             viewHolder.tvName.setText(template.getFileInfo().formattedDate);
             viewHolder.tvDate.setText(template.getFileInfo().timedDate);

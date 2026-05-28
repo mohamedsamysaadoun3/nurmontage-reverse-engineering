@@ -30,7 +30,7 @@ public class TextEntity extends EntityView {
     }
 
     @Override // hazem.nurmontage.videoquran.model.EntityView
-    public void scale(float scale, int value, int value2) {
+    public void scale(float scale, int resourceId, int resourceId2) {
     }
 
     public void setTxt(String textValue) {
@@ -51,21 +51,21 @@ public class TextEntity extends EntityView {
         this.entityQuran = entityQuranTimeline;
     }
 
-    public TextEntity(String textValue, float scale, float floatValue2, int value) {
+    public TextEntity(String textValue, float scale, float floatValue2, int ayaNumber) {
         this.txt = textValue;
         this.f439x = scale;
         this.f440y = floatValue2;
         setVisible(true);
-        this.viewWidth = value;
+        this.viewWidth = ayaNumber;
         this.paintAya.setColor(-1);
-        this.paintAya.setTextSize(value * 0.06f);
+        this.paintAya.setTextSize(ayaNumber * 0.06f);
         createStaticLayout();
     }
 
-    public void update(int value, int value2) {
-        this.f440y = value * 0.67f;
-        this.viewWidth = value2;
-        this.paintAya.setTextSize(value2 * 0.06f);
+    public void update(int ayaNumber, int ayaNumber7) {
+        this.f440y = ayaNumber * 0.67f;
+        this.viewWidth = ayaNumber7;
+        this.paintAya.setTextSize(ayaNumber7 * 0.06f);
         createStaticLayout();
     }
 

@@ -39,9 +39,9 @@ public class BgAdabterL extends RecyclerView.Adapter<ViewHolder> {
         }
     }
 
-    public BgAdabterL(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int value) {
+    public BgAdabterL(String textValue, ChangeBgFragment.IChangeBgCallback iChangeBgCallback, List<BgItem> list, int size1) {
         this.images = list;
-        this.size = value;
+        this.size = size1;
         this.iBgCallback = iChangeBgCallback;
         this.APP_VERSION = textValue;
     }
@@ -69,13 +69,13 @@ public class BgAdabterL extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int value) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(C2014R.layout.row_img_bg, viewGroup, false));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public void onBindViewHolder(ViewHolder viewHolder, int value) {
-        RequestBuilder<Bitmap> load = Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(value).getId()));
+    public void onBindViewHolder(ViewHolder viewHolder, int index) {
+        RequestBuilder<Bitmap> load = Glide.with(viewHolder.imageView).asBitmap().load(Integer.valueOf(this.images.get(index).getId()));
         int i2 = this.size;
         load.override(i2, i2).signature(new ObjectKey(this.APP_VERSION)).diskCacheStrategy(DiskCacheStrategy.NONE).transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.ALL))).into(viewHolder.imageView);
     }

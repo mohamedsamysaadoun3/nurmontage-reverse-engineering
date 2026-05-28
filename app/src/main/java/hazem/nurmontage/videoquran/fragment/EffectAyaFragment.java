@@ -157,8 +157,8 @@ public class EffectAyaFragment extends Fragment {
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
-                public void onProgressChanged(SeekBar seekBar2, int value, boolean isFlag) {
-                    EffectAyaFragment.this.tvDuration.setText(String.valueOf(value / 10.0f));
+                public void onProgressChanged(SeekBar seekBar2, int ayaNumber, boolean isFlag) {
+                    EffectAyaFragment.this.tvDuration.setText(String.valueOf(ayaNumber / 10.0f));
                 }
 
                 @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -233,15 +233,15 @@ public class EffectAyaFragment extends Fragment {
             root.post(new Runnable() { // from class: hazem.nurmontage.videoquran.fragment.EffectAyaFragment.6
                 @Override // java.lang.Runnable
                 public void run() {
-                    int value;
+                    int index;
                     List<TransitionEntityAdabters.TransitionItem> inTransition = EffectAyaFragment.this.getInTransition();
                     if (EffectAyaFragment.this.transition == null || !EffectAyaFragment.this.transition.isIn()) {
-                        value = -1;
+                        index = -1;
                     } else {
                         EffectAyaFragment effectAyaFragment = EffectAyaFragment.this;
-                        value = effectAyaFragment.getIndex(inTransition, effectAyaFragment.transition.getType_in());
+                        index = effectAyaFragment.getIndex(inTransition, effectAyaFragment.transition.getType_in());
                     }
-                    int i2 = value;
+                    int i2 = index;
                     EffectAyaFragment.this.transitionEntityAdabters = new TransitionEntityAdabters(BillingPreferences.isSubscribed(EffectAyaFragment.this.getContext()), EffectAyaFragment.this.iTransition, inTransition, i2, EffectAyaFragment.this.entityQuranTimeline);
                     EffectAyaFragment.this.recyclerView.setAdapter(EffectAyaFragment.this.transitionEntityAdabters);
                     EffectAyaFragment effectAyaFragment2 = EffectAyaFragment.this;
@@ -272,10 +272,10 @@ public class EffectAyaFragment extends Fragment {
         this.iv_apply_all.setColorFilter(-1, PorterDuff.Mode.SRC_IN);
     }
 
-    public void scroll(int value) {
+    public void scroll(int width) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) this.recyclerView.getLayoutManager();
-        View findViewByPosition = linearLayoutManager.findViewByPosition(value);
-        linearLayoutManager.scrollToPositionWithOffset(value, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
+        View findViewByPosition = linearLayoutManager.findViewByPosition(width);
+        linearLayoutManager.scrollToPositionWithOffset(width, (this.recyclerView.getWidth() - (findViewByPosition != null ? findViewByPosition.getWidth() : 0)) / 2);
     }
 
     public void updateButton(Transition transition) {
@@ -285,9 +285,9 @@ public class EffectAyaFragment extends Fragment {
     }
 
     public int getIndex(List<TransitionEntityAdabters.TransitionItem> list, String textValue) {
-        for (int value = 0; value < list.size(); value++) {
-            if (textValue.equals(list.get(value).getType())) {
-                return value;
+        for (int index = 0; index < list.size(); index++) {
+            if (textValue.equals(list.get(index).getType())) {
+                return index;
             }
         }
         return -1;
@@ -308,9 +308,9 @@ public class EffectAyaFragment extends Fragment {
         this.tvDuration.setVisibility(8);
     }
 
-    public void loadTransition(int value) {
+    public void loadTransition(int index32) {
         this.index = -1;
-        if (value == 0) {
+        if (index32 == 0) {
             List<TransitionEntityAdabters.TransitionItem> inTransition = getInTransition();
             Transition transition = this.transition;
             if (transition != null) {
@@ -341,7 +341,7 @@ public class EffectAyaFragment extends Fragment {
             }
             return;
         }
-        if (value == 1) {
+        if (index32 == 1) {
             List<TransitionEntityAdabters.TransitionItem> outTransition = getOutTransition();
             Transition transition3 = this.transition;
             if (transition3 != null) {

@@ -179,21 +179,21 @@ public class EntityQuranTemplate implements Serializable {
         return this.file_out;
     }
 
-    public EntityQuranTemplate(Transition transition, float dimension, float f2, float f3, float f4, float f5, float floatValue6, String textValue, String str2, String textValue3, int position, int i2, int i3, int i4, int value5) {
+    public EntityQuranTemplate(Transition transition, float dimension, float xPosition, float xPosition35, float xPosition35, float xPosition35, float floatValue6, String textValue, String name, String textValue3, int position, int i2, int i3, int i4, int ayaNumber) {
         this.aya = textValue;
         this.colorTrsl = i4;
-        this.preset = value5;
-        this.complete_aya = str2;
+        this.preset = ayaNumber;
+        this.complete_aya = name;
         this.transition = transition;
         this.start = dimension;
         this.color = i3;
-        this.end = f2;
+        this.end = xPosition;
         this.name_font = textValue3;
         this.number = i2;
         this.indexNumber = position;
         this.right = floatValue6;
-        this.left = f5;
-        this.btm_x = f3;
+        this.left = xPosition35;
+        this.btm_x = xPosition35;
         this.btm_y = f4;
     }
 

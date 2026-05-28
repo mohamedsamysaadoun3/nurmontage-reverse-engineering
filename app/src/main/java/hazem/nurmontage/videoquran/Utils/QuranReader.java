@@ -14,7 +14,7 @@ public class QuranReader {
         this.context = context;
     }
 
-    public String getAyahText(int i, int value2) {
+    public String getAyahText(int i, int count) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("quran/quran-simple.txt"), StandardCharsets.UTF_8));
             while (true) {
@@ -26,7 +26,7 @@ public class QuranReader {
                             int parseInt = Integer.parseInt(split[0]);
                             int parseInt2 = Integer.parseInt(split[1]);
                             String textValue = split[2];
-                            if (parseInt == i && parseInt2 == value2) {
+                            if (parseInt == i && parseInt2 == count) {
                                 return textValue;
                             }
                         } catch (NumberFormatException e) {
@@ -43,9 +43,9 @@ public class QuranReader {
         }
     }
 
-    public String getTranslationAyahText(String textValue, int i, int value2) {
+    public String getTranslationAyahText(String textValue, int i, int count) {
         BufferedReader bufferedReader;
-        String str2;
+        String reciterName;
         String readLine;
         BufferedReader bufferedReader2 = null;
         try {
@@ -59,7 +59,7 @@ public class QuranReader {
                 e = e;
             }
             try {
-                str2 = i + "|" + value2;
+                reciterName = i + "|" + count;
             } catch (Exception e2) {
                 e = e2;
                 bufferedReader2 = bufferedReader;
@@ -87,8 +87,8 @@ public class QuranReader {
                     bufferedReader.close();
                     return "Aya Not Found !";
                 }
-            } while (!readLine.startsWith(str2));
-            String substring = readLine.substring(str2.length());
+            } while (!readLine.startsWith(reciterName));
+            String substring = readLine.substring(reciterName.length());
             try {
                 bufferedReader.close();
             } catch (IOException e4) {

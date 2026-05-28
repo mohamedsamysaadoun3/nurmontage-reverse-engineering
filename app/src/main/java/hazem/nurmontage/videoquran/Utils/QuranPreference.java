@@ -18,10 +18,10 @@ public class QuranPreference {
         this.sharedPreferences = context.getSharedPreferences(PREF_NAME, 0);
     }
 
-    public static void savePreferencesSearch(Context context, int i, int value2, int value3, String textValue) {
+    public static void savePreferencesSearch(Context context, int i, int surahNumber, int surahNumber1, String textValue) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putInt("from", value2);
-        edit.putInt("to", value3);
+        edit.putInt("from", surahNumber);
+        edit.putInt("to", surahNumber1);
         edit.putInt("surah", i);
         edit.putString(KEY_SEARCH, textValue);
         edit.apply();
@@ -37,20 +37,20 @@ public class QuranPreference {
         return context.getSharedPreferences(PREF_NAME, 0).getString(KEY_SEARCH, "");
     }
 
-    public void savePreferences(int i, int value2, int value3, int i4, int value5) {
+    public void savePreferences(int i, int surahNumber, int surahNumber4, int i4, int surahNumber4) {
         SharedPreferences.Editor edit = this.sharedPreferences.edit();
-        edit.putInt("from", value2);
-        edit.putInt("to", value3);
+        edit.putInt("from", surahNumber);
+        edit.putInt("to", surahNumber4);
         edit.putInt("surah", i);
         edit.putInt(KEY_NAME_READER, i4);
         edit.putInt(KEY_TRANSLATION, value5);
         edit.apply();
     }
 
-    public static void savePreferencesSearch(Context context, int i, int value2) {
+    public static void savePreferencesSearch(Context context, int i, int resourceId) {
         SharedPreferences.Editor edit = context.getSharedPreferences(PREF_NAME, 0).edit();
-        edit.putInt("from", value2);
-        edit.putInt("to", value2);
+        edit.putInt("from", resourceId);
+        edit.putInt("to", resourceId);
         edit.putInt("surah", i);
         edit.apply();
     }
